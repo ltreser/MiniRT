@@ -6,12 +6,11 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:23:05 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/20 16:43:43 by afoth            ###   ########.fr       */
+/*   Updated: 2024/11/22 15:36:28 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
-
 
 void	check_command_line_input(int argc, char **argv)
 {
@@ -26,6 +25,7 @@ void	check_command_line_input(int argc, char **argv)
 int	input(int argc, char **argv)
 {
 	int	fd;
+
 	check_command_line_input(argc, argv);
 	fd = open(argv[1], O_RDONLY);
 	if (!fd)
@@ -33,7 +33,10 @@ int	input(int argc, char **argv)
 		perror("open failed");
 		exit;
 	}
-
+	while (get_next_line(fd) != '\0')
+	{
+		
+	}
 }
 
 int	main(int argc, char **argv)
