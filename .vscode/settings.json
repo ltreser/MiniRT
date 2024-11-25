@@ -12,6 +12,7 @@
 		"mutex": "c",
 		"regex": "c",
 		"tuple": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"minirt.h": "c"
 	}
 }

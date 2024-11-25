@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/11/25 14:49:42 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/11/25 18:40:50 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
+# include <float.h>
+# include <limits.h>
+
 //# include "./libs/libft/libft.h"
 # include "/home/afoth/Desktop/MiniRT/libs/libft/libft.h"
 
@@ -51,6 +54,9 @@ typedef struct s_object t_object;
 
 struct s_rt
 {
+	float	ar;
+	float	screen_h_rad;
+	float	screen_w_rad;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_camera	camera;
