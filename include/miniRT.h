@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/11/25 13:51:29 by afoth            ###   ########.fr       */
+/*   Updated: 2024/11/25 13:53:35 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,27 +66,41 @@ typedef struct s_obj
 		t_sphere *sphere;
 		t_cylinder *cylinder;
 	}
-};
+}t_obj;
+
+typedef struct vector
+{
+	float	x;
+	float	y;
+	float	z;
+}t_vector;
+
+typedef struct s_point
+{
+	float	x;
+	float	y;
+	float	z;
+}t_point;
 
 typedef struct s_ambient
 {
 	t_color c;
 	float	bright;
-}
+}t_ambient;
 
 typedef struct s_camera
 {
 	t_vector v;
 	t_point	p;
 	int	fov;
-}
+}t_camera;
 
 typedef struct s_plane
 {
 	t_color c;
 	t_vector v;
 	t_point	p;
-}
+}t_plane;
 
 typedef struct s_light
 {
@@ -94,7 +108,7 @@ typedef struct s_light
 	t_vector v;
 	t_point	p;
 	float bright;
-}
+}t_light;
 
 typedef struct s_sphere
 {
@@ -102,7 +116,7 @@ typedef struct s_sphere
 	t_vector v;
 	t_point	p;
 	int	d;
-}
+}t_sphere;
 
 typedef struct s_cylinder
 {
@@ -111,7 +125,7 @@ typedef struct s_cylinder
 	t_point	p;
 	float	d;
 	float	h;
-}
+}t_cylinder;
 
 
 typedef struct s_color
