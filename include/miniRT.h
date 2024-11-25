@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/11/25 19:07:04 by afoth            ###   ########.fr       */
+/*   Updated: 2024/11/25 19:14:15 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@
 # include <limits.h>
 
 //# include "./libs/libft/libft.h"
-# include "/home/afoth/Desktop/MiniRT/libs/libft/libft.h"
+# include "libs/libft/includes/libft.h"
+# include "libs/libft/includes/get_next_line.h"
+# include "libs/libft/includes/ft_printf.h"
 
 /* MiniLibX */
 #include <mlx.h>
