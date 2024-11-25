@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/11/22 18:21:47 by afoth            ###   ########.fr       */
+/*   Updated: 2024/11/25 13:40:23 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,19 @@ typedef struct s_rt
 	t_plane	*plane;
 	t_cylinder	*cylinder;
 } ;
+
+typedef struct s_ambient
+{
+	t_color c;
+	float	bright;
+}
+
+typedef struct s_camera
+{
+	t_vector v;
+	t_point	p;
+	int	fov;
+}
 
 typedef struct s_plane
 {
