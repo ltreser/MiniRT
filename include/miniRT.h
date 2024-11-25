@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/11/25 14:49:42 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/11/25 18:54:33 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,18 @@
 #define SCREEN_WIDTH  800
 #define SCREEN_HEIGHT 600
 
+/*Error Codes*/
+#define EXIT_MALLOC 2
+#define EXIT_READ 3
+#define EXIT_INPUT 4
+
 /*Error Messages*/
 
-#define MALLOC_FAIL "Malloc failed!\n"
-#define AC_FAIL "Wrong number of arguments!\n"
-#define OPEN_FAIL "Failed to open file!\n"
+#define MALLOC_FAIL "\033[0;31m Error\nMalloc failed!\n \033[0m"
+#define AC_FAIL "\033[0;31m Error\nWrong number of arguments!\n \033[0m"
+#define OPEN_FAIL "\033[0;31m Error\nFailed to open file!\n \033[0m"
+#define FORMAT_FAIL "\033[0;31m Error\nWrong Format!\n \033[0m"
+#define FILE_FAIL "\033[0;31m Error\nScene to render is not correctly provided!\n \033[0m"
 
 
 /* Standard Libraries */
@@ -53,13 +60,10 @@ struct s_rt
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	t_camera	camera;
-	t_ambient	ambient;
-	t_light	light;
-	t_sphere	*sphere;
-	t_plane	*plane;
-	t_cylinder	*cylinder;
-	t_object	*obj;
+	t_camera	*camera;
+	t_ambient	*ambient;
+	t_light	*light;
+	t_object	**obj;
 };
 
 
@@ -78,24 +82,24 @@ struct s_obj
 
 struct s_plane
 {
-	t_color c;
-	t_vector v;
-	t_point	p;
+	t_color *c;
+	t_vector *v;
+	t_point	*p;
 };
 
 struct s_sphere
 {
-	t_color c;
-	t_vector v;
-	t_point	p;
+	t_color *c;
+	t_vector *v;
+	t_point	*p;
 	int	d;
 };
 
 struct s_cylinder
 {
-	t_color c;
-	t_vector v;
-	t_point	p;
+	t_color *c;
+	t_vector *v;
+	t_point	*p;
 	float	d;
 	float	h;
 };
@@ -110,16 +114,16 @@ struct s_ambient
 
 struct s_camera
 {
-	t_vector v;
-	t_point	p;
+	t_vector *v;
+	t_point	*p;
 	int	fov;
 };
 
 struct s_light
 {
 	//t_color c;
-	t_vector v;
-	t_point	p;
+	t_vector *v;
+	t_point	*p;
 	float bright;
 };
 

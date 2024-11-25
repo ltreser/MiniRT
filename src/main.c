@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:23:05 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/25 15:00:27 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/11/25 16:58:01 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	check_command_line_input(int argc, char **argv)
 	if (argc > 2)
 	{
 		perror(AC_FAIL);
-		exit(2);
+		ft_exit(2);
 	}
 }
 
@@ -45,18 +45,19 @@ int	input_correct(int argc, char **argv)
 		perror("OPEN_FAIL");
 		exit;
 	}
-	while (get_next_line(fd) != '\0')
-	{
-		
-	}
+}
+
+void read_file(char *file)
+{
+	
 }
 
 int	main(int argc, char **argv)
 {
 	if (input_correct)
 	{
-		read_file(
-	//check if it is an .rt file
-	input(argc, argv);
+		read_file(argv[1]);
+		//render etc
+	}
 	printf("HELLO");
 }
