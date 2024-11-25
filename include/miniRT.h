@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/11/25 13:57:35 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/11/25 14:06:13 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ struct s_rt
 	t_object	*obj;
 };
 
+
+/*objects*/
+
 struct s_obj
 {
 	int	count;
@@ -68,46 +71,11 @@ struct s_obj
 	}
 };
 
-struct vector
-{
-	float	x;
-	float	y;
-	float	z;
-};
-
-struct s_point
-{
-	float	x;
-	float	y;
-	float	z;
-};
-
-struct s_ambient
-{
-	t_color c;
-	float	bright;
-};
-
-struct s_camera
-{
-	t_vector v;
-	t_point	p;
-	int	fov;
-};
-
 struct s_plane
 {
 	t_color c;
 	t_vector v;
 	t_point	p;
-};
-
-struct s_light
-{
-	//t_color c;
-	t_vector v;
-	t_point	p;
-	float bright;
 };
 
 struct s_sphere
@@ -127,6 +95,44 @@ struct s_cylinder
 	float	h;
 };
 
+/*parameters*/
+
+struct s_ambient
+{
+	t_color c;
+	float	bright;
+};
+
+struct s_camera
+{
+	t_vector v;
+	t_point	p;
+	int	fov;
+};
+
+struct s_light
+{
+	//t_color c;
+	t_vector v;
+	t_point	p;
+	float bright;
+};
+
+/*variables*/
+
+struct vector
+{
+	float	x;
+	float	y;
+	float	z;
+};
+
+struct s_point
+{
+	float	x;
+	float	y;
+	float	z;
+};
 
 struct s_color
 {
