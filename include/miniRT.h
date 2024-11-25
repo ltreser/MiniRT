@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/11/25 13:49:47 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/11/25 13:51:29 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,17 @@
 //Is different Structs a good idea, can there be one structure reused?
 
 typedef struct s_rt t_rt;
-typedef struct s_obj t_obj;
-typedef struct s_rt t_rt;
-typedef struct s_rt t_rt;
-typedef struct s_rt t_rt;
-typedef struct s_rt t_rt;
+typedef struct s_ambient t_ambient;
+typedef struct s_camera t_camera;
+typedef struct s_plane t_plane;
+typedef struct s_vector t_vector;
+typedef struct s_point t_point;
+typedef struct s_light t_light;
+typedef struct s_sphere t_sphere;
+typedef struct s_cylinder t_cylinder;
+typedef struct s_color t_color;
+typedef struct s_object t_object;
+
 
 typedef struct s_rt
 {
@@ -51,7 +57,7 @@ typedef struct s_rt
 	t_object	*obj;
 } ;
 
-struct s_obj
+typedef struct s_obj
 {
 	int	count;
 	union
