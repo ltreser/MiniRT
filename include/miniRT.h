@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/11/25 14:06:13 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/11/25 14:49:42 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 //1920x1080? DEL
 #define SCREEN_WIDTH  800
 #define SCREEN_HEIGHT 600
+
+/*Error Messages*/
+
+#define MALLOC_FAIL "Malloc failed!\n"
+#define AC_FAIL "Wrong number of arguments!\n"
+#define OPEN_FAIL "Failed to open file!\n"
+
 
 /* Standard Libraries */
 # include <stdlib.h>
@@ -28,8 +35,6 @@
 
 /* MiniLibX */
 #include <mlx.h>
-
-//Is different Structs a good idea, can there be one structure reused?
 
 typedef struct s_rt t_rt;
 typedef struct s_ambient t_ambient;
