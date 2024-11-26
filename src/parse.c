@@ -6,7 +6,7 @@
 /*   By: ltreser <ltreser@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:11:57 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/25 18:02:14 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/11/26 15:03:59 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ void    ft_parse(char *str, t_rt *rt)
 
 void	parse_obj(char *str, t_rt *rt, char type)
 {
-	rt->obj->count++;
+	//TODO malloc for obj
 	parse_point(ft_chop(str), rt);
 	parse_vector(ft_chop(str), rt);
 	if (type == 'c')
 		parse_dimensions(str, rt);
 	parse_color(ft_chop(str), rt);
+	rt->obj->count++;
 }
 
 void	parse_point(char *str, t_rt *rt);
