@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltreser <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:32:07 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/25 19:03:04 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/11/26 14:49:05 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ double	ft_atof(const char *str, int *error_code)
 	char	*dec_point;
 	int		sign;
 	int		i;
-	
+
 	sign = 1;
 	power = 1.0;
 	if (!valid_float(str, error_code))
@@ -50,7 +50,7 @@ double	ft_atof(const char *str, int *error_code)
 	if (dec_point)
 	{
 		i = dec_point - str + 1;
-		while (ft_isdigit(str[i]))
+		while (ft_isdigit(str[i]) && result < FLT_MAX / 10)
 		{
 			result = result * 10.0 + (str[i++] - '0');
 			power *= 10.0;
