@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltreser <ltreser@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:11:57 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/26 15:03:59 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/11/26 16:41:21 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
 
 void    ft_parse(char *str, t_rt *rt)
-{   
+{
     int i;
-    
+
     i = 0;
     while (str[i])
     {
@@ -39,12 +39,20 @@ void	parse_obj(char *str, t_rt *rt, char type)
 	if (type == 'c')
 		parse_dimensions(str, rt);
 	parse_color(ft_chop(str), rt);
-	rt->obj->count++;
+	rt->obj->n++;
 }
 
-void	parse_point(char *str, t_rt *rt);
+void	parse_point(char *str, char type, t_rt *rt, int n)
 {
 	//TODO only numbers, komma, point, minus
+	int	i;
+
+	i = skip_spaces(str)
 
 }
 
+//nomalized vektor
+void	parse_vector(char *str, char type, t_rt *rt, int n)
+{
+
+}

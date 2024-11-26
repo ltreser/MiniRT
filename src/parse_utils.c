@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltreser <ltreser@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:50:34 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/26 15:08:18 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/11/26 16:40:51 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,19 @@ void	parse_dimensions(t_rt *rt, char *str)
 {
 	int i;
 
-	i = 0;
-	while (str[i] == ' ')
-		i++;
+	i = skip_spaces(str)
 	rt->obj[rt->obj->count]->cy->d = ft_atof(ft_chop(str + i, ' '));
-	i = 0;
-	while (str[i] == ' ')
-		i++;
+	i = skip_spaces(str)
 	rt->obj[rt->obj->count]->cy->h = ft_atof(ft_chop(str + i, ' '));
 	free(str);
 	str = NULL;
 }
+ int	skip_spaces(char *str)
+ {
+		int	i;
+
+		i = 0;
+		while (str[i] == ' ')
+			i++;
+		return(i);
+ }

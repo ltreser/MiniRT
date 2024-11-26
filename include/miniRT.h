@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/11/25 19:14:15 by afoth            ###   ########.fr       */
+/*   Updated: 2024/11/26 16:40:05 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ struct s_rt
 
 struct s_obj
 {
-	int	count;
+	int	n;
 	union
 	{
 		t_plane *plane;
