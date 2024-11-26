@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:11:57 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/26 16:41:21 by afoth            ###   ########.fr       */
+/*   Updated: 2024/11/26 16:56:47 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,21 @@ void	parse_obj(char *str, t_rt *rt, char type)
 	rt->obj->n++;
 }
 
-void	parse_point(char *str, char type, t_rt *rt, int n)
+void	parse_point(t_rt *rt, t_point point, char *str)
 {
 	//TODO only numbers, komma, point, minus
 	int	i;
+	int	start_of_nb
 
 	i = skip_spaces(str)
-
+	start_of_nb
+	if(str[i] == '-')
+		i++;
+	while
 }
 
 //nomalized vektor
-void	parse_vector(char *str, char type, t_rt *rt, int n)
+void	parse_vector(t_rt *rt, t_vector vector, char *str)
 {
 
 }

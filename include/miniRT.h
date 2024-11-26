@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/11/26 16:40:05 by afoth            ###   ########.fr       */
+/*   Updated: 2024/11/26 17:13:56 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_sphere t_sphere;
 typedef struct s_cylinder t_cylinder;
 typedef struct s_color t_color;
 typedef struct s_object t_object;
+typedef struct s_gc t_gc;
 
 
 struct s_rt
@@ -157,5 +158,12 @@ struct s_color
 	int	g;
 	int	b;
 };
+
+typedef struct s_gc
+{
+	void	*ptr;
+	struct s_gc	*next;
+}
+
 
 #endif

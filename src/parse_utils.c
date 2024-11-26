@@ -6,11 +6,11 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:50:34 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/26 16:40:51 by afoth            ###   ########.fr       */
+/*   Updated: 2024/11/26 17:04:37 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minirt.h"
+#include "../include/miniRT.h"
 
 void	parse_dimensions(t_rt *rt, char *str)
 {
