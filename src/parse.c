@@ -32,7 +32,7 @@ void	parse_obj(char *str, t_rt *rt, char type)
 	rt->obj[rt->n_obj]->type = (t_enum)type;
 	if (rt->obj[rt->n_obj]->type == SPHERE)
 	{
-		rt->obj[rt->n_obj]->sphere = malloc(sizeof(t_sphere));
+		rt->obj[rt->n_obj]->sphere = ft_gc_malloc(sizeof(t_sphere));
 		rt->obj[rt->n_obj]->sphere->p = parse_point(ft_chop(str, ' '), rt);
 		rt->obj[rt->n_obj]->sphere->v = parse_vector(ft_chop(str, ' '), rt);
 		rt->obj[rt->n_obj]->sphere->c = parse_color(ft_chop(str, ' '), rt);
@@ -40,14 +40,14 @@ void	parse_obj(char *str, t_rt *rt, char type)
 	}
 	if (rt->obj[rt->n_obj]->type == PLANE)
 	{
-		rt->obj[rt->n_obj]->plane = malloc(sizeof(t_plane));
+		rt->obj[rt->n_obj]->plane = ft_gc_malloc(sizeof(t_plane));
 		rt->obj[rt->n_obj]->plane->p = parse_point(ft_chop(str, ' '), rt);
 		rt->obj[rt->n_obj]->plane->v = parse_vector(ft_chop(str, ' '), rt);
 		rt->obj[rt->n_obj]->plane->c = parse_color(ft_chop(str, ' '), rt);
 	}
 	if (rt->obj[rt->n_obj]->type == CYLINDER)
 	{
-		rt->obj[rt->n_obj]->cylinder = malloc(sizeof(t_cylinder));
+		rt->obj[rt->n_obj]->cylinder = ft_gc_malloc(sizeof(t_cylinder));
 		rt->obj[rt->n_obj]->cylinder->p = parse_point(ft_chop(str, ' '), rt);
 		rt->obj[rt->n_obj]->cylinder->v = parse_vector(ft_chop(str, ' '), rt);
 		parse_dimensions(str, rt);
@@ -84,6 +84,7 @@ t_point	*parse_point(t_rt *rt, char *str)
 t_vector	*parse_vector(t_rt *rt, char *str)
 {
 	t_vector	*vector;
+	float		len;
 	int			start_of_nb;
 
 	vector = ft_gc_malloc(rt->gc, sizeof(t_vector));
@@ -91,5 +92,14 @@ t_vector	*parse_vector(t_rt *rt, char *str)
 	vector->x= ft_atof(ft_chop(str + start_of_nb, ','));
 	vector->y= ft_atof(ft_chop(str, ','));
 	vector->z= ft_atof(ft_chop(str, ' '));
-	return(vector);
+	len = v_len(vector);
+	if (len == 1 || len == -1)
+		return(vector);
+	else
+	{
+		perror(FORMAT_FAIL);
+		perror("Vector not normalized");
+		ft_gc_free(rt->gc);
+		exit(EXIT_INPUT);
+	}
 }

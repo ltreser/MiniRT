@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/11/28 22:43:27 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/11/28 23:35:42 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ struct						s_rt
 	float					screen_w_rad;
 	void					*mlx_ptr;
 	void					*win_ptr;
+	t_gc					gc;
 	t_camera				*camera;
 	t_ambient				*ambient;
 	t_light					*light;
