@@ -38,14 +38,11 @@
 # include <fcntl.h>
 # include <float.h>
 # include <limits.h>
-<<<<<<< HEAD
 # include <stdint.h>
-=======
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
->>>>>>> 50d2c9e0a5872b42e001bdc8d995b4bbb42c2945
 
 //# include "./libs/libft/libft.h"
 # include "libs/libft/includes/ft_printf.h"
@@ -152,7 +149,7 @@ struct						s_light
 
 /*variables*/
 
-struct						vector
+struct						s_vector
 {
 	float					x;
 	float					y;

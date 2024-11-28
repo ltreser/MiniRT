@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:11:57 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/28 22:29:42 by afoth            ###   ########.fr       */
+/*   Updated: 2024/11/28 23:03:40 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,34 +52,29 @@ void	parse_obj(char *str, t_rt *rt, char type)
 // 3 Punkte
 // 2 Kommas
 // max 3*-
-t_point	parse_point(t_rt *rt, char *str)
+t_point	*parse_point(t_rt *rt, char *str)
 {
-	//TODO only numbers, komma, point, minus
 	t_point	*point;
-	int	i;
-	int nb_of_points
-	int	nb_of_coordinates;
-	int	start_of_nb;
+	int		start_of_nb;
 
 	point = ft_gc_malloc(rt->gc, sizeof(t_point));
-	nb_of_cordinates = 0;
 	start_of_nb = skip_spaces(str);
-	i = start_of_nb;
-	point->x=
-	point->y=
-	point->z=
-	while(nb_of_coordinates < 3)
-	{
-		if(str[i] == '-')
-			i++;
-		while
-
-		nb_of_coordinates++;
-	}
+	point->x= ft_atof(ft_chop(str + start_of_nb, ','));
+	point->y= ft_atof(ft_chop(str, ','));
+	point->z= ft_atof(ft_chop(str, ' '));
+	return(point);
 }
 
 //nomalized vektor
-void	parse_vector(t_rt *rt, t_vector vector, char *str)
+t_vector	*parse_vector(t_rt *rt, char *str)
 {
+	t_vector	*vector;
+	int			start_of_nb;
 
+	vector = ft_gc_malloc(rt->gc, sizeof(t_vector));
+	start_of_nb = skip_spaces(str);
+	vector->x= ft_atof(ft_chop(str + start_of_nb, ','));
+	vector->y= ft_atof(ft_chop(str, ','));
+	vector->z= ft_atof(ft_chop(str, ' '));
+	return(vector);
 }
