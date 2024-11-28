@@ -6,9 +6,11 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:32:07 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/26 14:49:05 by afoth            ###   ########.fr       */
+/*   Updated: 2024/11/28 20:25:49 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int valid_float(const char *str, int *error_code)
 {

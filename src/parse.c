@@ -6,11 +6,11 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:11:57 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/26 16:56:47 by afoth            ###   ########.fr       */
+/*   Updated: 2024/11/28 22:14:41 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minirt.h"
+#include "../include/miniRT.h"
 
 void    ft_parse(char *str, t_rt *rt)
 {
@@ -41,18 +41,35 @@ void	parse_obj(char *str, t_rt *rt, char type)
 	parse_color(ft_chop(str), rt);
 	rt->obj->n++;
 }
-
-void	parse_point(t_rt *rt, t_point point, char *str)
+rt->camera->point = parse_point
+//0.0,0.0,-10.0
+// 3 Punkte
+// 2 Kommas
+// max 3*-
+t_point	parse_point(t_rt *rt, char *str)
 {
 	//TODO only numbers, komma, point, minus
+	t_point	*point;
 	int	i;
-	int	start_of_nb
+	int nb_of_points
+	int	nb_of_coordinates;
+	int	start_of_nb;
 
-	i = skip_spaces(str)
-	start_of_nb
-	if(str[i] == '-')
-		i++;
-	while
+	point = ft_gc_malloc(rt->gc, sizeof(t_point));
+	nb_of_cordinates = 0;
+	start_of_nb = skip_spaces(str);
+	i = start_of_nb;
+	point->x=
+	point->y=
+	point->z=
+	while(nb_of_coordinates < 3)
+	{
+		if(str[i] == '-')
+			i++;
+		while
+
+		nb_of_coordinates++;
+	}
 }
 
 //nomalized vektor

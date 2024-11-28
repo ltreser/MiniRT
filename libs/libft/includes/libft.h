@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltreser <ltreser@student.42.fr>            +#+  +:+       +#+        */
+/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 19:09:08 by ltreser           #+#    #+#             */
-/*   Updated: 2024/03/13 01:33:57 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/11/28 20:25:18 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "get_next_line.h"
 # include <stdlib.h>
 # include <unistd.h>
+# include <float.h>
 
 typedef struct s_list
 {

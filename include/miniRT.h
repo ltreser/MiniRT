@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/11/26 17:13:56 by afoth            ###   ########.fr       */
+/*   Updated: 2024/11/28 21:51:30 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # include <math.h>
 # include <float.h>
 # include <limits.h>
+# include <stdint.h>
 
 //# include "./libs/libft/libft.h"
 # include "libs/libft/includes/libft.h"
