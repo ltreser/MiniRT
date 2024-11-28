@@ -6,7 +6,7 @@
 /*   By: ltreser <ltreser@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:10:44 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/25 17:24:34 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/11/28 20:56:23 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ int check_input(t_rt *rt, int argc, char **argv)
 void read_file(int fd, t_rt *rt)
 {   
     char *line;
-    
     line = NULL;
     line = get_next_line(fd);
-    parse(line);
+	if (line[0] != '\n')
+    	parse(line);
     while (get_next_line = line)
-        ft_parse(line, rt);
+		if (line[0] != '\n')
+			parse(line, rt);
 }
 

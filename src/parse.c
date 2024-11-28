@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:11:57 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/26 16:56:47 by afoth            ###   ########.fr       */
+/*   Updated: 2024/11/28 21:23:58 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 void    ft_parse(char *str, t_rt *rt)
 {
-    int i;
-
-    i = 0;
-    while (str[i])
-    {
+	if (only_valid_chars(str))
+	{
  		if (str[i] == 'A' && !rt->ambient)
 			parse_ambient(str, rt);
 		if (str[i] == 'C' && !rt->camera)
@@ -27,8 +24,10 @@ void    ft_parse(char *str, t_rt *rt)
 			parse_light(str, rt);
 		if (!strncmp("sp ", str, 3) || !strncmp("pl ", str, 3) || !strncmp("cy ", str, 3))
 			parse_obj(str + 3, rt, str[i]);
-		else
-			//error
+	}
+	else
+		ft_exit(rt, 2, ft_strdup(FILE_FAIL));
+	}
 }
 
 void	parse_obj(char *str, t_rt *rt, char type)
