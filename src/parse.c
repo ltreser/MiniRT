@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 17:11:57 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/28 23:03:40 by afoth            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
@@ -23,29 +12,55 @@ void    ft_parse(char *str, t_rt *rt)
 		if (str[i] == 'L' && !rt->light)
 			parse_light(str, rt);
 		if (!strncmp("sp ", str, 3) || !strncmp("pl ", str, 3) || !strncmp("cy ", str, 3))
+		{
+			rt->obj[rt->n_obj] = malloc(sizeof(t_obj));
 			parse_obj(str + 3, rt, str[i]);
+		}
 	}
 	else
 		ft_exit(rt, 2, ft_strdup(FILE_FAIL));
+	}
+	if (str)
+	{
+		free(str);
+		str = NULL;
 	}
 }
 
 void	parse_obj(char *str, t_rt *rt, char type)
 {
-	rt->obj[n_obj] = malloc(sizeof(t_obj));
-	rt->obj[n_obj]->type = (t_enum)type;
-	if (rt->obj[n_obj]->type == SPHERE)
-		rt->obj[n_obj]->sphere = malloc(sizeof(t_sphere));
-	if (rt->obj[n_obj]->type == PLANE)
-		rt->obj[n_obj]->plane = malloc(sizeof(t_plane));
-	if (rt->obj[n_obj]->type == CYLINDER)
-		rt->obj[n_obj]->cylinder = malloc(sizeof(t_cylinder));
-	rt->obj[n_obj]->sphere->parse_point(ft_chop(str, ' '), rt);
-	parse_vector(ft_chop(str), rt);
-	if (type == CYLINDER)
+	rt->obj[rt->n_obj]->type = (t_enum)type;
+	if (rt->obj[rt->n_obj]->type == SPHERE)
+	{
+		rt->obj[rt->n_obj]->sphere = malloc(sizeof(t_sphere));
+		rt->obj[rt->n_obj]->sphere->p = parse_point(ft_chop(str, ' '), rt);
+		rt->obj[rt->n_obj]->sphere->v = parse_vector(ft_chop(str, ' '), rt);
+		rt->obj[rt->n_obj]->sphere->c = parse_color(ft_chop(str, ' '), rt);
+
+	}
+	if (rt->obj[rt->n_obj]->type == PLANE)
+	{
+		rt->obj[rt->n_obj]->plane = malloc(sizeof(t_plane));
+		rt->obj[rt->n_obj]->plane->p = parse_point(ft_chop(str, ' '), rt);
+		rt->obj[rt->n_obj]->plane->v = parse_vector(ft_chop(str, ' '), rt);
+		rt->obj[rt->n_obj]->plane->c = parse_color(ft_chop(str, ' '), rt);
+	}
+	if (rt->obj[rt->n_obj]->type == CYLINDER)
+	{
+		rt->obj[rt->n_obj]->cylinder = malloc(sizeof(t_cylinder));
+		rt->obj[rt->n_obj]->cylinder->p = parse_point(ft_chop(str, ' '), rt);
+		rt->obj[rt->n_obj]->cylinder->v = parse_vector(ft_chop(str, ' '), rt);
 		parse_dimensions(str, rt);
-	parse_color(ft_chop(str), rt);
+		rt->obj[rt->n_obj]->cylinder->c = parse_color(ft_chop(str, ' '), rt);
+	}
 	rt->n_obj++;
+}
+
+
+t_color *parse_color(t_rt *rt, char *str)
+{
+
+
 }
 
 //0.0,0.0,-10.0

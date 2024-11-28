@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_utils.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 14:50:34 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/28 22:35:34 by afoth            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
@@ -17,11 +6,14 @@ void	parse_dimensions(t_rt *rt, char *str)
 	int i;
 
 	i = skip_spaces(str);
-	rt->obj[rt->obj->count]->cy->d = ft_atof(ft_chop(str + i, ' '));
+	rt->obj[rt->n_obj]->cy->d = ft_atof(ft_chop(str + i, ' '));
 	i = skip_spaces(str);
-	rt->obj[rt->obj->count]->cy->h = ft_atof(ft_chop(str + i, ' '));
-	free(str);
-	str = NULL;
+	rt->obj[rt->n_obj]->cy->h = ft_atof(ft_chop(str + i, ' '));
+	if (str)
+	{
+		free(str);
+		str = NULL;
+	}
 }
 
 int	skip_spaces(char *str)
