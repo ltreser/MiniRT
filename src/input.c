@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:10:44 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/28 20:50:00 by afoth            ###   ########.fr       */
+/*   Updated: 2024/11/28 22:26:08 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,13 @@ int check_input(t_rt *rt, int argc, char **argv)
 
 void read_file(int fd, t_rt *rt)
 {
-	char *line;
-
-	line = NULL;
-	line = get_next_line(fd);
-	parse(line);
-	while (get_next_line = line)
-		ft_parse(line, rt);
+    char *line;
+    line = NULL;
+    line = get_next_line(fd);
+	if (line[0] != '\n')
+    	parse(line);
+    while (get_next_line = line)
+		if (line[0] != '\n')
+			parse(line, rt);
 }
 
