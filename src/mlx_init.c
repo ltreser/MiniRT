@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 15:40:56 by afoth             #+#    #+#             */
-/*   Updated: 2024/11/22 17:38:25 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/03 18:10:48 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	mlx_create_window(t_rt *rt)
 	int screen_width;
 	int screen_height;
 
-	rt->mlx_ptr = mlx_init();
-	if (rt->mlx_ptr == NULL)
+	rt->mlx->connection = mlx_init();
+	if (rt->mlx->connection == NULL)
 	{
 		perror("ERROR, MLX DID NOT INIT\n");
 		//free stuff

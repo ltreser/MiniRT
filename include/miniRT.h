@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/03 18:10:38 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/03 18:16:12 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define OPEN_FAIL "\033[0;31m Error\nFailed to open file!\n \033[0m"
 # define FORMAT_FAIL "\033[0;31m Error\nWrong Format!\n \033[0m"
 # define FILE_FAIL "\033[0;31m Error\nScene to render is not correctly provided!\n \033[0m"
+# define MLX_FAIL "\033[0;31m Error\nMLX failed to initialize!\n \033[0m"
+
 
 /* Standard Libraries */
 # include <fcntl.h>
@@ -61,6 +63,7 @@ typedef struct s_cylinder	t_cylinder;
 typedef struct s_color		t_color;
 typedef struct s_object		t_object;
 typedef struct s_gc			t_gc;
+typedef struct s_mlx		t_mlx;
 typedef enum e_obj			t_obj;
 
 enum						e_obj
@@ -70,13 +73,26 @@ enum						e_obj
 	CYLINDER = 99,
 };
 
+struct						s_mlx
+{
+	void	*connection;
+	void	*window;
+	void	*img;
+	char	*pixel_adress;
+	int		x;
+	int		y;
+	int		bpp;
+	int		endian;
+	int		line_len;
+	//float	zoom;
+};
+
 struct						s_rt
 {
-	float					ar;
+	float					aspect_r;
 	float					screen_h_rad;
 	float					screen_w_rad;
-	void					*mlx_ptr;
-	void					*win_ptr;
+	t_mlx					*mlx;
 	t_gc					*gc;
 	t_camera				*camera;
 	t_ambient				*ambient;
