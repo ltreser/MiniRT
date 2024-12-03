@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/11/28 23:35:42 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/03 17:02:50 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,12 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+#include <sys/time.h>
 
 //# include "./libs/libft/libft.h"
-# include "libs/libft/includes/ft_printf.h"
-# include "libs/libft/includes/get_next_line.h"
-# include "libs/libft/includes/libft.h"
+# include "../libs/libft/includes/ft_printf.h"
+# include "../libs/libft/includes/get_next_line.h"
+# include "../libs/libft/includes/libft.h"
 
 /* MiniLibX */
 # include <mlx.h>

@@ -1,7 +1,7 @@
 
 #include "../include/miniRT.h"
 
-void    ft_parse(char *str, t_rt *rt)
+void	ft_parse(char *str, t_rt *rt)
 {
 	if (only_valid_chars(str))
 	{

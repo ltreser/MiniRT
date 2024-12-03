@@ -13,6 +13,7 @@
 		"regex": "c",
 		"tuple": "c",
 		"stdio.h": "c",
-		"minirt.h": "c"
+		"minirt.h": "c",
+		"libft.h": "c"
 	}
 }
