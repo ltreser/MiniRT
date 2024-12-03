@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/03 18:16:12 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/03 18:23:52 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ struct						s_color
 	int						b;
 };
 
-typedef struct s_gc
+struct						s_gc
 {
 	void					*ptr;
 	struct s_gc				*next;
