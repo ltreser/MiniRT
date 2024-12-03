@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/03 20:17:32 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/03 20:27:45 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ typedef enum e_obj			t_obj;
 
 enum						e_obj
 {
-	SPHERE = 115,
-	PLANE = 112,
-	CYLINDER = 99,
+	CYLINDER,
+	PLANE,
+	SPHERE,
 };
 
 

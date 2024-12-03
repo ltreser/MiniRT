@@ -69,9 +69,14 @@ t_color *parse_color(t_rt *rt, char *str)
 	color->g = (int)ft_atof(ft_chop(str + skip_spaces(str), ','));
 		if (color->r < 0 || color->r > 225)
 			ft_exit(rt, 2, ft_strdup(FILE_FAIL));
-	color->b = (int)ft_atof(ft_chop(str + skip_spaces(str), '\n'));
+	color->b = (int)ft_atof(ft_strtrim(str + skip_spaces(str), "'\n' "));
 		if (color->r < 0 || color->r > 225)
 			ft_exit(rt, 2, ft_strdup(FILE_FAIL));
+	if (str)
+	{
+		free(str);
+		str = NULL;
+	}
 	return (color);
 }
 
