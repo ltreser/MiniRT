@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/03 18:23:52 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/03 20:08:10 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,7 @@ t_vector					*parse_vector(t_rt *rt, char *str);
 void						parse_dimensions(t_rt *rt, char *str);
 int							skip_spaces(char *str);
 int							only_valid_chars(char *str);
+void						is_nan(t_rt *rt, float f);
 
 //vector_calc
 float						v_len(t_vector vector);

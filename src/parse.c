@@ -61,15 +61,15 @@ t_color *parse_color(t_rt *rt, char *str)
 	t_color *color;
 
 	color = malloc(sizeof(t_color));
-	if (contains_c(str, ".")
+	if (contains_c(str, "."))
 		ft_exit(rt, 2, ft_strdup(FILE_FAIL));
-	color->r = (int)ft_atof(ft_chop(str + skip_spaces(str), ","));
+	color->r = (int)ft_atof(ft_chop(str + skip_spaces(str), ','));
 		if (color->r < 0 || color->r > 225)
 			ft_exit(rt, 2, ft_strdup(FILE_FAIL));
-	color->g = (int)ft_atof(ft_chop(str + skip_spaces(str), ","));
+	color->g = (int)ft_atof(ft_chop(str + skip_spaces(str), ','));
 		if (color->r < 0 || color->r > 225)
 			ft_exit(rt, 2, ft_strdup(FILE_FAIL));
-	color->b = (int)ft_atof(ft_chop(str + skip_spaces(str), ","));
+	color->b = (int)ft_atof(ft_chop(str + skip_spaces(str), '\n'));
 		if (color->r < 0 || color->r > 225)
 			ft_exit(rt, 2, ft_strdup(FILE_FAIL));
 	return (color);
@@ -84,11 +84,14 @@ t_point	*parse_point(t_rt *rt, char *str)
 	t_point	*point;
 	int		start_of_nb;
 
-	point = ft_gc_malloc(rt->gc, sizeof(t_point));
+	point = ft_gc_malloc(rt, sizeof(t_point));
 	start_of_nb = skip_spaces(str);
 	point->x= ft_atof(ft_chop(str + start_of_nb, ','));
+	is_nan(rt, point->x);
 	point->y= ft_atof(ft_chop(str, ','));
+	is_nan(rt, point->x);
 	point->z= ft_atof(ft_chop(str, ' '));
+	is_nan(rt, point->x);
 	return(point);
 }
 
@@ -99,19 +102,22 @@ t_vector	*parse_vector(t_rt *rt, char *str)
 	float		len;
 	int			start_of_nb;
 
-	vector = ft_gc_malloc(rt->gc, sizeof(t_vector));
+	vector = ft_gc_malloc(rt, sizeof(t_vector));
 	start_of_nb = skip_spaces(str);
 	vector->x= ft_atof(ft_chop(str + start_of_nb, ','));
+	is_nan(rt, vector->x);
 	vector->y= ft_atof(ft_chop(str, ','));
+	is_nan(rt, vector->y);
 	vector->z= ft_atof(ft_chop(str, ' '));
-	len = v_len(vector);
+	is_nan(rt, vector->z);
+	len = v_len(*vector);
 	if (len == 1 || len == -1)
 		return(vector);
 	else
 	{
 		perror(FORMAT_FAIL);
 		perror("Vector not normalized");
-		ft_gc_free(rt->gc);
+		ft_gc_free(rt);
 		exit(EXIT_INPUT);
 	}
 }

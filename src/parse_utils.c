@@ -42,3 +42,14 @@ int	only_valid_chars(char *str)
 	}
 	return (1);
 }
+
+void	is_nan(t_rt *rt, float f)
+{
+	if (isnan(f))
+	{
+		perror(FORMAT_FAIL);
+		perror("NAN returned by ft_atof\n");
+		ft_gc_free(rt);
+		exit(EXIT_INPUT);
+	}
+}

@@ -6,18 +6,18 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:32:07 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/28 20:25:49 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/03 20:10:20 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int valid_float(const char *str, int *error_code)
+/* int valid_float(const char *str, int *error_code)
 {
 	int i;
 
 	i = 0;
-	if (!(ft_isdigit(str[i]) || str[i] != '-'))
+	if (!(ft_isdigit(str[i]) && str[i] != '-'))
 		*error_code = 4;
 	if (str[i] == '-')
 		i++;
@@ -59,4 +59,98 @@ double	ft_atof(const char *str, int *error_code)
 		}
 	}
 	return (result * sign / power);
+} */
+
+int	is_valid_float(const char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str || !*str)
+		return (0);
+	if (!(ft_isdigit(str[i]) && str[i] != '-'))
+		return (0);
+	if (str[i] == '-')
+		i++;
+	if (!ft_isdigit(str[i]))
+		return (0);
+	while (ft_isdigit(str[i]))
+		i++;
+	if (str[i] == '.')
+	{
+		i++;
+		if (!ft_isdigit(str[i]))
+			return (0);
+		while (ft_isdigit(str[i]))
+			i++;
+	}
+	return (str[i] == '\0');
+}
+
+double	parse_integer_part(const char **str, int *overflow)
+{
+	double	result;
+
+	result = 0.0;
+	while (ft_isdigit(**str))
+	{
+		result = result * 10.0 + (**str - '0');
+		(*str)++;
+		if (result > FLT_MAX)
+		{
+			*overflow = 1;
+			return (NAN);
+		}
+	}
+	return result;
+}
+
+double	parse_fractional_part(const char **str, double *power, int *overflow)
+{
+	double	result;
+
+	result = 0.0;
+	if (**str == '.')
+	{
+		(*str)++;
+		while (ft_isdigit(**str))
+		{
+			result = result * 10.0 + (**str - '0');
+			*power *= 10.0;
+			(*str)++;
+			if (result > FLT_MAX)
+			{
+				*overflow = 1;
+				return (NAN);
+			}
+		}
+	}
+	return result;
+}
+
+double	ft_atof(const char *str)
+{
+	double	result;
+	double	power;
+	int		sign;
+	int		overflow;
+
+	result = 0.0;
+	power = 1.0;
+	sign = 1;
+	overflow = 0;
+	if (!is_valid_float(str))
+		return (NAN);
+	if (*str == '-')
+	{
+		sign = -1;
+		str++;
+	}
+	result = parse_integer_part(&str, &overflow);
+	if (overflow)
+		return (NAN);
+	result += parse_fractional_part(&str, &power, &overflow) / power;
+	if (overflow)
+		return (NAN);
+	return (sign * result);
 }
