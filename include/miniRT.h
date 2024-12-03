@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/03 18:23:52 by afoth            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -73,19 +61,8 @@ enum						e_obj
 	CYLINDER = 99,
 };
 
-struct						s_mlx
-{
-	void	*connection;
-	void	*window;
-	void	*img;
-	char	*pixel_adress;
-	int		x;
-	int		y;
-	int		bpp;
-	int		endian;
-	int		line_len;
-	//float	zoom;
-};
+
+/*main struct*/
 
 struct						s_rt
 {
@@ -99,6 +76,24 @@ struct						s_rt
 	t_light					*light;
 	t_object				**obj;
 	int						n_obj;
+};
+
+/*minilibx graphical library struct*/
+
+struct						s_mlx
+{
+	void	*connection;
+	void	*window;
+	void	*img;
+	char	*pixel_adress;
+	int		x;
+	int		y;
+	int		width;
+	int		height;
+	int		bpp;
+	int		endian;
+	int		line_len;
+	//float	zoom;
 };
 
 /*objects*/
