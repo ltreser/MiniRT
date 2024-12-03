@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 19:09:08 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/28 20:25:18 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/03 18:15:02 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_list
 	struct s_list		*next;
 }						t_list;
 
+double					ft_atof(const char *str, int *error_code);
 int						ft_atoi(const char *nptr);
 void					ft_bzero(void *s, size_t n);
 void					*ft_calloc(size_t nmemb, size_t size);

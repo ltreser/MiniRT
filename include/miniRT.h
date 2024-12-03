@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/03 17:39:13 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/03 18:10:38 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,28 @@ void						ft_gc_free(t_rt *rt);
 char						*ft_gc_substr(t_rt *rt, const char *s, unsigned int start, size_t len);
 
 //input
-int							check_input(int argc, char **argv);
+int							check_input(t_rt *rt, int argc, char **argv);
 void						read_file(int fd, t_rt *rt);
+
+//exit
+void						ft_exit(t_rt *rt, int exit_code, char *error_message);
+void						free_all(t_rt *rt);
+
+//parse
+void						ft_parse(char *str, t_rt *rt);
+void						parse_obj(char *str, t_rt *rt, char type);
+t_color						*parse_color(t_rt *rt, char *str);
+t_point						*parse_point(t_rt *rt, char *str);
+t_vector					*parse_vector(t_rt *rt, char *str);
+
+//parse_utils
+void						parse_dimensions(t_rt *rt, char *str);
+int							skip_spaces(char *str);
+int							only_valid_chars(char *str);
+
+//vector_calc
+float						v_len(t_vector vector);
+
+//ft_chop
+char						*ft_chop(char *str, char c);
 #endif

@@ -5,21 +5,20 @@ void	ft_parse(char *str, t_rt *rt)
 {
 	if (only_valid_chars(str))
 	{
- 		if (str[i] == 'A' && !rt->ambient)
-			parse_ambient(str, rt);
-		if (str[i] == 'C' && !rt->camera)
-			parse_camera(str, rt);
-		if (str[i] == 'L' && !rt->light)
-			parse_light(str, rt);
-		if (!strncmp("sp ", str, 3) || !strncmp("pl ", str, 3) || !strncmp("cy ", str, 3))
+ 		//if (str[0] == 'A' && !rt->ambient)
+			//parse_ambient(str, rt);
+		//if (str[0] == 'C' && !rt->camera)
+			//parse_camera(str, rt);
+		//if (str[0] == 'L' && !rt->light)
+			//parse_light(str, rt);
+		if (!ft_strncmp("sp ", str, 3) || !ft_strncmp("pl ", str, 3) || !ft_strncmp("cy ", str, 3))
 		{
-			rt->obj[rt->n_obj] = malloc(sizeof(t_obj));
-			parse_obj(str + 3, rt, str[i]);
+			rt->obj[rt->n_obj] = ft_gc_malloc(rt->gc, sizeof(t_obj));
+			parse_obj(str + 3, rt, str[0]);
 		}
 	}
 	else
 		ft_exit(rt, 2, ft_strdup(FILE_FAIL));
-	}
 	if (str)
 	{
 		free(str);
@@ -32,7 +31,7 @@ void	parse_obj(char *str, t_rt *rt, char type)
 	rt->obj[rt->n_obj]->type = (t_enum)type;
 	if (rt->obj[rt->n_obj]->type == SPHERE)
 	{
-		rt->obj[rt->n_obj]->sphere = ft_gc_malloc(sizeof(t_sphere));
+		rt->obj[rt->n_obj]->sphere = ft_gc_malloc(rt, sizeof(t_sphere));
 		rt->obj[rt->n_obj]->sphere->p = parse_point(ft_chop(str, ' '), rt);
 		rt->obj[rt->n_obj]->sphere->v = parse_vector(ft_chop(str, ' '), rt);
 		rt->obj[rt->n_obj]->sphere->c = parse_color(ft_chop(str, ' '), rt);
@@ -40,14 +39,14 @@ void	parse_obj(char *str, t_rt *rt, char type)
 	}
 	if (rt->obj[rt->n_obj]->type == PLANE)
 	{
-		rt->obj[rt->n_obj]->plane = ft_gc_malloc(sizeof(t_plane));
+		rt->obj[rt->n_obj]->plane = ft_gc_malloc(rt, sizeof(t_plane));
 		rt->obj[rt->n_obj]->plane->p = parse_point(ft_chop(str, ' '), rt);
 		rt->obj[rt->n_obj]->plane->v = parse_vector(ft_chop(str, ' '), rt);
 		rt->obj[rt->n_obj]->plane->c = parse_color(ft_chop(str, ' '), rt);
 	}
 	if (rt->obj[rt->n_obj]->type == CYLINDER)
 	{
-		rt->obj[rt->n_obj]->cylinder = ft_gc_malloc(sizeof(t_cylinder));
+		rt->obj[rt->n_obj]->cylinder = ft_gc_malloc(rt, sizeof(t_cylinder));
 		rt->obj[rt->n_obj]->cylinder->p = parse_point(ft_chop(str, ' '), rt);
 		rt->obj[rt->n_obj]->cylinder->v = parse_vector(ft_chop(str, ' '), rt);
 		parse_dimensions(str, rt);
@@ -62,7 +61,7 @@ t_color *parse_color(t_rt *rt, char *str)
 	t_color *color;
 
 	color = malloc(sizeof(t_color));
-	if (contains_c(str, ".");
+	if (contains_c(str, ".")
 		ft_exit(rt, 2, ft_strdup(FILE_FAIL));
 	color->r = (int)ft_atof(ft_chop(str + skip_spaces(str), ","));
 		if (color->r < 0 || color->r > 225)

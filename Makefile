@@ -6,7 +6,7 @@
 #    By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 15:07:05 by mokutucu          #+#    #+#              #
-#    Updated: 2024/11/22 17:30:08 by afoth            ###   ########.fr        #
+#    Updated: 2024/12/03 17:56:24 by afoth            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CFLAGS  = -Wall #-Wextra -Werror
 RM      = rm -rf
 
 SRC_DIR = src
-SRCS    = src/main.c src/mlx_init.c
+SRCS    = src/main.c src/mlx_init.c src/input.c src/parse.c src/vector_calc.c src/parse_utils.c src/exit.c src/screen_calculation.c
 
 OBJS    = $(patsubst $(SRC_DIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
