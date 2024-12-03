@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/03 17:02:50 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/03 17:39:13 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ struct						s_rt
 	float					screen_w_rad;
 	void					*mlx_ptr;
 	void					*win_ptr;
-	t_gc					gc;
+	t_gc					*gc;
 	t_camera				*camera;
 	t_ambient				*ambient;
 	t_light					*light;
@@ -95,7 +95,7 @@ struct						s_obj
 		t_plane				*plane;
 		t_sphere			*sphere;
 		t_cylinder			*cylinder;
-	}
+	};
 };
 
 struct						s_plane
@@ -126,7 +126,7 @@ struct						s_cylinder
 
 struct						s_ambient
 {
-	t_color					c;
+	t_color					*c;
 	float					bright;
 };
 
@@ -172,6 +172,16 @@ typedef struct s_gc
 {
 	void					*ptr;
 	struct s_gc				*next;
-}
+};
 
+
+//garbage collector
+void						ft_gc_init(t_rt *rt);
+void						*ft_gc_malloc(t_rt *rt, size_t size);
+void						ft_gc_free(t_rt *rt);
+char						*ft_gc_substr(t_rt *rt, const char *s, unsigned int start, size_t len);
+
+//input
+int							check_input(int argc, char **argv);
+void						read_file(int fd, t_rt *rt);
 #endif

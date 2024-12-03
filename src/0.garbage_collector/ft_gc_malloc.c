@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:04:07 by afoth             #+#    #+#             */
-/*   Updated: 2024/11/28 22:02:45 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/03 17:36:46 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	*ft_gc_malloc(t_gc *gc, size_t size)
 	return (ptr);
 }
 
+//free rt?
 void	ft_gc_free(t_gc *gc)
 {
 	t_gc	*tmp;
