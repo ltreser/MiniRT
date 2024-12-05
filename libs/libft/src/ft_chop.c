@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_chop.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltreser <ltreser@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:25:35 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/05 21:19:09 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/12/05 21:33:57 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_chop(char *str, char c)
 	chop = NULL;
 	while (str[len] && str[len] != c)
 		len++;
-	chop = gc_malloc((len + 1) * sizeof(char));
+	chop = malloc((len + 1) * sizeof(char));
 	while (str[i] && i < len)
 	{
 		chop[i] = str[i];

@@ -2,4 +2,4 @@ exicodes, just 0 and 1?
 
 radians=degrees×(π/180).
 
-ft_chop ft_gc_malloc 
+gc_chop gc_malloc

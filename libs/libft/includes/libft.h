@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 19:09:08 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/05 20:47:06 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/12/05 21:46:05 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdint.h>
+# include <stdio.h>
+
+# define MALLOC_FAIL "\033[0;31m Error\nMalloc failed!\n \033[0m"
 
 typedef struct s_gc	t_gc;
 
@@ -109,10 +113,11 @@ void				ft_putunsnbr_len(unsigned int n, int *plen);
 
 //
 void				ft_gc_init(t_gc *gc);
-void				*ft_gc_malloc(t_gc *gc, size_t size);
+void				*gc_malloc(t_gc *gc, size_t size);
 void				ft_gc_free(t_gc *gc);
-char				*ft_gc_substr(const char *s, unsigned int start,
+char				*ft_gc_substr(t_gc *gc, const char *s, unsigned int start,
 						size_t len);
-char				*ft_gc_strdup(const char *s);
+char				*ft_gc_strdup(t_gc *gc, const char *s);
+char				*gc_chop(t_gc *gc, char *str, char c);
 
 #endif

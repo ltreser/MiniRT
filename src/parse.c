@@ -8,17 +8,17 @@ void	ft_parse(char *str, t_rt *rt)
  		if (str[0] == 'A' && !rt->ambient)
 			parse_ambient(rt, str);
 		if (str[0] == 'C' && !rt->camera)
-			parse_camera(str, rt);
+			parse_camera(rt, str);
 		if (str[0] == 'L' && !rt->light)
-			parse_light(str, rt);
+			parse_light(rt, str);
 		if (!ft_strncmp("sp ", str, 3) || !ft_strncmp("pl ", str, 3) || !ft_strncmp("cy ", str, 3))
 		{
-			rt->obj[rt->n_obj] = ft_gc_malloc(rt->gc, sizeof(t_obj));
+			rt->obj[rt->n_obj] = gc_malloc(rt->gc, sizeof(t_obj));
 			parse_obj(str + 3, rt, str[0]);
 		}
 	}
 	else
-		ft_exit(rt, 2, ft_gc_strdup(FILE_FAIL));
+		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
 	if (str)
 	{
 		free(str);
@@ -29,37 +29,37 @@ void	ft_parse(char *str, t_rt *rt)
 void	parse_ambient(t_rt *rt, char *str)
 {
 	float ratio;
-	rt->ambient = ft_gc_malloc(rt->gc, sizeof(t_ambient));
-	ratio = ft_atof(ft_chop(str, ' '));
+	rt->ambient = gc_malloc(rt->gc, sizeof(t_ambient));
+	ratio = ft_atof(gc_chop(rt->gc, str, ' '));
 	if (ratio < 0 || ratio > 1)
-		ft_exit(rt, 2, ft_gc_strdup(FILE_FAIL));
+		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
 	rt->ambient->ratio = ratio;
-	rt->ambient->c = parse_color(rt, ft_chop(str, ' '));
+	rt->ambient->c = parse_color(rt, gc_chop(rt->gc, str, ' '));
 }
 
 void	parse_camera(t_rt *rt, char *str)
 {
 	int fov;
 
-	rt->camera = ft_gc_malloc(rt->gc, sizeof(t_camera));
-	rt->camera->p = parse_point(rt, ft_chop(str, ' '));
-	rt->camera->v = parse_vector(rt, ft_chop(str, ' '));
-	fov = (int)ft_atof(ft_chop(str, '\n'));
+	rt->camera = gc_malloc(rt->gc, sizeof(t_camera));
+	rt->camera->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
+	rt->camera->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
+	fov = (int)ft_atof(gc_chop(rt->gc, str, '\n'));
 	if (fov < 0 || fov > 180)
-		ft_exit(rt, 2, ft_gc_strdup(FILE_FAIL));
+		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
 	rt->camera->fov = fov;
 }
 
 void	parse_light(t_rt *rt, char *str)
 {
 	float bright;
-	rt->light = ft_gc_malloc(rt->gc, sizeof(t_light));
-	rt->light->p = parse_point(rt, ft_chop(str, ' '));
-	bright = ft_atof(ft_chop(str, ' '));
+	rt->light = gc_malloc(rt->gc, sizeof(t_light));
+	rt->light->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
+	bright = ft_atof(gc_chop(rt->gc, str, ' '));
 	if (bright < 0 || bright > 1)
-		ft_exit(rt, 2, ft_gc_strdup(FILE_FAIL));
+		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
 	rt->light->bright = bright;
-	rt->light->c = parse_color(rt, ft_chop(str, '\n'));
+	rt->light->c = parse_color(rt, gc_chop(rt->gc, str, '\n'));
 }
 
 void	parse_obj(char *str, t_rt *rt, char type)
@@ -67,26 +67,26 @@ void	parse_obj(char *str, t_rt *rt, char type)
 	rt->obj[rt->n_obj]->type = (t_type)sqrt((type - 99) % 12);
 	if (rt->obj[rt->n_obj]->type == SPHERE)
 	{
-		rt->obj[rt->n_obj]->sphere = ft_gc_malloc(rt->gc, sizeof(t_sphere));
-		rt->obj[rt->n_obj]->sphere->p = parse_point(rt, ft_chop(str, ' '));
-		rt->obj[rt->n_obj]->sphere->v = parse_vector(rt, ft_chop(str, ' '));
-		rt->obj[rt->n_obj]->sphere->c = parse_color(rt, ft_chop(str, ' '));
+		rt->obj[rt->n_obj]->sphere = gc_malloc(rt->gc, sizeof(t_sphere));
+		rt->obj[rt->n_obj]->sphere->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
+		rt->obj[rt->n_obj]->sphere->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
+		rt->obj[rt->n_obj]->sphere->c = parse_color(rt, gc_chop(rt->gc, str, ' '));
 
 	}
 	if (rt->obj[rt->n_obj]->type == PLANE)
 	{
-		rt->obj[rt->n_obj]->plane = ft_gc_malloc(rt->gc, sizeof(t_plane));
-		rt->obj[rt->n_obj]->plane->p = parse_point(rt, ft_chop(str, ' '));
-		rt->obj[rt->n_obj]->plane->v = parse_vector(rt, ft_chop(str, ' '));
-		rt->obj[rt->n_obj]->plane->c = parse_color(rt, ft_chop(str, ' '));
+		rt->obj[rt->n_obj]->plane = gc_malloc(rt->gc, sizeof(t_plane));
+		rt->obj[rt->n_obj]->plane->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
+		rt->obj[rt->n_obj]->plane->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
+		rt->obj[rt->n_obj]->plane->c = parse_color(rt, gc_chop(rt->gc, str, ' '));
 	}
 	if (rt->obj[rt->n_obj]->type == CYLINDER)
 	{
-		rt->obj[rt->n_obj]->cylinder = ft_gc_malloc(rt->gc, sizeof(t_cylinder));
-		rt->obj[rt->n_obj]->cylinder->p = parse_point(rt, ft_chop(str, ' '));
-		rt->obj[rt->n_obj]->cylinder->v = parse_vector(rt, ft_chop(str, ' '));
+		rt->obj[rt->n_obj]->cylinder = gc_malloc(rt->gc, sizeof(t_cylinder));
+		rt->obj[rt->n_obj]->cylinder->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
+		rt->obj[rt->n_obj]->cylinder->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
 		parse_dimensions(rt, str);
-		rt->obj[rt->n_obj]->cylinder->c = parse_color(rt, ft_chop(str, ' '));
+		rt->obj[rt->n_obj]->cylinder->c = parse_color(rt, gc_chop(rt->gc, str, ' '));
 	}
 	rt->n_obj++;
 }
@@ -96,18 +96,18 @@ t_color *parse_color(t_rt *rt, char *str)
 {
 	t_color *color;
 
-	color = ft_gc_malloc(rt->gc, sizeof(t_color));
+	color = gc_malloc(rt->gc, sizeof(t_color));
 	if (contains_c(str, '.'))
-		ft_exit(rt, 2, ft_gc_strdup(FILE_FAIL));
-	color->r = (int)ft_atof(ft_chop(str + skip_spaces(str), ','));
+		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
+	color->r = (int)ft_atof(gc_chop(rt->gc, str + skip_spaces(str), ','));
 		if (color->r < 0 || color->r > 225)
-			ft_exit(rt, 2, ft_gc_strdup(FILE_FAIL));
-	color->g = (int)ft_atof(ft_chop(str + skip_spaces(str), ','));
+			ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
+	color->g = (int)ft_atof(gc_chop(rt->gc, str + skip_spaces(str), ','));
 		if (color->r < 0 || color->r > 225)
-			ft_exit(rt, 2, ft_gc_strdup(FILE_FAIL));
+			ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
 	color->b = (int)ft_atof(ft_strtrim(str + skip_spaces(str), "'\n' "));
 		if (color->r < 0 || color->r > 225)
-			ft_exit(rt, 2, ft_gc_strdup(FILE_FAIL));
+			ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
 	if (str)
 	{
 		free(str);
@@ -125,13 +125,13 @@ t_point	*parse_point(t_rt *rt, char *str)
 	t_point	*point;
 	int		start_of_nb;
 
-	point = ft_gc_malloc(rt->gc, sizeof(t_point));
+	point = gc_malloc(rt->gc, sizeof(t_point));
 	start_of_nb = skip_spaces(str);
-	point->x= ft_atof(ft_chop(str + start_of_nb, ','));
+	point->x= ft_atof(gc_chop(rt->gc, str + start_of_nb, ','));
 	is_nan(rt, point->x);
-	point->y= ft_atof(ft_chop(str, ','));
+	point->y= ft_atof(gc_chop(rt->gc, str, ','));
 	is_nan(rt, point->x);
-	point->z= ft_atof(ft_chop(str, ' '));
+	point->z= ft_atof(gc_chop(rt->gc, str, ' '));
 	is_nan(rt, point->x);
 	return(point);
 }
@@ -143,13 +143,13 @@ t_vector	*parse_vector(t_rt *rt, char *str)
 	float		len;
 	int			start_of_nb;
 
-	vector = ft_gc_malloc(rt->gc, sizeof(t_vector));
+	vector = gc_malloc(rt->gc, sizeof(t_vector));
 	start_of_nb = skip_spaces(str);
-	vector->x= ft_atof(ft_chop(str + start_of_nb, ','));
+	vector->x= ft_atof(gc_chop(rt->gc, str + start_of_nb, ','));
 	is_nan(rt, vector->x);
-	vector->y= ft_atof(ft_chop(str, ','));
+	vector->y= ft_atof(gc_chop(rt->gc, str, ','));
 	is_nan(rt, vector->y);
-	vector->z= ft_atof(ft_chop(str, ' '));
+	vector->z= ft_atof(gc_chop(rt->gc, str, ' '));
 	is_nan(rt, vector->z);
 	len = v_len(vector);
 	if (len == 1 || len == -1)

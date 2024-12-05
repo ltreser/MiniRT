@@ -6,7 +6,7 @@
 #    By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/04 02:24:33 by ltreser           #+#    #+#              #
-#    Updated: 2024/12/05 21:24:28 by afoth            ###   ########.fr        #
+#    Updated: 2024/12/05 21:47:45 by afoth            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,8 @@ LIBFT_SRCS	= ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 	ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \
 	ft_lstiter.c  ft_atol.c  \
 	ft_lstmap.c ft_lstnew.c ft_lstsize.c ft_lstlast.c \
-	ft_contains_c.c ft_isupper ft_islower ft_capitalize.c ft_count_words \
-	ft_chop.c
 	ft_contains_c.c ft_isupper.c ft_islower.c ft_capitalize.c ft_count_words.c \
-	ft_chop.c
+	ft_chop.c ft_atof.c
 
 LIBFT_OBJS	= $(LIBFT_SRCS:.c=.o)
 

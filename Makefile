@@ -6,7 +6,7 @@
 #    By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 15:07:05 by mokutucu          #+#    #+#              #
-#    Updated: 2024/12/05 20:26:27 by ltreser          ###   ########.fr        #
+#    Updated: 2024/12/05 22:10:58 by afoth            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@ OBJDIR  = obj
 CC      = cc
 
 CFLAGS  = -Wall #-Wextra -Werror
+
+LDFLAGS = -lXext -lX11 -lm
 
 RM      = rm -rf
 
@@ -29,7 +31,7 @@ OBJS    = $(patsubst $(SRC_DIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 all:    $(NAME)
 
 $(NAME): $(OBJS) $(LIBDIR)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS) $(LIBDIR)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBDIR) $(LDFLAGS)
 
 $(OBJDIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_gc_malloc.c                                     :+:      :+:    :+:   */
+/*   gc_malloc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
-/*
+
 // Function to initialize the garbage collector
 void	ft_gc_init(t_gc *gc)
 {
@@ -22,7 +22,7 @@ void	ft_gc_init(t_gc *gc)
 // Function to allocate memory and add to garbage collector
 // Set exit status to 1 for memory allocation failure
 //TODO EXIT AND ERROR CODES
-void	*ft_gc_malloc(t_rt *rt, size_t size)
+void	*gc_malloc(t_gc *gc, size_t size)
 {
 	void		*ptr;
 	t_gc	*new_node;
@@ -61,7 +61,7 @@ void	ft_gc_free(t_gc *gc)
 	}
 }
 
-char	*ft_gc_substr(const char *s, unsigned int start, size_t len)
+char	*ft_gc_substr(t_gc *gc, const char *s, unsigned int start, size_t len)
 {
 	size_t	len_s;
 	char	*dest;
@@ -76,7 +76,7 @@ char	*ft_gc_substr(const char *s, unsigned int start, size_t len)
 		len = len_s - start;
 	if (len >= SIZE_MAX - 1)
 		return (NULL);
-	dest = (char *)ft_gc_malloc((len + 1) * sizeof(char));
+	dest = (char *)gc_malloc(gc, (len + 1) * sizeof(char));
 	if (dest == NULL)
 		return (NULL);
 	i = 0;
@@ -89,17 +89,42 @@ char	*ft_gc_substr(const char *s, unsigned int start, size_t len)
 	return (dest);
 }
 
-char	*ft_gc_strdup(const char *s)
+char	*ft_gc_strdup(t_gc *gc, const char *s)
 {
 	char	*ptr;
 	int		i;
 
 	i = ft_strlen(s);
-	ptr = (char *) ft_gc_malloc(sizeof(char) * (i + 1));
+	ptr = (char *) gc_malloc( gc, sizeof(char) * (i + 1));
 	if (!ptr)
 		return (0);
 	ptr[i] = '\0';
 	while (--i >= 0)
 		ptr[i] = s[i];
 	return (ptr);
-} */
+}
+
+char	*gc_chop(t_gc *gc, char *str, char c)
+{
+	int		i;
+	int		len;
+	char	*chop;
+
+	i = 0;
+	len = 0;
+	chop = NULL;
+	while (str[len] && str[len] != c)
+		len++;
+	chop = gc_malloc(gc, (len + 1) * sizeof(char));
+	while (str[i] && i < len)
+	{
+		chop[i] = str[i];
+		i++;
+	}
+	chop[i++] = '\0';
+	len = i;
+	i = 0;
+	ft_memmove(str, str + len, (ft_strlen(str) - len));
+	ft_bzero(str + (ft_strlen(str) - len), len);
+	return (chop);
+}
