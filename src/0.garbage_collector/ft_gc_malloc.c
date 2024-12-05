@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:04:07 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/03 17:36:46 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/05 18:56:52 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_gc_init(t_gc *gc)
 // Function to allocate memory and add to garbage collector
 // Set exit status to 1 for memory allocation failure
 //TODO EXIT AND ERROR CODES
-void	*ft_gc_malloc(t_gc *gc, size_t size)
+void	*ft_gc_malloc(t_rt *rt, size_t size)
 {
 	void		*ptr;
 	t_gc	*new_node;
@@ -42,8 +42,8 @@ void	*ft_gc_malloc(t_gc *gc, size_t size)
 		exit(EXIT_FAILURE);
 	}
 	new_node->ptr = ptr;
-	new_node->next = gc->next;
-	gc->next = new_node;
+	new_node->next = rt->gc->next;
+	rt->gc->next = new_node;
 	return (ptr);
 }
 

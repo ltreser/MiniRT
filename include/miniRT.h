@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/03 20:27:45 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/12/05 19:07:42 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ typedef struct s_light		t_light;
 typedef struct s_sphere		t_sphere;
 typedef struct s_cylinder	t_cylinder;
 typedef struct s_color		t_color;
-typedef struct s_object		t_object;
+typedef struct s_obj		t_obj;
 typedef struct s_gc			t_gc;
 typedef struct s_mlx		t_mlx;
-typedef enum e_obj			t_obj;
+typedef enum e_type			t_type;
 
-enum						e_obj
+enum						e_type
 {
 	CYLINDER,
 	PLANE,
@@ -86,7 +86,7 @@ struct						s_rt
 	t_camera				*camera;
 	t_ambient				*ambient;
 	t_light					*light;
-	t_object				**obj;
+	t_obj					**obj;
 	int						n_obj;
 };
 
