@@ -6,11 +6,11 @@
 /*   By: ltreser <ltreser@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:24:50 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/05 19:25:01 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/12/05 20:30:01 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	count_words(char *s, char c)
+int	ft_count_words(char *s, char c)
 {
 	int	words;
 	int	in_word;

@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/05 19:36:15 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/05 20:23:10 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,18 +191,6 @@ struct						s_color
 	int						b;
 };
 
-struct						s_gc
-{
-	void					*ptr;
-	struct s_gc				*next;
-};
-
-
-//garbage collector
-void						ft_gc_init(t_rt *rt);
-void						*ft_gc_malloc(t_rt *rt, size_t size);
-void						ft_gc_free(t_rt *rt);
-char						*ft_gc_substr(t_rt *rt, const char *s, unsigned int start, size_t len);
 
 //input
 int							check_input(t_rt *rt, int argc, char **argv);
@@ -225,7 +213,16 @@ int							skip_spaces(char *str);
 int							only_valid_chars(char *str);
 void						is_nan(t_rt *rt, float f);
 
+//mlx
+void    mlx_create_window(t_rt *rt);
+int keypress(int keycode, t_rt *rt);
+int ft_close_window(t_rt *rt);
+
 //vector_calc
 float						v_len(t_vector *vector);
+
+//render
+void calc_aspect_ratio(t_rt *rt);
+
 
 #endif

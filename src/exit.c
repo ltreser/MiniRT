@@ -6,13 +6,13 @@
 /*   By: ltreser <ltreser@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:06 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/25 17:23:22 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/12/05 20:16:44 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minirt.h"
+#include "../include/miniRT.h"
 
-void	free_all(rt)
+void	free_all(t_rt *rt)
 {
 	return ;
 }
