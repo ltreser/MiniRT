@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/05 19:27:08 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/12/05 19:36:15 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,6 @@ int							only_valid_chars(char *str);
 void						is_nan(t_rt *rt, float f);
 
 //vector_calc
-float						v_len(t_vector vector);
+float						v_len(t_vector *vector);
 
 #endif
