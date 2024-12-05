@@ -61,7 +61,7 @@ double	ft_atof(const char *str, int *error_code)
 	return (result * sign / power);
 } */
 
-int	is_valid_float(const char *str)
+static int	is_valid_float(const char *str)
 {
 	int	i;
 
@@ -87,7 +87,7 @@ int	is_valid_float(const char *str)
 	return (str[i] == '\0');
 }
 
-double	parse_integer_part(const char **str, int *overflow)
+static double	parse_integer_part(const char **str, int *overflow)
 {
 	double	result;
 
@@ -105,7 +105,7 @@ double	parse_integer_part(const char **str, int *overflow)
 	return result;
 }
 
-double	parse_fractional_part(const char **str, double *power, int *overflow)
+static double	parse_fractional_part(const char **str, double *power, int *overflow)
 {
 	double	result;
 

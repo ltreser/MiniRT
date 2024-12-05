@@ -13,7 +13,7 @@ void	ft_parse(char *str, t_rt *rt)
 			//parse_light(str, rt);
 		if (!ft_strncmp("sp ", str, 3) || !ft_strncmp("pl ", str, 3) || !ft_strncmp("cy ", str, 3))
 		{
-			rt->obj[rt->n_obj] = ft_gc_malloc(rt, sizeof(t_obj));
+			rt->obj[rt->n_obj] = ft_gc_malloc(rt->gc, sizeof(t_obj));
 			parse_obj(str + 3, rt, str[0]);
 		}
 	}
@@ -67,7 +67,7 @@ void	parse_obj(char *str, t_rt *rt, char type)
 	rt->obj[rt->n_obj]->type = (t_type)sqrt((type - 99) % 12);
 	if (rt->obj[rt->n_obj]->type == SPHERE)
 	{
-		rt->obj[rt->n_obj]->sphere = ft_gc_malloc(rt, sizeof(t_sphere));
+		rt->obj[rt->n_obj]->sphere = ft_gc_malloc(rt->gc, sizeof(t_sphere));
 		rt->obj[rt->n_obj]->sphere->p = parse_point(rt, ft_chop(str, ' '));
 		rt->obj[rt->n_obj]->sphere->v = parse_vector(rt, ft_chop(str, ' '));
 		rt->obj[rt->n_obj]->sphere->c = parse_color(rt, ft_chop(str, ' '));
@@ -75,14 +75,14 @@ void	parse_obj(char *str, t_rt *rt, char type)
 	}
 	if (rt->obj[rt->n_obj]->type == PLANE)
 	{
-		rt->obj[rt->n_obj]->plane = ft_gc_malloc(rt, sizeof(t_plane));
+		rt->obj[rt->n_obj]->plane = ft_gc_malloc(rt->gc, sizeof(t_plane));
 		rt->obj[rt->n_obj]->plane->p = parse_point(rt, ft_chop(str, ' '));
 		rt->obj[rt->n_obj]->plane->v = parse_vector(rt, ft_chop(str, ' '));
 		rt->obj[rt->n_obj]->plane->c = parse_color(rt, ft_chop(str, ' '));
 	}
 	if (rt->obj[rt->n_obj]->type == CYLINDER)
 	{
-		rt->obj[rt->n_obj]->cylinder = ft_gc_malloc(rt, sizeof(t_cylinder));
+		rt->obj[rt->n_obj]->cylinder = ft_gc_malloc(rt->gc, sizeof(t_cylinder));
 		rt->obj[rt->n_obj]->cylinder->p = parse_point(rt, ft_chop(str, ' '));
 		rt->obj[rt->n_obj]->cylinder->v = parse_vector(rt, ft_chop(str, ' '));
 		parse_dimensions(rt, str);
@@ -96,8 +96,8 @@ t_color *parse_color(t_rt *rt, char *str)
 {
 	t_color *color;
 
-	color = ft_gc_malloc(sizeof(t_color));
-	if (contains_c(str, "."))
+	color = ft_gc_malloc(rt->gc, sizeof(t_color));
+	if (contains_c(str, '.'))
 		ft_exit(rt, 2, ft_gc_strdup(FILE_FAIL));
 	color->r = (int)ft_atof(ft_chop(str + skip_spaces(str), ','));
 		if (color->r < 0 || color->r > 225)
@@ -125,7 +125,7 @@ t_point	*parse_point(t_rt *rt, char *str)
 	t_point	*point;
 	int		start_of_nb;
 
-	point = ft_gc_malloc(rt, sizeof(t_point));
+	point = ft_gc_malloc(rt->gc, sizeof(t_point));
 	start_of_nb = skip_spaces(str);
 	point->x= ft_atof(ft_chop(str + start_of_nb, ','));
 	is_nan(rt, point->x);
@@ -143,7 +143,7 @@ t_vector	*parse_vector(t_rt *rt, char *str)
 	float		len;
 	int			start_of_nb;
 
-	vector = ft_gc_malloc(rt, sizeof(t_vector));
+	vector = ft_gc_malloc(rt->gc, sizeof(t_vector));
 	start_of_nb = skip_spaces(str);
 	vector->x= ft_atof(ft_chop(str + start_of_nb, ','));
 	is_nan(rt, vector->x);
@@ -151,14 +151,14 @@ t_vector	*parse_vector(t_rt *rt, char *str)
 	is_nan(rt, vector->y);
 	vector->z= ft_atof(ft_chop(str, ' '));
 	is_nan(rt, vector->z);
-	len = v_len(*vector);
+	len = v_len(vector);
 	if (len == 1 || len == -1)
 		return(vector);
 	else
 	{
 		perror(FORMAT_FAIL);
 		perror("Vector not normalized");
-		ft_gc_free(rt);
+		ft_gc_free(rt->gc);
 		exit(EXIT_INPUT);
 	}
 }

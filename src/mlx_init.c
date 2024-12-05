@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 15:40:56 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/05 19:34:27 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/05 20:24:40 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,15 @@ int	ft_close_window(t_rt *rt)
 {
 	mlx_destroy_window(rt->mlx->connection, rt->mlx->window);
 	mlx_destroy_display(rt->mlx->connection);
+	return (0);
 }
 
 int	keypress(int keycode, t_rt *rt)
 {
 	if (keycode == 65307)
 		ft_close_window(rt);
+	return (0);
 }
-//
 void	mlx_create_window(t_rt *rt)
 {
 	rt->mlx->x = 0;

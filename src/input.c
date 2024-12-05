@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:10:44 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/05 19:22:08 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/05 20:20:01 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ void read_file(int fd, t_rt *rt)
 
 	line = NULL;
 	line = get_next_line(fd);
-	if (line[0] != '\n')
-		ft_parse(line, rt);
-	while (get_next_line != NULL)
+	while (line)
+	{
 		if (line[0] != '\n')
 			ft_parse(line, rt);
+		line = get_next_line(fd);
+	}	
 }
 

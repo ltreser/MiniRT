@@ -6,11 +6,11 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:04:07 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/05 19:19:38 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/05 20:06:15 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/miniRT.h"
+#include "../includes/linft.h"
 
 // Function to initialize the garbage collector
 void	ft_gc_init(t_gc *gc)
@@ -42,8 +42,8 @@ void	*ft_gc_malloc(t_rt *rt, size_t size)
 		exit(EXIT_FAILURE);
 	}
 	new_node->ptr = ptr;
-	new_node->next = rt->gc->next;
-	rt->gc->next = new_node;
+	new_node->next = gc->next;
+	gc->next = new_node;
 	return (ptr);
 }
 

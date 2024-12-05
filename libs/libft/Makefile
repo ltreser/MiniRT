@@ -6,7 +6,7 @@
 #    By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/04 02:24:33 by ltreser           #+#    #+#              #
-#    Updated: 2024/12/05 19:26:09 by ltreser          ###   ########.fr        #
+#    Updated: 2024/12/05 20:18:15 by ltreser          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,10 @@ GNL_SRCS	= get_next_line.c get_next_line_utils.c
 
 GNL_OBJS	= $(GNL_SRCS:.c=.o)
 
+GC_SRCS	= ft_gc_malloc.c
+
+GC_OBJS	= $(GC_SRCS:.c=.o)
+
 CC			= cc
 
 LIBFT_PATH	= ./src/
@@ -42,6 +46,8 @@ LIBFT_PATH	= ./src/
 PRINTF_PATH	= ./printf/
 
 GNL_PATH	= ./gnl/
+
+GC_PATH     = ./gc/
 
 INCLUDES_PATH	= ./includes
 
@@ -52,11 +58,11 @@ CFLAGS		= -Wall -Werror -Wextra -I $(INCLUDES_PATH)
 
 all: $(NAME)
 
-$(NAME): $(addprefix $(LIBFT_PATH), $(LIBFT_OBJS)) $(addprefix $(PRINTF_PATH), $(PRINTF_OBJS)) $(addprefix $(GNL_PATH), $(GNL_OBJS))
-	ar rc $(NAME) $(addprefix $(LIBFT_PATH), $(LIBFT_OBJS)) $(addprefix $(PRINTF_PATH), $(PRINTF_OBJS)) $(addprefix $(GNL_PATH), $(GNL_OBJS))
+$(NAME): $(addprefix $(LIBFT_PATH), $(LIBFT_OBJS)) $(addprefix $(PRINTF_PATH), $(PRINTF_OBJS)) $(addprefix $(GNL_PATH), $(GNL_OBJS)) $(addprefix $(GC_PATH), $(GC_OBJS))
+	ar rc $(NAME) $(addprefix $(LIBFT_PATH), $(LIBFT_OBJS)) $(addprefix $(PRINTF_PATH), $(PRINTF_OBJS)) $(addprefix $(GNL_PATH), $(GNL_OBJS))  $(addprefix $(GC_PATH), $(GC_OBJS))
 
 clean:
-	rm -f $(addprefix $(LIBFT_PATH), $(LIBFT_OBJS)) $(addprefix $(PRINTF_PATH), $(PRINTF_OBJS)) $(addprefix $(GNL_PATH), $(GNL_OBJS))
+	rm -f $(addprefix $(LIBFT_PATH), $(LIBFT_OBJS)) $(addprefix $(PRINTF_PATH), $(PRINTF_OBJS)) $(addprefix $(GNL_PATH), $(GNL_OBJS)) $(addprefix $(GC_PATH), $(GC_OBJS))
 
 fclean: clean
 	rm -f $(NAME)
