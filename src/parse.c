@@ -9,8 +9,8 @@ void	ft_parse(char *str, t_rt *rt)
 			parse_ambient(str, rt);
 		if (str[0] == 'C' && !rt->camera)
 			parse_camera(str, rt);
-		//if (str[0] == 'L' && !rt->light)
-			//parse_light(str, rt);
+		if (str[0] == 'L' && !rt->light)
+			parse_light(str, rt);
 		if (!ft_strncmp("sp ", str, 3) || !ft_strncmp("pl ", str, 3) || !ft_strncmp("cy ", str, 3))
 		{
 			rt->obj[rt->n_obj] = ft_gc_malloc(rt->gc, sizeof(t_obj));

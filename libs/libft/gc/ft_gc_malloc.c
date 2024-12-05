@@ -6,12 +6,12 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:04:07 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/05 20:06:15 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/12/05 20:42:02 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/linft.h"
-
+#include "../includes/libft.h"
+/*
 // Function to initialize the garbage collector
 void	ft_gc_init(t_gc *gc)
 {
@@ -102,4 +102,4 @@ char	*ft_gc_strdup(const char *s)
 	while (--i >= 0)
 		ptr[i] = s[i];
 	return (ptr);
-}
+} */

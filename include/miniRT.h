@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/05 20:33:31 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/05 20:34:59 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,9 @@ void						parse_obj(char *str, t_rt *rt, char type);
 t_color						*parse_color(t_rt *rt, char *str);
 t_point						*parse_point(t_rt *rt, char *str);
 t_vector					*parse_vector(t_rt *rt, char *str);
+void						parse_ambient(t_rt *rt, char *str);
+void						parse_camera(t_rt *rt, char *str);
+void						parse_light(t_rt *rt, char *str);
 
 //parse_utils
 void						parse_dimensions(t_rt *rt, char *str);
