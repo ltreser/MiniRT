@@ -6,9 +6,11 @@
 /*   By: ltreser <ltreser@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:25:35 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/05 19:25:50 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/12/05 21:19:09 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../includes/libft.h"
 
 char	*ft_chop(char *str, char c)
 {

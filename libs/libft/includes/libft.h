@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 19:09:08 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/05 20:30:32 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/12/05 20:47:06 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void				ft_putendl_fd(char *s, int fd);
 void				ft_putchar_fd(char c, int fd);
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 int					contains_c(char *str, char c);
-int					is_upper(char c);
-int					is_lower(char c);
+int					ft_isupper(char c);
+int					ft_islower(char c);
 double				ft_atof(const char *str);
 char				*capitalize(char *str);
 int					ft_count_words(char *s, char c);
