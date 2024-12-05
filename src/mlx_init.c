@@ -6,13 +6,13 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 15:40:56 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/03 20:17:14 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/05 19:25:14 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
-/* int	ft_close_window(t_rt *rt)
+int	ft_close_window(t_rt *rt)
 {
 	mlx_destroy_window(rt->mlx->connection, rt->mlx->window);
 	mlx_destroy_display(rt->mlx->connection);
@@ -55,4 +55,3 @@ void	mlx_create_window(t_rt *rt)
 	mlx_loop(rt->mlx_ptr);
 	mlx_hook(rt->mlx->window, 2, 1L << 0, keypress, rt);
 }
- */

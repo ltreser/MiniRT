@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:04:07 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/05 18:56:52 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/05 19:19:38 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,19 @@ char	*ft_gc_substr(const char *s, unsigned int start, size_t len)
 	}
 	dest[i] = '\0';
 	return (dest);
+}
+
+char	*ft_gc_strdup(const char *s)
+{
+	char	*ptr;
+	int		i;
+
+	i = ft_strlen(s);
+	ptr = (char *) ft_gc_malloc(sizeof(char) * (i + 1));
+	if (!ptr)
+		return (0);
+	ptr[i] = '\0';
+	while (--i >= 0)
+		ptr[i] = s[i];
+	return (ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:10:44 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/03 18:03:09 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/05 19:22:08 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ void check_format(t_rt *rt, char *arg)
 	int i;
 
 	i = ft_strlen(arg) - 1;
-	if (arg[i] != EOF || arg[i-1] != 't' || arg[i-2] != 'r' || arg[i-3] != '.')
-		ft_exit(rt, 2, ft_strdup(FORMAT_FAIL));
+	if (arg[i] != EOF || arg[i-3] != '.' || arg[i-2] != 'r' || arg[i-1] != 't')
+		ft_exit(rt, 2, ft_gc_strdup(FORMAT_FAIL));
 }
 
 int check_input(t_rt *rt, int argc, char **argv)
 {
 	int fd;
 	if (argc > 2)
-		ft_exit(rt, 2, ft_strdup(AC_FAIL));
+		ft_exit(rt, 2, ft_gc_strdup(AC_FAIL));
 	check_format(rt, argv[1]);
 	fd = open(argv[1], O_RDONLY);
 	if (!fd)
-		ft_exit(rt, 2, ft_strdup(OPEN_FAIL));
+		ft_exit(rt, 2, ft_gc_strdup(OPEN_FAIL));
 	return (fd);
 }
 

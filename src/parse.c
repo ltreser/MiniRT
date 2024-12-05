@@ -18,13 +18,15 @@ void	ft_parse(char *str, t_rt *rt)
 		}
 	}
 	else
-		ft_exit(rt, 2, ft_strdup(FILE_FAIL));
+		ft_exit(rt, 2, ft_gc_strdup(FILE_FAIL));
 	if (str)
 	{
 		free(str);
 		str = NULL;
 	}
 }
+
+void	parse_ambient(rt *rt, char *str)
 
 void	parse_obj(char *str, t_rt *rt, char type)
 {
@@ -60,18 +62,18 @@ t_color *parse_color(t_rt *rt, char *str)
 {
 	t_color *color;
 
-	color = malloc(sizeof(t_color));
+	color = ft_gc_malloc(sizeof(t_color));
 	if (contains_c(str, "."))
-		ft_exit(rt, 2, ft_strdup(FILE_FAIL));
+		ft_exit(rt, 2, ft_gc_strdup(FILE_FAIL));
 	color->r = (int)ft_atof(ft_chop(str + skip_spaces(str), ','));
 		if (color->r < 0 || color->r > 225)
-			ft_exit(rt, 2, ft_strdup(FILE_FAIL));
+			ft_exit(rt, 2, ft_gc_strdup(FILE_FAIL));
 	color->g = (int)ft_atof(ft_chop(str + skip_spaces(str), ','));
 		if (color->r < 0 || color->r > 225)
-			ft_exit(rt, 2, ft_strdup(FILE_FAIL));
+			ft_exit(rt, 2, ft_gc_strdup(FILE_FAIL));
 	color->b = (int)ft_atof(ft_strtrim(str + skip_spaces(str), "'\n' "));
 		if (color->r < 0 || color->r > 225)
-			ft_exit(rt, 2, ft_strdup(FILE_FAIL));
+			ft_exit(rt, 2, ft_gc_strdup(FILE_FAIL));
 	if (str)
 	{
 		free(str);
