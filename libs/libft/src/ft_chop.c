@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_chop.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: ltreser <ltreser@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 22:20:41 by ltreser           #+#    #+#             */
-/*   Updated: 2024/11/28 22:32:27 by afoth            ###   ########.fr       */
+/*   Created: 2024/12/05 19:25:35 by ltreser           #+#    #+#             */
+/*   Updated: 2024/12/05 19:25:50 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../include/miniRT.h"
 
 char	*ft_chop(char *str, char c)
 {
@@ -23,7 +21,7 @@ char	*ft_chop(char *str, char c)
 	chop = NULL;
 	while (str[len] && str[len] != c)
 		len++;
-	chop = ft_gc_malloc((len + 1) * sizeof(char));
+	chop = gc_malloc((len + 1) * sizeof(char));
 	while (str[i] && i < len)
 	{
 		chop[i] = str[i];

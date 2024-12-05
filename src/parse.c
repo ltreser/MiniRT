@@ -28,7 +28,7 @@ void	ft_parse(char *str, t_rt *rt)
 
 void	parse_obj(char *str, t_rt *rt, char type)
 {
-	rt->obj[rt->n_obj]->type = (t_enum)type;
+	rt->obj[rt->n_obj]->type = (t_type)sqrt((type - 99) % 12);
 	if (rt->obj[rt->n_obj]->type == SPHERE)
 	{
 		rt->obj[rt->n_obj]->sphere = ft_gc_malloc(rt, sizeof(t_sphere));

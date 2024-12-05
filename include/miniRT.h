@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/05 19:07:42 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/05 19:27:08 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ struct						s_mlx
 
 struct						s_obj
 {
-	t_obj					*type;
+	t_type					type;
 	union
 	{
 		t_plane				*plane;
@@ -228,6 +228,4 @@ void						is_nan(t_rt *rt, float f);
 //vector_calc
 float						v_len(t_vector vector);
 
-//ft_chop
-char						*ft_chop(char *str, char c);
 #endif
