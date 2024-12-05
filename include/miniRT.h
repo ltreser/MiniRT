@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/05 19:36:15 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/05 19:52:51 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ struct						s_cylinder
 struct						s_ambient
 {
 	t_color					*c;
-	float					bright;
+	float					ratio;
 };
 
 struct						s_camera
@@ -162,10 +162,9 @@ struct						s_camera
 
 struct						s_light
 {
-	// t_color c;
-	t_vector				*v;
 	t_point					*p;
 	float					bright;
+	t_color					*c;
 };
 
 /*variables*/

@@ -5,10 +5,10 @@ void	ft_parse(char *str, t_rt *rt)
 {
 	if (only_valid_chars(str))
 	{
- 		//if (str[0] == 'A' && !rt->ambient)
-			//parse_ambient(str, rt);
-		//if (str[0] == 'C' && !rt->camera)
-			//parse_camera(str, rt);
+ 		if (str[0] == 'A' && !rt->ambient)
+			parse_ambient(str, rt);
+		if (str[0] == 'C' && !rt->camera)
+			parse_camera(str, rt);
 		//if (str[0] == 'L' && !rt->light)
 			//parse_light(str, rt);
 		if (!ft_strncmp("sp ", str, 3) || !ft_strncmp("pl ", str, 3) || !ft_strncmp("cy ", str, 3))
@@ -26,7 +26,41 @@ void	ft_parse(char *str, t_rt *rt)
 	}
 }
 
-void	parse_ambient(rt *rt, char *str)
+void	parse_ambient(t_rt *rt, char *str)
+{
+	float ratio;
+	rt->ambient = ft_gc_malloc(rt, sizeof(t_ambient));
+	ratio = ft_atof(ft_chop(str, ' '));
+	if (ratio < 0 || ratio > 1)
+		ft_exit(rt, 2, ft_gc_strdup(FILE_FAIL));
+	rt->ambient->ratio = ratio;
+	rt->ambient->c = parse_color(rt, ft_chop(str, ' '));
+}
+
+void	parse_camera(t_rt *rt, char *str)
+{
+	int fov;
+
+	rt->camera = ft_gc_malloc(rt, sizeof(t_camera));
+	rt->camera->p = parse_point(rt, ft_chop(str, ' '));
+	rt->camera->v = parse_vector(rt, ft_chop(str, ' '));
+	fov = (int)ft_atof(ft_chop(str, '\n'));
+	if (fov < 0 || fov > 180)
+		ft_exit(rt, 2, ft_gc_strdup(FILE_FAIL));
+	rt->camera->fov = fov;
+}
+
+void	parse_light(t_rt *rt, char *str)
+{
+	float bright;
+	rt->light = ft_gc_malloc(rt, sizeof(t_light));
+	rt->light->p = parse_point(rt, ft_chop(str, ' '));
+	bright = ft_atof(ft_strchop(str, ' '));
+	if (bright < 0 || bright > 1)
+		ft_exit(rt, 2, ft_gc_strdup(FILE_FAIL));
+	rt->light->bright = bright;
+	rt->light->c = parse_color(rt, ft_chop(str, '\n'));
+}
 
 void	parse_obj(char *str, t_rt *rt, char type)
 {
