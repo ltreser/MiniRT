@@ -42,8 +42,12 @@ void	parse_ambient(t_rt *rt, char *str)
 	ratio = ft_atof(gc_chop(rt->gc, str, ' '));
 	if (ratio < 0 || ratio > 1)
 		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
+<<<<<<< HEAD
 	rt->ambient->ratio = ratio;
 	printf("str is now: %s|\n", str);
+=======
+	rt->ambient->ratio = ratio;	
+>>>>>>> 5ad43d5 (chore:: debug)
 	rt->ambient->c = parse_color(rt, ft_strtrim(str, "\n "));
 }
 
@@ -52,11 +56,17 @@ void	parse_camera(t_rt *rt, char *str)
 	int fov;
 
 	rt->camera = gc_malloc(rt->gc, sizeof(t_camera));
+	printf("goes here 0\n");
+	printf("str is now: %s\n", str);
 	rt->camera->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
+	printf("goes here 1\n");
 	rt->camera->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
 	fov = (int)ft_atof(gc_chop(rt->gc, str, '\n'));
 	if (fov < 0 || fov > 180)
+	{
+		printf("goes here 2\n");
 		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
+	}
 	rt->camera->fov = fov;
 }
 
@@ -131,6 +141,8 @@ t_color *parse_color(t_rt *rt, char *str)
 // max 3*-
 t_point	*parse_point(t_rt *rt, char *str)
 {
+	if (rt->camera)
+		printf("str is: %s\n");
 	t_point	*point;
 	int		start_of_nb;
 
