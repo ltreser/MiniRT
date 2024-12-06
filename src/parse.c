@@ -5,12 +5,12 @@ void	ft_parse(char *str, t_rt *rt)
 {
 	if (only_valid_chars(str))
 	{
- 		if (str[0] == 'A' && !rt->ambient)
-			parse_ambient(rt, str);
-		if (str[0] == 'C' && !rt->camera)
-			parse_camera(rt, str);
-		if (str[0] == 'L' && !rt->light)
-			parse_light(rt, str);
+ 		if (str[0] == 'A' && !rt->ambient && str[1] && str[1] == ' ')
+			parse_ambient(rt, str + 2);
+		if (str[0] == 'C' && !rt->camera && str[1] && str[1] == ' ')
+			parse_camera(rt, str + 2);
+		if (str[0] == 'L' && !rt->light && str[1] & str[1] == ' ')
+			parse_light(rt, str + 2);
 		if (!ft_strncmp("sp ", str, 3) || !ft_strncmp("pl ", str, 3) || !ft_strncmp("cy ", str, 3))
 		{
 			rt->obj[rt->n_obj] = gc_malloc(rt->gc, sizeof(t_obj));
@@ -30,7 +30,9 @@ void	parse_ambient(t_rt *rt, char *str)
 {
 	float ratio;
 	rt->ambient = gc_malloc(rt->gc, sizeof(t_ambient));
+	printf("str is now: %s\n", str);
 	ratio = ft_atof(gc_chop(rt->gc, str, ' '));
+	printf("str is now: %s\n", str);
 	if (ratio < 0 || ratio > 1)
 		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
 	rt->ambient->ratio = ratio;
