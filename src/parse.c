@@ -30,13 +30,12 @@ void	parse_ambient(t_rt *rt, char *str)
 {
 	float ratio;
 	rt->ambient = gc_malloc(rt->gc, sizeof(t_ambient));
-	printf("str is now: %s\n", str);
 	ratio = ft_atof(gc_chop(rt->gc, str, ' '));
-	printf("str is now: %s\n", str);
 	if (ratio < 0 || ratio > 1)
 		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
-	rt->ambient->ratio = ratio;
-	rt->ambient->c = parse_color(rt, gc_chop(rt->gc, str, ' '));
+	rt->ambient->ratio = ratio;	
+	printf("str is now: %s|\n", str);
+	rt->ambient->c = parse_color(rt, ft_strtrim(str, "\n "));
 }
 
 void	parse_camera(t_rt *rt, char *str)
@@ -61,7 +60,7 @@ void	parse_light(t_rt *rt, char *str)
 	if (bright < 0 || bright > 1)
 		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
 	rt->light->bright = bright;
-	rt->light->c = parse_color(rt, gc_chop(rt->gc, str, '\n'));
+	rt->light->c = parse_color(rt, ft_strtrim(str, "\n "));
 }
 
 void	parse_obj(char *str, t_rt *rt, char type)
@@ -93,10 +92,8 @@ void	parse_obj(char *str, t_rt *rt, char type)
 	rt->n_obj++;
 }
 
-
 t_color *parse_color(t_rt *rt, char *str)
 {
-	exit(0);
 	t_color *color;
 
 	color = gc_malloc(rt->gc, sizeof(t_color));
