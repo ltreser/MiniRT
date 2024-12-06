@@ -6,7 +6,7 @@
 #    By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/04 02:24:33 by ltreser           #+#    #+#              #
-#    Updated: 2024/12/05 21:47:45 by afoth            ###   ########.fr        #
+#    Updated: 2024/12/06 20:23:42 by afoth            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ GC_SRCS	= ft_gc_malloc.c
 
 GC_OBJS	= $(GC_SRCS:.c=.o)
 
-CC			= cc
+CC			= gcc
 
 LIBFT_PATH	= ./src/
 
@@ -51,7 +51,7 @@ GC_PATH     = ./gc/
 
 INCLUDES_PATH	= ./includes
 
-CFLAGS		= -Wall -Werror -Wextra -I $(INCLUDES_PATH)
+CFLAGS		= -Wall -Werror -Wextra -g -I $(INCLUDES_PATH)
 
 %.o:%.c
 	$(CC) $(CFLAGS) -c $< -o $@
