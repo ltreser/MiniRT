@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/06 19:28:05 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/12/06 19:57:00 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 /*Error Messages*/
 
 # define MALLOC_FAIL "\033[0;31m Error\nMalloc failed!\n \033[0m"
-# define AC_FAIL "\033[0;31m Error\nWrong number of arguments!\n \033[0m"
-# define OPEN_FAIL "\033[0;31m Error\nFailed to open file!\n \033[0m"
-# define FORMAT_FAIL "\033[0;31m Error\nWrong Format!\n \033[0m"
-# define FILE_FAIL "\033[0;31m Error\nScene to render is not correctly provided!\n \033[0m"
-# define MLX_FAIL "\033[0;31m Error\nMLX failed to initialize!\n \033[0m"
+# define AC_FAIL "\033[0;31m Error\n Wrong number of arguments!\n \033[0m"
+# define OPEN_FAIL "\033[0;31m Error\n Failed to open file!\n \033[0m"
+# define FORMAT_FAIL "\033[0;31m Error\n Wrong Format!\n \033[0m"
+# define FILE_FAIL "\033[0;31m Error\n Scene to render is not correctly provided!\n \033[0m"
+# define MLX_FAIL "\033[0;31m Error\n MLX failed to initialize!\n \033[0m"
 
 
 /* Standard Libraries */
@@ -190,6 +190,9 @@ struct						s_color
 	int						b;
 };
 
+
+//init
+void    init(t_rt *rt);
 
 //input
 int							check_input(t_rt *rt, int argc, char **argv);
