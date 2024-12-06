@@ -6,14 +6,14 @@
 #    By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 05:57:35 by ltreser           #+#    #+#              #
-#    Updated: 2024/12/06 19:39:26 by afoth            ###   ########.fr        #
+#    Updated: 2024/12/06 20:45:56 by afoth            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
 
 SRC = main.c mlx_init.c input.c parse.c vector_calc.c parse_utils.c \
-      exit.c screen_calculations.c
+      exit.c screen_calculations.c init.c
 
 SRC_DIR = src/
 

@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:23:05 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/06 19:59:32 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/06 20:45:40 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,3 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-void	init(t_rt *rt)
-{
-	rt->gc = malloc(sizeof(t_gc));
-	ft_gc_init(rt->gc);
-}
