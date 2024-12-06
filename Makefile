@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ltreser <ltreser@student.42berlin.de>      +#+  +:+       +#+         #
+#    By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 05:57:35 by ltreser           #+#    #+#              #
-#    Updated: 2024/12/06 19:27:06 by ltreser          ###   ########.fr        #
+#    Updated: 2024/12/06 19:39:26 by afoth            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,9 @@ INC_DIR = include/
 
 HEADERS = $(addprefix $(INC_DIR), miniRT.h)
 
-CC = cc
+CC = gcc
 
-CFLAGS = -Wall -Iinclude/ -I/usr/include -Iminilibx-linux #-O3 TODO put in flags later
+CFLAGS = -Wall -g -Iinclude/ -I/usr/include -Iminilibx-linux #-O3 TODO put in flags later
 
 LDLIBS = -lft -lmlx
 
