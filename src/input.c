@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:10:44 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/05 21:41:17 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/06 19:31:06 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void check_format(t_rt *rt, char *arg)
 int check_input(t_rt *rt, int argc, char **argv)
 {
 	int fd;
-	if (argc > 2)
+	if (argc > 2 || argc < 2)
 		ft_exit(rt, 2, ft_gc_strdup(rt->gc, AC_FAIL));
 	check_format(rt, argv[1]);
 	fd = open(argv[1], O_RDONLY);

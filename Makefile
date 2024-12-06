@@ -6,14 +6,14 @@
 #    By: ltreser <ltreser@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 05:57:35 by ltreser           #+#    #+#              #
-#    Updated: 2024/12/06 19:12:58 by ltreser          ###   ########.fr        #
+#    Updated: 2024/12/06 19:27:06 by ltreser          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
 
-SRC = src/main.c src/mlx_init.c src/input.c src/parse.c src/vector_calc.c src/parse_utils.c \
-      src/exit.c src/screen_calculations.c
+SRC = main.c mlx_init.c input.c parse.c vector_calc.c parse_utils.c \
+      exit.c screen_calculations.c
 
 SRC_DIR = src/
 
@@ -25,7 +25,7 @@ HEADERS = $(addprefix $(INC_DIR), miniRT.h)
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra -Iinclude/ -I/usr/include -Iminilibx-linux -O3
+CFLAGS = -Wall -Iinclude/ -I/usr/include -Iminilibx-linux #-O3 TODO put in flags later
 
 LDLIBS = -lft -lmlx
 
@@ -35,7 +35,7 @@ LFLAGS = -lbsd -lXext -lX11 -lm
 
 RM = rm -rf
 
-LIBFT = LIBS/libft/libft.a
+LIBFT = libft/libft.a
 
 LIBMLX = minilibx-linux/libmlx_Linux.a
 
@@ -45,7 +45,7 @@ all: $(NAME)
 	$(CC) $(CFLAGS) -I$(INC_DIR) -I/usr/include -Imlx_linux -O3 -c  $< -o $@
 
 $(LIBFT):
-	make -C ./libs/libft
+	make -C ./libft
 
 $(LIBMLX):
 	git clone https://github.com/42Paris/minilibx-linux.git minilibx-linux
