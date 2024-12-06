@@ -42,12 +42,8 @@ void	parse_ambient(t_rt *rt, char *str)
 	ratio = ft_atof(gc_chop(rt->gc, str, ' '));
 	if (ratio < 0 || ratio > 1)
 		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
-<<<<<<< HEAD
 	rt->ambient->ratio = ratio;
-	printf("str is now: %s|\n", str);
-=======
 	rt->ambient->ratio = ratio;	
->>>>>>> 5ad43d5 (chore:: debug)
 	rt->ambient->c = parse_color(rt, ft_strtrim(str, "\n "));
 }
 
