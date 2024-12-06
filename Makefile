@@ -3,52 +3,65 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+         #
+#    By: ltreser <ltreser@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/13 15:07:05 by mokutucu          #+#    #+#              #
-#    Updated: 2024/12/05 22:10:58 by afoth            ###   ########.fr        #
+#    Created: 2024/02/23 05:57:35 by ltreser           #+#    #+#              #
+#    Updated: 2024/12/06 19:27:06 by ltreser          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME    = miniRT
+NAME = miniRT
 
-LIBDIR  = libs/libft/libft.a
-OBJDIR  = obj
-CC      = cc
+SRC = main.c mlx_init.c input.c parse.c vector_calc.c parse_utils.c \
+      exit.c screen_calculations.c
 
-CFLAGS  = -Wall #-Wextra -Werror
+SRC_DIR = src/
 
-LDFLAGS = -lXext -lX11 -lm
+OBJ = $(addprefix $(SRC_DIR), $(SRC:.c=.o))
 
-RM      = rm -rf
+INC_DIR = include/
 
-SRC_DIR = src
-SRCS    = src/main.c src/mlx_init.c src/input.c src/parse.c src/vector_calc.c src/parse_utils.c \
-          src/exit.c src/screen_calculations.c
+HEADERS = $(addprefix $(INC_DIR), miniRT.h)
 
-OBJS    = $(patsubst $(SRC_DIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
+CC = cc
 
-all:    $(NAME)
+CFLAGS = -Wall -Iinclude/ -I/usr/include -Iminilibx-linux #-O3 TODO put in flags later
 
-$(NAME): $(OBJS) $(LIBDIR)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBDIR) $(LDFLAGS)
+LDLIBS = -lft -lmlx
 
-$(OBJDIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+LDFLAGS = -L libft -L minilibx-linux
 
+LFLAGS = -lbsd -lXext -lX11 -lm
 
-$(LIBDIR):
-	@make -s -C libs/libft/
+RM = rm -rf
+
+LIBFT = libft/libft.a
+
+LIBMLX = minilibx-linux/libmlx_Linux.a
+
+all: $(NAME)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -I$(INC_DIR) -I/usr/include -Imlx_linux -O3 -c  $< -o $@
+
+$(LIBFT):
+	make -C ./libft
+
+$(LIBMLX):
+	git clone https://github.com/42Paris/minilibx-linux.git minilibx-linux
+	make -C minilibx-linux
+
+$(NAME): $(HEADERS) $(LIBFT) $(LIBMLX) $(OBJ)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LDFLAGS) $(LDLIBS) $(LFLAGS)
 
 clean:
-	@rm -rf $(OBJDIR)
-	@make clean -C libs/libft/
+	$(RM) $(OBJ)
 
 fclean: clean
+	make -C libft fclean
+	$(RM) minilibx-linux
 	$(RM) $(NAME)
-	@make fclean -C libs/libft/
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: re fclean clean all
