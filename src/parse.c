@@ -7,18 +7,18 @@ void	ft_parse(char *str, t_rt *rt)
 	{
  		if (str[0] == 'A' && !rt->ambient && str[1] && str[1] == ' ')
 		{
-			printf("parsing %c\n", str[0]);
 			parse_ambient(rt, str + 2);
+			write(1, "ambient done\n", 13);
 		}
 		if (str[0] == 'C' && !rt->camera && str[1] && str[1] == ' ')
 		{
-			printf("parsing %c\n", str[0]);
 			parse_camera(rt, str + 2);
+			write(1, "camera done\n", 12);
 		}
 		if (str[0] == 'L' && !rt->light && str[1] && str[1] == ' ')
 		{
-			printf("parsing %c\n", str[0]);
 			parse_light(rt, str + 2);
+			write(1, "light done\n", 11);
 		}
 		if (!ft_strncmp("sp ", str, 3) || !ft_strncmp("pl ", str, 3) || !ft_strncmp("cy ", str, 3))
 		{
@@ -52,17 +52,11 @@ void	parse_camera(t_rt *rt, char *str)
 	int fov;
 
 	rt->camera = gc_malloc(rt->gc, sizeof(t_camera));
-	printf("goes here 0\n");
-	printf("str is now: %s\n", str);
 	rt->camera->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
-	printf("goes here 1\n");
 	rt->camera->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
 	fov = (int)ft_atof(gc_chop(rt->gc, str, '\n'));
 	if (fov < 0 || fov > 180)
-	{
-		printf("goes here 2\n");
 		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
-	}
 	rt->camera->fov = fov;
 }
 
@@ -137,8 +131,6 @@ t_color *parse_color(t_rt *rt, char *str)
 // max 3*-
 t_point	*parse_point(t_rt *rt, char *str)
 {
-	if (rt->camera)
-		printf("str is: %s\n");
 	t_point	*point;
 	int		start_of_nb;
 
@@ -173,8 +165,9 @@ t_vector	*parse_vector(t_rt *rt, char *str)
 		return(vector);
 	else
 	{
+		
 		perror(FORMAT_FAIL);
-		perror("Vector not normalized");
+		write(1, "Vector not normalized\n", 22);
 		ft_gc_free(rt->gc);
 		exit(EXIT_INPUT);
 	}
