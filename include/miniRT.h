@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/06 19:57:00 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/12/06 20:59:11 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,7 @@ struct						s_color
 
 
 //init
-void    init(t_rt *rt);
+void						init(t_rt *rt);
 
 //input
 int							check_input(t_rt *rt, int argc, char **argv);
