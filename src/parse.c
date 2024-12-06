@@ -9,7 +9,7 @@ void	ft_parse(char *str, t_rt *rt)
 			parse_ambient(rt, str + 2);
 		if (str[0] == 'C' && !rt->camera && str[1] && str[1] == ' ')
 			parse_camera(rt, str + 2);
-		if (str[0] == 'L' && !rt->light && str[1] & str[1] == ' ')
+		if (str[0] == 'L' && !rt->light && str[1] && str[1] == ' ')
 			parse_light(rt, str + 2);
 		if (!ft_strncmp("sp ", str, 3) || !ft_strncmp("pl ", str, 3) || !ft_strncmp("cy ", str, 3))
 		{
@@ -96,6 +96,7 @@ void	parse_obj(char *str, t_rt *rt, char type)
 
 t_color *parse_color(t_rt *rt, char *str)
 {
+	exit(0);
 	t_color *color;
 
 	color = gc_malloc(rt->gc, sizeof(t_color));
