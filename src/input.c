@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:10:44 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/06 19:59:58 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/06 20:14:06 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,9 @@ void check_format(t_rt *rt, char *arg)
 {
 	int i;
 
-	printf("HOOO!\n");
-
-	i = ft_strlen(arg) - 1;
-	if (arg[i] != EOF || arg[i-3] != '.' || arg[i-2] != 'r' || arg[i-1] != 't')
+	i = ft_strlen(arg);
+	if (i < 3 || arg[i - 3] != '.' || arg[i - 2] != 'r' || arg[i - 1] != 't')
 		ft_exit(rt, 2, ft_gc_strdup(rt->gc, FORMAT_FAIL));
-	printf("HU!\n");
 }
 
 int check_input(t_rt *rt, int argc, char **argv)
