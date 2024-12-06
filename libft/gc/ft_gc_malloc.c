@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_malloc.c                                     :+:      :+:    :+:   */
+/*   ft_gc_malloc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:04:07 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/05 20:42:02 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/06 19:54:28 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	*ft_gc_strdup(t_gc *gc, const char *s)
 	int		i;
 
 	i = ft_strlen(s);
-	ptr = (char *) gc_malloc( gc, sizeof(char) * (i + 1));
+	ptr = (char *)gc_malloc(gc, sizeof(char) * (i + 1));
 	if (!ptr)
 		return (0);
 	ptr[i] = '\0';

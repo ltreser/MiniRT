@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:23:05 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/05 20:37:18 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/12/06 19:54:08 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ int	main(int argc, char **argv)
 	int fd;
 	struct timeval	start, end;
 
-	gettimeofday(&start, NULL);
-	rt = malloc(sizeof(rt));
 	fd = 0;
+	gettimeofday(&start, NULL);
+	rt = malloc(sizeof(t_rt));
+	init(rt);
 	fd = check_input(rt, argc, argv);
 	read_file(fd, rt);
 	mlx_create_window(rt);
@@ -30,4 +31,10 @@ int	main(int argc, char **argv)
 	//free_data(rt);
 	printf("Runtime: %.6f seconds\n", runtime);
 	return (0);
+}
+
+void	init(t_rt *rt)
+{
+	rt->gc = malloc(sizeof(t_gc));
+	ft_gc_init(rt->gc);
 }
