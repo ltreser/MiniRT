@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:32:07 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/03 20:10:20 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/06 21:18:06 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,13 +139,13 @@ double	ft_atof(const char *str)
 	power = 1.0;
 	sign = 1;
 	overflow = 0;
-	if (!is_valid_float(str))
-		return (NAN);
 	if (*str == '-')
 	{
 		sign = -1;
 		str++;
 	}
+	if (!is_valid_float(str))
+		return (NAN);
 	result = parse_integer_part(&str, &overflow);
 	if (overflow)
 		return (NAN);

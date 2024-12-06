@@ -6,11 +6,20 @@ void	ft_parse(char *str, t_rt *rt)
 	if (only_valid_chars(str))
 	{
  		if (str[0] == 'A' && !rt->ambient && str[1] && str[1] == ' ')
+		{
+			printf("parsing %c\n", str[0]);
 			parse_ambient(rt, str + 2);
+		}
 		if (str[0] == 'C' && !rt->camera && str[1] && str[1] == ' ')
+		{
+			printf("parsing %c\n", str[0]);
 			parse_camera(rt, str + 2);
+		}
 		if (str[0] == 'L' && !rt->light && str[1] && str[1] == ' ')
+		{
+			printf("parsing %c\n", str[0]);
 			parse_light(rt, str + 2);
+		}
 		if (!ft_strncmp("sp ", str, 3) || !ft_strncmp("pl ", str, 3) || !ft_strncmp("cy ", str, 3))
 		{
 			rt->obj[rt->n_obj] = gc_malloc(rt->gc, sizeof(t_obj));
@@ -33,7 +42,7 @@ void	parse_ambient(t_rt *rt, char *str)
 	ratio = ft_atof(gc_chop(rt->gc, str, ' '));
 	if (ratio < 0 || ratio > 1)
 		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
-	rt->ambient->ratio = ratio;	
+	rt->ambient->ratio = ratio;
 	printf("str is now: %s|\n", str);
 	rt->ambient->c = parse_color(rt, ft_strtrim(str, "\n "));
 }
@@ -100,13 +109,13 @@ t_color *parse_color(t_rt *rt, char *str)
 	if (contains_c(str, '.'))
 		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
 	color->r = (int)ft_atof(gc_chop(rt->gc, str + skip_spaces(str), ','));
-		if (color->r < 0 || color->r > 225)
+		if (color->r < 0 || color->r > 255)
 			ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
 	color->g = (int)ft_atof(gc_chop(rt->gc, str + skip_spaces(str), ','));
-		if (color->r < 0 || color->r > 225)
+		if (color->r < 0 || color->r > 255)
 			ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
 	color->b = (int)ft_atof(ft_strtrim(str + skip_spaces(str), "'\n' "));
-		if (color->r < 0 || color->r > 225)
+		if (color->r < 0 || color->r > 255)
 			ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
 	if (str)
 	{
@@ -127,11 +136,11 @@ t_point	*parse_point(t_rt *rt, char *str)
 
 	point = gc_malloc(rt->gc, sizeof(t_point));
 	start_of_nb = skip_spaces(str);
-	point->x= ft_atof(gc_chop(rt->gc, str + start_of_nb, ','));
+	point->x = ft_atof(gc_chop(rt->gc, str + start_of_nb, ','));
 	is_nan(rt, point->x);
-	point->y= ft_atof(gc_chop(rt->gc, str, ','));
+	point->y = ft_atof(gc_chop(rt->gc, str, ','));
 	is_nan(rt, point->x);
-	point->z= ft_atof(gc_chop(rt->gc, str, ' '));
+	point->z = ft_atof(ft_strtrim(str, "\n "));
 	is_nan(rt, point->x);
 	return(point);
 }

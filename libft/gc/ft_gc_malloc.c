@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:04:07 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/06 19:54:28 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/12/06 21:21:23 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ char	*gc_chop(t_gc *gc, char *str, char c)
 	i = 0;
 	len = 0;
 	chop = NULL;
+	if (!contains_c(str, c))
+		return (str);
 	while (str[len] && str[len] != c)
 		len++;
 	chop = gc_malloc(gc, (len + 1) * sizeof(char));
