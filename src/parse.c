@@ -117,11 +117,6 @@ t_color *parse_color(t_rt *rt, char *str)
 	color->b = (int)ft_atof(ft_strtrim(str + skip_spaces(str), "'\n' "));
 		if (color->r < 0 || color->r > 255)
 			ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
-	if (str)
-	{
-		free(str);
-		str = NULL;
-	}
 	return (color);
 }
 
