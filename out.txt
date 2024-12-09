@@ -1,0 +1,4 @@
+ambient done
+camera done
+light done
+len 1.000000len 1.000000len 1.000000Runtime: 0.041623 seconds

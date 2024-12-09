@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:23:05 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/06 20:45:40 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/09 21:23:07 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ int	main(int argc, char **argv)
 	read_file(fd, rt);
 	// mlx_create_window(rt);
 	//render(rt);
+
 	gettimeofday(&end, NULL);
 	double runtime = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1e6;
-	//free_data(rt);
+	ft_gc_free(rt->gc);
+	free(rt);
 	printf("Runtime: %.6f seconds\n", runtime);
 	return (0);
 }

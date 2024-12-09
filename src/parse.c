@@ -28,7 +28,7 @@ void	ft_parse(char *str, t_rt *rt)
 		}
 	}
 	else
-		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
+		ft_exit(rt, 2, gc_strdup(rt->gc,FILE_FAIL));
 }
 
 void	parse_ambient(t_rt *rt, char *str)
@@ -37,10 +37,10 @@ void	parse_ambient(t_rt *rt, char *str)
 	rt->ambient = gc_malloc(rt->gc, sizeof(t_ambient));
 	ratio = ft_atof(gc_chop(rt->gc, str, ' '));
 	if (ratio < 0 || ratio > 1)
-		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
+		ft_exit(rt, 2, gc_strdup(rt->gc,FILE_FAIL));
 	rt->ambient->ratio = ratio;
-	rt->ambient->ratio = ratio;	
-	rt->ambient->c = parse_color(rt, ft_strtrim(str, "\n "));
+	rt->ambient->ratio = ratio;
+	rt->ambient->c = parse_color(rt, gc_strtrim(rt->gc, str, "\n "));
 }
 
 void	parse_camera(t_rt *rt, char *str)
@@ -52,7 +52,7 @@ void	parse_camera(t_rt *rt, char *str)
 	rt->camera->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
 	fov = (int)ft_atof(gc_chop(rt->gc, str, '\n'));
 	if (fov < 0 || fov > 180)
-		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
+		ft_exit(rt, 2, gc_strdup(rt->gc,FILE_FAIL));
 	rt->camera->fov = fov;
 }
 
@@ -63,9 +63,9 @@ void	parse_light(t_rt *rt, char *str)
 	rt->light->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
 	bright = ft_atof(gc_chop(rt->gc, str, ' '));
 	if (bright < 0 || bright > 1)
-		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
+		ft_exit(rt, 2, gc_strdup(rt->gc,FILE_FAIL));
 	rt->light->bright = bright;
-	rt->light->c = parse_color(rt, ft_strtrim(str, "\n "));
+	rt->light->c = parse_color(rt, gc_strtrim(rt->gc, str, "\n "));
 }
 
 void	parse_obj(char *str, t_rt *rt)
@@ -74,8 +74,7 @@ void	parse_obj(char *str, t_rt *rt)
 	{
 		rt->obj[rt->n_obj]->sphere = gc_malloc(rt->gc, sizeof(t_sphere));
 		rt->obj[rt->n_obj]->sphere->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
-		rt->obj[rt->n_obj]->sphere->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
-		parse_dimensions(rt, str);	
+		parse_dimensions(rt, str);
 		rt->obj[rt->n_obj]->sphere->c = parse_color(rt, gc_chop(rt->gc, str, ' '));
 
 	}
@@ -104,16 +103,16 @@ t_color *parse_color(t_rt *rt, char *str)
 
 	color = gc_malloc(rt->gc, sizeof(t_color));
 	if (contains_c(str, '.'))
-		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
+		ft_exit(rt, 2, gc_strdup(rt->gc,FILE_FAIL));
 	color->r = (int)ft_atof(gc_chop(rt->gc, str + skip_spaces(str), ','));
 		if (color->r < 0 || color->r > 255)
-			ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
+			ft_exit(rt, 2, gc_strdup(rt->gc,FILE_FAIL));
 	color->g = (int)ft_atof(gc_chop(rt->gc, str + skip_spaces(str), ','));
 		if (color->r < 0 || color->r > 255)
-			ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
-	color->b = (int)ft_atof(ft_strtrim(str + skip_spaces(str), "'\n' "));
+			ft_exit(rt, 2, gc_strdup(rt->gc,FILE_FAIL));
+	color->b = (int)ft_atof(gc_strtrim(rt->gc, str + skip_spaces(str), "'\n' "));
 		if (color->r < 0 || color->r > 255)
-			ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
+			ft_exit(rt, 2, gc_strdup(rt->gc,FILE_FAIL));
 	return (color);
 }
 
@@ -134,7 +133,7 @@ t_point	*parse_point(t_rt *rt, char *str)
 	point->y = ft_atof(gc_chop(rt->gc, str, ','));
 	printf("point y is: %f\n", point->y);
 	is_nan(rt, point->x);
-	point->z = ft_atof(ft_strtrim(str, "\n "));
+	point->z = ft_atof(gc_strtrim(rt->gc, str, "\n "));
 	is_nan(rt, point->x);
 	printf("point z is: %f\n", point->z);
 	return(point);
@@ -163,7 +162,7 @@ t_vector	*parse_vector(t_rt *rt, char *str)
 		return(vector);
 	else
 	{
-		
+
 		perror(FORMAT_FAIL);
 		write(1, "Vector not normalized\n", 22);
 		ft_gc_free(rt->gc);

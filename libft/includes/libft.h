@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 19:09:08 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/05 21:46:05 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/09 21:17:17 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,12 @@ void				ft_putunsnbr_len(unsigned int n, int *plen);
 void				ft_gc_init(t_gc *gc);
 void				*gc_malloc(t_gc *gc, size_t size);
 void				ft_gc_free(t_gc *gc);
-char				*ft_gc_substr(t_gc *gc, const char *s, unsigned int start,
+char				*gc_substr(t_gc *gc, const char *s, unsigned int start,
 						size_t len);
-char				*ft_gc_strdup(t_gc *gc, const char *s);
+char				*gc_strtrim(t_gc *gc, char const *s1, char const *set);
+
+
+char				*gc_strdup(t_gc *gc, const char *s);
 char				*gc_chop(t_gc *gc, char *str, char c);
 
 #endif

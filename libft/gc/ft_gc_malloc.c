@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:04:07 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/06 21:21:23 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/09 21:22:12 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ void	ft_gc_free(t_gc *gc)
 		free(tmp->ptr);
 		free(tmp);
 	}
+	free(gc);
 }
 
-char	*ft_gc_substr(t_gc *gc, const char *s, unsigned int start, size_t len)
+char	*gc_substr(t_gc *gc, const char *s, unsigned int start, size_t len)
 {
 	size_t	len_s;
 	char	*dest;
@@ -89,7 +90,7 @@ char	*ft_gc_substr(t_gc *gc, const char *s, unsigned int start, size_t len)
 	return (dest);
 }
 
-char	*ft_gc_strdup(t_gc *gc, const char *s)
+char	*gc_strdup(t_gc *gc, const char *s)
 {
 	char	*ptr;
 	int		i;
@@ -129,4 +130,33 @@ char	*gc_chop(t_gc *gc, char *str, char c)
 	ft_memmove(str, str + len, (ft_strlen(str) - len));
 	ft_bzero(str + (ft_strlen(str) - len), len);
 	return (chop);
+}
+
+char	*gc_strtrim(t_gc *gc, char const *s1, char const *set)
+{
+	size_t	i;
+	size_t	ri;
+	size_t	setlen;
+
+	i = 0;
+	ri = (ft_strlen(s1) - 1);
+	setlen = ft_strlen(set);
+	while (setlen--)
+	{
+		if (s1[i] == set[setlen])
+		{
+			i++;
+			setlen = ft_strlen(set);
+		}
+	}
+	setlen = ft_strlen(set);
+	while (setlen--)
+	{
+		if (s1[ri] == set[setlen])
+		{
+			ri--;
+			setlen = ft_strlen(set);
+		}
+	}
+	return (gc_substr(gc, s1, i, (ri - i + 1)));
 }
