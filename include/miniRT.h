@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/06 20:59:11 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/09 20:15:20 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ void						free_all(t_rt *rt);
 
 //parse
 void						ft_parse(char *str, t_rt *rt);
-void						parse_obj(char *str, t_rt *rt, char type);
+void						parse_obj(char *str, t_rt *rt);
 t_color						*parse_color(t_rt *rt, char *str);
 t_point						*parse_point(t_rt *rt, char *str);
 t_vector					*parse_vector(t_rt *rt, char *str);

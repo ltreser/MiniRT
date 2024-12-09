@@ -23,16 +23,12 @@ void	ft_parse(char *str, t_rt *rt)
 		if (!ft_strncmp("sp ", str, 3) || !ft_strncmp("pl ", str, 3) || !ft_strncmp("cy ", str, 3))
 		{
 			rt->obj[rt->n_obj] = gc_malloc(rt->gc, sizeof(t_obj));
-			parse_obj(str + 3, rt, str[0]);
+			rt->obj[rt->n_obj]->type = (t_type)sqrt((str[0] - 99) % 12);
+			parse_obj(str + 3, rt);
 		}
 	}
 	else
 		ft_exit(rt, 2, ft_gc_strdup(rt->gc,FILE_FAIL));
-	if (str)
-	{
-		free(str);
-		str = NULL;
-	}
 }
 
 void	parse_ambient(t_rt *rt, char *str)
@@ -72,14 +68,14 @@ void	parse_light(t_rt *rt, char *str)
 	rt->light->c = parse_color(rt, ft_strtrim(str, "\n "));
 }
 
-void	parse_obj(char *str, t_rt *rt, char type)
+void	parse_obj(char *str, t_rt *rt)
 {
-	rt->obj[rt->n_obj]->type = (t_type)sqrt((type - 99) % 12);
 	if (rt->obj[rt->n_obj]->type == SPHERE)
 	{
 		rt->obj[rt->n_obj]->sphere = gc_malloc(rt->gc, sizeof(t_sphere));
 		rt->obj[rt->n_obj]->sphere->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
 		rt->obj[rt->n_obj]->sphere->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
+		parse_dimensions(rt, str);	
 		rt->obj[rt->n_obj]->sphere->c = parse_color(rt, gc_chop(rt->gc, str, ' '));
 
 	}
@@ -98,6 +94,7 @@ void	parse_obj(char *str, t_rt *rt, char type)
 		parse_dimensions(rt, str);
 		rt->obj[rt->n_obj]->cylinder->c = parse_color(rt, gc_chop(rt->gc, str, ' '));
 	}
+	parse_dimensions(rt, str);
 	rt->n_obj++;
 }
 
@@ -132,11 +129,14 @@ t_point	*parse_point(t_rt *rt, char *str)
 	point = gc_malloc(rt->gc, sizeof(t_point));
 	start_of_nb = skip_spaces(str);
 	point->x = ft_atof(gc_chop(rt->gc, str + start_of_nb, ','));
+	printf("point x is: %f\n", point->x);
 	is_nan(rt, point->x);
 	point->y = ft_atof(gc_chop(rt->gc, str, ','));
+	printf("point y is: %f\n", point->y);
 	is_nan(rt, point->x);
 	point->z = ft_atof(ft_strtrim(str, "\n "));
 	is_nan(rt, point->x);
+	printf("point z is: %f\n", point->z);
 	return(point);
 }
 
@@ -150,10 +150,13 @@ t_vector	*parse_vector(t_rt *rt, char *str)
 	vector = gc_malloc(rt->gc, sizeof(t_vector));
 	start_of_nb = skip_spaces(str);
 	vector->x= ft_atof(gc_chop(rt->gc, str + start_of_nb, ','));
+	printf("vektor point x is: %f\n", vector->x);
 	is_nan(rt, vector->x);
 	vector->y= ft_atof(gc_chop(rt->gc, str, ','));
+	printf("vektor point y is: %f\n", vector->y);
 	is_nan(rt, vector->y);
 	vector->z= ft_atof(gc_chop(rt->gc, str, ' '));
+	printf("vektor point z is: %f\n", vector->z);
 	is_nan(rt, vector->z);
 	len = v_len(vector);
 	if (len == 1 || len == -1)
