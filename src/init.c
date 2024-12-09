@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:53:47 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/06 21:02:53 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/09 19:14:32 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ void	init(t_rt *rt)
 	rt->obj = gc_malloc(rt->gc, sizeof(t_obj));
 	rt->n_obj = 0;
 }
+
+
 
 
