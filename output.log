@@ -1,0 +1,173 @@
+./orga/tests/run_tests.sh: line 4: /home/ltreser/Desktop/MiniRT/miniRT: No such file or directory
+./orga/tests/run_tests.sh: line 4: /home/ltreser/Desktop/MiniRT/minirt_gh: No such file or directory
+./orga/tests/run_tests.sh: line 4: /home/ltreser/Desktop/minirt_gh/miniRT: No such file or directory
+./orga/tests/run_tests.sh: line 4: /home/ltreser/Desktop/minirt_gh/miniRT: No such file or directory
+./orga/tests/run_tests.sh: line 4: /home/ltreser/Desktop/minirt_gh/miniRT: No such file or directory
+./orga/tests/run_tests.sh: line 4: /home/ltreser/Desktop/minirt_gh/miniRT: No such file or directory
+./orga/tests/run_tests.sh: line 4: /home/ltreser/Desktop/minirt_gh/miniRT: No such file or directory
+./orga/tests/run_tests.sh: line 4: /home/ltreser/Desktop/minirt_gh/miniRT: No such file or directory
+./orga/tests/run_tests.sh: line 4: /home/ltreser/Desktop/minirt_gh/miniRT: No such file or directory
+./orga/tests/run_tests.sh: line 4: /home/ltreser/Desktop/minirt_gh/miniRT: No such file or directory
+ambient done
+camera done
+light done
+[0;31m Error
+ Wrong number of arguments!
+ [0m: Success
+
+
+
+TESTING: /home/ltreser/Desktop/minirt_gh/orga/tests/empty_fail.rt
+
+Runtime: 0.000015 seconds
+[0;31m Error
+ Scene to render is not correctly provided!
+ [0m: Success
+
+
+
+TESTING: /home/ltreser/Desktop/minirt_gh/orga/tests/missing_fail.rt
+
+[0;31m Error
+ Wrong Format!
+ [0m: Success
+NAN returned by ft_atof
+: Invalid argument
+
+
+
+TESTING: /home/ltreser/Desktop/minirt_gh/orga/tests/more_spaces_pass.rt
+
+Parsing ambient
+ambient done
+camera done
+light done
+
+
+
+TESTING: /home/ltreser/Desktop/minirt_gh/orga/tests/multiple_obj_pass.rt
+
+Parsing ambient
+Parsing Camera
+point x is: 0.000000
+point y is: 0.000000
+point z is: 10.000000
+vektor point x is: 0.000000
+vektor point y is: 0.000000
+vektor point z is: -1.000000
+Parsing Ligth
+point x is: 0.000000
+point y is: 10.000000
+point z is: 0.000000
+this is type now: 2this is sphere: 2
+this is type: 2
+Parsing Sphere
+point x is: 1.500000
+point y is: 0.000000
+point z is: -5.000000
+this is type now: 2this is sphere: 2
+this is type: 2
+Parsing Sphere
+point x is: -1.500000
+point y is: 0.000000
+point z is: -5.000000
+this is type now: 1this is sphere: 2
+this is type: 1
+Parsing Plane
+point x is: 0.000000
+point y is: -2.000000
+point z is: 0.000000
+vektor point x is: 0.000000
+vektor point y is: 1.000000
+vektor point z is: 0.000000
+this is type now: 1this is sphere: 2
+this is type: 1
+Parsing Plane
+point x is: 4.000000
+point y is: -2.000000
+point z is: 0.000000
+vektor point x is: 0.000000
+vektor point y is: 1.000000
+vektor point z is: 0.000000
+this is type now: 0this is sphere: 2
+this is type: 0
+Parsing Cylinder
+point x is: 0.000000
+point y is: 0.000000
+point z is: -10.000000
+vektor point x is: 0.000000
+vektor point y is: 0.000000
+vektor point z is: 1.000000
+this is type now: 0this is sphere: 2
+this is type: 0
+Parsing Cylinder
+point x is: 3.000000
+point y is: 0.000000
+point z is: -10.000000
+vektor point x is: 0.000000
+vektor point y is: 0.000000
+vektor point z is: 1.000000
+Runtime: 0.000710 seconds
+[0;31m Error
+ Scene to render is not correctly provided!
+ [0m: Success
+
+
+
+TESTING: /home/ltreser/Desktop/minirt_gh/orga/tests/out_of_range_fail.rt
+
+Parsing ambient
+ambient done
+camera done
+light done
+
+
+
+TESTING: /home/ltreser/Desktop/minirt_gh/orga/tests/test_pass.rt
+
+Parsing ambient
+Parsing Camera
+point x is: 1.000000
+point y is: 1.000000
+point z is: 1.000000
+vektor point x is: 0.000000
+vektor point y is: 0.000000
+vektor point z is: 1.000000
+Parsing Ligth
+point x is: 1.000000
+point y is: 0.000000
+point z is: 0.000000
+this is type now: 1this is sphere: 2
+this is type: 1
+Parsing Plane
+point x is: 1.000000
+point y is: 0.000000
+point z is: 0.000000
+vektor point x is: 0.000000
+vektor point y is: 1.000000
+vektor point z is: 0.000000
+this is type now: 2this is sphere: 2
+this is type: 2
+Parsing Sphere
+point x is: 1.000000
+point y is: 0.000000
+point z is: 0.000000
+this is type now: 0this is sphere: 2
+this is type: 0
+Parsing Cylinder
+point x is: 1.000000
+point y is: 0.000000
+point z is: 0.000000
+vektor point x is: 0.000000
+vektor point y is: 0.000000
+vektor point z is: 1.000000
+Runtime: 0.000057 seconds
+[0;31m Error
+ Scene to render is not correctly provided!
+ [0m: Success
+
+
+
+TESTING: /home/ltreser/Desktop/minirt_gh/orga/tests/to_nuch_input_fail.rt
+
+Parsing ambient
