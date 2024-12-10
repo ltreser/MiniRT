@@ -102,7 +102,7 @@ void	parse_obj(char *str, t_rt *rt)
 		rt->obj[rt->n_obj]->sphere = gc_malloc(rt->gc, sizeof(t_sphere));
 		rt->obj[rt->n_obj]->sphere->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
 		parse_dimensions(rt, str);
-		rt->obj[rt->n_obj]->sphere->c = parse_color(rt, gc_chop(rt->gc, str, ' '));
+		rt->obj[rt->n_obj]->sphere->c = parse_color(rt, str);
 
 	}
 	if (rt->obj[rt->n_obj]->type == PLANE)
@@ -112,7 +112,7 @@ void	parse_obj(char *str, t_rt *rt)
 		rt->obj[rt->n_obj]->plane = gc_malloc(rt->gc, sizeof(t_plane));
 		rt->obj[rt->n_obj]->plane->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
 		rt->obj[rt->n_obj]->plane->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
-		rt->obj[rt->n_obj]->plane->c = parse_color(rt, gc_chop(rt->gc, str, ' '));
+		rt->obj[rt->n_obj]->plane->c = parse_color(rt, str);
 	}
 	if (rt->obj[rt->n_obj]->type == CYLINDER)
 	{
@@ -121,7 +121,7 @@ void	parse_obj(char *str, t_rt *rt)
 		rt->obj[rt->n_obj]->cylinder->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
 		rt->obj[rt->n_obj]->cylinder->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
 		parse_dimensions(rt, str);
-		rt->obj[rt->n_obj]->cylinder->c = parse_color(rt, gc_chop(rt->gc, str, ' '));
+		rt->obj[rt->n_obj]->cylinder->c = parse_color(rt, str);
 	}
 	parse_dimensions(rt, str);
 	rt->n_obj++;
