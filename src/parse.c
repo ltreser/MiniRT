@@ -36,7 +36,7 @@ void	ft_parse(char *str, t_rt *rt, int count_only)
 			rt->obj[rt->n_obj] = gc_malloc(rt->gc, sizeof(t_obj));
 			rt->obj[rt->n_obj]->type = (t_type)sqrt((str[0] - 99) % 12);
 			printf("this is type now: %d", rt->obj[rt->n_obj]->type);
-			parse_obj(str + 3, rt);
+			parse_obj((str + 3) + skip_spaces(str + 3), rt);
 		}
 	}
 	else
@@ -61,9 +61,12 @@ void	parse_camera(t_rt *rt, char *str)
 {
 	int fov;
 
+	printf("string in parse camera: %s\n", str);
 	fov = -1;
 	rt->camera = gc_malloc(rt->gc, sizeof(t_camera));
+	str += skip_spaces(str);
 	rt->camera->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
+	str += skip_spaces(str);
 	rt->camera->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
 	str += skip_spaces(str);
 	fov = (int)ft_atof(gc_chop(rt->gc, str, '\n'));
@@ -77,6 +80,7 @@ void	parse_light(t_rt *rt, char *str)
 {
 	float bright;
 	rt->light = gc_malloc(rt->gc, sizeof(t_light));
+	str += skip_spaces(str);
 	rt->light->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
 	str += skip_spaces(str);
 	bright = ft_atof(gc_chop(rt->gc, str, ' '));
@@ -155,11 +159,9 @@ t_color *parse_color(t_rt *rt, char *str)
 t_point	*parse_point(t_rt *rt, char *str)
 {
 	t_point	*point;
-	int		start_of_nb;
 
 	point = gc_malloc(rt->gc, sizeof(t_point));
-	start_of_nb = skip_spaces(str);
-	point->x = ft_atof(gc_chop(rt->gc, str + start_of_nb, ','));
+	point->x = ft_atof(gc_chop(rt->gc, str, ','));
 	printf("point x is: %f\n", point->x);
 	is_nan(rt, point->x);
 	point->y = ft_atof(gc_chop(rt->gc, str, ','));
@@ -176,12 +178,9 @@ t_vector	*parse_vector(t_rt *rt, char *str)
 {
 	t_vector	*vector;
 	float		len;
-	int			start_of_nb;
 
 	vector = gc_malloc(rt->gc, sizeof(t_vector));
-	start_of_nb = skip_spaces(str);
-	str += skip_spaces(str);
-	vector->x= ft_atof(gc_chop(rt->gc, str + start_of_nb, ','));
+	vector->x= ft_atof(gc_chop(rt->gc, str, ','));
 	printf("vektor point x is: %f\n", vector->x);
 	is_nan(rt, vector->x);
 	vector->y= ft_atof(gc_chop(rt->gc, str, ','));

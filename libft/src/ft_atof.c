@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:32:07 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/10 18:05:32 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/12/10 18:20:32 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ double	ft_atof(const char *str)
 	double	power;
 	int		sign;
 	int		overflow;
-
+	printf("atof receives this as str:'%s'\n", str);
 	result = 0.0;
 	power = 1.0;
 	sign = 1;
