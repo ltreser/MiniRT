@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:23:05 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/09 21:23:07 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/10 14:57:07 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	main(int argc, char **argv)
 {
+	printf("\n\n\nTESTING: %s\n\n", argv[1]);
 	t_rt *rt;
 	int fd;
 	struct timeval	start, end;

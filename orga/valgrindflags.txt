@@ -1,0 +1,49 @@
+
+Valgrind Flags and Options:
+
+General Options:
+  --help                      Show help message and exit.
+  --version                   Show Valgrind version.
+
+Memory Checking (Memcheck) Options:
+  --leak-check=<yes|no|summary|full>
+                              Control the level of leak checking.
+  --show-reachable=<yes|no>   Show reachable memory blocks.
+  --track-origins=<yes|no>    Track origins of uninitialized values.
+  --undef-value-errors=<yes|no>
+                              Control if undefined value errors are reported.
+
+Performance Checking (Cachegrind) Options:
+  --cache-sim=<yes|no>        Enable/disable cache simulation.
+  --branch-sim=<yes|no>       Enable/disable branch prediction simulation.
+
+Profiling (Callgrind) Options:
+  --collect-jumps=<yes|no>    Collect jump statistics.
+  --simulate-cache=<yes|no>   Simulate cache behavior.
+
+Debugging (Helgrind) Options:
+  --free-is-write=<yes|no>    Detect if free writes to memory.
+  --tool=helgrind             Use Helgrind tool for debugging threads.
+
+Heap Profiling (Massif) Options:
+  --heap-admin=<bytes>        Set overhead per heap block.
+  --stacks=<yes|no>           Profile stack space as well as heap.
+
+Client Requests:
+  --log-file=<filename>       Write Valgrind's output to a file.
+  --trace-children=<yes|no>   Enable tracing of child processes.
+  --error-limit=<yes|no>      Limit the number of errors reported.
+
+Advanced Options:
+  --ignore-range=<start>-<end>
+                              Ignore errors in a specific memory range.
+  --vgdb=<yes|no>             Enable Valgrind GDB server.
+  --sim-hints=<hints>         Set hints for simulation.
+
+Common Debugging Flags:
+  --track-fds=<yes|no>        Track open file descriptors.
+  --child-silent-after-fork=<yes|no>
+                              Silence child processes after fork.
+
+Note:
+For detailed descriptions and usage examples, refer to the Valgrind documentation.
