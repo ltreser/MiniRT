@@ -63,7 +63,9 @@ void	parse_camera(t_rt *rt, char *str)
 
 	fov = -1;
 	rt->camera = gc_malloc(rt->gc, sizeof(t_camera));
+	str += skip_spaces(str);
 	rt->camera->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
+	str += skip_spaces(str);
 	rt->camera->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
 	str += skip_spaces(str);
 	fov = (int)ft_atof(gc_chop(rt->gc, str, '\n'));
