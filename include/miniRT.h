@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/09 20:15:20 by ltreser          ###   ########.fr       */
+/*   Updated: 2024/12/10 17:12:15 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ struct						s_rt
 	t_light					*light;
 	t_obj					**obj;
 	int						n_obj;
+	int						obj_count;
+	int						fd;
 };
 
 /*minilibx graphical library struct*/
@@ -203,7 +205,7 @@ void						ft_exit(t_rt *rt, int exit_code, char *error_message);
 void						free_all(t_rt *rt);
 
 //parse
-void						ft_parse(char *str, t_rt *rt);
+void						ft_parse(char *str, t_rt *rt, int count_only);
 void						parse_obj(char *str, t_rt *rt);
 t_color						*parse_color(t_rt *rt, char *str);
 t_point						*parse_point(t_rt *rt, char *str);

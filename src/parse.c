@@ -1,9 +1,11 @@
 
 #include "../include/miniRT.h"
 
-void	ft_parse(char *str, t_rt *rt)
+void	ft_parse(char *str, t_rt *rt, int count_only)
 {
-	if (only_valid_chars(str))
+	if (count_only)
+		rt->obj_count += (!ft_strncmp("sp ", str, 3) || !ft_strncmp("pl ", str, 3) || !ft_strncmp("cy ", str, 3));
+	else if (only_valid_chars(str))
 	{
  		if (str[0] == 'A' && !rt->ambient && str[1] && str[1] == ' ')
 		{
@@ -33,6 +35,7 @@ void	ft_parse(char *str, t_rt *rt)
 		{
 			rt->obj[rt->n_obj] = gc_malloc(rt->gc, sizeof(t_obj));
 			rt->obj[rt->n_obj]->type = (t_type)sqrt((str[0] - 99) % 12);
+			printf("this is type now: %d", rt->obj[rt->n_obj]->type);
 			parse_obj(str + 3, rt);
 		}
 	}
@@ -57,6 +60,7 @@ void	parse_camera(t_rt *rt, char *str)
 {
 	int fov;
 
+	fov = -1;
 	rt->camera = gc_malloc(rt->gc, sizeof(t_camera));
 	rt->camera->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
 	rt->camera->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
@@ -82,6 +86,8 @@ void	parse_light(t_rt *rt, char *str)
 
 void	parse_obj(char *str, t_rt *rt)
 {
+	printf("this is sphere: %d\n", SPHERE);
+	printf("this is type: %d\n", rt->obj[rt->n_obj]->type);
 	if (rt->obj[rt->n_obj]->type == SPHERE)
 	{
 		printf("Parsing Sphere\n");

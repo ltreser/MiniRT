@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:10:44 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/09 21:14:16 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/10 17:24:18 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,36 +21,43 @@ void check_format(t_rt *rt, char *arg)
 		ft_exit(rt, 2, gc_strdup(rt->gc, FORMAT_FAIL));
 }
 
-int check_input(t_rt *rt, int argc, char **argv)
+int input_correct(t_rt *rt, int argc, char **argv)
 {
-	int fd;
-
 	if (argc > 2 || argc < 2)
-	{
 		ft_exit(rt, 2, gc_strdup(rt->gc, AC_FAIL));
-	//	printf("goes here");
-	}
-
 	check_format(rt, argv[1]);
-	fd = open(argv[1], O_RDONLY);
-	if (!fd)
+	rt->fd = open(argv[1], O_RDONLY);
+	if (!rt->fd)
 		ft_exit(rt, 2, gc_strdup(rt->gc, OPEN_FAIL));
-	return (fd);
+	return (1);
 }
 
-void read_file(int fd, t_rt *rt)
+void parse_input(t_rt *rt, char **argv)
 {
 	char *line;
 
 	line = NULL;
-	line = get_next_line(fd);
+	line = get_next_line(rt->fd);
 	while (line)
 	{
-		ft_parse(line, rt);
+		ft_parse(line, rt, 1);
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(rt->fd);
 	}
 	free(line);
-
+	close(rt->fd);
+	rt->obj = gc_malloc(rt->gc, sizeof(t_obj) * rt->obj_count);
+	rt->fd = open(argv[1], O_RDONLY);
+	line = NULL;
+	line = get_next_line(rt->fd);
+	while (line)
+	{
+		ft_parse(line, rt, 0);
+		free(line);
+		line = get_next_line(rt->fd);
+	}
+	free(line);
+	close(rt->fd);
 }
+
 
