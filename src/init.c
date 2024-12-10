@@ -3,6 +3,7 @@
 void	init(t_rt *rt)
 {
 	rt->fd = 0;
+	rt->obj_count = 0;
 	rt->gc = malloc(sizeof(t_gc));
 	ft_gc_init(rt->gc);
 	rt->mlx = NULL;
