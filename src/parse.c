@@ -93,8 +93,8 @@ void	parse_light(t_rt *rt, char *str)
 
 void	parse_obj(char *str, t_rt *rt)
 {
-	printf("this is sphere: %d\n", SPHERE);
-	printf("this is type: %d\n", rt->obj[rt->n_obj]->type);
+	// printf("this is sphere: %d\n", SPHERE);
+	// printf("this is type: %d\n", rt->obj[rt->n_obj]->type);
 	if (rt->obj[rt->n_obj]->type == SPHERE)
 	{
 		printf("Parsing Sphere\n");

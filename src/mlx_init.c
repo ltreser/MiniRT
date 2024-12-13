@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 15:40:56 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/13 15:10:24 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/13 16:30:14 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 int	ft_close_window(t_rt *rt)
 {
+	mlx_destroy_image(rt->mlx->connection, rt->mlx->img);
 	mlx_destroy_window(rt->mlx->connection, rt->mlx->window);
 	mlx_destroy_display(rt->mlx->connection);
+	free(rt->mlx->connection);
+	ft_exit(rt, 0, NULL);
 	return (0);
 }
 
@@ -23,6 +26,7 @@ int	keypress(int keycode, t_rt *rt)
 {
 	if (keycode == 65307)
 		ft_close_window(rt);
+	printf("keycode is: %d\n", keycode);
 	return (0);
 }
 void	mlx_create_window(t_rt *rt)
@@ -52,7 +56,9 @@ void	mlx_create_window(t_rt *rt)
 		ft_exit(rt, 2, ft_strdup(MLX_FAIL)); //TODO is error code 2 correct here?
 	}
 	rt->mlx->pixel_adress = mlx_get_data_addr(rt->mlx->img, &rt->mlx->bpp, &rt->mlx->line_len, &rt->mlx->endian);
-	//mlx_hook(rt->win_ptr, 17, 1L << 17, ft_close_window, rt);
-	mlx_loop(rt->mlx->connection);
 	mlx_hook(rt->mlx->window, 2, 1L << 0, keypress, rt);
+	mlx_hook(rt->mlx->window, 17, 1L << 17, ft_close_window, rt);
+	mlx_loop(rt->mlx->connection);
 }
+
+

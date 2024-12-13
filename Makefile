@@ -6,7 +6,7 @@
 #    By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 05:57:35 by ltreser           #+#    #+#              #
-#    Updated: 2024/12/13 15:41:27 by afoth            ###   ########.fr        #
+#    Updated: 2024/12/13 16:36:53 by afoth            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,10 +34,12 @@ LIBMLX = libs/minilibx-linux/libmlx_Linux.a
 all: $(NAME)
 
 $(LIBFT):
+	@echo "Building libft..."
 	make -C libs/libft
 
 $(LIBMLX):
-	@mkdir -p libs
+	@echo "Building minilibx..."
+	mkdir -p libs
 	git clone https://github.com/42Paris/minilibx-linux.git libs/minilibx-linux || true
 	make -C libs/minilibx-linux
 
