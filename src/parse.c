@@ -135,17 +135,17 @@ t_color *parse_color(t_rt *rt, char *str)
 	if (contains_c(str, '.'))
 		ft_exit(rt, 2, gc_strdup(rt->gc,FILE_FAIL));
 	str += skip_spaces(str);
-	color->r = (int)ft_atof(gc_chop(rt->gc, str + skip_spaces(str), ','));
+	color->r = (int)ft_atof(gc_chop(rt->gc, str, ','));
 	is_nan(rt, (float)color->r);
 	if (color->r < 0 || color->r > 255)
 		ft_exit(rt, 2, gc_strdup(rt->gc,FILE_FAIL));
 	str += skip_spaces(str);
-	color->g = (int)ft_atof(gc_chop(rt->gc, str + skip_spaces(str), ','));
+	color->g = (int)ft_atof(gc_chop(rt->gc, str, ','));
 	is_nan(rt, (float)color->g);
 	if (color->g < 0 || color->g > 255)
 		ft_exit(rt, 2, gc_strdup(rt->gc,FILE_FAIL));
 	str += skip_spaces(str);
-	color->b = (int)ft_atof(gc_strtrim(rt->gc, str + skip_spaces(str), "'\n' "));
+	color->b = (int)ft_atof(gc_strtrim(rt->gc, str, "'\n' "));
 	is_nan(rt, (float)color->b);
 	if (color->b < 0 || color->b > 255)
 		ft_exit(rt, 2, gc_strdup(rt->gc,FILE_FAIL));
