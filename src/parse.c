@@ -101,8 +101,10 @@ void	parse_obj(char *str, t_rt *rt)
 
 		rt->obj[rt->n_obj]->sphere = gc_malloc(rt->gc, sizeof(t_sphere));
 		rt->obj[rt->n_obj]->sphere->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
+		printf("parsing spehre point done\n");
 		parse_dimensions(rt, str);
 		rt->obj[rt->n_obj]->sphere->c = parse_color(rt, str);
+		printf("parsing spehre color done\n");
 
 	}
 	if (rt->obj[rt->n_obj]->type == PLANE)
@@ -111,19 +113,24 @@ void	parse_obj(char *str, t_rt *rt)
 
 		rt->obj[rt->n_obj]->plane = gc_malloc(rt->gc, sizeof(t_plane));
 		rt->obj[rt->n_obj]->plane->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
+		printf("parsing plane point done\n");
 		rt->obj[rt->n_obj]->plane->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
+		printf("parsing plane vektor done\n");
 		rt->obj[rt->n_obj]->plane->c = parse_color(rt, str);
+		printf("parsing plane color done\n");
 	}
 	if (rt->obj[rt->n_obj]->type == CYLINDER)
 	{
 		printf("Parsing Cylinder\n");
 		rt->obj[rt->n_obj]->cylinder = gc_malloc(rt->gc, sizeof(t_cylinder));
 		rt->obj[rt->n_obj]->cylinder->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
+		printf("parsing cylinder point done\n");
 		rt->obj[rt->n_obj]->cylinder->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
+		printf("parsing cylinder vektor done\n");
 		parse_dimensions(rt, str);
 		rt->obj[rt->n_obj]->cylinder->c = parse_color(rt, str);
+		printf("parsing cylinder color done\n");
 	}
-	parse_dimensions(rt, str);
 	rt->n_obj++;
 }
 
