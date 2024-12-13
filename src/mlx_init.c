@@ -6,13 +6,13 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 15:40:56 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/06 19:25:18 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/13 15:10:24 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
-/* int	ft_close_window(t_rt *rt)
+int	ft_close_window(t_rt *rt)
 {
 	mlx_destroy_window(rt->mlx->connection, rt->mlx->window);
 	mlx_destroy_display(rt->mlx->connection);
@@ -30,8 +30,8 @@ void	mlx_create_window(t_rt *rt)
 	rt->mlx->x = 0;
 	rt->mlx->y = 0;
 	//mlx_get_screen_size(rt->mlx_ptr, &screen_width, &screen_height); TODO check if works
-	rt->mlx->width = 800; //TODO change later
-	rt->mlx->height = 800; //TODO same
+	rt->mlx->width = SCREEN_WIDTH; //TODO change later
+	rt->mlx->height = SCREEN_HEIGHT; //TODO same
 	rt->mlx->bpp = 24;
 	rt->mlx->endian = 0;
 	rt->mlx->line_len = rt->mlx->width * 3;
@@ -55,4 +55,4 @@ void	mlx_create_window(t_rt *rt)
 	//mlx_hook(rt->win_ptr, 17, 1L << 17, ft_close_window, rt);
 	mlx_loop(rt->mlx->connection);
 	mlx_hook(rt->mlx->window, 2, 1L << 0, keypress, rt);
-}*/
+}

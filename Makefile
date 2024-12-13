@@ -6,7 +6,7 @@
 #    By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 05:57:35 by ltreser           #+#    #+#              #
-#    Updated: 2024/12/06 20:45:56 by afoth            ###   ########.fr        #
+#    Updated: 2024/12/13 15:35:04 by afoth            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,52 +14,48 @@ NAME = miniRT
 
 SRC = main.c mlx_init.c input.c parse.c vector_calc.c parse_utils.c \
       exit.c screen_calculations.c init.c
-
 SRC_DIR = src/
-
-OBJ = $(addprefix $(SRC_DIR), $(SRC:.c=.o))
+OBJDIR = obj
+OBJ = $(patsubst %.c, $(OBJDIR)/%.o, $(SRC))
 
 INC_DIR = include/
-
 HEADERS = $(addprefix $(INC_DIR), miniRT.h)
 
 CC = gcc
-
-CFLAGS = -Wall -g -Iinclude/ -I/usr/include -Iminilibx-linux #-O3 TODO put in flags later
-
+CFLAGS = -Wall -g -I$(INC_DIR) -I/usr/include -Ilibs/minilibx-linux
+LDFLAGS = -L libs/libft -L libs/minilibx-linux
 LDLIBS = -lft -lmlx
-
-LDFLAGS = -L libft -L minilibx-linux
-
 LFLAGS = -lbsd -lXext -lX11 -lm
-
 RM = rm -rf
 
-LIBFT = libft/libft.a
-
-LIBMLX = minilibx-linux/libmlx_Linux.a
+LIBFT = libs/libft/libft.a
+LIBMLX = libs/minilibx-linux/libmlx_Linux.a
 
 all: $(NAME)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -I$(INC_DIR) -I/usr/include -Imlx_linux -O3 -c  $< -o $@
-
 $(LIBFT):
-	make -C ./libft
+	@mkdir -p libs
+	git clone https://github.com/42Paris/libft.git libs/libft || true
+	make -C libs/libft
 
 $(LIBMLX):
-	git clone https://github.com/42Paris/minilibx-linux.git minilibx-linux
-	make -C minilibx-linux
+	@mkdir -p libs
+	git clone https://github.com/42Paris/minilibx-linux.git libs/minilibx-linux || true
+	make -C libs/minilibx-linux
 
-$(NAME): $(HEADERS) $(LIBFT) $(LIBMLX) $(OBJ)
+$(OBJDIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME): $(OBJ) $(LIBFT) $(LIBMLX)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LDFLAGS) $(LDLIBS) $(LFLAGS)
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJDIR)
 
 fclean: clean
-	make -C libft fclean
-	$(RM) minilibx-linux
+	make -C libs/libft fclean || true
+	$(RM) libs/minilibx-linux
 	$(RM) $(NAME)
 
 re: fclean all
