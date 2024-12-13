@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/13 15:28:41 by afoth            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -89,7 +77,10 @@ struct						s_rt
 	t_obj					**obj;
 	int						n_obj;
 	int						obj_count;
-	int						fd;
+	int						fd;	
+	float						viewport_width;
+	float						viewport_height;
+	float						viewport_distance;
 };
 
 /*minilibx graphical library struct*/
