@@ -13,7 +13,7 @@ int	main(int argc, char **argv)
 	if (input_correct(rt, argc, argv))
 	{
 		parse_input(rt, argv);
-		mlx_create_window(rt);
+		//mlx_create_window(rt);
 		//render(rt);
 	}
 	gettimeofday(&end, NULL);

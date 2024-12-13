@@ -6,7 +6,7 @@
 #    By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 05:57:35 by ltreser           #+#    #+#              #
-#    Updated: 2024/12/13 15:35:04 by afoth            ###   ########.fr        #
+#    Updated: 2024/12/13 15:41:27 by afoth            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,6 @@ LIBMLX = libs/minilibx-linux/libmlx_Linux.a
 all: $(NAME)
 
 $(LIBFT):
-	@mkdir -p libs
-	git clone https://github.com/42Paris/libft.git libs/libft || true
 	make -C libs/libft
 
 $(LIBMLX):
