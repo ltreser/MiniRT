@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/17 17:25:20 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/17 18:05:57 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,8 +167,8 @@ struct						s_plane
 
 struct						s_sphere
 {
-	t_point					*y_corner;
-	t_point					*x_corner;
+	t_point					*u_corner;
+	t_point					*d_corner;
 	t_color					*c;
 	t_vector				*v;
 	t_point					*p;
@@ -177,8 +177,8 @@ struct						s_sphere
 
 struct						s_cylinder
 {
-	t_point					*x_corner;
-	t_point					*y_corner;
+	t_point					*u_corner;
+	t_point					*d_corner;
 	t_color					*c;
 	t_vector				*v;
 	t_point					*p;
@@ -260,10 +260,10 @@ int							ft_close_window(t_rt *rt);
 
 // maths
 float						v_len(t_vector *vector);
-t_vec						*v_cross_product(t_vec *a, t_vec *b);
-t_vec						*v_normalize(t_vec *v);
-t_vec						*v_add(t_vec *a, t_vec *b);
-t_vec						*pv_add(t_vec *a, t_point *b);
+t_vector						*v_cross_product(t_vector *a, t_vector *b);
+t_vector						*v_normalize(t_vector *v);
+t_vector						*v_add(t_vector *a, t_vector *b);
+t_vector						*pv_add(t_vector *a, t_point *b);
 
 // render
 void						render(t_rt *rt);
