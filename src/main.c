@@ -1,6 +1,9 @@
 
 #include "../include/miniRT.h"
 
+
+// was ist besser, coordinate system an untere Seite des Bildschirms und neu berechung der coordinaten oder
+// 
 int	main(int argc, char **argv)
 {
 	printf("\n\n\nTESTING: %s\n\n", argv[1]);

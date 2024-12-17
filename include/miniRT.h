@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/13 15:28:41 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/16 16:41:56 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ struct						s_plane
 
 struct						s_sphere
 {
+	float						x_corner[2];
+	float						y_corner[2];
 	t_color					*c;
 	t_vector				*v;
 	t_point					*p;
@@ -140,6 +142,8 @@ struct						s_sphere
 
 struct						s_cylinder
 {
+	float						x_corner[2];
+	float						y_corner[2];
 	t_color					*c;
 	t_vector				*v;
 	t_point					*p;
