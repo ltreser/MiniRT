@@ -8,6 +8,7 @@ void	setup_viewport(t_rt *rt) //TODO init struct variables
 	rt->vp->viewport_distance = 1;
 	rt->vp->rplane_o = v_normalize(v_cross_product(t_vec{0,0,0}, rt->camera->v));
 	rt->vp->uplane_o = v_normalize(v_cross_product(rt->vp->rplane_o, rt->camera->v));
+	rt->vp->center = pv_add(rt->camera->v, rt->camera->p);
 }
 	
 	

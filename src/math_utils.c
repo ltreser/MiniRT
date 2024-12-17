@@ -23,5 +23,4 @@ t_vec	*v_normalize(t_vec *v)
 	v->y /= length;
 	v->z /= length;
 	return (v);
-
 }

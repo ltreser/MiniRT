@@ -87,16 +87,17 @@ struct						s_vp
 	float					viewport_width;
 	float					viewport_height;
 	float					viewport_distance;
-	t_vektor				*uplane_o;
-	t_vektor				*rplane_o;
-	t_vektor				*uplane_n;
-	t_vektor				*dplane_n;
-	t_vektor				*rplane_n;
-	t_vektor				*lplane_n;
+	t_vector				*uplane_o;
+	t_vector				*rplane_o;
+	t_vector				*uplane_n;
+	t_vector				*dplane_n;
+	t_vector				*rplane_n;
+	t_vector				*lplane_n;
 	t_point					*uplane_p;
 	t_point					*dplane_p;
 	t_point					*rplane_p;
 	t_point					*lplane_p;
+	t_point					*center;
 	float					uplane_d;
 	float					dplane_d;
 	float					rplane_d;
@@ -230,12 +231,15 @@ void						mlx_create_window(t_rt *rt);
 int							keypress(int keycode, t_rt *rt);
 int							ft_close_window(t_rt *rt);
 
-// vector_calc
+// maths
 float						v_len(t_vector *vector);
 t_vec						*v_cross_product(t_vec *a, t_vec *b);
 t_vec						*v_normalize(t_vec *v);
+t_vec						*v_add(t_vec *a, t_vec *b);
+t_vec						*pv_add(t_vec *a, t_point *b);
 
 // render
+void						render(t_rt *rt);
 void						calc_aspect_ratio(t_rt *rt);
 void						setup_viewport(t_rt *rt);
 
