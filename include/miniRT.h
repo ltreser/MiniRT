@@ -64,6 +64,7 @@ typedef struct s_obj		t_obj;
 typedef struct s_gc			t_gc;
 typedef struct s_mlx		t_mlx;
 typedef struct s_vp			t_vp;
+typedef struct s_fc			t_fc;
 typedef enum e_type			t_type;
 
 enum						e_type
@@ -96,15 +97,26 @@ struct						s_rt
 
 struct						s_vp
 {
-	float					viewport_width;
-	float					viewport_height;
-	float					viewport_distance;
-	t_vektor				*uplane_o;
-	t_vektor				*rplane_o;
-	t_vektor				*uplane_n;
-	t_vektor				*dplane_n;
-	t_vektor				*rplane_n;
-	t_vektor				*lplane_n;
+	float					width;
+	float					height;
+	float					distance;
+	t_vector				*up;
+	t_vector				*right;
+	t_point					*center;
+	t_point					*top_left;
+	t_point					*top_right;
+	t_point					*bottom_left;
+	t_point					*bottom_right;
+};
+
+/*frustum culling*/
+
+struct						s_fc
+{
+	t_vector				*uplane_n;
+	t_vector				*dplane_n;
+	t_vector				*rplane_n;
+	t_vector				*lplane_n;
 	t_point					*uplane_p;
 	t_point					*dplane_p;
 	t_point					*rplane_p;
@@ -246,12 +258,15 @@ void						mlx_create_window(t_rt *rt);
 int							keypress(int keycode, t_rt *rt);
 int							ft_close_window(t_rt *rt);
 
-// vector_calc
+// maths
 float						v_len(t_vector *vector);
 t_vec						*v_cross_product(t_vec *a, t_vec *b);
 t_vec						*v_normalize(t_vec *v);
+t_vec						*v_add(t_vec *a, t_vec *b);
+t_vec						*pv_add(t_vec *a, t_point *b);
 
 // render
+void						render(t_rt *rt);
 void						calc_aspect_ratio(t_rt *rt);
 void						setup_viewport(t_rt *rt);
 //init_obj.c
