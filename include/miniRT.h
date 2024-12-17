@@ -19,17 +19,16 @@
 # define FILE_FAIL "\033[0;31m Error\n Scene to render is not correctly provided!\n \033[0m"
 # define MLX_FAIL "\033[0;31m Error\n MLX failed to initialize!\n \033[0m"
 
-
 /* Standard Libraries */
 # include <fcntl.h>
 # include <float.h>
 # include <limits.h>
-# include <stdint.h>
 # include <math.h>
+# include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/time.h>
 # include <unistd.h>
-#include <sys/time.h>
 
 //# include "./libs/libft/libft.h"
 # include "../libs/libft/includes/ft_printf.h"
@@ -52,6 +51,7 @@ typedef struct s_color		t_color;
 typedef struct s_obj		t_obj;
 typedef struct s_gc			t_gc;
 typedef struct s_mlx		t_mlx;
+typedef struct s_vp			t_vp;
 typedef enum e_type			t_type;
 
 enum						e_type
@@ -60,7 +60,6 @@ enum						e_type
 	PLANE,
 	SPHERE,
 };
-
 
 /*main struct*/
 
@@ -75,30 +74,51 @@ struct						s_rt
 	t_ambient				*ambient;
 	t_light					*light;
 	t_obj					**obj;
+	t_vp					*vp;
 	int						n_obj;
 	int						obj_count;
-	int						fd;	
-	float						viewport_width;
-	float						viewport_height;
-	float						viewport_distance;
+	int						fd;
+};
+
+/*viewport*/
+
+struct						s_vp
+{
+	float					viewport_width;
+	float					viewport_height;
+	float					viewport_distance;
+	t_vektor				*uplane_o;
+	t_vektor				*rplane_o;
+	t_vektor				*uplane_n;
+	t_vektor				*dplane_n;
+	t_vektor				*rplane_n;
+	t_vektor				*lplane_n;
+	t_point					*uplane_p;
+	t_point					*dplane_p;
+	t_point					*rplane_p;
+	t_point					*lplane_p;
+	float					uplane_d;
+	float					dplane_d;
+	float					rplane_d;
+	float					lplane_d;
 };
 
 /*minilibx graphical library struct*/
 
 struct						s_mlx
 {
-	void	*connection;
-	void	*window;
-	void	*img;
-	char	*pixel_adress;
-	int		x;
-	int		y;
-	int		width;
-	int		height;
-	int		bpp;
-	int		endian;
-	int		line_len;
-	//float	zoom;
+	void					*connection;
+	void					*window;
+	void					*img;
+	char					*pixel_adress;
+	int						x;
+	int						y;
+	int						width;
+	int						height;
+	int						bpp;
+	int						endian;
+	int						line_len;
+	// float	zoom;
 };
 
 /*objects*/
@@ -183,19 +203,12 @@ struct						s_color
 	int						b;
 };
 
-
-//init
-void						init(t_rt *rt);
-
-//input
-int							check_input(t_rt *rt, int argc, char **argv);
-void						read_file(int fd, t_rt *rt);
-
-//exit
-void						ft_exit(t_rt *rt, int exit_code, char *error_message);
+// exit
+void						ft_exit(t_rt *rt, int exit_code,
+								char *error_message);
 void						free_all(t_rt *rt);
 
-//parse
+// parse
 void						ft_parse(char *str, t_rt *rt, int count_only);
 void						parse_obj(char *str, t_rt *rt);
 t_color						*parse_color(t_rt *rt, char *str);
@@ -204,23 +217,26 @@ t_vector					*parse_vector(t_rt *rt, char *str);
 void						parse_ambient(t_rt *rt, char *str);
 void						parse_camera(t_rt *rt, char *str);
 void						parse_light(t_rt *rt, char *str);
-
-//parse_utils
+int							check_input(t_rt *rt, int argc, char **argv);
+void						read_file(int fd, t_rt *rt);
 void						parse_dimensions(t_rt *rt, char *str);
 int							skip_spaces(char *str);
 int							only_valid_chars(char *str);
 void						is_nan(t_rt *rt, float f);
+void						init(t_rt *rt);
 
-//mlx
-void    mlx_create_window(t_rt *rt);
-int keypress(int keycode, t_rt *rt);
-int ft_close_window(t_rt *rt);
+// mlx
+void						mlx_create_window(t_rt *rt);
+int							keypress(int keycode, t_rt *rt);
+int							ft_close_window(t_rt *rt);
 
-//vector_calc
+// vector_calc
 float						v_len(t_vector *vector);
+t_vec						*v_cross_product(t_vec *a, t_vec *b);
+t_vec						*v_normalize(t_vec *v);
 
-//render
-void calc_aspect_ratio(t_rt *rt);
-
+// render
+void						calc_aspect_ratio(t_rt *rt);
+void						setup_viewport(t_rt *rt);
 
 #endif
