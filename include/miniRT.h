@@ -52,6 +52,7 @@ typedef struct s_obj		t_obj;
 typedef struct s_gc			t_gc;
 typedef struct s_mlx		t_mlx;
 typedef struct s_vp			t_vp;
+typedef struct s_fc			t_fc;
 typedef enum e_type			t_type;
 
 enum						e_type
@@ -84,11 +85,22 @@ struct						s_rt
 
 struct						s_vp
 {
-	float					viewport_width;
-	float					viewport_height;
-	float					viewport_distance;
-	t_vector				*uplane_o;
-	t_vector				*rplane_o;
+	float					width;
+	float					height;
+	float					distance;
+	t_vector				*up;
+	t_vector				*right;
+	t_point					*center;
+	t_point					*top_left;
+	t_point					*top_right;
+	t_point					*bottom_left;
+	t_point					*bottom_right;
+};
+
+/*frustum culling*/
+
+struct						s_fc
+{
 	t_vector				*uplane_n;
 	t_vector				*dplane_n;
 	t_vector				*rplane_n;
@@ -97,7 +109,6 @@ struct						s_vp
 	t_point					*dplane_p;
 	t_point					*rplane_p;
 	t_point					*lplane_p;
-	t_point					*center;
 	float					uplane_d;
 	float					dplane_d;
 	float					rplane_d;
