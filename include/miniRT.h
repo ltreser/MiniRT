@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/17 15:45:49 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/17 17:25:20 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,8 +155,8 @@ struct						s_plane
 
 struct						s_sphere
 {
-	float						x_corner[2];
-	float						y_corner[2];
+	t_point					*y_corner;
+	t_point					*x_corner;
 	t_color					*c;
 	t_vector				*v;
 	t_point					*p;
@@ -165,8 +165,8 @@ struct						s_sphere
 
 struct						s_cylinder
 {
-	float						x_corner[2];
-	float						y_corner[2];
+	t_point					*x_corner;
+	t_point					*y_corner;
 	t_color					*c;
 	t_vector				*v;
 	t_point					*p;
@@ -254,5 +254,8 @@ t_vec						*v_normalize(t_vec *v);
 // render
 void						calc_aspect_ratio(t_rt *rt);
 void						setup_viewport(t_rt *rt);
+//init_obj.c
+void						init_obj(t_rt *rt);
+t_point						*init_point(t_gc *gc);
 
 #endif

@@ -1,21 +1,6 @@
 
 #include "../include/miniRT.h"
 
-void	parse_dimensions(t_rt *rt, char *str)
-{
-	int i;
-
-	i = skip_spaces(str);
-	if (rt->obj[rt->n_obj]->type == CYLINDER)
-	{
-		rt->obj[rt->n_obj]->cylinder->d = ft_atof(gc_chop(rt->gc, str + i, ' '));
-		i = skip_spaces(str);
-		rt->obj[rt->n_obj]->cylinder->h = ft_atof(gc_chop(rt->gc, str + i, ' '));
-	}
-	else if (rt->obj[rt->n_obj]->type == SPHERE)
-		rt->obj[rt->n_obj]->sphere->d = ft_atof(gc_chop(rt->gc, str + i, ' '));
-}
-
 int	skip_spaces(char *str)
  {
 		int	i;

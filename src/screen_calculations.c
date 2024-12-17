@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:00:16 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/17 15:44:42 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/17 15:50:29 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,4 @@ void calc_aspect_ratio(t_rt *rt)
 	rt->aspect_r = SCREEN_HEIGHT / SCREEN_WIDTH;
 }
 
-void	calc_screensize(t_rt *rt)
-{
-	double	angle_rad;
-	double	hypotenuse;
-	double	known_side;
 
-	known_side = 1;
-	angle_rad = DEG_TO_RAD(rt->camera->fov / 2);
-	hypotenuse = known_side / cos(angle_rad);
-
-}
