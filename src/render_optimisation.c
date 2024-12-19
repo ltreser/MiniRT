@@ -6,12 +6,13 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:36:36 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/17 18:29:51 by afoth            ###   ########.fr       */
+/*   Updated: 2024/12/19 12:59:17 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
+//DEL TEST!!!!
 /*Calculation of the points of a square mask that will
 represent the square on the viewport.
 Only where the mask is, pixels are renderd
@@ -41,4 +42,7 @@ void	symplify_sphere(t_rt *rt)
 	rt->obj[rt->n_obj]->sphere->d_corner = calc_endpoint_vector(v_add_no_maloc(v_mult_scalar(up, r * -1), v_mult_scalar(right, r), p, 1));
 }
 
+void	symplify_cylinder(t_rt *rt)
+{
 
+}
