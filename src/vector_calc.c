@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 23:10:32 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/17 18:20:21 by afoth            ###   ########.fr       */
+/*   Updated: 2025/01/21 17:12:41 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,15 @@ t_vector	*v_add_no_maloc(t_vector *a, t_vector *b)
 	res->x = a->x + b->x;
 	res->y = a->y + b->y;
 	res->z = a->z + b->z;
+	return (res);
+}
+
+t_vector	*v_between_two_points(t_point a, t_point b)
+{
+	t_vector	*res;
+
+	res->x = b.x - a.x;
+	res->y = b.y - a.y;
+	res->z = b.z - a.z;
 	return (res);
 }

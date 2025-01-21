@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:36:36 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/19 12:59:17 by afoth            ###   ########.fr       */
+/*   Updated: 2025/01/21 18:04:27 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,21 @@ Lower Corner = normalized Vektor up * (r -1) + normalized Vektor right * r
 This creates the cordinates of a square with sidelenght r in 3D Space paralle to
 the viewport
 */
+void	optimise_pixel_rendering(t_rt *rt)
+{
+	/*optimize obj
+	how do I get access to the obj, how do I know wich type?
+	Where do I store the squares?
+	How do I know the coordinats of the squares?
+
+	1. Calculate the coordinates of the covering square
+	2. Create a vector betweem square and camera.
+	3. Calculate impact point on viewport
+	4. Translate impact point into pixel coordinates
+	5. Save the coordinates
+	*/
+}
+
 void	symplify_sphere(t_rt *rt)
 {
 	float		r;
@@ -31,9 +46,10 @@ void	symplify_sphere(t_rt *rt)
 	t_vector	*up;
 	t_vector	*right;
 
-
 	x = rt->obj[rt->n_obj]->sphere->p->x;
+	y = rt->obj	x = rt->obj[rt->n_obj]->sphere->p->x;
 	y = rt->obj[rt->n_obj]->sphere->p->y;
+	r = rt->obj[rt->n_obj]->sphere->d / 2;[rt->n_obj]->sphere->p->y;
 	r = rt->obj[rt->n_obj]->sphere->d / 2;
 	p = rt->obj[rt->n_obj]->sphere->p;
 	up = rt->vp->up;

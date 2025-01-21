@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/17 18:05:57 by afoth            ###   ########.fr       */
+/*   Updated: 2025/01/21 16:58:02 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,9 @@ struct						s_vp
 	float					width;
 	float					height;
 	float					distance;
+	float					pixel_size;
+	int						*pixel_x; //both not in use yet, to know wich pixel is rendering.
+	int						*pixel_y;
 	t_vector				*up;
 	t_vector				*right;
 	t_point					*center;
