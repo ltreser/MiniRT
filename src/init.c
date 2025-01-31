@@ -7,7 +7,7 @@ void	init(t_rt *rt)
 	rt->gc = malloc(sizeof(t_gc));
 	ft_gc_init(rt->gc);
 	rt->mlx = gc_malloc(rt->gc, sizeof(t_mlx));
-	calc_aspect_ratio(rt)
+	calc_aspect_ratio(rt);
 	rt->camera = NULL;
 	rt->ambient = NULL;
 	rt->light = NULL;
