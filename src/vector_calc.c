@@ -6,14 +6,20 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 23:10:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/01/21 17:12:41 by afoth            ###   ########.fr       */
+/*   Updated: 2025/01/31 20:32:12 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
+//function has possibility to over and underflow
 float v_len(t_vector *vector)
 {
+	if (!vector)
+	{
+		printf("Error in v_len\nVector is NULL\n");//DEL?
+		return (0);
+	}
 	return(sqrtf(vector->x * vector->x + vector->y * vector->y + vector->z * vector->z));
 }
 
@@ -34,8 +40,8 @@ t_vector	*v_normalize(t_vector *v)
 
 	length = 0;
 	length = v_len(v);
-	if (!length)
-		return ((t_vector{0,0,0}));
+	if (length == 0)
+		return (v);
 	v->x /= length;
 	v->y /= length;
 	v->z /= length;

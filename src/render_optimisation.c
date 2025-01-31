@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:36:36 by afoth             #+#    #+#             */
-/*   Updated: 2025/01/21 18:04:27 by afoth            ###   ########.fr       */
+/*   Updated: 2025/01/31 20:00:48 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,18 @@ void	optimise_pixel_rendering(t_rt *rt)
 	4. Translate impact point into pixel coordinates
 	5. Save the coordinates
 	*/
+	//go throught obj
+	//if sphere ->
+		symplify_sphere(rt);
+
+}
+
+t_vector	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner)
+{
+	t_vector	*vector;
+
+	vector = v_between_two_points(mask_corner, rt->camera->p);
+
 }
 
 void	symplify_sphere(t_rt *rt)
@@ -60,5 +72,5 @@ void	symplify_sphere(t_rt *rt)
 
 void	symplify_cylinder(t_rt *rt)
 {
-
+	
 }

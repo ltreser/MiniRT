@@ -6,14 +6,15 @@
 #    By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 05:57:35 by ltreser           #+#    #+#              #
-#    Updated: 2024/12/13 16:36:53 by afoth            ###   ########.fr        #
+#    Updated: 2025/01/31 20:34:53 by afoth            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
 
 SRC = main.c mlx_init.c input.c parse.c vector_calc.c parse_utils.c \
-      exit.c screen_calculations.c init.c
+      exit.c screen_calculations.c init.c render.c init_obj.c setup_viewport.c \
+	  
 SRC_DIR = src/
 OBJDIR = obj
 OBJ = $(patsubst %.c, $(OBJDIR)/%.o, $(SRC))

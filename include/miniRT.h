@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:04:10 by afoth             #+#    #+#             */
-/*   Updated: 2025/01/21 16:58:02 by afoth            ###   ########.fr       */
+/*   Updated: 2025/01/31 20:33:09 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 // 1920x1080? DEL
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 600
+//Comparing floats, if the difference is smaller than EPSILON, they are considered equal
+# define EPSILON = 0.00001
 
 /*Error Codes*/
 # define EXIT_MALLOC 2
@@ -263,10 +265,10 @@ int							ft_close_window(t_rt *rt);
 
 // maths
 float						v_len(t_vector *vector);
-t_vector						*v_cross_product(t_vector *a, t_vector *b);
-t_vector						*v_normalize(t_vector *v);
-t_vector						*v_add(t_vector *a, t_vector *b);
-t_vector						*pv_add(t_vector *a, t_point *b);
+t_vector					*v_cross_product(t_rt *rt, t_vector *a, t_vector *b);
+t_vector					*v_normalize(t_vector *v);
+t_vector					*v_add(t_rt *rt, t_vector *a, t_vector *b);
+t_vector					*pv_add(t_vector *a, t_point *b);
 
 // render
 void						render(t_rt *rt);
