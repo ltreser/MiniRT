@@ -12,6 +12,7 @@
 
 #include "../include/miniRT.h"
 
+//adds a given vector to a point, so the point is moved in the direction and length of the vector
 t_point	*pv_add(t_vector *a, t_point *b)
 {
 	t_point *res;

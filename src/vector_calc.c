@@ -23,6 +23,11 @@ float v_len(t_vector *vector)
 	return(sqrtf(vector->x * vector->x + vector->y * vector->y + vector->z * vector->z));
 }
 
+//results in a scalar that descrubes the angle between the two vectors, e.g. if a * b = 0 -> they are perpendicular
+float	v_dot_product(t_rt *rt, t_vector *a, t_vector *b)
+
+
+//results in a vector thats perpendicular (senkrecht) to both a and b
 t_vector	*v_cross_product(t_rt *rt, t_vector *a, t_vector *b)
 {
 	t_vector *res;
