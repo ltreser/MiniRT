@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:45:50 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/03 15:37:22 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/02/04 16:28:13 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@ t_point	calc_endpoint_vector(t_vector *v, t_point *start, float scalar)
 	return(end);
 }
 
+
+//XXX distance between 2 points is returned as a negative float
 float	calc_p_distance(t_point a, t_point b)
 {
 	float distance;
 
 	distance = sqrtf(powf(a->x - b->x) + powf(a->y - b->y) + powf(a-> - b->z));
-	if (distance < 0)
+	if (distance > 0)
 		distance *= -1;
 	return (distance);
 }

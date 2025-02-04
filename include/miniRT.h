@@ -145,6 +145,7 @@ struct						s_mlx
 struct						s_obj
 {
 	t_type					type;
+	int						visible;
 	union
 	{
 		t_plane				*plane;

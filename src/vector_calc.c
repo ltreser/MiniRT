@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 23:10:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/01/31 20:32:12 by afoth            ###   ########.fr       */
+/*   Updated: 2025/02/04 16:26:37 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,14 @@ t_vector	*v_between_two_points(t_point a, t_point b)
 	res->y = b.y - a.y;
 	res->z = b.z - a.z;
 	return (res);
+}
+
+//project vector a onto b
+t_vector	vector_projection(t_vector a, t_vector b)
+{
+	t_vector res;
+	res = ((b * a) / (b * b)) * b;
+	return (res);
+}
+
 }
