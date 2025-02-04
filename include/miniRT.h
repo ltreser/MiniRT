@@ -4,7 +4,8 @@
 // 1920x1080? DEL
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 600
-//Comparing floats, if the difference is smaller than EPSILON, they are considered equal
+// Comparing floats, if the difference is smaller than EPSILON,
+they are considered equal
 # define EPSILON = 0.00001
 
 /*Error Codes*/
@@ -40,7 +41,7 @@
 /* MiniLibX */
 # include <mlx.h>
 
-typedef struct s_rt			t_rt;
+	typedef struct s_rt t_rt;
 typedef struct s_ambient	t_ambient;
 typedef struct s_camera		t_camera;
 typedef struct s_plane		t_plane;
@@ -55,6 +56,7 @@ typedef struct s_gc			t_gc;
 typedef struct s_mlx		t_mlx;
 typedef struct s_vp			t_vp;
 typedef struct s_fc			t_fc;
+typedef struct s_ray		t_ray;
 typedef enum e_type			t_type;
 
 enum						e_type
@@ -91,7 +93,7 @@ struct						s_vp
 	float					height;
 	float					distance;
 	float					pixel_size;
-	int						*pixel_x; //both not in use yet, to know wich pixel is rendering.
+	int *pixel_x; // both not in use yet, to know wich pixel is rendering.
 	int						*pixel_y;
 	t_vector				*up;
 	t_vector				*right;
@@ -224,8 +226,14 @@ struct						s_color
 	int						b;
 };
 
+struct						s_ray
+{
+	t_point					*p;
+	t_vector				*v;
+}
+
 // exit
-void						ft_exit(t_rt *rt, int exit_code,
+void	ft_exit(t_rt *rt, int exit_code,
 								char *error_message);
 void						free_all(t_rt *rt);
 
@@ -253,16 +261,19 @@ int							ft_close_window(t_rt *rt);
 
 // maths
 float						v_len(t_vector *vector);
-t_vector					*v_cross_product(t_rt *rt, t_vector *a, t_vector *b);
+t_vector					*v_cross_product(t_rt *rt, t_vector *a,
+								t_vector *b);
 t_vector					*v_normalize(t_vector *v);
 t_vector					*v_add(t_rt *rt, t_vector *a, t_vector *b);
 t_vector					*pv_add(t_vector *a, t_point *b);
+float						calc_p_distance(t_point a, t_point b);
+t_vector					vector_projection(t_vector a, t_vector b);
 
 // render
 void						render(t_rt *rt);
 void						calc_aspect_ratio(t_rt *rt);
 void						setup_viewport(t_rt *rt);
-//init_obj.c
+// init_obj.c
 void						init_obj(t_rt *rt);
 t_point						*init_point(t_gc *gc);
 
