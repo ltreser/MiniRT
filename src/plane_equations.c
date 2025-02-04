@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:27:20 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/04 14:42:03 by afoth            ###   ########.fr       */
+/*   Updated: 2025/02/04 16:18:44 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,25 @@ P = lo + (- ((lo -a) *n)/(l *n)) *l
 
 t_point	*plane_ray_intersection(t_plane *pl, t_vector *v, t_point *p)
 {
-	
+
+}
+
+
+float	vector2component_form(t_point *p, t_vektor *v)
+{
+
+}
+
+/*explanation:
+given parameters:
+-
+
+
+t_point	ray_plane_intersect(float scalar, t_ray *ray, t_plane *plane)
+{
+
+
+
+
+
 }
