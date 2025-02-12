@@ -5,7 +5,7 @@
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 600
 // Comparing floats, if the difference is smaller than EPSILON,
-they are considered equal
+//they are considered equal
 # define EPSILON = 0.00001
 
 /*Error Codes*/
@@ -230,11 +230,10 @@ struct						s_ray
 {
 	t_point					*p;
 	t_vector				*v;
-}
+};
 
 // exit
-void	ft_exit(t_rt *rt, int exit_code,
-								char *error_message);
+void	ft_exit(t_rt *rt, int exit_code, char *error_message);
 void						free_all(t_rt *rt);
 
 // parse

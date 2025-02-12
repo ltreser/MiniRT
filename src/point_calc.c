@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:45:50 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/03 15:37:22 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/02/12 14:54:03 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ t_point	calc_endpoint_vector(t_vector *v, t_point *start, float scalar)
 	return(end);
 }
 
+//powf calculates the value of one float raised to the power of another float.
 float	calc_p_distance(t_point a, t_point b)
 {
 	float distance;
 
-	distance = sqrtf(powf(a->x - b->x) + powf(a->y - b->y) + powf(a-> - b->z));
+	distance = sqrtf(powf(a.x - b.x, 2) + powf(a.y - b.y, 2) + powf(a.z - b.z, 2));
 	if (distance < 0)
 		distance *= -1;
 	return (distance);

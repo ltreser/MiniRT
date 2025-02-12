@@ -6,22 +6,14 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:36:36 by afoth             #+#    #+#             */
-/*   Updated: 2025/01/31 20:00:48 by afoth            ###   ########.fr       */
+/*   Updated: 2025/02/12 22:32:43 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
 //DEL TEST!!!!
-/*Calculation of the points of a square mask that will
-represent the square on the viewport.
-Only where the mask is, pixels are renderd
 
-Upper Corner = normalized Vektor up * r + normalized Vektor right * (r * -1)
-Lower Corner = normalized Vektor up * (r -1) + normalized Vektor right * r
-This creates the cordinates of a square with sidelenght r in 3D Space paralle to
-the viewport
-*/
 void	optimise_pixel_rendering(t_rt *rt)
 {
 	/*optimize obj
@@ -48,7 +40,15 @@ t_vector	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner)
 	vector = v_between_two_points(mask_corner, rt->camera->p);
 
 }
+/*Calculation of the points of a square mask that will
+represent the square on the viewport.
+Only where the mask is, pixels are renderd
 
+Upper Corner = normalized Vektor up * r + normalized Vektor right * (r * -1)
+Lower Corner = normalized Vektor up * (r -1) + normalized Vektor right * r
+This creates the cordinates of a square with sidelenght r in 3D Space paralle to
+the viewport
+*/
 void	symplify_sphere(t_rt *rt)
 {
 	float		r;
@@ -59,9 +59,7 @@ void	symplify_sphere(t_rt *rt)
 	t_vector	*right;
 
 	x = rt->obj[rt->n_obj]->sphere->p->x;
-	y = rt->obj	x = rt->obj[rt->n_obj]->sphere->p->x;
 	y = rt->obj[rt->n_obj]->sphere->p->y;
-	r = rt->obj[rt->n_obj]->sphere->d / 2;[rt->n_obj]->sphere->p->y;
 	r = rt->obj[rt->n_obj]->sphere->d / 2;
 	p = rt->obj[rt->n_obj]->sphere->p;
 	up = rt->vp->up;
@@ -72,5 +70,5 @@ void	symplify_sphere(t_rt *rt)
 
 void	symplify_cylinder(t_rt *rt)
 {
-	
+
 }
