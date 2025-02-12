@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:27:20 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/04 16:18:44 by afoth            ###   ########.fr       */
+/*   Updated: 2025/02/12 17:13:10 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,10 @@ t_point	ray_plane_intersect(float scalar, t_ray *ray, t_plane *plane)
 
 
 
+}
+*/
+
+void	plane_check_fc(t_rt	*rt, int i)
+{
+//TODO
 }

@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 23:10:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/04 16:26:37 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/02/12 16:44:34 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ t_vector	*v_cross_product(t_rt *rt, t_vector *a, t_vector *b)
 	res-> z = a->x * b->y - a->y * b->x;
 	return (res);
 }
+
+t_vector    v_cross_product_nomalloc(t_vector a, t_vector b)
+{   
+    t_vector res;
+    
+    res->x = a->y * b->z - a->z * b->y;
+    res->y = a->z * b->x - a->x * b->z;
+    res-> z = a->x * b->y - a->y * b->x;
+    return (res);
+}
+
 
 t_vector	*v_normalize(t_vector *v)
 {
