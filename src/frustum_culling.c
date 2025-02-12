@@ -72,7 +72,9 @@ void	calculate_fplane_distances(t_rt *rt)
 
 void	frustum_check(t_rt *rt, int i)
 {
-
+	//calculate position vector
+	//project this position vector onto the normal
+	//5.30
 
 }
 
