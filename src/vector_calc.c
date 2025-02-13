@@ -43,14 +43,14 @@ t_vector	*v_cross_product(t_rt *rt, t_vector *a, t_vector *b)
 	return (res);
 }
 
-t_vector    v_cross_product_nomalloc(t_vector a, t_vector b)
-{   
-    t_vector res;
-    
-    res->x = a->y * b->z - a->z * b->y;
-    res->y = a->z * b->x - a->x * b->z;
-    res-> z = a->x * b->y - a->y * b->x;
-    return (res);
+t_vector	v_cross_product_nomalloc(t_vector a, t_vector b)
+{
+	t_vector res;
+
+	res.x = a.y * b.z - a.z * b.y;
+	res.y = a.z * b.x - a.x * b.z;
+	res. z = a.x * b.y - a.y * b.x;
+	return (res);
 }
 
 
