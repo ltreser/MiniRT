@@ -145,6 +145,7 @@ struct						s_mlx
 struct						s_obj
 {
 	t_type					type;
+	int						visible;
 	union
 	{
 		t_plane				*plane;
@@ -168,15 +169,17 @@ struct						s_sphere
 	t_vector				*v;
 	t_point					*p;
 	int						d;
+	float					rot_r;
 };
 
 struct						s_cylinder
 {
-	t_point					*u_corner;
+	t_point					*u_corner; 
 	t_point					*d_corner;
 	t_color					*c;
 	t_vector				*v;
 	t_point					*p;
+	float					rot_r;
 	float					d;
 	float					h;
 };

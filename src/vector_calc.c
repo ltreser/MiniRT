@@ -6,7 +6,11 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 23:10:32 by afoth             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/02/12 14:34:20 by afoth            ###   ########.fr       */
+=======
+/*   Updated: 2025/02/12 16:44:34 by ltreser          ###   ########.fr       */
+>>>>>>> 214ad3d3056aacf6e1bb56346fbc6b70f4e675a5
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +42,17 @@ t_vector	*v_cross_product(t_rt *rt, t_vector *a, t_vector *b)
 	res-> z = a->x * b->y - a->y * b->x;
 	return (res);
 }
+
+t_vector    v_cross_product_nomalloc(t_vector a, t_vector b)
+{   
+    t_vector res;
+    
+    res->x = a->y * b->z - a->z * b->y;
+    res->y = a->z * b->x - a->x * b->z;
+    res-> z = a->x * b->y - a->y * b->x;
+    return (res);
+}
+
 
 t_vector	*v_normalize(t_vector *v)
 {
@@ -72,4 +87,14 @@ t_vector	*v_between_two_points(t_point a, t_point b)
 	res->y = b.y - a.y;
 	res->z = b.z - a.z;
 	return (res);
+}
+
+//project vector a onto b
+t_vector	vector_projection(t_vector a, t_vector b)
+{
+	t_vector res;
+	res = ((b * a) / (b * b)) * b;
+	return (res);
+}
+
 }

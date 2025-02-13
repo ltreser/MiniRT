@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:45:50 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/12 14:54:03 by afoth            ###   ########.fr       */
+/*   Updated: 2025/02/13 15:05:19 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ t_point	calc_endpoint_vector(t_vector *v, t_point *start, float scalar)
 }
 
 //powf calculates the value of one float raised to the power of another float.
+
+//XXX distance between 2 points is returned as a negative float
 float	calc_p_distance(t_point a, t_point b)
 {
 	float distance;
