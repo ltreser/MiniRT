@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:23:23 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/12 16:52:01 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/02/13 15:25:44 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	init_obj(t_rt *rt)
 	{
 		rt->obj[rt->n_obj]->cylinder->u_corner = init_point(rt->gc);
 		rt->obj[rt->n_obj]->cylinder->d_corner = init_point(rt->gc);
-i		rt->obj[rt->n_obj]->cylinder->rot_r = cylinder_rot_radius(rt, rt->obj[rt->n_obj]->cylinder);
+		rt->obj[rt->n_obj]->cylinder->rot_r = cylinder_rot_radius(rt, rt->obj[rt->n_obj]->cylinder);
 	}
 	if (rt->obj[rt->n_obj]->type == SPHERE)
 	{
