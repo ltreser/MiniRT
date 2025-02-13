@@ -1,19 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   vector_calc.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 23:10:32 by afoth             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/02/12 14:34:20 by afoth            ###   ########.fr       */
-=======
-/*   Updated: 2025/02/12 16:44:34 by ltreser          ###   ########.fr       */
->>>>>>> 214ad3d3056aacf6e1bb56346fbc6b70f4e675a5
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../include/miniRT.h"
 
 //function has possibility to over and underflow
@@ -90,6 +74,7 @@ t_vector	*v_between_two_points(t_point a, t_point b)
 }
 
 //project vector a onto b
+//the component of a that goes in the same direction as b
 t_vector	vector_projection(t_vector a, t_vector b)
 {
 	t_vector res;

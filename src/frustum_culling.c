@@ -70,14 +70,6 @@ void	calculate_fplane_distances(t_rt *rt)
 	rt->fc->dplane_d = calc_p_distance(dplane_nstart, {0, 0, 0});
 }
 
-void	frustum_check(t_rt *rt, int i)
-{
-	//calculate position vector
-	//project this position vector onto the normal
-	//5.30
-
-}
-
 void	frustum_culling(t_rt *rt)
 {
 	int i;
@@ -90,7 +82,7 @@ void	frustum_culling(t_rt *rt)
 	while (i < rt->n_obj)
 	{
 		if (rt->obj[i]->type == CYLINDER || rt->obj[i]->type == SPHERE)
-			frustum_check(rt, i);
+			frustum_check_uplane(rt, i);
 		else
 			plane_check(rt, i);		
 	}	

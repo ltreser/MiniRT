@@ -36,6 +36,7 @@ void	ft_parse(char *str, t_rt *rt, int count_only)
 			rt->obj[rt->n_obj] = gc_malloc(rt->gc, sizeof(t_obj));
 			rt->obj[rt->n_obj]->type = (t_type)sqrt((str[0] - 99) % 12);
 			printf("this is type now: %d", rt->obj[rt->n_obj]->type);
+			rt->obj[rt->n_obj]->visible = 1;
 			parse_obj((str + 3) + skip_spaces(str + 3), rt);
 		}
 	}
