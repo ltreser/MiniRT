@@ -63,11 +63,11 @@ t_vector	*v_add(t_rt *rt, t_vector *a, t_vector *b)
 	return (res);
 }
 
-t_vector	*v_between_two_points(t_point a, t_point b)
+t_vector	*v_between_two_points(t_rt *rt, t_point a, t_point b)
 {
 	t_vector	*res;
 
-	res = malloc(sizeof(t_vector));
+	res = gc_malloc(rt->gc, sizeof(t_vector));
 	res->x = b.x - a.x;
 	res->y = b.y - a.y;
 	res->z = b.z - a.z;

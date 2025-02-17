@@ -89,11 +89,12 @@ struct						s_rt
 
 struct						s_vp
 {
+	t_plane					vp_plane;
 	float					width;
 	float					height;
 	float					distance;
 	float					pixel_size;
-	int *pixel_x; // both not in use yet, to know wich pixel is rendering.
+	int						*pixel_x; // both not in use yet, to know wich pixel is rendering.
 	int						*pixel_y;
 	t_vector				*up;
 	t_vector				*right;
@@ -146,6 +147,10 @@ struct						s_obj
 {
 	t_type					type;
 	int						visible;
+	int						vp_x1;
+	int						vp_y1;
+	int						vp_x2;
+	int						vp_y2;
 	union
 	{
 		t_plane				*plane;
@@ -270,6 +275,7 @@ int							ft_close_window(t_rt *rt);
 float						v_len(t_vector *vector);
 t_vector					*v_cross_product(t_rt *rt, t_vector *a,
 								t_vector *b);
+t_point						calc_endpoint_vector(t_vector v, t_point start, float scalar);
 t_vector					*v_normalize(t_vector *v);
 t_vector					*v_add(t_rt *rt, t_vector *a, t_vector *b);
 float						calc_p_distance(t_point a, t_point b);
@@ -284,6 +290,8 @@ t_point						*pv_add(t_rt *rt, t_vector *a, t_point *b);
 t_point						vp_add_nm(t_vector a, t_point b);
 t_point						pv_subtract_nm(t_point a, t_vector b);
 t_point						vp_subtract_nm(t_vector a, t_point b);
+t_point						plane_ray_intersec(t_plane pl, t_ray ray);
+//render optimisation
 
 // render
 void						render(t_rt *rt);
