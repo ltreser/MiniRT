@@ -284,6 +284,9 @@ t_point						*pv_add(t_rt *rt, t_vector *a, t_point *b);
 t_point						vp_add_nm(t_vector a, t_point b);
 t_point						pv_subtract_nm(t_point a, t_vector b);
 t_point						vp_subtract_nm(t_vector a, t_point b);
+t_point						calc_endpoint_vector(t_vector *v, t_point *start, float scalar);
+t_vector    v_cross_product_nomalloc(t_vector a, t_vector b);
+
 
 // render
 void						render(t_rt *rt);
