@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:23:23 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/13 15:25:44 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/02/17 16:17:57 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void	init_obj(t_rt *rt)
 	{
 		rt->obj[rt->n_obj]->sphere->u_corner = init_point(rt->gc);
 		rt->obj[rt->n_obj]->sphere->d_corner = init_point(rt->gc);
-		rt->obj[rt->n_obj]->spehre->rot_r = rt->obj[rt->n_obj]->spehre->d / 2;
+		rt->obj[rt->n_obj]->sphere->rot_r = rt->obj[rt->n_obj]->sphere->d / 2;
 	}
 }

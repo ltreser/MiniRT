@@ -53,38 +53,42 @@ l*n = 0 Ray is parallel
 t = - ((lo -a) *n)/(l *n)
 result = ray->p + (-1*((ray->p - pl->p)* pl->v)/ (ray->v * pl->v)) * ray->v;
  */
-
-float	plane_ray_calc_t(t_plane *pl, t_ray *ray)
+float	plane_ray_calc_t(t_plane pl, t_ray ray)
 {
 	float	divident;
 	float	divisor;
 	float	t;
 
-	divisor = scalar_product(pl->v, ray->v);
+	divisor = scalar_product(pl.v, ray.v);
 	if(divisor == 0)
 	{
 		printf("Error\nPlane_ray_calc_t: devisor is 0\n");
-		return(0);
+		return(NAN);
 	}
-	divident = scalar_product((p_sub(ray->p, pl->p)), pl->v);
+	divident = scalar_product((p_sub(ray.p, pl.p)), pl.v);
 	t = divident/divisor;
 	if(t < 0)
 	{
 		printf("Error\nPlane_ray_calc_t: intersecpoint is behind camera\n");
-		return(0);
+		return(NAN);
 	}
 	else
 		return(0);
 }
+
+t_point	plane_ray_intersec(t_plane pl, t_ray ray)
+{
+	t_point	point;
+	float	t;
+
+	t = plane_ray_calc_t(pl, ray);
+	point = calc_endpoint_vector(*ray.v, *ray.p, t);
+	return(point);
+}
+
 // Ray equation = p = lo + tl
 // lo = startpoint ray,
 // l = vektor ray
-t_point	plane_ray_calc_p(t_ray ray, float t)
-{
-	t_point	point;
-
-	retpoint = calc_endpoint_vector(ray.v, ray.p, t);
-}
 /* int	plane_intersection(t_ray ray, t_plane plane, t_point *intersection)
 {
 	double	denom;

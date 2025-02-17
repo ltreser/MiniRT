@@ -63,13 +63,13 @@ t_vector	*v_add(t_rt *rt, t_vector *a, t_vector *b)
 	return (res);
 }
 
-t_vector	*v_between_two_points(t_point a, t_point b)
+t_vector	v_between_two_points(t_point a, t_point b)
 {
-	t_vector	*res;
+	t_vector	res;
 
-	res->x = b.x - a.x;
-	res->y = b.y - a.y;
-	res->z = b.z - a.z;
+	res.x = b.x - a.x;
+	res.y = b.y - a.y;
+	res.z = b.z - a.z;
 	return (res);
 }
 
@@ -82,4 +82,3 @@ t_vector	vector_projection(t_vector a, t_vector b)
 	return (res);
 }
 
-}

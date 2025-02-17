@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:26:34 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/12 22:16:42 by afoth            ###   ########.fr       */
+/*   Updated: 2025/02/14 15:34:00 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_vector	v_add(t_vector a, t_vector b)
 	return (res);
 }
 
-t_vector	v_subst(t_vector a, t_vector b)
+t_vector	v_subt(t_vector a, t_vector b)
 {
 	t_vector	res;
 
