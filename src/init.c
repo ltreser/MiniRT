@@ -12,6 +12,7 @@ void	init(t_rt *rt)
 	rt->ambient = NULL;
 	rt->light = NULL;
 	rt->n_obj = 0;
+	rt->fc = gc_malloc(rt->gc, sizeof(t_fc));
 	init_viewport(rt);
 }
 

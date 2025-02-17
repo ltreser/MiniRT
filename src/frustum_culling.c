@@ -4,21 +4,21 @@ void	malloc_fc(t_rt *rt) // have they been inited to 0/NULL?
 {
 	rt->fc = gc_malloc(rt->gc, sizeof(t_fc));
 	if (!rt->fc->uplane_n)
-		rt->fc->uplane_n = gc_malloc(rt->gc, sizeof(t_vector);
+		rt->fc->uplane_n = gc_malloc(rt->gc, sizeof(t_vector));
 	if (!rt->fc->dplane_n)
-		rt->fc->dplane_n = gc_malloc(rt->gc, sizeof(t_vector);
+		rt->fc->dplane_n = gc_malloc(rt->gc, sizeof(t_vector));
 	if (!rt->fc->rplane_n)
-		rt->fc->rplane_n = gc_malloc(rt->gc, sizeof(t_vector);
+		rt->fc->rplane_n = gc_malloc(rt->gc, sizeof(t_vector));
 	if (!rt->fc->lplane_n)
-		rt->fc->lplane_n = gc_malloc(rt->gc, sizeof(t_vector);
+		rt->fc->lplane_n = gc_malloc(rt->gc, sizeof(t_vector));
 	if (!rt->fc->uplane_p)
-		rt->fc->uplane_p = gc_malloc(rt->gc, sizeof(t_point);
+		rt->fc->uplane_p = gc_malloc(rt->gc, sizeof(t_point));
 	if (!rt->fc->dplane_p)
-		rt->fc->dplane_p = gc_malloc(rt->gc, sizeof(t_point);
+		rt->fc->dplane_p = gc_malloc(rt->gc, sizeof(t_point));
 	if (!rt->fc->rplane_p)
-		rt->fc->rplane_p = gc_malloc(rt->gc, sizeof(t_point);
+		rt->fc->rplane_p = gc_malloc(rt->gc, sizeof(t_point));
 	if (!rt->fc->lplane_p)
-		rt->fc->lplane_p = gc_malloc(rt->gc, sizeof(t_point);
+		rt->fc->lplane_p = gc_malloc(rt->gc, sizeof(t_point));
 }
 
 // calculation of the normals (perpendicular/senkrecht) that define the planes that border the vision field of the camera. we dont calculate a far plane because we dont restrict that,

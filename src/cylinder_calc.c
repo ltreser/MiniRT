@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 19:02:13 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/17 19:24:27 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/02/17 19:43:16 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@
 	}
 	sideways = v_cross_product_nomalloc(arbitrary, *(c->v));
 	up_side	= calc_endpoint_vector(&sideways, &up_center, c->d/2);
-	radius = v_between_two_points(c->p, up_side);
+	radius = v_len(v_between_two_points(*(c->p), up_side));
 	return (radius);
 }
