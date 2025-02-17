@@ -6,14 +6,14 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:45:50 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/13 15:05:19 by afoth            ###   ########.fr       */
+/*   Updated: 2025/02/17 18:16:07 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
 //adds a given vector to a point, so the point is moved in the direction and length of the vector
-t_point	*pv_add(t_vector *a, t_point *b)
+t_point	*pv_add(t_rt *rt, t_vector *a, t_point *b)
 {
 	t_point *res;
 
@@ -23,6 +23,7 @@ t_point	*pv_add(t_vector *a, t_point *b)
 	res->z = a->z + b->z;
 	return (res);
 }
+
 t_point	calc_endpoint_vector(t_vector *v, t_point *start, float scalar)
 {
 	t_point	 end;
@@ -44,4 +45,34 @@ float	calc_p_distance(t_point a, t_point b)
 	if (distance < 0)
 		distance *= -1;
 	return (distance);
+}
+
+t_point pv_add_nm(t_vector a, t_point b)
+{
+	t_point res;
+
+    res->x = a->x + b->x;
+    res->y = a->y + b->y;
+    res->z = a->z + b->z;
+    return (res);
+}
+
+t_point    pv_subtract_nm(t_point a, t_vector b)
+{
+    t_vector res;
+
+    res->x = a->x - b->x;
+    res->y = a->y - b->y;
+    res->z = a->z - b->z;
+    return (res);
+}
+
+t_point	vp_subtract_nm(t_vector a, t_point b)
+{
+	t_vector res;
+
+	res->x = a->x - b->x;
+	res->y = a->y - b->y;
+	res->z = a->z - b->z;
+	return (res);
 }

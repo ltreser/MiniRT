@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:39:19 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/13 15:41:28 by afoth            ###   ########.fr       */
+/*   Updated: 2025/02/13 16:12:40 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,5 @@ void	frustum_check_lplane(t_rt *rt, int i)
 	if (dist_plane > 0 && rt->obj[i]->visible == 1)
 		rt->obj[i]->visible = 1;
 	else
-		rt->obj[i]->vis
-		ible = 0;
+		rt->obj[i]->visible = 0;
 }

@@ -5,7 +5,7 @@
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 600
 // Comparing floats, if the difference is smaller than EPSILON,
-//they are considered equal
+// they are considered equal
 # define EPSILON = 0.00001
 
 /*Error Codes*/
@@ -41,7 +41,7 @@
 /* MiniLibX */
 # include <mlx.h>
 
-	typedef struct s_rt t_rt;
+typedef struct s_rt			t_rt;
 typedef struct s_ambient	t_ambient;
 typedef struct s_camera		t_camera;
 typedef struct s_plane		t_plane;
@@ -174,7 +174,7 @@ struct						s_sphere
 
 struct						s_cylinder
 {
-	t_point					*u_corner; 
+	t_point					*u_corner;
 	t_point					*d_corner;
 	t_color					*c;
 	t_vector				*v;
@@ -236,10 +236,15 @@ struct						s_ray
 };
 
 // exit
-void	ft_exit(t_rt *rt, int exit_code, char *error_message);
+void						ft_exit(t_rt *rt, int exit_code,
+								char *error_message);
 void						free_all(t_rt *rt);
 
 // parse
+void						init_viewport(t_rt *rt);
+void						parse_input(t_rt *rt, char **argv);
+int							input_correct(t_rt *rt, int argc, char **argv);
+void						check_format(t_rt *rt, char *arg);
 void						ft_parse(char *str, t_rt *rt, int count_only);
 void						parse_obj(char *str, t_rt *rt);
 t_color						*parse_color(t_rt *rt, char *str);
@@ -267,9 +272,18 @@ t_vector					*v_cross_product(t_rt *rt, t_vector *a,
 								t_vector *b);
 t_vector					*v_normalize(t_vector *v);
 t_vector					*v_add(t_rt *rt, t_vector *a, t_vector *b);
-t_vector					*pv_add(t_vector *a, t_point *b);
 float						calc_p_distance(t_point a, t_point b);
 t_vector					vector_projection(t_vector a, t_vector b);
+t_vector					v_mult_scalar_nm(t_vector v, float scalar);
+t_vector					v_add_nm(t_vector a, t_vector b);
+t_vector					v_subtract_nm(t_vector a, t_vector b);
+t_vector					v_mult_nm(t_vector a, t_vector b);
+float						scalar_product_nm(t_vector a, t_vector b);
+float						cylinder_rot_radius(t_rt *rt, t_cylinder *c);
+t_point						*pv_add(t_rt *rt, t_vector *a, t_point *b);
+t_point						vp_add_nm(t_vector a, t_point b);
+t_point						pv_subtract_nm(t_point a, t_vector b);
+t_point						vp_subtract_nm(t_vector a, t_point b);
 
 // render
 void						render(t_rt *rt);

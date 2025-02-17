@@ -82,8 +82,23 @@ void	frustum_culling(t_rt *rt)
 	while (i < rt->n_obj)
 	{
 		if (rt->obj[i]->type == CYLINDER || rt->obj[i]->type == SPHERE)
+		{
 			frustum_check_uplane(rt, i);
+			frustum_check_dplane(rt, i);
+			frustum_check_rplane(rt, i);
+			frustum_check_lplane(rt, i);
+		}
+		//else
+			//plane_check(rt, i);
+		i++;
+	}
+	i = 0;
+	while (i < rt->n_obj)
+	{
+		if (rt->obj[i]->visible)
+			printf("obj nr %d is visible\n", i);
 		else
-			plane_check(rt, i);		
-	}	
+			printf("obj nr %d is NOT visible\n", i);
+		i++;
+	}
 }
