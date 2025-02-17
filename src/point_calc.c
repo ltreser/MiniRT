@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:45:50 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/17 19:20:24 by afoth            ###   ########.fr       */
+/*   Updated: 2025/02/17 19:28:29 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_point	*pv_add(t_rt *rt, t_vector *a, t_point *b)
 	return (res);
 }
 
-/* t_point	calc_endpoint_vector(t_vector *v, t_point *start, float scalar)
+t_point	calc_endpoint_vector(t_vector *v, t_point *start, float scalar)
 {
 	t_point	 end;
 
@@ -32,7 +32,7 @@ t_point	*pv_add(t_rt *rt, t_vector *a, t_point *b)
 	end.y = start->y + scalar * v->y;
 	end.z = start->z + scalar * v->z;
 	return (end);
-} */
+}
 
 //powf calculates the value of one float raised to the power of another float.
 
