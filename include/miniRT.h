@@ -89,7 +89,7 @@ struct						s_rt
 
 struct						s_vp
 {
-	t_plane					vp_plane;
+	t_plane					*vp_plane;
 	float					width;
 	float					height;
 	float					distance;
@@ -275,7 +275,7 @@ int							ft_close_window(t_rt *rt);
 float						v_len(t_vector *vector);
 t_vector					*v_cross_product(t_rt *rt, t_vector *a,
 								t_vector *b);
-t_point						calc_endpoint_vector(t_vector v, t_point start, float scalar);
+//t_point						calc_endpoint_vector(t_vector v, t_point start, float scalar); POSIBLE ERROR?!
 t_vector					*v_normalize(t_vector *v);
 t_vector					*v_add(t_rt *rt, t_vector *a, t_vector *b);
 float						calc_p_distance(t_point a, t_point b);
