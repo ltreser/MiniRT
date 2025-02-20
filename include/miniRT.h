@@ -291,22 +291,20 @@ t_point						*pv_add(t_rt *rt, t_vector *a, t_point *b);
 t_point						vp_add_nm(t_vector a, t_point b);
 t_point						pv_subtract_nm(t_point a, t_vector b);
 t_point						vp_subtract_nm(t_vector a, t_point b);
-t_point						calc_endpoint_vector(t_vector *v, t_point *start, float scalar);
-t_vector					v_cross_product_nomalloc(t_vector a, t_vector b);
 t_point						calc_endpoint_vector(t_vector *v, t_point *start,
 								float scalar);
 t_vector					v_cross_product_nomalloc(t_vector a, t_vector b);
-t_vector    *v_between_two_points(t_point a, t_point b);
+t_vector					*v_between_two_points(t_point a, t_point b);
 
 //frustum culling
-void    malloc_fc(t_rt *rt);
-void    calculate_fplanes(t_rt *rt);
-void    calculate_fplane_distances(t_rt *rt);
-void    frustum_culling(t_rt *rt);
-void    frustum_check_uplane(t_rt *rt, int i);
-void    frustum_check_dplane(t_rt *rt, int i);
-void    frustum_check_rplane(t_rt *rt, int i);
-void    frustum_check_lplane(t_rt *rt, int i);
+void						malloc_fc(t_rt *rt);
+void						calculate_fplanes(t_rt *rt);
+void						calculate_fplane_distances(t_rt *rt);
+void						frustum_culling(t_rt *rt);
+void						frustum_check_uplane(t_rt *rt, int i);
+void						frustum_check_dplane(t_rt *rt, int i);
+void						frustum_check_rplane(t_rt *rt, int i);
+void						frustum_check_lplane(t_rt *rt, int i);
 
 t_point						plane_ray_intersec(t_plane pl, t_ray ray);
 //render optimisation
