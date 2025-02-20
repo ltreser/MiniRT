@@ -17,26 +17,6 @@
 #include "../include/miniRT.h"
 
 /* DEL
-int	intersection_plane(double *t, t_plane *plane, t_ray *ray)
-{
-	t_vec3	v;
-	double	k;
-	double	b;
-
-	copy_vec3(&v, ray->terminus);
-	substract_vec3(&v, plane->point);
-	k = dot_product_vec3(ray->vec, plane->norm); //scalar product
-	b = dot_product_vec3(&v, plane->norm);
-	if (k == 0)
-	{
-		*t = NO_ROOTS;
-		return (1);
-	}
-	*t = -b / k;
-	if (*t <= EPSILON_ROOT)
-		*t = NO_ROOTS;
-	return (*t == NO_ROOTS);
-}*/
 /* t = - ((lo -a) *n)/(l *n)
 a = plane point,
 n = nomalized vektor plane
@@ -82,7 +62,7 @@ t_point	plane_ray_intersec(t_plane pl, t_ray ray)
 	float	t;
 
 	t = plane_ray_calc_t(pl, ray);
-	point = calc_endpoint_vector(*ray.v, *ray.p, t);
+	point = calc_endpoint_vector_nm(ray.v, ray.p, t);
 	return(point);
 }
 
@@ -108,10 +88,10 @@ t_point	plane_ray_intersec(t_plane pl, t_ray ray)
 	return (1);
 } */
 
-float	vector2component_form(t_point *p, t_vektor *v)
-{
+// float	vector2component_form(t_point *p, t_vektor *v)
+// {
 
-}
+// }
 
 /*explanation:
 given parameters:

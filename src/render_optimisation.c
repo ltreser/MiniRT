@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:36:36 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/17 17:51:06 by afoth            ###   ########.fr       */
+/*   Updated: 2025/02/20 15:47:33 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,17 @@ void	optimise_pixel_rendering(t_rt *rt)
 
 void	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner)
 {
-	t_vector	vector;
+	t_vector	*vector;
 	t_ray		ray;
 	t_point		point;
 
-	vector = v_between_two_points(mask_corner, rt->camera->p);
+	vector = v_between_two_points(*mask_corner, *rt->camera->p);
 	ray.v = &vector;
 	ray.p = mask_corner;
 	point = plane_ray_intersec(rt->vp->vp_plane, ray);
 	if(corner == "u")
 	{
-		
+
 	}
 		//save in u
 	if(corner == "d")
