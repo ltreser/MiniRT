@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   miniRT.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ltreser <ltreser@student.42berlin.de>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
+/*   Updated: 2025/02/20 16:34:43 by ltreser          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -90,12 +102,12 @@ struct						s_rt
 
 struct						s_vp
 {
-	t_plane					vp_plane;
+	t_plane					*vp_plane;
 	float					width;
 	float					height;
 	float					distance;
 	float					pixel_size;
-	int						*pixel_x; // both not in use yet, to know wich pixel is rendering.
+	int *pixel_x; // both not in use yet, to know wich pixel is rendering.
 	int						*pixel_y;
 	t_vector				*up;
 	t_vector				*right;
@@ -276,7 +288,8 @@ int							ft_close_window(t_rt *rt);
 float						v_len(t_vector *vector);
 t_vector					*v_cross_product(t_rt *rt, t_vector *a,
 								t_vector *b);
-t_point						calc_endpoint_vector(t_vector v, t_point start, float scalar);
+t_point						calc_endpoint_vector_nm(t_vector v, t_point start,
+								float scalar);
 t_vector					*v_normalize(t_vector *v);
 t_vector					*v_add(t_rt *rt, t_vector *a, t_vector *b);
 float						calc_p_distance(t_point a, t_point b);
@@ -294,20 +307,21 @@ t_point						vp_subtract_nm(t_vector a, t_point b);
 t_point						calc_endpoint_vector(t_vector *v, t_point *start,
 								float scalar);
 t_vector					v_cross_product_nomalloc(t_vector a, t_vector b);
-t_vector 				   *v_between_two_points(t_point a, t_point b);
+t_vector					*v_between_two_points(t_rt *rt, t_point a, t_point b);
+t_vector					v_between_two_points_nm(t_point a, t_point b);
 
-//frustum culling
-void    malloc_fc(t_rt *rt);
-void    calculate_fplanes(t_rt *rt);
-void    calculate_fplane_distances(t_rt *rt);
-void    frustum_culling(t_rt *rt);
-void    frustum_check_uplane(t_rt *rt, int i);
-void    frustum_check_dplane(t_rt *rt, int i);
-void    frustum_check_rplane(t_rt *rt, int i);
-void    frustum_check_lplane(t_rt *rt, int i);
+// frustum culling
+void						malloc_fc(t_rt *rt);
+void						calculate_fplanes(t_rt *rt);
+void						calculate_fplane_distances(t_rt *rt);
+void						frustum_culling(t_rt *rt);
+void						frustum_check_uplane(t_rt *rt, int i);
+void						frustum_check_dplane(t_rt *rt, int i);
+void						frustum_check_rplane(t_rt *rt, int i);
+void						frustum_check_lplane(t_rt *rt, int i);
 
 t_point						plane_ray_intersec(t_plane pl, t_ray ray);
-//render optimisation
+// render optimisation
 
 // render
 void						render(t_rt *rt);
