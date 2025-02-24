@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/02/24 19:00:25 by afoth            ###   ########.fr       */
+/*   Updated: 2025/02/24 19:07:31 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,7 +291,7 @@ int							keypress(int keycode, t_rt *rt);
 int							ft_close_window(t_rt *rt);
 
 // maths
-float						v_len(t_vector *vector);
+float						v_len(t_vector vector);
 t_vector					*v_cross_product(t_rt *rt, t_vector *a,
 								t_vector *b);
 t_point						calc_endpoint_vector_nm(t_vector v, t_point start,
@@ -312,7 +312,7 @@ t_point						pv_subtract_nm(t_point a, t_vector b);
 t_point						vp_subtract_nm(t_vector a, t_point b);
 t_point						calc_endpoint_vector(t_vector *v, t_point *start,
 								float scalar);
-t_vector					v_cross_product_nomalloc(t_vector a, t_vector b);
+t_vector					v_cross_product_nm(t_vector a, t_vector b);
 t_vector					*v_between_two_points(t_rt *rt, t_point a, t_point b);
 t_vector					v_between_two_points_nm(t_point a, t_point b);
 

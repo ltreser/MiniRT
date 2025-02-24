@@ -6,21 +6,16 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:48:50 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/20 15:48:51 by afoth            ###   ########.fr       */
+/*   Updated: 2025/02/20 16:56:32 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
 //function has possibility to over and underflow
-float v_len(t_vector *vector)
+float v_len(t_vector vector)
 {
-	if (!vector)
-	{
-		printf("Error in v_len\nVector is NULL\n");//DEL?
-		return (0);
-	}
-	return(sqrtf(vector->x * vector->x + vector->y * vector->y + vector->z * vector->z));
+	return(sqrtf(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z));
 }
 
 //results in a scalar that descrubes the angle between the two vectors, e.g. if a * b = 0 -> they are perpendicular
@@ -39,7 +34,7 @@ t_vector	*v_cross_product(t_rt *rt, t_vector *a, t_vector *b)
 	return (res);
 }
 
-t_vector	v_cross_product_nomalloc(t_vector a, t_vector b)
+t_vector	v_cross_product_nm(t_vector a, t_vector b)
 {
 	t_vector res;
 
@@ -55,7 +50,7 @@ t_vector	*v_normalize(t_vector *v)
 	float	length;
 
 	length = 0;
-	length = v_len(v);
+	length = v_len(*v);
 	if (length == 0)
 		return (v);
 	v->x /= length;

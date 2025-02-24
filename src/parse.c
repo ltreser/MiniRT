@@ -183,7 +183,7 @@ t_vector	*parse_vector(t_rt *rt, char *str)
 	vector->z= ft_atof(gc_chop(rt->gc, str, ' '));
 	printf("vektor point z is: %f\n", vector->z);
 	is_nan(rt, vector->z);
-	len = v_len(vector);
+	len = v_len(*vector);
 	if (len == 1 || len == -1)
 		return(vector);
 	else
