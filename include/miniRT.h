@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltreser <ltreser@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/02/20 16:34:43 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/02/24 19:00:25 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 // 1920x1080? DEL
 # define SCREEN_WIDTH 800
-# define SCREEN_HEIGHT 600
+# define SCREEN_HEIGHT 800
 // Comparing floats, if the difference is smaller than EPSILON,
 // they are considered equal
 # define EPSILON = 0.00001
@@ -24,6 +24,8 @@
 # define EXIT_MALLOC 2
 # define EXIT_READ 3
 # define EXIT_INPUT 4
+# define EXIT_MLX 5
+
 
 /*Error Messages*/
 
@@ -107,6 +109,10 @@ struct						s_vp
 	float					height;
 	float					distance;
 	float					pixel_size;
+	//test DEL! for checking if equal
+	float					pixel_w;
+	float					pixel_h;
+
 	int *pixel_x; // both not in use yet, to know wich pixel is rendering.
 	int						*pixel_y;
 	t_vector				*up;

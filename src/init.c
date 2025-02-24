@@ -26,6 +26,8 @@ void	init_viewport(t_rt *rt)
 	rt->vp->top_right = gc_malloc(rt->gc, sizeof(t_point));
 	rt->vp->bottom_left = gc_malloc(rt->gc, sizeof(t_point));
 	rt->vp->bottom_right = gc_malloc(rt->gc, sizeof(t_point));
+	rt->vp->vp_plane = gc_malloc(rt->gc, sizeof(t_plane));
+
 }
 
 

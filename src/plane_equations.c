@@ -62,7 +62,7 @@ t_point	plane_ray_intersec(t_plane pl, t_ray ray)
 	float	t;
 
 	t = plane_ray_calc_t(pl, ray);
-	point = calc_endpoint_vector_nm(ray.v, ray.p, t);
+	point = calc_endpoint_vector_nm(*ray.v, *ray.p, t);
 	return(point);
 }
 

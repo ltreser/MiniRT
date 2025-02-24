@@ -6,11 +6,11 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 20:08:39 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/14 17:28:30 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/02/24 18:32:20 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../include/miniRT.h"
 
+#include "../include/miniRT.h"
 
 
 // was ist besser, coordinate system an untere Seite des Bildschirms und neu berechung der coordinaten oder
