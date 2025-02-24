@@ -21,12 +21,14 @@ void	malloc_fc(t_rt *rt) // have they been inited to 0/NULL?
 		rt->fc->lplane_p = gc_malloc(rt->gc, sizeof(t_point));
 }
 
-// calculation of the normals (perpendicular/senkrecht) that define the planes that border the vision field of the camera. we dont calculate a far plane because we dont restrict that,
+/* calculation of the normals (perpendicular/senkrecht) that define the planes that border the vision field of the camera. we dont calculate a far plane because we dont restrict that,
 	the side planes and upper
-	+ lower are calculated by the cross product of a vektor thats calculated and a direction vektor. the near vector is not calculated because all of the planes start at the camera point.
-void	calculate_fplanes(rt)
+	+ lower are calculated by the cross product of a vektor thats calculated and a direction vektor. the near vector is not calculated because all of the planes start at the camera point
+*/
+
+void	calculate_fplanes(t_rt *rt)
 {
-	rt->fc->rplane_n = v_normalize(v_cross_product(rt->vp->up, rt->vp->top_right
+	rt->fc->rplane_n = v_normalize(v_cross_product_nm(rt->vp->up, rt->vp->top_right
 				- rt->vp->center));
 	rt->fc->lplane_n = v_normalize(v_cross_product(rt->vp->bottom_left
 				- rt->vp->center, rt->vp->up));
