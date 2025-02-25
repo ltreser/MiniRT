@@ -6,12 +6,19 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:53:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/24 18:53:30 by afoth            ###   ########.fr       */
+/*   Updated: 2025/02/25 12:05:07 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
+void	setup_pixel(t_rt *rt)
+{
+	rt->vp->pixel_w = rt->vp->width/rt->mlx->width;
+	rt->vp->pixel_h = rt->vp->height/rt->mlx->height;
+	*rt->vp->pixel_v_x = v_mult_scalar_nm(*rt->vp->right, rt->vp->pixel_w);
+	*rt->vp->pixel_v_y = v_mult_scalar_nm(*rt->vp->up, rt->vp->pixel_h);
+}
 //XXX the forward orientation vector = camera vector
 void	setup_viewport(t_rt *rt) //TODO init struct variables
 {
@@ -30,15 +37,6 @@ void	setup_viewport(t_rt *rt) //TODO init struct variables
 	// rt->vp->vp_plane->c->r = 0;
 	// rt->vp->vp_plane->c->g = 0;
 	// rt->vp->vp_plane->c->b = 0;
-	set_pixelsize(rt);//DEL?
+	setup_pixel(rt);//DEL?
 }
 
-void	set_pixelsize(t_rt *rt)
-{
-	rt->vp->pixel_w = rt->vp->width/rt->mlx->width;
-	rt->vp->pixel_h = rt->vp->height/rt->mlx->height;
-	if(rt->vp->pixel_h == rt->vp->pixel_w)
-		printf("PIXEL OK\n");
-	else
-		printf("PIXEL ERROR\n");
-}

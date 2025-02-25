@@ -21,6 +21,8 @@ void	init_viewport(t_rt *rt)
 	rt->vp = gc_malloc(rt->gc, sizeof(t_vp));
 	rt->vp->up = gc_malloc(rt->gc, sizeof(t_vector));
 	rt->vp->right = gc_malloc(rt->gc, sizeof(t_vector));
+	rt->vp->pixel_v_x = gc_malloc(rt->gc, sizeof(t_vector));
+	rt->vp->pixel_v_y = gc_malloc(rt->gc, sizeof(t_vector));
 	rt->vp->center = gc_malloc(rt->gc, sizeof(t_point));
 	rt->vp->top_left = gc_malloc(rt->gc, sizeof(t_point));
 	rt->vp->top_right = gc_malloc(rt->gc, sizeof(t_point));

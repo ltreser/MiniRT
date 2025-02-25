@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/02/24 19:07:31 by afoth            ###   ########.fr       */
+/*   Updated: 2025/02/25 12:02:13 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 // 1920x1080? DEL
 # define SCREEN_WIDTH 800
-# define SCREEN_HEIGHT 800
+# define SCREEN_HEIGHT 600
 // Comparing floats, if the difference is smaller than EPSILON,
 // they are considered equal
 # define EPSILON = 0.00001
@@ -109,7 +109,8 @@ struct						s_vp
 	float					height;
 	float					distance;
 	float					pixel_size;
-	//test DEL! for checking if equal
+	t_vector				*pixel_v_x;
+	t_vector				*pixel_v_y;
 	float					pixel_w;
 	float					pixel_h;
 
