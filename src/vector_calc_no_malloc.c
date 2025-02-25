@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:26:34 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/20 16:35:12 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/02/24 18:14:41 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,18 @@ t_vector    v_between_two_points_nm(t_point a, t_point b)
     res.y = b.y - a.y;
     res.z = b.z - a.z;
     return (res);
+}
+
+t_vector    v_normalize_nm(t_vector v)
+{
+    float   length;
+
+    length = 0;
+    length = v_len(v);
+    if (length == 0)
+        return (v);
+    v.x /= length;
+    v.y /= length;
+    v.z /= length;
+    return (v);
 }

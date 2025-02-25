@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/02/24 19:07:31 by afoth            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
@@ -297,6 +286,7 @@ t_vector					*v_cross_product(t_rt *rt, t_vector *a,
 t_point						calc_endpoint_vector_nm(t_vector v, t_point start,
 								float scalar);
 t_vector					*v_normalize(t_vector *v);
+t_vector                    v_normalize_nm(t_vector v);
 t_vector					*v_add(t_rt *rt, t_vector *a, t_vector *b);
 float						calc_p_distance(t_point a, t_point b);
 t_vector					vector_projection(t_vector a, t_vector b);

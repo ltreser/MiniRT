@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 20:08:39 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/24 18:32:20 by afoth            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
@@ -27,7 +16,7 @@ int	main(int argc, char **argv)
 	if (input_correct(rt, argc, argv))
 	{
 		parse_input(rt, argv);
-		mlx_create_window(rt);
+		//mlx_create_window(rt);
 		render(rt);
 	}
 	gettimeofday(&end, NULL);

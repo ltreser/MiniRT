@@ -26,16 +26,12 @@ void	malloc_fc(t_rt *rt) // have they been inited to 0/NULL?
 	+ lower are calculated by the cross product of a vektor thats calculated and a direction vektor. the near vector is not calculated because all of the planes start at the camera point
 */
 
-void	calculate_fplanes(t_rt *rt)
+void	calculate_fplanes(t_rt *rt) //TODO segfault issue here?
 {
-	rt->fc->rplane_n = v_normalize(v_cross_product_nm(rt->vp->up, rt->vp->top_right
-				- rt->vp->center));
-	rt->fc->lplane_n = v_normalize(v_cross_product(rt->vp->bottom_left
-				- rt->vp->center, rt->vp->up));
-	rt->fc->uplane_n = v_normalize(v_cross_product(rt->vp->top_left
-				- rt->vp->center, rt->vp->right));
-	rt->fc->dplane_n = v_normalize(v_cross_product(rt->vp->right,
-				rt->vp->bottom_left - rt->vp->center));
+	*rt->fc->rplane_n = v_normalize_nm(v_cross_product_nm(*rt->vp->up, v_between_two_points_nm(*rt->vp->top_right, *rt->vp->center)));
+	*rt->fc->lplane_n = v_normalize_nm(v_cross_product_nm(v_between_two_points_nm(*rt->vp->bottom_left, *rt->vp->center), *rt->vp->up));
+	*rt->fc->uplane_n = v_normalize_nm(v_cross_product_nm(v_between_two_points_nm(*rt->vp->top_left, *rt->vp->center), *rt->vp->right));
+	*rt->fc->dplane_n = v_normalize_nm(v_cross_product_nm(*rt->vp->right, v_between_two_points_nm(*rt->vp->bottom_left, *rt->vp->center)));
 }
 
 /* calculate distance of the plane itself to the origin
@@ -57,19 +53,19 @@ void	calculate_fplane_distances(t_rt *rt)
 	t_point		uplane_nstart;
 	t_point		dplane_nstart;
 
-	cam2origin = v_between_two_points(rt->camera->p, {0, 0, 0});
-	c2o_rplane_n = vector_projection(cam2origin, rt->fc->rplane_n);
-	c2o_lplane_n = vector_projection(cam2origin, rt->fc->lplane_n);
-	c2o_uplane_n = vector_projection(cam2origin, rt->fc->uplane_n);
-	c2o_dplane_n = vector_projection(cam2origin, rt->fc->dplane_n);
-	rplane_nstart = pv_add(c2o_rplane_n, rt->camera->p);
-	lplane_nstart = pv_add(c2o_lplane_n, rt->camera->p);
-	uplane_nstart = pv_add(c2o_uplane_n, rt->camera->p);
-	dplane_nstart = pv_add(c2o_dplane_n, rt->camera->p);
-	rt->fc->rplane_d = calc_p_distance(rplane_nstart, {0, 0, 0});
-	rt->fc->lplane_d = calc_p_distance(lplane_nstart, {0, 0, 0});
-	rt->fc->uplane_d = calc_p_distance(uplane_nstart, {0, 0, 0});
-	rt->fc->dplane_d = calc_p_distance(dplane_nstart, {0, 0, 0});
+	cam2origin = v_between_two_points_nm(*rt->camera->p, (t_point){0, 0, 0});
+	c2o_rplane_n = vector_projection(cam2origin, *rt->fc->rplane_n);
+	c2o_lplane_n = vector_projection(cam2origin, *rt->fc->lplane_n);
+	c2o_uplane_n = vector_projection(cam2origin, *rt->fc->uplane_n);
+	c2o_dplane_n = vector_projection(cam2origin, *rt->fc->dplane_n);
+	rplane_nstart = vp_add_nm(c2o_rplane_n, *rt->camera->p);
+	lplane_nstart = vp_add_nm(c2o_lplane_n, *rt->camera->p);
+	uplane_nstart = vp_add_nm(c2o_uplane_n, *rt->camera->p);
+	dplane_nstart = vp_add_nm(c2o_dplane_n, *rt->camera->p);
+	rt->fc->rplane_d = calc_p_distance(rplane_nstart, (t_point){0, 0, 0});
+	rt->fc->lplane_d = calc_p_distance(lplane_nstart, (t_point){0, 0, 0});
+	rt->fc->uplane_d = calc_p_distance(uplane_nstart, (t_point){0, 0, 0});
+	rt->fc->dplane_d = calc_p_distance(dplane_nstart, (t_point){0, 0, 0});
 }
 
 void	frustum_culling(t_rt *rt)
