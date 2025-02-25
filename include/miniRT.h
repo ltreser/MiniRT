@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/02/25 12:02:13 by afoth            ###   ########.fr       */
+/*   Updated: 2025/02/25 16:22:51 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,6 +298,7 @@ t_vector					*v_cross_product(t_rt *rt, t_vector *a,
 t_point						calc_endpoint_vector_nm(t_vector v, t_point start,
 								float scalar);
 t_vector					*v_normalize(t_vector *v);
+t_vector                    v_normalize_nm(t_vector v);
 t_vector					*v_add(t_rt *rt, t_vector *a, t_vector *b);
 float						calc_p_distance(t_point a, t_point b);
 t_vector					vector_projection(t_vector a, t_vector b);

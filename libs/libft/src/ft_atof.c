@@ -134,7 +134,7 @@ double	ft_atof(const char *str)
 	double	power;
 	int		sign;
 	int		overflow;
-	printf("atof receives this as str:'%s'\n", str);
+	//printf("atof receives this as str:'%s'\n", str);
 	result = 0.0;
 	power = 1.0;
 	sign = 1;

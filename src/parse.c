@@ -9,25 +9,25 @@ void	ft_parse(char *str, t_rt *rt, int count_only)
 	{
  		if (str[0] == 'A' && !rt->ambient && str[1] && str[1] == ' ')
 		{
-			printf("Parsing ambient\n");
+			//printf("Parsing ambient\n");
 			parse_ambient(rt, str + 2);
-			write(1, "ambient done\n", 13);
+			//write(1, "ambient done\n", 13);
 		}
 		else if (str[0] == 'A' && rt->ambient)
 			ft_exit(rt,4, AC_FAIL);
 		if (str[0] == 'C' && !rt->camera && str[1] && str[1] == ' ')
 		{
-			printf("Parsing Camera\n");
+			//printf("Parsing Camera\n");
 			parse_camera(rt, str + 2);
-			write(1, "camera done\n", 12);
+			//write(1, "camera done\n", 12);
 		}
 		else if (str[0] == 'C' && rt->camera)
 			ft_exit(rt,4, AC_FAIL);
 		if (str[0] == 'L' && !rt->light && str[1] && str[1] == ' ')
 		{
-			printf("Parsing Ligth\n");
+			//printf("Parsing Ligth\n");
 			parse_light(rt, str + 2);
-			write(1, "light done\n", 11);
+			//write(1, "light done\n", 11);
 		}
 		else if (str[0] == 'L' && rt->light)
 			ft_exit(rt,4, AC_FAIL);
@@ -35,7 +35,7 @@ void	ft_parse(char *str, t_rt *rt, int count_only)
 		{
 			rt->obj[rt->n_obj] = gc_malloc(rt->gc, sizeof(t_obj));
 			rt->obj[rt->n_obj]->type = (t_type)sqrt((str[0] - 99) % 12);
-			printf("this is type now: %d", rt->obj[rt->n_obj]->type);
+			//printf("this is type now: %d", rt->obj[rt->n_obj]->type);
 			rt->obj[rt->n_obj]->visible = 1;
 			parse_obj((str + 3) + skip_spaces(str + 3), rt);
 		}
@@ -62,7 +62,7 @@ void	parse_camera(t_rt *rt, char *str)
 {
 	int fov;
 
-	printf("string in parse camera: %s\n", str);
+	//printf("string in parse camera: %s\n", str);
 	fov = -1;
 	rt->camera = gc_malloc(rt->gc, sizeof(t_camera));
 	str += skip_spaces(str);
@@ -156,14 +156,14 @@ t_point	*parse_point(t_rt *rt, char *str)
 
 	point = gc_malloc(rt->gc, sizeof(t_point));
 	point->x = ft_atof(gc_chop(rt->gc, str, ','));
-	printf("point x is: %f\n", point->x);
+	//printf("point x is: %f\n", point->x);
 	is_nan(rt, point->x);
 	point->y = ft_atof(gc_chop(rt->gc, str, ','));
-	printf("point y is: %f\n", point->y);
+	//printf("point y is: %f\n", point->y);
 	is_nan(rt, point->y);
 	point->z = ft_atof(gc_strtrim(rt->gc, str, "\n "));
 	is_nan(rt, point->z);
-	printf("point z is: %f\n", point->z);
+	//printf("point z is: %f\n", point->z);
 	return(point);
 }
 
@@ -175,13 +175,13 @@ t_vector	*parse_vector(t_rt *rt, char *str)
 
 	vector = gc_malloc(rt->gc, sizeof(t_vector));
 	vector->x= ft_atof(gc_chop(rt->gc, str, ','));
-	printf("vektor point x is: %f\n", vector->x);
+	//printf("vektor point x is: %f\n", vector->x);
 	is_nan(rt, vector->x);
 	vector->y= ft_atof(gc_chop(rt->gc, str, ','));
-	printf("vektor point y is: %f\n", vector->y);
+	//printf("vektor point y is: %f\n", vector->y);
 	is_nan(rt, vector->y);
 	vector->z= ft_atof(gc_chop(rt->gc, str, ' '));
-	printf("vektor point z is: %f\n", vector->z);
+	//printf("vektor point z is: %f\n", vector->z);
 	is_nan(rt, vector->z);
 	len = v_len(*vector);
 	if (len == 1 || len == -1)
