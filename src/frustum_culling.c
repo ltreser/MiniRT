@@ -2,7 +2,8 @@
 
 void	malloc_fc(t_rt *rt) // have they been inited to 0/NULL?
 {
-	rt->fc = gc_malloc(rt->gc, sizeof(t_fc));
+	if (!rt->fc)
+		rt->fc = gc_malloc(rt->gc, sizeof(t_fc));
 	if (!rt->fc->uplane_n)
 		rt->fc->uplane_n = gc_malloc(rt->gc, sizeof(t_vector));
 	if (!rt->fc->dplane_n)
@@ -73,8 +74,7 @@ void	frustum_culling(t_rt *rt)
 	int i;
 
 	i = 0;
-	if (!rt->fc)
-		malloc_fc(rt);
+	malloc_fc(rt);
 	calculate_fplanes(rt);
 	calculate_fplane_distances(rt);
 	while (i < rt->n_obj)
@@ -86,8 +86,6 @@ void	frustum_culling(t_rt *rt)
 			frustum_check_rplane(rt, i);
 			frustum_check_lplane(rt, i);
 		}
-		//else
-			//plane_check(rt, i);
 		i++;
 	}
 	i = 0;

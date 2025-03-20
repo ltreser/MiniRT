@@ -18,8 +18,6 @@ int	main(int argc, char **argv)
 		parse_input(rt, argv);
 		mlx_create_window(rt);
 		render(rt);
-		
-
 	}
 	gettimeofday(&end, NULL);
 	double runtime = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1e6;

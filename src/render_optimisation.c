@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:36:36 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/20 17:36:12 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/20 17:59:42 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,11 @@ void	optimise_pixel_rendering(t_rt *rt)
 		printf("OPTIMIZE RENDER LOOP\n");//DEL
 		if(rt->obj[i]->visible == 1)
 		{
-			// if(rt->obj[i]->type == PLANE)
-				// continue;
+			if(rt->obj[i]->type == PLANE)
+				continue;
 			rt->n_obj = i;
-			if(rt->obj[i]->type == SPHERE)
-			{
-				printf("SPHERE RENDER\n");//DEL
-				symplify_sphere(rt);
-
-				mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->obj[rt->n_obj]->uvp_x1, rt->obj[rt->n_obj]->uvp_y1, 0xFFFFFFFF);
-				mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->obj[rt->n_obj]->dvp_x2, rt->obj[rt->n_obj]->dvp_y2, 0xFFFFFFFF);
-
-			}
-
-			//if(rt->obj[i]->type == CYLINDER)
-				//simplify_cylinder(rt);
+			if(rt->obj[i]->type == SPHERE || rt->obj[i]->type == CYLINDER)
+				symplify(rt);
 		}
 		i++;
 	}
@@ -131,15 +121,43 @@ void	create_sphere_mask(t_rt *rt)
 
 }
 
-void	symplify_sphere(t_rt *rt)
+void	create_cylinder_mask(t_rt *rt)
 {
-	create_sphere_mask(rt);
-	calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->sphere->u_corner, 'u');
-	calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->sphere->d_corner, 'd');
+	float		r;
+	float		x;
+	float		y;
+	t_point		*p;
+	t_vector	*up;
+	t_vector	*right;
 
+	x = rt->obj[rt->n_obj]->cylinder->p->x;
+	y = rt->obj[rt->n_obj]->cylinder->p->y;
+	r = rt->obj[rt->n_obj]->cylinder->d / 2;
+	p = rt->obj[rt->n_obj]->cylinder->p;
+	up = rt->vp->up;
+	right = rt->vp->right;
+	rt->obj[rt->n_obj]->cylinder->u_corner = calc_endpoint_vector(v_add_no_maloc(v_mult_scalar(up, r), v_mult_scalar(right, r * -1), p, 1));
+	rt->obj[rt->n_obj]->cylinder->d_corner = calc_endpoint_vector(v_add_no_maloc(v_mult_scalar(up, r * -1), v_mult_scalar(right, r), p, 1));
 }
 
-void	symplify_cylinder(t_rt *rt)
+void	symplify(t_rt *rt)
 {
+	if (rt->obj[rt->n_obj]->type == SPHERE)
+	{
+		printf("SPHERE RENDER\n");//DEL
 
+
+
+		create_sphere_mask(rt);
+		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->sphere->u_corner, "u");
+		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->sphere->d_corner, "d");
+		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->obj[rt->n_obj]->dvp_x2, rt->obj[rt->n_obj]->dvp_y2, 0xFFFFFFFF);
+		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->obj[rt->n_obj]->uvp_x1, rt->obj[rt->n_obj]->uvp_y1, 0xFFFFFFFF);
+	}
+	else
+	{
+		create_cylinder_mask(rt);
+		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->cylinder->u_corner, "u");
+		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->cylinder->d_corner, "d");
+	}
 }
