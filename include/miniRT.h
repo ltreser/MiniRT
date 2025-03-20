@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/02/25 16:22:51 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/20 17:07:10 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,10 +167,10 @@ struct						s_obj
 {
 	t_type					type;
 	int						visible;
-	int						vp_x1;
-	int						vp_y1;
-	int						vp_x2;
-	int						vp_y2;
+	int						uvp_x1;
+	int						uvp_y1;
+	int						dvp_x2;
+	int						dvp_y2;
 	union
 	{
 		t_plane				*plane;
@@ -298,7 +298,7 @@ t_vector					*v_cross_product(t_rt *rt, t_vector *a,
 t_point						calc_endpoint_vector_nm(t_vector v, t_point start,
 								float scalar);
 t_vector					*v_normalize(t_vector *v);
-t_vector                    v_normalize_nm(t_vector v);
+t_vector					v_normalize_nm(t_vector v);
 t_vector					*v_add(t_rt *rt, t_vector *a, t_vector *b);
 float						calc_p_distance(t_point a, t_point b);
 t_vector					vector_projection(t_vector a, t_vector b);
@@ -312,11 +312,14 @@ t_point						*pv_add(t_rt *rt, t_vector *a, t_point *b);
 t_point						vp_add_nm(t_vector a, t_point b);
 t_point						pv_subtract_nm(t_point a, t_vector b);
 t_point						vp_subtract_nm(t_vector a, t_point b);
+t_vector					v_product_nm(t_vector a, t_vector b);
 t_point						calc_endpoint_vector(t_vector *v, t_point *start,
 								float scalar);
 t_vector					v_cross_product_nm(t_vector a, t_vector b);
 t_vector					*v_between_two_points(t_rt *rt, t_point a, t_point b);
 t_vector					v_between_two_points_nm(t_point a, t_point b);
+t_vector					pp_sub_v_nm(t_point a, t_point b);
+float						distance_p_to_ray(t_point point, t_ray ray);
 
 // frustum culling
 void						malloc_fc(t_rt *rt);
@@ -330,7 +333,13 @@ void						frustum_check_lplane(t_rt *rt, int i);
 
 t_point						plane_ray_intersec(t_plane pl, t_ray ray);
 // render optimisation
-
+void						symplify_sphere(t_rt *rt);
+void						create_sphere_mask(t_rt *rt);
+void						calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner);
+void						optimise_pixel_rendering(t_rt *rt);
+//plan equations
+float						plane_ray_calc_t(t_plane pl, t_ray ray);
+t_point						plane_ray_intersec(t_plane pl, t_ray ray);
 // render
 void						render(t_rt *rt);
 void						calc_aspect_ratio(t_rt *rt);

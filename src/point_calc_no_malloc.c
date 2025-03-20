@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:38:54 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/17 19:18:24 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/02/26 16:00:29 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_point	p_add(t_vector a, t_point b)
 	return (res);
 }
 
-t_vector	p_sub(t_vector a, t_point b)
+t_vector	pp_sub_v_nm(t_point a, t_point b)
 {
 	t_vector	res;
 

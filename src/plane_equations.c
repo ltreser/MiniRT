@@ -6,11 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:27:20 by afoth             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/02/12 22:26:38 by afoth            ###   ########.fr       */
-=======
-/*   Updated: 2025/02/12 17:13:10 by ltreser          ###   ########.fr       */
->>>>>>> 214ad3d3056aacf6e1bb56346fbc6b70f4e675a5
+/*   Updated: 2025/02/26 16:02:53 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +31,19 @@ result = ray->p + (-1*((ray->p - pl->p)* pl->v)/ (ray->v * pl->v)) * ray->v;
  */
 float	plane_ray_calc_t(t_plane pl, t_ray ray)
 {
-	float	divident;
-	float	divisor;
-	float	t;
+	float		divident;
+	float		divisor;
+	t_vector	vector;
+	float		t;
 
-	divisor = scalar_product(pl.v, ray.v);
+	divisor = scalar_product_nm(*pl.v, *ray.v);
 	if(divisor == 0)
 	{
 		printf("Error\nPlane_ray_calc_t: devisor is 0\n");
 		return(NAN);
 	}
-	divident = scalar_product((p_sub(ray.p, pl.p)), pl.v);
+	vector = pp_sub_v_nm(*ray.p, *pl.p);
+	divident = scalar_product_nm(vector, *pl.v);
 	t = divident/divisor;
 	if(t < 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:23:23 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/24 18:49:23 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/20 14:59:08 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ t_point	*init_point(t_gc *gc)
 	return (point);
 }
 
-//DEL NEEDED?
 void	init_obj(t_rt *rt)
 {
 	if (rt->obj[rt->n_obj]->type == CYLINDER)
