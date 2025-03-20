@@ -14,6 +14,7 @@ void	init(t_rt *rt)
 	rt->n_obj = 0;
 	rt->fc = gc_malloc(rt->gc, sizeof(t_fc));
 	init_viewport(rt);
+	init_fc(rt->fc);
 }
 
 void	init_viewport(t_rt *rt)
@@ -32,4 +33,14 @@ void	init_viewport(t_rt *rt)
 
 }
 
-
+void	init_fc(t_fc *fc)
+{
+	fc->uplane_n = NULL;
+	fc->dplane_n = NULL;
+	fc->rplane_n = NULL;
+	fc->lplane_n = NULL;
+	fc->uplane_p = NULL;
+	fc->dplane_p = NULL;
+	fc->rplane_p = NULL;
+	fc->lplane_p = NULL;
+}

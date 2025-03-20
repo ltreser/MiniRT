@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/02/25 16:22:51 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/20 16:34:10 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,6 +285,7 @@ int							skip_spaces(char *str);
 int							only_valid_chars(char *str);
 void						is_nan(t_rt *rt, float f);
 void						init(t_rt *rt);
+void						init_fc(t_fc *fc);
 
 // mlx
 void						mlx_create_window(t_rt *rt);
@@ -330,6 +331,12 @@ void						frustum_check_lplane(t_rt *rt, int i);
 
 t_point						plane_ray_intersec(t_plane pl, t_ray ray);
 // render optimisation
+void    optimise_pixel_rendering(t_rt *rt);
+void    calc_maskpoint_on_vp(t_rt *rt, t_point  *mask_corner, char corner);
+void    create_sphere_mask(t_rt *rt);
+void    create_cylinder_mask(t_rt *rt);
+void    symplify(t_rt *rt);
+
 
 // render
 void						render(t_rt *rt);
