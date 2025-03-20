@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:36:36 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/20 17:59:42 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/20 19:41:53 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@ void	optimise_pixel_rendering(t_rt *rt)
 	int	i;
 
 	i = 0;
+	printf("OPTIMIZE RENDER LOOP\n");//DEL
+	printf("count %i\n", rt->obj_count);//DEL
+
 	while(i < rt->obj_count)
 	{
-		printf("OPTIMIZE RENDER LOOP\n");//DEL
+		// printf("LOOP\n");//DEL
+		printf("I %i count %i\n", i, rt->obj_count);
 		if(rt->obj[i]->visible == 1)
 		{
-			if(rt->obj[i]->type == PLANE)
-				continue;
 			rt->n_obj = i;
 			if(rt->obj[i]->type == SPHERE || rt->obj[i]->type == CYLINDER)
 				symplify(rt);
@@ -60,7 +62,7 @@ void	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner)
 	ray.v = &vector;
 	ray.p = mask_corner;
 	point = plane_ray_intersec(*rt->vp->vp_plane, ray);
-	if(corner == "u")
+	if(corner == 'u')
 	{
 		//grade aufstellen x achse p(r) + x * v(a) rt->vp->bottom_right + x * rt->vp->right
 		//grade aufstellen y achse p(r) + x * v(a) rt->vp->bottom_right + x * rt->vp->up
@@ -77,7 +79,7 @@ void	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner)
 		// rt->obj[rt->n_obj]->uvp_x1 = v_len(v_product_nm(*rt->vp->up, pp_sub_v_nm(point, *rt->vp->bottom_right)))/ v_len(*rt->vp->up);
 		// rt->obj[rt->n_obj]->uvp_y1 = v_len(v_product_nm(*rt->vp->right, pp_sub_v_nm(point, *rt->vp->bottom_right)))/ v_len(*rt->vp->right);
 	}
-	if(corner == "d")
+	if(corner == 'd')
 	{
 		ray.v = rt->vp->up;
 		ray.p = rt->vp->bottom_right;
@@ -126,18 +128,25 @@ void	create_cylinder_mask(t_rt *rt)
 	float		r;
 	float		x;
 	float		y;
-	t_point		*p;
-	t_vector	*up;
-	t_vector	*right;
+	t_vector	tmp_u;
+	t_vector	tmp_d;
+	t_point		p;
+	t_vector	up;
+	t_vector	right;
 
 	x = rt->obj[rt->n_obj]->cylinder->p->x;
 	y = rt->obj[rt->n_obj]->cylinder->p->y;
 	r = rt->obj[rt->n_obj]->cylinder->d / 2;
-	p = rt->obj[rt->n_obj]->cylinder->p;
-	up = rt->vp->up;
-	right = rt->vp->right;
-	rt->obj[rt->n_obj]->cylinder->u_corner = calc_endpoint_vector(v_add_no_maloc(v_mult_scalar(up, r), v_mult_scalar(right, r * -1), p, 1));
-	rt->obj[rt->n_obj]->cylinder->d_corner = calc_endpoint_vector(v_add_no_maloc(v_mult_scalar(up, r * -1), v_mult_scalar(right, r), p, 1));
+	p = *rt->obj[rt->n_obj]->cylinder->p;
+	up = *rt->vp->up;
+	right = *rt->vp->right;
+	tmp_u = v_add_nm(v_mult_scalar_nm(up, r), v_mult_scalar_nm(right, r * -1));
+	tmp_d = v_add_nm(v_mult_scalar_nm(up, r * -1), v_mult_scalar_nm(right, r));
+	*rt->obj[rt->n_obj]->sphere->u_corner = calc_endpoint_vector(&tmp_u, &p, 1);
+	*rt->obj[rt->n_obj]->sphere->d_corner = calc_endpoint_vector(&tmp_d, &p, 1);
+	//DEL Safety comment, changes above
+	// rt->obj[rt->n_obj]->cylinder->u_corner = calc_endpoint_vector(v_add_nm(v_mult_scalar_nm(up, r), v_mult_scalar_nm(right, r * -1), p, 1));
+	// rt->obj[rt->n_obj]->cylinder->d_corner = calc_endpoint_vector(v_add_nm(v_mult_scalar_nm(up, r * -1), v_mult_scalar_nm(right, r), p, 1));
 }
 
 void	symplify(t_rt *rt)
@@ -145,19 +154,18 @@ void	symplify(t_rt *rt)
 	if (rt->obj[rt->n_obj]->type == SPHERE)
 	{
 		printf("SPHERE RENDER\n");//DEL
-
-
-
 		create_sphere_mask(rt);
-		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->sphere->u_corner, "u");
-		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->sphere->d_corner, "d");
+		printf("MASK WORKS\n");//DEL
+		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->sphere->u_corner, 'u');
+		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->sphere->d_corner, 'd');
+		printf("MASK POINT ON VP \n");//DEL
 		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->obj[rt->n_obj]->dvp_x2, rt->obj[rt->n_obj]->dvp_y2, 0xFFFFFFFF);
 		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->obj[rt->n_obj]->uvp_x1, rt->obj[rt->n_obj]->uvp_y1, 0xFFFFFFFF);
 	}
 	else
 	{
 		create_cylinder_mask(rt);
-		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->cylinder->u_corner, "u");
-		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->cylinder->d_corner, "d");
+		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->cylinder->u_corner, 'u');
+		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->cylinder->d_corner, 'd');
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:27:20 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/26 16:02:53 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/20 20:50:00 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ float	plane_ray_calc_t(t_plane pl, t_ray ray)
 		printf("Error\nPlane_ray_calc_t: devisor is 0\n");
 		return(NAN);
 	}
-	vector = pp_sub_v_nm(*ray.p, *pl.p);
+	vector = pp_sub_v_nm(*ray.p, *pl.p); //switch???
 	divident = scalar_product_nm(vector, *pl.v);
 	t = divident/divisor;
 	if(t < 0)
@@ -53,7 +53,59 @@ float	plane_ray_calc_t(t_plane pl, t_ray ray)
 	else
 		return(0);
 }
+/* #include <stdio.h>
+#include <math.h>
 
+float	plane_ray_calc_t(t_plane pl, t_ray ray)
+{
+    float		divident;
+    float		divisor;
+    t_vector	vector;
+    float		t;
+
+    printf("DEBUG: Starting plane_ray_calc_t function\n");
+
+    // Debugging: Print input values
+    printf("DEBUG: Plane normal vector (pl.v): [%f, %f, %f]\n", pl.v->x, pl.v->y, pl.v->z);
+    printf("DEBUG: Ray direction vector (ray.v): [%f, %f, %f]\n", ray.v->x, ray.v->y, ray.v->z);
+
+    divisor = scalar_product_nm(*pl.v, *ray.v);
+
+    // Debugging: Check divisor
+    printf("DEBUG: Calculated divisor (dot product): %f\n", divisor);
+
+    if (divisor == 0)
+    {
+        printf("Error\nPlane_ray_calc_t: divisor is 0 (Ray is parallel to plane)\n");
+        return (NAN);
+    }
+
+    vector = pp_sub_v_nm(*ray.p, *pl.p);
+
+    // Debugging: Print vector from plane to ray origin
+    printf("DEBUG: Vector from ray origin to plane point: [%f, %f, %f]\n",
+           vector.x, vector.y, vector.z);
+
+    divident = scalar_product_nm(vector, *pl.v);
+
+    // Debugging: Check divident
+    printf("DEBUG: Calculated divident (dot product): %f\n", divident);
+
+    t = divident / divisor;
+
+    // Debugging: Print calculated t-value
+    printf("DEBUG: Calculated intersection t-value: %f\n", t);
+
+    if (t < 0)
+    {
+        printf("Error\nPlane_ray_calc_t: intersection point is behind camera\n");
+        return (NAN);
+    }
+
+    printf("DEBUG: Ray-plane intersection found at t = %f\n", t);
+    return (t);
+}
+ */
 t_point	plane_ray_intersec(t_plane pl, t_ray ray)
 {
 	t_point	point;
