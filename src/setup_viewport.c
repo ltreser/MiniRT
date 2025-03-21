@@ -6,16 +6,25 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:53:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/25 12:05:07 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/21 17:36:26 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
+//DEL width and hight can be negative?!
 void	setup_pixel(t_rt *rt)
 {
-	rt->vp->pixel_w = rt->vp->width/rt->mlx->width;
-	rt->vp->pixel_h = rt->vp->height/rt->mlx->height;
+	printf("rt->vp->width %f\n", rt->vp->width);
+	printf("rt->vp->height %f\n", rt->vp->height);
+	if(rt->vp->width < 0)
+		rt->vp->pixel_w = (rt->vp->width *-1)/rt->mlx->width;
+	else
+		rt->vp->pixel_w = rt->vp->width/rt->mlx->width;
+	if(rt->vp->height < 0)
+		rt->vp->pixel_h = (rt->vp->height *-1)/rt->mlx->height;
+	else
+		rt->vp->pixel_h = rt->vp->height/rt->mlx->height;
 	*rt->vp->pixel_v_x = v_mult_scalar_nm(*rt->vp->right, rt->vp->pixel_w);
 	*rt->vp->pixel_v_y = v_mult_scalar_nm(*rt->vp->up, rt->vp->pixel_h);
 }

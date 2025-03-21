@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/03/20 17:50:19 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/21 16:49:33 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -337,9 +337,9 @@ t_point						plane_ray_intersec(t_plane pl, t_ray ray);
 
 
 void						create_cylinder_mask(t_rt *rt);
-void						symplify(t_rt *rt);
+void						symplify(t_rt *rt, int *error);
 void						create_sphere_mask(t_rt *rt);
-void						calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner);
+void						calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner, int *error);
 void						optimise_pixel_rendering(t_rt *rt);
 //plan equations
 float						plane_ray_calc_t(t_plane pl, t_ray ray);
@@ -351,5 +351,9 @@ void						setup_viewport(t_rt *rt);
 // init_obj.c
 void						init_obj(t_rt *rt);
 t_point						*init_point(t_gc *gc);
+//debug
+void						print_point(t_point p);
+void						print_vector(t_vector v);
+
 
 #endif

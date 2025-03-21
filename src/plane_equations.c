@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:27:20 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/21 14:47:59 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/21 16:42:10 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,18 @@ float	plane_ray_calc_t(t_plane pl, t_ray ray)
 	divisor = scalar_product_nm(*pl.v, *ray.v);
 	if(divisor == 0)
 	{
-		printf("Error\nPlane_ray_calc_t: devisor is 0\n");
+		printf("Error\nPlane_ray_calc_t: devisor is 0\n");//DEL ERROR handeling this should be poosible !segfault prevent
 		return(NAN);
 	}
 	vector = pp_sub_v_nm(*pl.p, *ray.p);
 	divident = scalar_product_nm(vector, *pl.v);
 	t = divident/divisor;
-	if(t < 0)
-	{
-		printf("Error\nPlane_ray_calc_t: intersecpoint is behind camera\n");
-		return(NAN);
-	}
-	else
+	// if(t < 0)
+	// {
+	// 	printf("Error\nPlane_ray_calc_t: intersecpoint is behind camera\n");//DEL frustum culling error
+	// 	return(NAN);
+	// }
+	// else
 		return(t);
 }
 /* #include <stdio.h>
@@ -115,6 +115,8 @@ t_point	plane_ray_intersec(t_plane pl, t_ray ray)
 	float	t;
 
 	t = plane_ray_calc_t(pl, ray);
+	if(isnan(t))
+		return ((t_point){NAN, NAN, NAN});
 	point = calc_endpoint_vector_nm(*ray.v, *ray.p, t);
 	return(point);
 }
