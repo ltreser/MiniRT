@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:27:20 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/20 20:50:00 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/21 14:47:59 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ l*n = 0 Ray is parallel
 
 t = - ((lo -a) *n)/(l *n)
 result = ray->p + (-1*((ray->p - pl->p)* pl->v)/ (ray->v * pl->v)) * ray->v;
+
+
+
  */
 float	plane_ray_calc_t(t_plane pl, t_ray ray)
 {
@@ -42,7 +45,7 @@ float	plane_ray_calc_t(t_plane pl, t_ray ray)
 		printf("Error\nPlane_ray_calc_t: devisor is 0\n");
 		return(NAN);
 	}
-	vector = pp_sub_v_nm(*ray.p, *pl.p); //switch???
+	vector = pp_sub_v_nm(*pl.p, *ray.p);
 	divident = scalar_product_nm(vector, *pl.v);
 	t = divident/divisor;
 	if(t < 0)
@@ -51,7 +54,7 @@ float	plane_ray_calc_t(t_plane pl, t_ray ray)
 		return(NAN);
 	}
 	else
-		return(0);
+		return(t);
 }
 /* #include <stdio.h>
 #include <math.h>
