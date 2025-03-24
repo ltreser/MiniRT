@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/03/21 16:49:33 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/21 20:17:06 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINIRT_H
 
 // 1920x1080? DEL
+# define PI 3.14159265f
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 600
 // Comparing floats, if the difference is smaller than EPSILON,
@@ -191,7 +192,7 @@ struct						s_sphere
 	t_point					*u_corner;
 	t_point					*d_corner;
 	t_color					*c;
-	t_vector				*v;
+	t_vector				*v;//DEL HAE??
 	t_point					*p;
 	int						d;
 	float					rot_r;
@@ -221,7 +222,7 @@ struct						s_camera
 {
 	t_vector				*v;
 	t_point					*p;
-	int						fov;
+	int						fov;//DEL float???
 };
 
 struct						s_light
@@ -352,8 +353,8 @@ void						setup_viewport(t_rt *rt);
 void						init_obj(t_rt *rt);
 t_point						*init_point(t_gc *gc);
 //debug
-void						print_point(t_point p);
-void						print_vector(t_vector v);
-
+void						print_point(t_point p, char *prompt);
+void						print_vector(t_vector v, char *prompt);
+void						print_sphere(t_sphere *s);
 
 #endif

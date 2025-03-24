@@ -6,19 +6,36 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:18:33 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/21 16:51:35 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/21 20:17:23 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
-void	print_vector(t_vector v)
+void	print_vector(t_vector v, char *prompt)
 {
-	printf("vector x:%f y:%f z:%f\n", v.x, v.y, v.z);
+	printf("vector %s:%f y:%f z:%f\n", prompt, v.x, v.y, v.z);
 }
 
-void	print_point(t_point p)
+void	print_point(t_point p, char *prompt)
 {
-	printf("point x:%f y:%f z:%f\n", p.x, p.y, p.z);
+	printf("point %s:%f y:%f z:%f\n", prompt, p.x, p.y, p.z);
 }
 
+void	print_sphere(t_sphere *s)
+{
+	if (!s)
+	{
+		printf("Sphere: (null)\n");
+		return ;
+	}
+	printf("====== SPHERE DEBUG ======\n");
+	print_point(*s->p, "Position");
+	// print_vector(*s->v, "Direction");
+	// print_color("Color", *s->c);
+	printf("Diameter: %d\n", s->d);
+	// printf("Rotation (rad): %.2f\n", s->rot_r);
+	print_point(*s->u_corner, "Upper Corner");
+	print_point(*s->d_corner, "Lower Corner");
+	printf("==========================\n");
+}

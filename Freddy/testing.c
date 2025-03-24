@@ -88,3 +88,35 @@ int	main(void)
 	printf("Resulting perpendicular distance = %f\n", dist);
 	return (0);
 }
+
+
+TESTING: orga/tests/main.rt
+
+
+rt->vp->center
+:0.000000 y:0.000000 z:9.000000
+point
+rt->vp->top_left
+:0.577350 y:-0.433013 z:9.000000
+point
+rt->vp->top_right
+:-0.577350 y:-0.433013 z:9.000000
+point
+rt->vp->bottom_left
+:0.577350 y:0.433013 z:9.000000
+point
+rt->vp->bottom_right
+:-0.577350 y:0.433013 z:9.000000
+
+====== SPHERE DEBUG ======
+point Position:1.500000 y:0.000000 z:-5.000000
+Diameter: 2
+point Upper Corner:2.500000 y:-1.000000 z:-5.000000
+point Lower Corner:0.500000 y:1.000000 z:-5.000000
+
+vector v:2.500000 y:-1.000000 z:-15.000000
+point mask_corner:2.500000 y:-1.000000 z:-5.000000
+point intersection point vp:-1.082532 y:0.433013 z:16.495192
+point mask_corner:0.500000 y:1.000000 z:-5.000000
+point intersection point vp:0.216506 y:0.433013 z:3.504809
+

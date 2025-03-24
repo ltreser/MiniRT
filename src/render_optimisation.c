@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:36:36 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/21 17:20:14 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/24 18:44:33 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,25 @@ void	optimise_pixel_rendering(t_rt *rt)
 	//if sphere ->
 
 }
-
+//DEL DEbuging plane_ray_intersec scheint zu gehen vl falsche eingabe?
 void	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner, int *error)
 {
 	t_vector	vector;
 	t_ray		ray;
 	t_point		point;
 
-	vector = v_between_two_points_nm(*mask_corner, *rt->camera->p);
+	vector = v_between_two_points_nm(*rt->camera->p, *mask_corner);//VEktor correct
 	ray.v = &vector;
 	ray.p = mask_corner;
+	print_vector(vector, "v ");
+	print_point(*mask_corner, "mask_corner");
 	point = plane_ray_intersec(*rt->vp->vp_plane, ray);
 	if(isnan(point.x))
 	{
 		*error = 1;
 		return;
 	}
-	print_point(point);
+	print_point(point, "intersection point vp");
 	if (corner == 'u')
 	{
 		printf("DEBUG: Corner = 'u'\n");
@@ -222,6 +224,7 @@ void	symplify(t_rt *rt, int	*error)
 	{
 		printf("SPHERE RENDER\n");//DEL
 		create_sphere_mask(rt);
+		print_sphere(rt->obj[rt->n_obj]->sphere);
 		printf("MASK WORKS\n");//DEL
 		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->sphere->u_corner, 'u', error);
 		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->sphere->d_corner, 'd', error);

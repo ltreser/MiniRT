@@ -221,11 +221,16 @@ t_point	plane_ray_intersec(t_plane pl, t_ray ray)
  */
 int	main(void)
 {
-	t_point	plane_origin = {1.0f, 1.0f, 2.0f};//r0
-	t_vector	plane_normal = {2.0f, 1.0f, 1.0f}; // n
+	// t_point	plane_origin = {1.0f, 1.0f, 2.0f};//r0
+	// t_vector	plane_normal = {2.0f, 1.0f, 1.0f}; // n
 
-	t_point	ray_origin = {2.0f, 0.0f, 5.0f};//r1
-	t_vector	ray_dir = {3.0f, -4.0f, -1.0f}; // a
+	// t_point	ray_origin = {2.0f, 0.0f, 5.0f};//r1
+	// t_vector	ray_dir = {3.0f, -4.0f, -1.0f}; // a
+	t_point	plane_origin = {0.577350318f, 0.433012724f, 9.0f};//r0
+	t_vector	plane_normal = {-0.0f, 1.0f, -0.0f}; // n
+
+	t_point	ray_origin = {2.5f, -1.0f, -5.0f};//r1
+	t_vector	ray_dir = {2.5f, -1.0f, -15.0f}; // a
 
 	t_plane	plane = {&plane_origin, &plane_normal};
 	t_ray	ray = {&ray_origin, &ray_dir};
