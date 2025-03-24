@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/03/20 17:50:19 by afoth            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
@@ -25,7 +14,6 @@
 # define EXIT_READ 3
 # define EXIT_INPUT 4
 # define EXIT_MLX 5
-
 
 /*Error Messages*/
 
@@ -317,7 +305,8 @@ t_vector					v_product_nm(t_vector a, t_vector b);
 t_point						calc_endpoint_vector(t_vector *v, t_point *start,
 								float scalar);
 t_vector					v_cross_product_nm(t_vector a, t_vector b);
-t_vector					*v_between_two_points(t_rt *rt, t_point a, t_point b);
+t_vector					*v_between_two_points(t_rt *rt, t_point a,
+								t_point b);
 t_vector					v_between_two_points_nm(t_point a, t_point b);
 t_vector					pp_sub_v_nm(t_point a, t_point b);
 float						distance_p_to_ray(t_point point, t_ray ray);
@@ -333,15 +322,18 @@ void						frustum_check_rplane(t_rt *rt, int i);
 void						frustum_check_lplane(t_rt *rt, int i);
 
 t_point						plane_ray_intersec(t_plane pl, t_ray ray);
-// render optimisation
+float						sphere_intersection(t_sphere *s, t_ray *r);
+t_point						sphere_intersection_p(t_sphere *s, t_ray *r);
 
+// render optimisation
 
 void						create_cylinder_mask(t_rt *rt);
 void						symplify(t_rt *rt);
 void						create_sphere_mask(t_rt *rt);
-void						calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner);
+void						calc_maskpoint_on_vp(t_rt *rt, t_point *mask_corner,
+								char corner);
 void						optimise_pixel_rendering(t_rt *rt);
-//plan equations
+// plan equations
 float						plane_ray_calc_t(t_plane pl, t_ray ray);
 t_point						plane_ray_intersec(t_plane pl, t_ray ray);
 // render

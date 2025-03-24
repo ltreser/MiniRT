@@ -6,7 +6,7 @@
 #    By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 05:57:35 by ltreser           #+#    #+#              #
-#    Updated: 2025/03/20 18:01:40 by afoth            ###   ########.fr        #
+#    Updated: 2025/03/24 14:35:31 by ltreser          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC = main.c mlx_init.c input.c parse.c vector_calc.c parse_utils.c \
       exit.c screen_calculations.c init.c render.c init_obj.c setup_viewport.c \
 	  vector_calc_no_malloc.c point_calc.c point_calc_no_malloc.c frustum_culling.c \
 	  frustum_check.c cylinder_calc.c render_optimisation.c \
-	plane_equations.c\
+	plane_equations.c  sphere_calc.c \
 
 #cylinder_calc.c frustum_culling.c frustum_check.c
 SRC_DIR = src/
