@@ -310,6 +310,7 @@ t_vector					*v_between_two_points(t_rt *rt, t_point a,
 t_vector					v_between_two_points_nm(t_point a, t_point b);
 t_vector					pp_sub_v_nm(t_point a, t_point b);
 float						distance_p_to_ray(t_point point, t_ray ray);
+float						v_dot_product(t_vector *a, t_vector *b);
 
 // frustum culling
 void						malloc_fc(t_rt *rt);
