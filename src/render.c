@@ -19,6 +19,38 @@ void	create_render_ray(t_rt *rt)
 	*rt->vp->render_ray->v = v_between_two_points_nm(*rt->camera->p , *rt->vp->render_ray->p);
 	//error handling?
 }
+// void	render_sphere()
+// {
+
+// }
+void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
+{
+	int		i;
+	float	t;
+
+	i = 0;
+	while(i < rt->obj_count)
+	{
+		// printf("LOOP\n");//DEL
+		// printf("I %i count %i\n", i, rt->obj_count);
+		if(rt->obj[i]->visible == 1)
+		{
+			rt->n_obj = i;
+			if(rt->obj[i]->type == SPHERE)
+			{
+				t = sphere_intersection(rt->obj[rt->n_obj]->sphere, ray);
+				if(t > 0)
+				{
+					printf("t = %f\n", t);
+					mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , 0xFFFFFF);
+					//rt->obj[i]->type == CYLINDER)
+				}
+			}
+
+		}
+		i++;
+	}
+}
 
 void render_loop(t_rt *rt)
 {
@@ -31,7 +63,8 @@ void render_loop(t_rt *rt)
 		rt->vp->pixel_x = 0;
 		while(rt->vp->pixel_x < SCREEN_WIDTH)
 		{
-			mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->vp->pixel_x, rt->vp->pixel_y , 0xFFFFFF);
+			obj_render_loop(rt, rt->vp->render_ray, rt->vp->pixel_x, rt->vp->pixel_y);
+			// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->vp->pixel_x, rt->vp->pixel_y , 0xFFFFFF);
 			// if(i < 6)
 			// 	printf("Coord x: %i y: %i\n", rt->vp->pixel_x, rt->vp->pixel_y);
 			i++;
