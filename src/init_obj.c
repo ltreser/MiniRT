@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:23:23 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/25 14:28:10 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/25 14:36:59 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ t_ray	*init_ray(t_gc *gc)
 	ray = gc_malloc(gc, sizeof(t_ray));
 	if (!ray)
 		return (NULL);
+	ray->v = gc_malloc(gc, sizeof(t_vector));
+	ray->p = gc_malloc(gc, sizeof(t_point));
 	// ray->p->x = 0;
 	// ray->p->y = 0;
 	// ray->p->z = 0;

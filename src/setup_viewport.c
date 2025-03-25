@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:53:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/25 12:43:05 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/25 14:42:07 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ void	setup_viewport(t_rt *rt) //TODO init struct variables
 	*(rt->vp->bottom_left) = vp_add_nm(v_subtract_nm(v_mult_scalar_nm(*rt->vp->up, -rt->vp->height / 2),v_mult_scalar_nm(*rt->vp->right, rt->vp->width / 2)),*rt->vp->center);
 
 
-	print_point(*rt->vp->center, "\nrt->vp->center\n");
-	print_point(*rt->vp->top_left, "\nrt->vp->top_left\n");
-	print_point(*rt->vp->top_right, "\nrt->vp->top_right\n");
-	print_point(*rt->vp->bottom_left, "\nrt->vp->bottom_left\n");
-	print_point(*rt->vp->bottom_right, "\nrt->vp->bottom_right\n");
+	// print_point(*rt->vp->center, "\nrt->vp->center\n");
+	// print_point(*rt->vp->top_left, "\nrt->vp->top_left\n");
+	// print_point(*rt->vp->top_right, "\nrt->vp->top_right\n");
+	// print_point(*rt->vp->bottom_left, "\nrt->vp->bottom_left\n");
+	// print_point(*rt->vp->bottom_right, "\nrt->vp->bottom_right\n");
 	rt->vp->vp_plane->p = rt->vp->bottom_left;
 	// print_vector(*v_normalize(v_cross_product(rt, rt->vp->right, rt->vp->up)), "\nNORMALIZED shoud be equal to camera\n");
 	// print_vector(*rt->camera->v,"CAMERA\n");

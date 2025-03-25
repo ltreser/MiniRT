@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:36:36 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/24 18:44:33 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/25 14:40:51 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void	optimise_pixel_rendering(t_rt *rt)
 	error_flag = 0;
 	error = &error_flag;
 	i = 0;
-	printf("OPTIMIZE RENDER LOOP\n");//DEL
-	printf("count %i\n", rt->obj_count);//DEL
+	// printf("OPTIMIZE RENDER LOOP\n");//DEL
+	// printf("count %i\n", rt->obj_count);//DEL
 
 	while(i < rt->obj_count)
 	{
 		// printf("LOOP\n");//DEL
-		printf("I %i count %i\n", i, rt->obj_count);
+		// printf("I %i count %i\n", i, rt->obj_count);
 		if(rt->obj[i]->visible == 1)
 		{
 			rt->n_obj = i;
@@ -70,64 +70,42 @@ void	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner, int *erro
 	vector = v_between_two_points_nm(*rt->camera->p, *mask_corner);//VEktor correct
 	ray.v = &vector;
 	ray.p = mask_corner;
-	print_vector(vector, "v ");
-	print_point(*mask_corner, "mask_corner");
 	point = plane_ray_intersec(*rt->vp->vp_plane, ray);
 	if(isnan(point.x))
 	{
 		*error = 1;
 		return;
 	}
-	print_point(point, "intersection point vp");
+
 	if (corner == 'u')
 	{
-		printf("DEBUG: Corner = 'u'\n");
 
 		ray.v = rt->vp->up;
 		ray.p = rt->vp->bottom_right;
-		printf("DEBUG: Ray (UP) Origin: (%.2f, %.2f, %.2f)\n", ray.p->x, ray.p->y, ray.p->z);
-		printf("DEBUG: Ray (UP) Dir:    (%.2f, %.2f, %.2f)\n", ray.v->x, ray.v->y, ray.v->z);
 
 		float dist_up = distance_p_to_ray(point, ray);
-		printf("DEBUG: Distance to UP ray: %.4f\n", dist_up);
-		printf("DEBUG: Pixel_w ray: %.4f\n", rt->vp->pixel_w);
 
 		rt->obj[rt->n_obj]->uvp_x1 = ceilf(dist_up / rt->vp->pixel_w);
-		printf("DEBUG: Pixel X (uvp_x1): %d\n", rt->obj[rt->n_obj]->uvp_x1);
 
 		ray.v = rt->vp->right;
-		printf("DEBUG: Ray (RIGHT) Dir: (%.2f, %.2f, %.2f)\n", ray.v->x, ray.v->y, ray.v->z);
 
 		float dist_right = distance_p_to_ray(point, ray);
-		printf("DEBUG: Distance to RIGHT ray: %.4f\n", dist_right);
-		printf("DEBUG: Pixel_h ray: %.4f\n", rt->vp->pixel_h);
 		rt->obj[rt->n_obj]->uvp_y1 = ceilf(dist_right / rt->vp->pixel_h);
-		printf("DEBUG: Pixel Y (uvp_y1): %d\n", rt->obj[rt->n_obj]->uvp_y1);
 	}
 
 	if (corner == 'd')
 	{
-		printf("DEBUG: Corner = 'd'\n");
 
 		ray.v = rt->vp->up;
 		ray.p = rt->vp->bottom_right;
-		printf("DEBUG: Ray (UP) Origin: (%.2f, %.2f, %.2f)\n", ray.p->x, ray.p->y, ray.p->z);
-		printf("DEBUG: Ray (UP) Dir:    (%.2f, %.2f, %.2f)\n", ray.v->x, ray.v->y, ray.v->z);
 
 		float dist_up = distance_p_to_ray(point, ray);
-		printf("DEBUG: Distance to UP ray: %.4f\n", dist_up);
-		printf("DEBUG: Pixel_w ray: %.4f\n", rt->vp->pixel_w);
 		rt->obj[rt->n_obj]->dvp_x2 = ceilf(dist_up / rt->vp->pixel_w);
-		printf("DEBUG: Pixel X (dvp_x2): %d\n", rt->obj[rt->n_obj]->dvp_x2);
 
 		ray.v = rt->vp->right;
-		printf("DEBUG: Ray (RIGHT) Dir: (%.2f, %.2f, %.2f)\n", ray.v->x, ray.v->y, ray.v->z);
 
 		float dist_right = distance_p_to_ray(point, ray);
-		printf("DEBUG: Distance to RIGHT ray: %.4f\n", dist_right);
-		printf("DEBUG: Pixel_h ray: %.4f\n", rt->vp->pixel_h);
 		rt->obj[rt->n_obj]->dvp_y2 = ceilf(dist_right / rt->vp->pixel_h);
-		printf("DEBUG: Pixel Y (dvp_y2): %d\n", rt->obj[rt->n_obj]->dvp_y2);
 	}
 }
 /* 	if(corner == 'u')
@@ -222,19 +200,12 @@ void	symplify(t_rt *rt, int	*error)
 
 	if (rt->obj[rt->n_obj]->type == SPHERE)
 	{
-		printf("SPHERE RENDER\n");//DEL
 		create_sphere_mask(rt);
-		print_sphere(rt->obj[rt->n_obj]->sphere);
-		printf("MASK WORKS\n");//DEL
 		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->sphere->u_corner, 'u', error);
 		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->sphere->d_corner, 'd', error);
-		printf("MASK POINT ON VP \n");//DEL
-		printf("down %i, %i\n", rt->obj[rt->n_obj]->dvp_x2, rt->obj[rt->n_obj]->dvp_y2);
-		printf("up %i, %i\n", rt->obj[rt->n_obj]->uvp_x1, rt->obj[rt->n_obj]->uvp_y1);
 
 		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->obj[rt->n_obj]->dvp_x2, rt->obj[rt->n_obj]->dvp_y2, 0xFFFFFFFF);
 		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->obj[rt->n_obj]->uvp_x1, rt->obj[rt->n_obj]->uvp_y1, 0xFFFFFFFF);
-		printf("MASk RENDER \n");
 	}
 	else
 	{
