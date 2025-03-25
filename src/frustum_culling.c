@@ -29,7 +29,7 @@ void	malloc_fc(t_rt *rt) // have they been inited to 0/NULL?
 
 void	calculate_fplanes(t_rt *rt)
 {
-	*rt->fc->rplane_n = v_normalize_nm(v_cross_product_nm(*rt->vp->up, v_between_two_points_nm(*rt->vp->top_right, *rt->vp->center)))G;
+	*rt->fc->rplane_n = v_normalize_nm(v_cross_product_nm(*rt->vp->up, v_between_two_points_nm(*rt->vp->top_right, *rt->vp->center)));
 	*rt->fc->lplane_n = v_normalize_nm(v_cross_product_nm(v_between_two_points_nm(*rt->vp->bottom_left, *rt->vp->center), *rt->vp->up));
 	*rt->fc->uplane_n = v_normalize_nm(v_cross_product_nm(v_between_two_points_nm(*rt->vp->top_left, *rt->vp->center), *rt->vp->right));
 	*rt->fc->dplane_n = v_normalize_nm(v_cross_product_nm(*rt->vp->right, v_between_two_points_nm(*rt->vp->bottom_left, *rt->vp->center)));
@@ -44,7 +44,7 @@ void	calculate_fplanes(t_rt *rt)
 
 void	calculate_fplane_distances(t_rt *rt)
 {
-	t_vector	cam2origin;	
+	t_vector	cam2origin;
 	t_vector	c2o_rplane_n; // projection of cam2origin on the right planes normal
 	t_vector	c2o_lplane_n;
 	t_vector	c2o_uplane_n;
