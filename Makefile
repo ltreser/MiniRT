@@ -1,14 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/23 05:57:35 by ltreser           #+#    #+#              #
-#    Updated: 2025/03/24 19:28:56 by afoth            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 NAME = miniRT
 
@@ -27,7 +16,7 @@ INC_DIR = include/
 HEADERS = $(addprefix $(INC_DIR), miniRT.h)
 
 CC = gcc
-CFLAGS = -Wall -g -I$(INC_DIR) -I/usr/include -Ilibs/minilibx-linux
+CFLAGS = -Wall -g3 -I$(INC_DIR) -I/usr/include -Ilibs/minilibx-linux
 LDFLAGS = -L libs/libft -L libs/minilibx-linux
 LDLIBS = -lft -lmlx
 LFLAGS = -lbsd -lXext -lX11 -lm

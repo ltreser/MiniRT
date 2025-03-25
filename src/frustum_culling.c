@@ -27,9 +27,9 @@ void	malloc_fc(t_rt *rt) // have they been inited to 0/NULL?
 	+ lower are calculated by the cross product of a vektor thats calculated and a direction vektor. the near vector is not calculated because all of the planes start at the camera point
 */
 
-void	calculate_fplanes(t_rt *rt) //TODO segfault issue here?
+void	calculate_fplanes(t_rt *rt)
 {
-	*rt->fc->rplane_n = v_normalize_nm(v_cross_product_nm(*rt->vp->up, v_between_two_points_nm(*rt->vp->top_right, *rt->vp->center)));
+	*rt->fc->rplane_n = v_normalize_nm(v_cross_product_nm(*rt->vp->up, v_between_two_points_nm(*rt->vp->top_right, *rt->vp->center)))G;
 	*rt->fc->lplane_n = v_normalize_nm(v_cross_product_nm(v_between_two_points_nm(*rt->vp->bottom_left, *rt->vp->center), *rt->vp->up));
 	*rt->fc->uplane_n = v_normalize_nm(v_cross_product_nm(v_between_two_points_nm(*rt->vp->top_left, *rt->vp->center), *rt->vp->right));
 	*rt->fc->dplane_n = v_normalize_nm(v_cross_product_nm(*rt->vp->right, v_between_two_points_nm(*rt->vp->bottom_left, *rt->vp->center)));
@@ -54,6 +54,8 @@ void	calculate_fplane_distances(t_rt *rt)
 	t_point		uplane_nstart;
 	t_point		dplane_nstart;
 
+
+//TODO distances arent calculated correctly, they should be negative (?)
 	cam2origin = v_between_two_points_nm(*rt->camera->p, (t_point){0, 0, 0});
 	c2o_rplane_n = vector_projection(cam2origin, *rt->fc->rplane_n);
 	c2o_lplane_n = vector_projection(cam2origin, *rt->fc->lplane_n);
@@ -67,6 +69,10 @@ void	calculate_fplane_distances(t_rt *rt)
 	rt->fc->lplane_d = calc_p_distance(lplane_nstart, (t_point){0, 0, 0});
 	rt->fc->uplane_d = calc_p_distance(uplane_nstart, (t_point){0, 0, 0});
 	rt->fc->dplane_d = calc_p_distance(dplane_nstart, (t_point){0, 0, 0});
+	printf("distance: %f\n", rt->fc->rplane_d);
+	printf("distance: %f\n", rt->fc->lplane_d);
+	printf("distance: %f\n", rt->fc->uplane_d);
+	printf("distance: %f\n", rt->fc->dplane_d);
 }
 
 void	frustum_culling(t_rt *rt)
