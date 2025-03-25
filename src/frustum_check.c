@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:39:19 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/20 14:23:39 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/03/24 15:20:18 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	frustum_check_uplane(t_rt *rt, int i)
 	else
 		rt->obj[i]->visible = 0;
 }
+
+//TODO dist should be negative when not visible
 
 void	frustum_check_dplane(t_rt *rt, int i)
 {
