@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:53:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/24 19:03:58 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/25 12:43:05 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	setup_viewport(t_rt *rt) //TODO init struct variables
 	printf("fov %i\n", rt->camera->fov);
 	// float tang = tanf(((float)rt->camera->fov / 2))
 	t_vector	plane_normal = {-0.0f, 0.0f, -1.0f};//DEBUG
-
+	rt->vp->render_ray = init_ray(rt->gc);//init to NULL? right now to 0
 
 	rt->vp->width = 2 * tanf(((float)rt->camera->fov / 2) * (PI / 180.0f));
 	printf("rt->vp->width %f\n", rt->vp->width);

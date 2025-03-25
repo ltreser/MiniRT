@@ -1,13 +1,74 @@
 
 #include "../include/miniRT.h"
 
+//Vector is multiplied by -0.5 for the middle point of the pixel
+t_point	calc_startpoint_render(t_rt *rt)
+{
+	t_vector	vector;
+	t_point		point;
+
+	vector = v_add_nm(*rt->vp->pixel_v_y, *rt->vp->pixel_v_x);
+	vector = v_mult_scalar_nm(vector, (float)-0.5);
+	point = p_add(vector, *rt->vp->top_left);
+	return(point);
+	// t_point	p_add(t_vector a, t_point b)
+	// t_vector	v_add_nm(t_vector a, t_vector b)
+	// t_vector	v_multc_scalar_nm(t_vector v, float scalar)
+}
+
+void	create_render_ray(t_rt *rt);
+{
+	t_ray		ray;
+	t_point		point;
+	t_vector	vector;
+
+
+	ray->p = calc_startpoint_render(rt);
+	ray->v = v_between_two_points_nm(rt->camera->p , point);
+	return(ray);
+	//error handling?
+}
+
+void render_loop(t_rt *rt)
+{
+	create_render_ray(rt);
+	/*
+	start: create ray pixel coord + camera
+	start a the top most left pixel? y max x min
+	Go throught obj array and see if obj is visble
+	(y obj max <= y pixel >= y obj min;  if x obj max <= x pixel >= x obj min -> render)
+	move ray
+	call function related to obj type
+
+	if point found-> retun t compare render smallest positve t
+	if point not found/ behind camera-> return t negative
+
+	y pixel++ until y max verschiebung vektor?
+
+
+	*/
+	// int	i;
+
+	// i = 0;
+	// while(i < rt->obj_count)
+	// {
+	// 	// printf("LOOP\n");//DEL
+	// 	if(rt->obj[i]->visible == 1)
+	// 	{
+
+	// 	}
+	// 	i++;
+	// }
+
+}
+
 void	render(t_rt *rt)
 {
 	printf("START OF RENDER\n");
 	setup_viewport(rt);
 	frustum_culling(rt);
 	optimise_pixel_rendering(rt);
-	//renderstuff
+	render_loop(rt);
 
 
 	//last FT in render!!!

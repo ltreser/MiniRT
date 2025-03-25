@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:23:23 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/20 18:03:54 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/25 12:37:30 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,21 @@ void	parse_dimensions(t_rt *rt, char *str)
 	}
 	else if (rt->obj[rt->n_obj]->type == SPHERE)
 		rt->obj[rt->n_obj]->sphere->d = ft_atof(gc_chop(rt->gc, str + i, ' '));
+}
+t_ray	*init_ray(t_gc *gc)
+{
+	t_ray	*ray;
+
+	ray = gc_malloc(gc, sizeof(t_ray));
+	if (!ray)
+		return (NULL);
+	ray->p->x = 0;
+	ray->p->y = 0;
+	ray->p->z = 0;
+	ray->v->x = 0;
+	ray->v->y = 0;
+	ray->v->z = 0;
+	return (ray);
 }
 
 t_point	*init_point(t_gc *gc)

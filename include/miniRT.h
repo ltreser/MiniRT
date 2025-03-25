@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/03/24 19:27:48 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/25 13:07:20 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ struct						s_rt
 
 struct						s_vp
 {
+	t_ray					*render_ray;
 	t_plane					*vp_plane;
 	float					width;
 	float					height;
@@ -114,7 +115,7 @@ struct						s_vp
 	float					pixel_w;
 	float					pixel_h;
 
-	int *pixel_x; // both not in use yet, to know wich pixel is rendering.
+	int						*pixel_x; // both not in use yet, to know wich pixel is rendering.
 	int						*pixel_y;
 	t_vector				*up;
 	t_vector				*right;
@@ -323,6 +324,7 @@ t_vector					v_between_two_points_nm(t_point a, t_point b);
 t_vector					pp_sub_v_nm(t_point a, t_point b);
 float						distance_p_to_ray(t_point point, t_ray ray);
 float						v_dot_product(t_vector *a, t_vector *b);
+t_point						p_add(t_vector a, t_point b);
 
 // frustum culling
 void						malloc_fc(t_rt *rt);
@@ -355,6 +357,8 @@ void						setup_viewport(t_rt *rt);
 // init_obj.c
 void						init_obj(t_rt *rt);
 t_point						*init_point(t_gc *gc);
+t_ray						*init_ray(t_gc *gc);
+
 //debug
 void						print_point(t_point p, char *prompt);
 void						print_vector(t_vector v, char *prompt);

@@ -1,0 +1,12 @@
+In Visual Studio Code on Linux, you can press **Ctrl + `** (Ctrl + backtick) to toggle and focus the integrated terminal. If the terminal is already open, this will move your cursor there.
+Ctrl + C: Interrupt (stop) the currently running process.
+Ctrl + D: Send an end-of-file (EOF) marker, often closes the current shell session if typed at an empty prompt.
+Ctrl + Z: Suspend the current foreground process (can be resumed with the “fg” command).
+Ctrl + A: Move the cursor to the beginning of the line.
+Ctrl + E: Move the cursor to the end of the line.
+Ctrl + U: Clear from the cursor position to the beginning of the line.
+Ctrl + K: Clear from the cursor position to the end of the line.
+Ctrl + W: Delete the previous word.
+Ctrl + L: Clear the terminal screen (similar to the “clear” command).
+Ctrl + R: Search through command history as you type.
+!!: Repeat the last command.
