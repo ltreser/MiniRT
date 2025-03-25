@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/03/25 13:07:20 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/25 16:48:43 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ struct						s_vp
 	float					pixel_w;
 	float					pixel_h;
 
-	int						*pixel_x; // both not in use yet, to know wich pixel is rendering.
-	int						*pixel_y;
+	int						pixel_x;
+	int						pixel_y;
 	t_vector				*up;
 	t_vector				*right;
 	t_point					*center;

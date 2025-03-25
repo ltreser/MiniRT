@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:53:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/25 14:42:07 by afoth            ###   ########.fr       */
+/*   Updated: 2025/03/25 15:38:24 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ void	setup_viewport(t_rt *rt) //TODO init struct variables
 	rt->vp->render_ray = init_ray(rt->gc);//init to NULL? right now to 0
 
 	rt->vp->width = 2 * tanf(((float)rt->camera->fov / 2) * (PI / 180.0f));
-	printf("rt->vp->width %f\n", rt->vp->width);
 	calc_aspect_ratio(rt);
-	printf("rt->aspect_r; %f\n", rt->aspect_r);
 	rt->vp->height = rt->vp->width / rt->aspect_r;
 	rt->vp->right = v_normalize(v_cross_product(rt, &(t_vector){0,1,0}, rt->camera->v));
 	rt->vp->up = v_normalize(v_cross_product(rt, rt->vp->right, rt->camera->v));

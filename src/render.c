@@ -15,20 +15,30 @@ t_point	calc_startpoint_render(t_rt *rt)
 
 void	create_render_ray(t_rt *rt)
 {
-	t_ray		ray;
-	t_point		point;
-	t_vector	vector;
-
-
-	*ray.p = calc_startpoint_render(rt);
-	*ray.v = v_between_two_points_nm(*rt->camera->p , point);
-	rt->vp->render_ray = &ray;
+	*rt->vp->render_ray->p  = calc_startpoint_render(rt);
+	*rt->vp->render_ray->v = v_between_two_points_nm(*rt->camera->p , *rt->vp->render_ray->p);
 	//error handling?
 }
 
 void render_loop(t_rt *rt)
 {
 	create_render_ray(rt);
+	int i = 0;//DEL DEBUG
+	// rt->vp->pixel_x = 0;
+	rt->vp->pixel_y = SCREEN_HEIGHT - 1;
+	while(rt->vp->pixel_y >= 0)
+	{
+		rt->vp->pixel_x = 0;
+		while(rt->vp->pixel_x < SCREEN_WIDTH)
+		{
+			mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->vp->pixel_x, rt->vp->pixel_y , 0xFFFFFF);
+			// if(i < 6)
+			// 	printf("Coord x: %i y: %i\n", rt->vp->pixel_x, rt->vp->pixel_y);
+			i++;
+			rt->vp->pixel_x++;
+		}
+		rt->vp->pixel_y--;
+	}
 	/*
 	start: create ray pixel coord + camera
 	start a the top most left pixel? y max x min
@@ -65,7 +75,7 @@ void	render(t_rt *rt)
 	setup_viewport(rt);
 	frustum_culling(rt);
 	optimise_pixel_rendering(rt);
-	//render_loop(rt);
+	render_loop(rt);
 
 
 	//last FT in render!!!
