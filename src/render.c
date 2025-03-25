@@ -11,21 +11,18 @@ t_point	calc_startpoint_render(t_rt *rt)
 	vector = v_mult_scalar_nm(vector, (float)-0.5);
 	point = p_add(vector, *rt->vp->top_left);
 	return(point);
-	// t_point	p_add(t_vector a, t_point b)
-	// t_vector	v_add_nm(t_vector a, t_vector b)
-	// t_vector	v_multc_scalar_nm(t_vector v, float scalar)
 }
 
-void	create_render_ray(t_rt *rt);
+void	create_render_ray(t_rt *rt)
 {
 	t_ray		ray;
 	t_point		point;
 	t_vector	vector;
 
 
-	ray->p = calc_startpoint_render(rt);
-	ray->v = v_between_two_points_nm(rt->camera->p , point);
-	return(ray);
+	*ray.p = calc_startpoint_render(rt);
+	*ray.v = v_between_two_points_nm(*rt->camera->p , point);
+	rt->vp->render_ray = &ray;
 	//error handling?
 }
 
@@ -68,7 +65,7 @@ void	render(t_rt *rt)
 	setup_viewport(rt);
 	frustum_culling(rt);
 	optimise_pixel_rendering(rt);
-	render_loop(rt);
+	//render_loop(rt);
 
 
 	//last FT in render!!!
