@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 17:51:38 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/20 17:51:39 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/07 16:26:15 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	init_viewport(t_rt *rt)
 	rt->vp->right = gc_malloc(rt->gc, sizeof(t_vector));
 	rt->vp->pixel_v_x = gc_malloc(rt->gc, sizeof(t_vector));
 	rt->vp->pixel_v_y = gc_malloc(rt->gc, sizeof(t_vector));
+	rt->vp->pixel_v_y_negative = gc_malloc(rt->gc, sizeof(t_vector));
 	rt->vp->center = gc_malloc(rt->gc, sizeof(t_point));
 	rt->vp->top_left = gc_malloc(rt->gc, sizeof(t_point));
 	rt->vp->top_right = gc_malloc(rt->gc, sizeof(t_point));

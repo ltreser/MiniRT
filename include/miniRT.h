@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/03/25 16:48:43 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/07 21:54:31 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define SCREEN_HEIGHT 600
 // Comparing floats, if the difference is smaller than EPSILON,
 // they are considered equal
-# define EPSILON = 0.00001
+# define EPSILON 0.00001f
 
 /*Error Codes*/
 # define EXIT_MALLOC 2
@@ -112,6 +112,7 @@ struct						s_vp
 	float					pixel_size;
 	t_vector				*pixel_v_x;
 	t_vector				*pixel_v_y;
+	t_vector				*pixel_v_y_negative;
 	float					pixel_w;
 	float					pixel_h;
 
@@ -358,10 +359,15 @@ void						setup_viewport(t_rt *rt);
 void						init_obj(t_rt *rt);
 t_point						*init_point(t_gc *gc);
 t_ray						*init_ray(t_gc *gc);
-
+//color
+unsigned int				float_to_grayscale_color(float value);
 //debug
 void						print_point(t_point p, char *prompt);
 void						print_vector(t_vector v, char *prompt);
 void						print_sphere(t_sphere *s);
+int							calc_point_on_screen(t_rt *rt, t_point point, char axis);
+void						renderpoint(t_rt *rt, t_point point);
+
+
 
 #endif

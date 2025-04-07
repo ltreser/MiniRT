@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:18:33 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/21 20:17:23 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/07 22:04:24 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_vector(t_vector v, char *prompt)
 
 void	print_point(t_point p, char *prompt)
 {
-	printf("point %s:%f y:%f z:%f\n", prompt, p.x, p.y, p.z);
+	printf("point %s x:%f y:%f z:%f\n", prompt, p.x, p.y, p.z);
 }
 
 void	print_sphere(t_sphere *s)

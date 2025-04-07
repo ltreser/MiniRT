@@ -31,21 +31,35 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 	i = 0;
 	while(i < rt->obj_count)
 	{
-		// printf("LOOP\n");//DEL
 		// printf("I %i count %i\n", i, rt->obj_count);
 		if(rt->obj[i]->visible == 1)
 		{
 			rt->n_obj = i;
-			if(rt->obj[i]->type == SPHERE)
+			if(rt->obj[i]->type == PLANE)
 			{
-				t = sphere_intersection(rt->obj[rt->n_obj]->sphere, ray);
-				if(t > 0)
+				// printf("LOOP\n");//DEL
+				t = plane_ray_calc_t(*rt->obj[rt->n_obj]->plane, *ray);
+				// if(t  < 0)
+				if(t > 0 && !isnan(t))
 				{
-					printf("t = %f\n", t);
+					printf("t = %f y= %i x= %i\n", t, rt->vp->pixel_y, rt->vp->pixel_x);
 					mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , 0xFFFFFF);
+
+					// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , float_to_grayscale_color(t));
 					//rt->obj[i]->type == CYLINDER)
 				}
 			}
+			// if(rt->obj[i]->type == SPHERE)
+			// {
+			// 	// printf("LOOP\n");//DEL
+			// 	t = sphere_intersection(rt->obj[rt->n_obj]->sphere, ray);
+			// 	printf("t = %f\n", t);
+			// 	if(t > 0)
+			// 	{
+			// 		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , 0xFFFFFF);
+			// 		//rt->obj[i]->type == CYLINDER)
+			// 	}
+			// }
 
 		}
 		i++;
@@ -55,10 +69,12 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 void render_loop(t_rt *rt)
 {
 	create_render_ray(rt);
-	int i = 0;//DEL DEBUG
+	// int i = 0;//DEL DEBUG
 	// rt->vp->pixel_x = 0;
-	rt->vp->pixel_y = SCREEN_HEIGHT - 1;
-	while(rt->vp->pixel_y >= 0)
+	rt->vp->pixel_y = 0;
+	//mlx_pixel_put(rt->mlx->connection, rt->mlx->window, 0, rt->vp->pixel_y, 0xFF00FF);
+	renderpoint(rt, *rt->vp->top_left);
+	while(rt->vp->pixel_y < SCREEN_HEIGHT - 1)
 	{
 		rt->vp->pixel_x = 0;
 		while(rt->vp->pixel_x < SCREEN_WIDTH)
@@ -67,10 +83,13 @@ void render_loop(t_rt *rt)
 			// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->vp->pixel_x, rt->vp->pixel_y , 0xFFFFFF);
 			// if(i < 6)
 			// 	printf("Coord x: %i y: %i\n", rt->vp->pixel_x, rt->vp->pixel_y);
-			i++;
+			// i++;
+			*rt->vp->render_ray->v = v_add_nm(*rt->vp->render_ray->v, *rt->vp->pixel_v_x);
 			rt->vp->pixel_x++;
 		}
-		rt->vp->pixel_y--;
+		rt->vp->pixel_y++;
+		*rt->vp->render_ray->v = v_add_nm(*rt->vp->render_ray->v, *rt->vp->pixel_v_y_negative);
+		// printf("pixel y %i\n", rt->vp->pixel_y);
 	}
 	/*
 	start: create ray pixel coord + camera
@@ -100,6 +119,39 @@ void render_loop(t_rt *rt)
 	// 	i++;
 	// }
 
+}
+void	renderpoint(t_rt *rt, t_point point)
+{
+	int		x;
+	int		y;
+	x = calc_point_on_screen(rt, point, 'x');
+	printf("x= %i ", x);
+	y = calc_point_on_screen(rt, point, 'y');
+	printf("y= %i\n", y);
+
+	mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x -1, y-1 , 0xFF00FF);
+}
+
+int	calc_point_on_screen(t_rt *rt, t_point point, char axis)
+{
+	t_ray		ray;
+
+	ray.v = rt->vp->up;
+	ray.p = rt->vp->bottom_right;
+	if(axis == 'x')
+	{
+		float dist_up = distance_p_to_ray(point, ray);
+		return(ceilf(dist_up / rt->vp->pixel_w));
+	}
+	if(axis == 'y')
+	{
+		ray.v = rt->vp->right;
+
+		float dist_right = distance_p_to_ray(point, ray);
+		return(ceilf(dist_right / rt->vp->pixel_h));
+	}
+	else
+		return(-1);
 }
 
 void	render(t_rt *rt)

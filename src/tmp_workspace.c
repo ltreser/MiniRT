@@ -219,18 +219,18 @@ t_point	plane_ray_intersec(t_plane pl, t_ray ray)
 	return (point);
 }
  */
-int	main(void)
+/* int	main(void)
 {
 	// t_point	plane_origin = {1.0f, 1.0f, 2.0f};//r0
 	// t_vector	plane_normal = {2.0f, 1.0f, 1.0f}; // n
 
 	// t_point	ray_origin = {2.0f, 0.0f, 5.0f};//r1
 	// t_vector	ray_dir = {3.0f, -4.0f, -1.0f}; // a
-	t_point	plane_origin = {0.577350318f, 0.433012724f, 9.0f};//r0
+	t_point	plane_origin = {1.5f, 0.0f, -5.0f};//r0
 	t_vector	plane_normal = {-0.0f, 1.0f, -0.0f}; // n
 
-	t_point	ray_origin = {2.5f, -1.0f, -5.0f};//r1
-	t_vector	ray_dir = {2.5f, -1.0f, -15.0f}; // a
+	t_point	ray_origin = {0.578072011f, -0.432291031f, 9.0f};//r1
+	t_vector	ray_dir = {0.578072011f, -0.432291031f, -1.0f}; // a
 
 	t_plane	plane = {&plane_origin, &plane_normal};
 	t_ray	ray = {&ray_origin, &ray_dir};
@@ -239,16 +239,51 @@ int	main(void)
 
 	printf("Intersection Point: (%.2f, %.2f, %.2f)\n", hit.x, hit.y, hit.z);
 	return (0);
+} */
+
+
+
+
+int main()
+{
+	t_point ray_origin = {0, 0, 0};
+	t_vector ray_dir = {0, 0, 1};
+
+	t_point plane_point = {0, 0, 5};
+	t_vector plane_normal = {0, 0, 1};
+
+	t_ray ray = {&ray_origin, &ray_dir};
+	t_plane plane = {&plane_point, &plane_normal};
+
+	float t = plane_ray_calc_t(plane, ray);
+	if (!isnan(t))
+	{
+		printf("Intersection at t = %f\n", t);
+	}
+	else
+	{
+		printf("No intersection.\n");
+	}
+
+	return 0;
 }
 
 
 
 
 
+pl 0,0,-10 0.5,0.7071,0.5 255,0,225
+//sollt nichts sehen
+pl 1.5,0,-5 0,1,0 255,0,225
+//haelfte
+pl 1.5,0,-5 1,0,0 255,0,225
 
 
-
-
-
-
-
+// pl 1.5,0,-5 0,0,1 255,0,225
+//0.33333333333333333333
+9.433981132
+0.317999364
+0.423999152
+0.847998304
+pl 0,0,-10 0.5,0.5,0.7071 255,0,225
+pl 0,0,-10 0.317999364,0.423999152,0.847998304 255,0,225

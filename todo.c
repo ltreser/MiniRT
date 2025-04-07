@@ -1,4 +1,3 @@
 //TODO
-//1) create file with non visible obj DONE
-//run gdb
+// camera vector parallel to y axis {0,1,0}
 //
