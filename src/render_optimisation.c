@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:36:36 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/25 14:40:51 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/08 13:29:27 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,21 @@ void	optimise_pixel_rendering(t_rt *rt)
 
 }
 //DEL DEbuging plane_ray_intersec scheint zu gehen vl falsche eingabe?
+/* Calculating the 2D point on the viewport of a 3d point.
+The point has to lay on the screen
+The tranformation is done by calculating the distance of the point to
+the x and y axis of the viewport
+1. Ray is created for the axis
+2. Distance to axis is calculated and translated into pixels(dist_up / rt->vp->pixel_w)
+ceilf is used to round up(no half pixels)
+*/
 void	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner, int *error)
 {
 	t_vector	vector;
 	t_ray		ray;
 	t_point		point;
 
-	vector = v_between_two_points_nm(*rt->camera->p, *mask_corner);//VEktor correct
+	vector = v_between_two_points_nm(*rt->camera->p, *mask_corner);
 	ray.v = &vector;
 	ray.p = mask_corner;
 	point = plane_ray_intersec(*rt->vp->vp_plane, ray);
@@ -81,7 +89,7 @@ void	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner, int *erro
 	{
 
 		ray.v = rt->vp->up;
-		ray.p = rt->vp->bottom_right;
+		ray.p = rt->vp->bottom_left;
 
 		float dist_up = distance_p_to_ray(point, ray);
 
@@ -97,7 +105,7 @@ void	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner, int *erro
 	{
 
 		ray.v = rt->vp->up;
-		ray.p = rt->vp->bottom_right;
+		ray.p = rt->vp->bottom_left;
 
 		float dist_up = distance_p_to_ray(point, ray);
 		rt->obj[rt->n_obj]->dvp_x2 = ceilf(dist_up / rt->vp->pixel_w);

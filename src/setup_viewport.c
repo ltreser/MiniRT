@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:53:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/07 22:50:52 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/08 12:59:31 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,22 @@ void	setup_pixel(t_rt *rt)
 	*rt->vp->pixel_v_x = v_mult_scalar_nm(*rt->vp->right, rt->vp->pixel_w);
 	*rt->vp->pixel_v_y = v_mult_scalar_nm(*rt->vp->up, rt->vp->pixel_h);
 	*rt->vp->pixel_v_y_negative = v_mult_scalar_nm(*rt->vp->pixel_v_y, -1);
-
 }
+/* Should be correct test needed implement after merging
+void	calc_vp_corners(t_rt *rt)
+{
+	t_vector	v_half_up;
+	t_vector	v_half_down;
+	t_vector	v_half_right;
+
+	v_half_down = v_mult_scalar_nm(*rt->vp->up, -rt->vp->height / 2);
+	v_half_up = v_mult_scalar_nm(*rt->vp->up, rt->vp->height / 2);
+	v_half_right = v_mult_scalar_nm(*rt->vp->right, rt->vp->width / 2);
+	*(rt->vp->top_left) = vp_add_nm(v_subtract_nm(v_half_up, v_half_right), *rt->vp->center);
+	*(rt->vp->top_right) = vp_add_nm(v_add_nm(v_half_up, v_half_right), *rt->vp->center);
+	*(rt->vp->bottom_right) = vp_add_nm(v_add_nm(v_half_right,v_half_down),*rt->vp->center);
+	*(rt->vp->bottom_left) = vp_add_nm(v_subtract_nm(v_half_down,v_half_right),*rt->vp->center);
+} */
 //XXX the forward orientation vector = camera vector
 void	setup_viewport(t_rt *rt) //TODO init struct variables
 {
@@ -38,7 +52,8 @@ void	setup_viewport(t_rt *rt) //TODO init struct variables
 	rt->vp->width = 2 * tanf(((float)rt->camera->fov / 2) * (PI / 180.0f));
 	calc_aspect_ratio(rt);
 	rt->vp->height = rt->vp->width / rt->aspect_r;
-	rt->vp->right = v_normalize(v_cross_product(rt, &(t_vector){0,1,0}, rt->camera->v));//DEL this seems not correct why fixedpoint y
+
+	rt->vp->right = v_normalize(v_cross_product(rt, rt->camera->v, &(t_vector){0,1,0}));//DEL this seems not correct why fixedpoint y
 	print_vector(*rt->vp->right, "rt->vp->right");
 	rt->vp->up = v_normalize(v_cross_product(rt, rt->vp->right, rt->camera->v));
 	print_vector(*rt->vp->up , "rt->vp->up ");

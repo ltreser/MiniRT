@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/04/07 21:54:31 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/08 12:23:06 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -366,7 +366,7 @@ void						print_point(t_point p, char *prompt);
 void						print_vector(t_vector v, char *prompt);
 void						print_sphere(t_sphere *s);
 int							calc_point_on_screen(t_rt *rt, t_point point, char axis);
-void						renderpoint(t_rt *rt, t_point point);
+void						renderpoint(t_rt *rt, t_point point, char *prompt);
 
 
 
