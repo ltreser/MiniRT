@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 16:32:16 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/08 15:35:31 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/09 16:04:17 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,28 @@ unsigned int float_to_grayscale_color(float value)
 	// printf("Color: 0x%06X\n", color);
 
 	return (intensity << 16) | (intensity << 8) | intensity;
+}
+
+unsigned int scale_color_by_value(struct s_color color, float value)
+{
+    // Choose your min/max or pass them as parameters if needed
+    float min = 0.0f;
+    float max = 100.0f;
+
+    // Clamp value to [min, max]
+    if (value < min)
+        value = min;
+    if (value > max)
+        value = max;
+
+    // Convert [min, max] to a normalized [0, 1]
+    float norm = (value - min) / (max - min);
+
+    // Scale each component
+    int r = (int)(color.r * norm);
+    int g = (int)(color.g * norm);
+    int b = (int)(color.b * norm);
+
+    // Pack into 0xRRGGBB
+    return (r << 16) | (g << 8) | b;
 }

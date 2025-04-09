@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/04/08 12:23:06 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/09 13:53:32 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define PI 3.14159265f
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 600
+# define MAX_RENDER FLT_MAX
 // Comparing floats, if the difference is smaller than EPSILON,
 // they are considered equal
 # define EPSILON 0.00001f
@@ -165,6 +166,8 @@ struct						s_mlx
 
 /*objects*/
 
+//	uvp_x1	uvp_y1	dvp_x2	dvp_y2 are the corners of the mask that
+// is used to optimize rendering (simplyfied bounding volumes)
 struct						s_obj
 {
 	t_type					type;
@@ -361,6 +364,7 @@ t_point						*init_point(t_gc *gc);
 t_ray						*init_ray(t_gc *gc);
 //color
 unsigned int				float_to_grayscale_color(float value);
+unsigned int				scale_color_by_value(struct s_color color, float value);
 //debug
 void						print_point(t_point p, char *prompt);
 void						print_vector(t_vector v, char *prompt);

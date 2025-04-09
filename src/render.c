@@ -23,49 +23,78 @@ void	create_render_ray(t_rt *rt)
 // {
 
 // }
+
+/* Check for closes distance (t)
+This Point is rendert
+tmp_t init
+*/
 void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 {
 	int		i;
+	int		min_t_obj;
 	float	t;
+	float	tmp_t;
 
 	i = 0;
+	t = MAX_RENDER;
+	min_t_obj = -1;
 	while(i < rt->obj_count)
 	{
 		// printf("I %i count %i\n", i, rt->obj_count);
 		if(rt->obj[i]->visible == 1)
 		{
 			rt->n_obj = i;
+			tmp_t = -1;
 			if(rt->obj[i]->type == PLANE)
 			{
-				// printf("LOOP\n");//DEL
-				t = plane_ray_calc_t(*rt->obj[rt->n_obj]->plane, *ray);
-				// if(t  < 0)
-				if(t > 0 && !isnan(t))
+				// printf("I:%i ", i);
+				tmp_t = plane_ray_calc_t(*rt->obj[rt->n_obj]->plane, *ray);
+				if(tmp_t > 0 && !isnan(tmp_t))
 				{
+					// printf("tmp_t = %f\n", tmp_t);
+
 					// printf("t = %f y= %i x= %i\n", t, rt->vp->pixel_y, rt->vp->pixel_x);
-					// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , 0xFFFFFF);
-
-					mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , float_to_grayscale_color(t));
-					//rt->obj[i]->type == CYLINDER)
+					mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , 0xFF00FF);
+					// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , float_to_grayscale_color(tmp_t));
 				}
 			}
-			if(rt->obj[i]->type == SPHERE)
+			// if(rt->obj[i]->type == SPHERE)
+			// {
+			// 	tmp_t = sphere_intersection(rt->obj[rt->n_obj]->sphere, ray);
+			// 	if(tmp_t > 0)
+			// 	{
+			// 		// printf("tmp_t = %f\n", tmp_t);
+			// 		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , 0xFFFFFF);
+			// 	}
+			// }
+			// if (rt->obj[i]->type == CYLINDER)
+			// {
+			// 	// tmp_t = cylinder_intersection(rt->obj[rt->n_obj]->cylinder, ray);
+			// }
+			if(tmp_t > 0 && tmp_t < t)
 			{
-				// printf("LOOP\n");//DEL
-				t = sphere_intersection(rt->obj[rt->n_obj]->sphere, ray);
-				if(t > 0)
-				{
-					printf("t = %f\n", t);
-					mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , 0xFFFFFF);
-					//rt->obj[i]->type == CYLINDER)
-				}
+				t = tmp_t;
+				min_t_obj = i;
 			}
-
 		}
 		i++;
 	}
-}
+	if(min_t_obj < 0) //no t found
+		return;
+	// printf("t = %f\n", t);
+	printf("t = %f y= %i x= %i\n", t, rt->vp->pixel_y, rt->vp->pixel_x);
 
+	// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , scale_color_by_value(*rt->obj[min_t_obj]->plane->c,t));
+
+	//CALC LIGHTING ETC
+	//unsigned int scale_color_by_value(struct s_color color, float value)
+}
+/* Main loop that sends out a ray for every pixel
+Starts in the upper left corner. (xmin ymax)
+Warning! in the mlx lib (rendering) y is inverted so y = 0 is the the highest up.
+Our coordinate system 0.0 for the viewport is still at the bottom left corner for ease of thinking.
+Rendering starts at the bootm left
+*/
 void render_loop(t_rt *rt)
 {
 	t_vector	start_vec;
@@ -79,20 +108,22 @@ void render_loop(t_rt *rt)
 	rt->vp->pixel_y = SCREEN_HEIGHT - 1;
 	//mlx_pixel_put(rt->mlx->connection, rt->mlx->window, 0, rt->vp->pixel_y, 0xFF00FF);
 
-	renderpoint(rt, *rt->vp->center, "center      ");
-	renderpoint(rt, *rt->vp->top_left, "top_left    ");
-	renderpoint(rt, *rt->vp->top_right, "top_right   ");
-	renderpoint(rt, *rt->vp->bottom_left, "bottom_left ");
-	renderpoint(rt, *rt->vp->bottom_right, "bottom_right");
+	// renderpoint(rt, *rt->vp->center, "center      ");
+	// renderpoint(rt, *rt->vp->top_left, "top_left    ");
+	// renderpoint(rt, *rt->vp->top_right, "top_right   ");
+	// renderpoint(rt, *rt->vp->bottom_left, "bottom_left ");
+	// renderpoint(rt, *rt->vp->bottom_right, "bottom_right");
 	while(rt->vp->pixel_y > 0)
 	{
 		rt->vp->pixel_x = 0;
 		while(rt->vp->pixel_x < SCREEN_WIDTH)
 		{
 			obj_render_loop(rt, rt->vp->render_ray, rt->vp->pixel_x, rt->vp->pixel_y);
+			if(rt->vp->pixel_x == 799)
+				print_vector(*rt->vp->render_ray->v, "renderray");
+
 			// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->vp->pixel_x, rt->vp->pixel_y , 0xFFFFFF);
 			// if(i < 6)
-			// 	printf("Coord x: %i y: %i\n", rt->vp->pixel_x, rt->vp->pixel_y);
 			// i++;
 			*rt->vp->render_ray->v = v_add_nm(*rt->vp->render_ray->v, *rt->vp->pixel_v_x);
 			rt->vp->pixel_x++;

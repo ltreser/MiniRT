@@ -1,42 +1,51 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-//AI CODE
-int main(int argc, char *argv[]) {
+
+struct						s_vector
+{
+	float					x;
+	float					y;
+	float					z;
+};
+typedef struct s_vector		t_vector;
+
+float v_len(t_vector vector)
+{
+	return(sqrtf(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z));
+}
+t_vector	v_normalize_nm(t_vector v)
+{
+	float	length;
+
+	length = 0;
+	length = v_len(v);
+	if (length == 0)
+		return (v);
+	v.x /= length;
+	v.y /= length;
+	v.z /= length;
+	return (v);
+}
+void	print_vector(t_vector v, char *prompt)
+{
+	printf("vector %s x:%f y:%f z:%f\n", prompt, v.x, v.y, v.z);
+	printf("%f,%f,%f\n", v.x, v.y, v.z);
+
+}
+
+int main(int argc, char *argv[])
+{
+	t_vector vector;
     if (argc < 2) {
         fprintf(stderr, "Usage: %s x1 x2 x3 ...\n", argv[0]);
         return 1;
     }
 
-    int n = argc - 1;
-    double *vec = malloc(n * sizeof(double));
-    if (vec == NULL) {
-        fprintf(stderr, "Memory allocation failed\n");
-        return 1;
-    }
-
-    double magnitude = 0.0;
-
-    // Parse input and compute magnitude
-    for (int i = 0; i < n; i++) {
-        vec[i] = atof(argv[i + 1]);
-        magnitude += vec[i] * vec[i];
-    }
-
-    magnitude = sqrt(magnitude);
-    if (magnitude == 0.0) {
-        fprintf(stderr, "Cannot normalize a zero vector.\n");
-        free(vec);
-        return 1;
-    }
-
-    // Normalize and print
-    printf("Normalized vector: ");
-    for (int i = 0; i < n; i++) {
-        printf("%.6f ", vec[i] / magnitude);
-    }
-    printf("\n");
-
-    free(vec);
+        vector.x = atof(argv[1]);
+        vector.y= atof(argv[2]);
+        vector.z = atof(argv[3]);
+		vector = v_normalize_nm(vector);
+		print_vector(vector, "vector");
     return 0;
 }
