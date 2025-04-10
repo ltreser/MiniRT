@@ -15,8 +15,8 @@ t_point	calc_startpoint_render(t_rt *rt)
 
 void	create_render_ray(t_rt *rt)
 {
-	*rt->vp->render_ray->p  = calc_startpoint_render(rt);
-	*rt->vp->render_ray->v = v_between_two_points_nm(*rt->camera->p , *rt->vp->render_ray->p);
+	*rt->vp->render_ray->p  =  *rt->camera->p;  //TODO problem: ray start point should be the camera
+	*rt->vp->render_ray->v = v_between_two_points_nm(*rt->camera->p, calc_startpoint_render(rt));
 	//error handling?
 }
 // void	render_sphere()
@@ -58,11 +58,11 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 					// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , float_to_grayscale_color(tmp_t));
 				}
 			}
-			// if(rt->obj[i]->type == SPHERE)
-			// {
-			// 	tmp_t = sphere_intersection(rt->obj[rt->n_obj]->sphere, ray);
-			// 	if(tmp_t > 0)
-			// 	{
+			 if(rt->obj[i]->type == SPHERE)
+			 {
+		 	 	tmp_t = sphere_intersection(rt->obj[rt->n_obj]->sphere, ray);
+			//	if(tmp_t > 0)
+			//	{
 			// 		// printf("tmp_t = %f\n", tmp_t);
 			// 		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , 0xFFFFFF);
 			// 	}
@@ -70,7 +70,7 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 			// if (rt->obj[i]->type == CYLINDER)
 			// {
 			// 	// tmp_t = cylinder_intersection(rt->obj[rt->n_obj]->cylinder, ray);
-			// }
+			 }
 			if(tmp_t > 0 && tmp_t < t)
 			{
 				t = tmp_t;
@@ -84,7 +84,7 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 	// printf("t = %f\n", t);
 	printf("t = %f y= %i x= %i\n", t, rt->vp->pixel_y, rt->vp->pixel_x);
 
-	// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , scale_color_by_value(*rt->obj[min_t_obj]->plane->c,t));
+	mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , scale_color_by_value(*rt->obj[min_t_obj]->plane->c,t));
 
 	//CALC LIGHTING ETC
 	//unsigned int scale_color_by_value(struct s_color color, float value)
@@ -119,8 +119,8 @@ void render_loop(t_rt *rt)
 		while(rt->vp->pixel_x < SCREEN_WIDTH)
 		{
 			obj_render_loop(rt, rt->vp->render_ray, rt->vp->pixel_x, rt->vp->pixel_y);
-			if(rt->vp->pixel_x == 799)
-				print_vector(*rt->vp->render_ray->v, "renderray");
+			//if(rt->vp->pixel_x == 799)
+				//print_vector(*rt->vp->render_ray->v, "renderray");
 
 			// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->vp->pixel_x, rt->vp->pixel_y , 0xFFFFFF);
 			// if(i < 6)
