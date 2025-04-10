@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:26:34 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/24 19:29:06 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/04 22:27:03 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ float	scalar_product_nm(t_vector a, t_vector b)
 	return(result = a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
+/*returns vector that points from a to b*/
 t_vector	v_between_two_points_nm(t_point a, t_point b)
 {
 	t_vector	res;
