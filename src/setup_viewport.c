@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:53:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/25 14:42:07 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/08 12:15:19 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	setup_viewport(t_rt *rt) //TODO init struct variables
 	calc_aspect_ratio(rt);
 	printf("rt->aspect_r; %f\n", rt->aspect_r);
 	rt->vp->height = rt->vp->width / rt->aspect_r;
-	rt->vp->right = v_normalize(v_cross_product(rt, &(t_vector){0,1,0}, rt->camera->v));
+	rt->vp->right = v_normalize(v_cross_product(rt, rt->camera->v, &(t_vector){0,1,0}));
 	rt->vp->up = v_normalize(v_cross_product(rt, rt->vp->right, rt->camera->v));
 	// rt->vp->up = &plane_normal;
 
@@ -53,9 +53,9 @@ void	setup_viewport(t_rt *rt) //TODO init struct variables
 
 	// print_point(*rt->vp->center, "\nrt->vp->center\n");
 	// print_point(*rt->vp->top_left, "\nrt->vp->top_left\n");
-	// print_point(*rt->vp->top_right, "\nrt->vp->top_right\n");
-	// print_point(*rt->vp->bottom_left, "\nrt->vp->bottom_left\n");
-	// print_point(*rt->vp->bottom_right, "\nrt->vp->bottom_right\n");
+	 //print_point(*rt->vp->top_right, "\nrt->vp->top_right\n");
+	 //print_point(*rt->vp->bottom_left, "\nrt->vp->bottom_left\n");
+	 //print_point(*rt->vp->bottom_right, "\nrt->vp->bottom_right\n");
 	rt->vp->vp_plane->p = rt->vp->bottom_left;
 	// print_vector(*v_normalize(v_cross_product(rt, rt->vp->right, rt->vp->up)), "\nNORMALIZED shoud be equal to camera\n");
 	// print_vector(*rt->camera->v,"CAMERA\n");

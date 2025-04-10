@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:39:19 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/24 15:20:18 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/10 12:20:35 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,26 @@ void	frustum_check_uplane(t_rt *rt, int i)
 	t_vector	pos;
 	float		pos_prime_len;
 	float		dist_plane;
+	float		e;
 
-	t_vector	pos_prime; // position projected onto n
+//	t_vector	pos_prime; // position projected onto n
 	if (rt->obj[i]->type == CYLINDER)
 		pos = v_between_two_points_nm((t_point){0, 0, 0}, *rt->obj[i]->cylinder->p);
 	else
 		pos = v_between_two_points_nm((t_point){0, 0, 0}, *rt->obj[i]->sphere->p);
+	e = v_dot_product(&pos, rt->fc->uplane_n);
+	if (e < 0)
+		e *= -1;
+	printf("e uplane is: %f\n", e);
+	dist_plane = e + rt->fc->uplane_d;
 	/*printf("this is POS:\n");
 	printf("pos.x: %f\n", pos.x);
 	printf("pos.y: %f\n", pos.y);
 	printf("pos.z: %f\n", pos.z);
 	printf("this is len of pos: %f\n", v_len(pos));*/
-	pos_prime = vector_projection(pos, *rt->fc->uplane_n);
+	
+	//pos_prime = vector_projection(pos, *rt->fc->uplane_n);
+
 	/*printf("this is POS':\n");
 	printf("pos'.x: %f\n", pos_prime.x);
 	printf("pos'.y: %f\n", pos_prime.y);
@@ -42,15 +50,20 @@ void	frustum_check_uplane(t_rt *rt, int i)
 	printf("n.z: %f\n", rt->fc->uplane_n->z);
 	printf("this is len of n: %f\n", v_len(*rt->fc->uplane_n));
 	printf("upplane distance is: %f\n", rt->fc->uplane_d);*/
-	pos_prime_len = v_len(pos_prime);
+	
+	//pos_prime_len = v_len(pos_prime);
+	
 	//TODO ok so pos prime len doesnt cause issues but is 0.00? wtf 
 	//printf("pos prime len is: %f\n", pos_prime_len);
-	dist_plane = pos_prime_len + rt->fc->uplane_d;
+	
+	//dist_plane = pos_prime_len + rt->fc->uplane_d;
+	
+	printf("dist uplane before adding radius is: %f\n", dist_plane);
 	if (rt->obj[i]->type == CYLINDER)
 		dist_plane += rt->obj[i]->cylinder->rot_r;
 	else
 		dist_plane += rt->obj[i]->sphere->rot_r;
-	printf("dist plane is: %f\n", dist_plane);
+	printf("dist uplane is: %f\n", dist_plane);
 	if (dist_plane > 0 && rt->obj[i]->visible == 1)
 		rt->obj[i]->visible = 1;
 	else
@@ -62,7 +75,7 @@ void	frustum_check_uplane(t_rt *rt, int i)
 void	frustum_check_dplane(t_rt *rt, int i)
 {
 	t_vector	pos;
-	float		pos_prime_len;
+	float		e;
 	float		dist_plane;
 
 	t_vector pos_prime; // position projected onto n
@@ -70,9 +83,15 @@ void	frustum_check_dplane(t_rt *rt, int i)
 		pos = v_between_two_points_nm((t_point){0, 0, 0}, *rt->obj[i]->cylinder->p);
 	else
 		pos = v_between_two_points_nm((t_point){0, 0, 0}, *rt->obj[i]->sphere->p);
-	pos_prime = vector_projection(pos, *rt->fc->dplane_n);
-	pos_prime_len = v_len(pos_prime);
-	dist_plane = pos_prime_len + rt->fc->dplane_d;
+	e = v_dot_product(&pos, rt->fc->dplane_n);
+	if (e < 0)
+        e *= -1;
+	printf("e dplane is: %f\n", e);
+    dist_plane = e + rt->fc->dplane_d;
+	//pos_prime = vector_projection(pos, *rt->fc->dplane_n);
+	//pos_prime_len = v_len(pos_prime);
+	//dist_plane = pos_prime_len + rt->fc->dplane_d;
+	printf("dist dplane before adding radius is: %f\n", dist_plane);
 	if (rt->obj[i]->type == CYLINDER)
 		dist_plane += rt->obj[i]->cylinder->rot_r;
 	else
@@ -81,12 +100,13 @@ void	frustum_check_dplane(t_rt *rt, int i)
 		rt->obj[i]->visible = 1;
 	else
 		rt->obj[i]->visible = 0;
+	printf("dist dplane is: %f\n", dist_plane);
 }
 
 void	frustum_check_rplane(t_rt *rt, int i)
 {
 	t_vector	pos;
-	float		pos_prime_len;
+	float		e;
 	float		dist_plane;
 
 	t_vector pos_prime; // position projected onto n
@@ -94,9 +114,17 @@ void	frustum_check_rplane(t_rt *rt, int i)
 		pos = v_between_two_points_nm((t_point){0, 0, 0}, *rt->obj[i]->cylinder->p);
 	else
 		pos = v_between_two_points_nm((t_point){0, 0, 0}, *rt->obj[i]->sphere->p);
-	pos_prime = vector_projection(pos, *rt->fc->rplane_n);
-	pos_prime_len = v_len(pos_prime);
-	dist_plane = pos_prime_len + rt->fc->rplane_d;
+	//pos_prime = vector_projection(pos, *rt->fc->rplane_n);
+	//pos_prime_len = v_len(pos_prime);
+	//dist_plane = pos_prime_len + rt->fc->rplane_d;
+	printf("pos vector: x = %f, y = %f, z = %f\n", pos.x, pos.y, pos.z);
+printf("rplane normal: x = %f, y = %f, z = %f\n", rt->fc->rplane_n->x, rt->fc->rplane_n->y, rt->fc->rplane_n->z);
+	e = v_dot_product(&pos, rt->fc->rplane_n);
+	if (e < 0)
+        e *= -1;
+	printf("e rplane is: %f\n", e);
+    dist_plane = e + rt->fc->rplane_d;
+	printf("dist rplane before adding radius is: %f\n", dist_plane);
 	if (rt->obj[i]->type == CYLINDER)
 		dist_plane += rt->obj[i]->cylinder->rot_r;
 	else
@@ -105,12 +133,13 @@ void	frustum_check_rplane(t_rt *rt, int i)
 		rt->obj[i]->visible = 1;
 	else
 		rt->obj[i]->visible = 0;
+	printf("dist rplane is: %f\n", dist_plane);
 }
 
 void	frustum_check_lplane(t_rt *rt, int i)
 {
 	t_vector	pos;
-	float		pos_prime_len;
+	float		e;
 	float		dist_plane;
 
 	t_vector pos_prime; // position projected onto n
@@ -118,15 +147,22 @@ void	frustum_check_lplane(t_rt *rt, int i)
 		pos = v_between_two_points_nm((t_point){0, 0, 0}, *rt->obj[i]->cylinder->p);
 	else
 		pos = v_between_two_points_nm((t_point){0, 0, 0}, *rt->obj[i]->sphere->p);
-	pos_prime = vector_projection(pos, *rt->fc->lplane_n);
-	pos_prime_len = v_len(pos_prime);
-	dist_plane = pos_prime_len + rt->fc->lplane_d;
+	e = v_dot_product(&pos, rt->fc->uplane_n);
+	if (e < 0)
+        e *= -1;
+	printf("e lplane is: %f\n", e);
+    dist_plane = e + rt->fc->uplane_d;
+	//pos_prime = vector_projection(pos, *rt->fc->lplane_n);
+	//pos_prime_len = v_len(pos_prime);
+	//dist_plane = pos_prime_len + rt->fc->lplane_d;
+	printf("dist lplane before adding radius is: %f\n", dist_plane);
 	if (rt->obj[i]->type == CYLINDER)
 		dist_plane += rt->obj[i]->cylinder->rot_r;
 	else
 		dist_plane += rt->obj[i]->sphere->rot_r;
 	if (dist_plane > 0 && rt->obj[i]->visible == 1)
-		rt->obj[i]->visible = 1;
+		;
 	else
 		rt->obj[i]->visible = 0;
+	printf("dist lplane is: %f\n", dist_plane);
 }
