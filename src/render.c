@@ -8,8 +8,8 @@ t_point	calc_startpoint_render(t_rt *rt)
 	t_point		point;
 
 	vector = v_add_nm(*rt->vp->pixel_v_y, *rt->vp->pixel_v_x);
-	vector = v_mult_scalar_nm(vector, (float)-0.5);
-	point = p_add(vector, *rt->vp->top_left);
+	vector = v_mult_scalar_nm(vector, (float)0.5);
+	point = p_add(vector, *rt->vp->bottom_left);
 	return(point);
 }
 
@@ -60,10 +60,11 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 			}
 			 if(rt->obj[i]->type == SPHERE)
 			 {
+
 		 	 	tmp_t = sphere_intersection(rt->obj[rt->n_obj]->sphere, ray);
+				// printf("tmp_t = %f\n", tmp_t);
 			//	if(tmp_t > 0)
 			//	{
-			// 		// printf("tmp_t = %f\n", tmp_t);
 			// 		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , 0xFFFFFF);
 			// 	}
 			// }
@@ -85,6 +86,7 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 	printf("t = %f y= %i x= %i\n", t, rt->vp->pixel_y, rt->vp->pixel_x);
 
 	mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , scale_color_by_value(*rt->obj[min_t_obj]->plane->c,t));
+	// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , 0xFFFFFF);
 
 	//CALC LIGHTING ETC
 	//unsigned int scale_color_by_value(struct s_color color, float value)
@@ -119,10 +121,10 @@ void render_loop(t_rt *rt)
 		while(rt->vp->pixel_x < SCREEN_WIDTH)
 		{
 			obj_render_loop(rt, rt->vp->render_ray, rt->vp->pixel_x, rt->vp->pixel_y);
-			//if(rt->vp->pixel_x == 799)
-				//print_vector(*rt->vp->render_ray->v, "renderray");
+			if(rt->vp->pixel_x == 400 && rt->vp->pixel_y == 300)
+				print_vector(*rt->vp->render_ray->v, "renderray");
 
-			// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->vp->pixel_x, rt->vp->pixel_y , 0xFFFFFF);
+			// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->vp->pixel_x, rt->vp->pixel_y , 0x0000FF);
 			// if(i < 6)
 			// i++;
 			*rt->vp->render_ray->v = v_add_nm(*rt->vp->render_ray->v, *rt->vp->pixel_v_x);

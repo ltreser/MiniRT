@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 16:32:16 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/09 16:04:17 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/11 12:06:19 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ unsigned int float_to_grayscale_color(float value)
 	float	norm;
 	int		intensity;
 
-	min = 0;
+	min = 15;
 	max = 100;
 	if (value < min)
 		value = min;

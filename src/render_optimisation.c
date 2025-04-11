@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:36:36 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/08 13:29:27 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/11 11:42:50 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,14 @@ void	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner, int *erro
 		float dist_up = distance_p_to_ray(point, ray);
 
 		rt->obj[rt->n_obj]->uvp_x1 = ceilf(dist_up / rt->vp->pixel_w);
+		printf("uvp_x1 %i, ", rt->obj[rt->n_obj]->uvp_x1);
 
 		ray.v = rt->vp->right;
 
 		float dist_right = distance_p_to_ray(point, ray);
 		rt->obj[rt->n_obj]->uvp_y1 = ceilf(dist_right / rt->vp->pixel_h);
+		printf("uvp_y1 %i, ", rt->obj[rt->n_obj]->uvp_y1);
+
 	}
 
 	if (corner == 'd')
@@ -109,11 +112,14 @@ void	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner, int *erro
 
 		float dist_up = distance_p_to_ray(point, ray);
 		rt->obj[rt->n_obj]->dvp_x2 = ceilf(dist_up / rt->vp->pixel_w);
+		printf("dvp_x2 %i, ", rt->obj[rt->n_obj]->dvp_x2);
 
 		ray.v = rt->vp->right;
 
 		float dist_right = distance_p_to_ray(point, ray);
 		rt->obj[rt->n_obj]->dvp_y2 = ceilf(dist_right / rt->vp->pixel_h);
+		printf("dvp_y2 %i, ", rt->obj[rt->n_obj]->dvp_y2);
+
 	}
 }
 /* 	if(corner == 'u')
