@@ -35,7 +35,6 @@ float	sphere_intersection(t_sphere *s, t_ray *r)
 	//printf("this is the discriminant : %f\n", discriminant);
 	if (discriminant < 0)
 	{
-		printf("no\n");
 
 		return (-1);
 	}

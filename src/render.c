@@ -67,11 +67,14 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 			//	{
 			// 		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , 0xFFFFFF);
 			// 	}
-			// }
-			// if (rt->obj[i]->type == CYLINDER)
-			// {
-			// 	// tmp_t = cylinder_intersection(rt->obj[rt->n_obj]->cylinder, ray);
-			 }
+			}
+			if (rt->obj[i]->type == CYLINDER)
+			{
+				// printf("HERE");
+				tmp_t = cylinder_intersection(*rt->obj[rt->n_obj]->cylinder, *ray);
+				// printf("tmp_t = %f\n", tmp_t);
+
+			}
 			if(tmp_t > 0 && tmp_t < t)
 			{
 				t = tmp_t;

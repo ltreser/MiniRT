@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/04/09 13:53:32 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/11 22:58:07 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,6 +298,7 @@ int							keypress(int keycode, t_rt *rt);
 int							ft_close_window(t_rt *rt);
 
 // maths
+float						abc_formula(float a, float b, float c);
 float						v_len(t_vector vector);
 t_vector					*v_cross_product(t_rt *rt, t_vector *a,
 								t_vector *b);
@@ -343,6 +344,7 @@ void						frustum_check_lplane(t_rt *rt, int i);
 t_point						plane_ray_intersec(t_plane pl, t_ray ray);
 float						sphere_intersection(t_sphere *s, t_ray *r);
 t_point						sphere_intersection_p(t_sphere *s, t_ray *r);
+float						cylinder_intersection(t_cylinder cyl, t_ray ray);
 
 // render optimisation
 

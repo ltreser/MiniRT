@@ -19,5 +19,49 @@ with
 */
 float	cylinder_intersection(t_cylinder cyl, t_ray ray)
 {
+	t_vector	delta_p;
+	t_vector	vector;
+	t_vector	vector2;
+	float		a;
+	float		b;
+	float		c;
+	float		r;
 
+	r = cyl.d/2;
+	delta_p = pp_sub_v_nm(*ray.p, *cyl.p);
+	vector = v_subtract_nm( *ray.v, v_mult_scalar_nm(*cyl.v, v_dot_product(ray.v, cyl.v)));
+	a = scalar_product_nm(vector, vector);
+	vector2 = v_subtract_nm(delta_p, v_mult_scalar_nm(*cyl.v, v_dot_product(&delta_p, cyl.v)));
+	b = 2 * (v_dot_product(&vector, &vector2));
+	c = scalar_product_nm(vector2, vector2) - (r*r);
+	//ENDCAPS!!!
+	return(abc_formula(a,b,c));
+}
+
+//(−b±√(b^2−4ac))/2a
+float	abc_formula(float a, float b, float c)
+{
+	float	t1;
+	float	t2;
+	float	tmp;
+	float	discriminant;
+
+	discriminant = b*b - 4.f*a*c;
+	if (discriminant < 0.f)
+		return -1.f;
+	discriminant = sqrtf(discriminant);
+	t1 = (- b + discriminant) / (2 * a);
+	t2 = (- b - discriminant) / (2 * a);
+	//REWORK
+	if (t1 > t2)
+	{
+		tmp = t1;
+		t1 = t2;
+		t2 = tmp;
+	}
+	if (t1 > 0.f)
+		return t1;
+	if (t2 > 0.f)
+		return t2;
+	return -1.f;
 }
