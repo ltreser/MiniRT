@@ -16,6 +16,9 @@ with
  C = ([delta]p - ([delta]p, va)va)^2 - r^2
  where [delta]p = p - pa
 
+
+ 	(va, (p+v*t1)-p1) > 0 and (va, (p+v*t1)- p2) < 0
+	(va, (p+v*t2)-p1) > 0 and (va, (p+v*t2)- p2) < 0
 */
 float	cylinder_intersection(t_cylinder cyl, t_ray ray)
 {
@@ -38,6 +41,11 @@ float	cylinder_intersection(t_cylinder cyl, t_ray ray)
 	return(abc_formula(a,b,c));
 }
 
+float calc_cyl_endcaps(t_cylinder cyl, t_ray ray)
+{
+
+}
+
 //(−b±√(b^2−4ac))/2a
 float	abc_formula(float a, float b, float c)
 {
@@ -51,6 +59,7 @@ float	abc_formula(float a, float b, float c)
 		return -1.f;
 	discriminant = sqrtf(discriminant);
 	t1 = (- b + discriminant) / (2 * a);
+	// (va, (p+v*t1)-p1) > 0 and (va, (p+v*t1)- p2) < 0 when nicht der fall return max float
 	t2 = (- b - discriminant) / (2 * a);
 	//REWORK
 	if (t1 > t2)
@@ -59,9 +68,9 @@ float	abc_formula(float a, float b, float c)
 		t1 = t2;
 		t2 = tmp;
 	}
-	if (t1 > 0.f)
+	if (t1 > 0.f)//&& !max flaot
 		return t1;
-	if (t2 > 0.f)
+	if (t2 > 0.f)//&& !max flaot
 		return t2;
 	return -1.f;
 }

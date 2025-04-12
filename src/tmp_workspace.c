@@ -300,3 +300,8 @@ ax2+bx+c=0
 
 cy 0,0,-5 0.000000,0.707107,0.707107 2 10 0,255,0
 
+(va, qi-p1) > 0 and (va, qi- p2) < 0, where
+	qi=p+v ti.
+
+	(va, (p+v*t1)-p1) > 0 and (va, (p+v*t1)- p2) < 0
+	(va, (p+v*t2)-p1) > 0 and (va, (p+v*t2)- p2) < 0
