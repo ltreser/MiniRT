@@ -6,14 +6,14 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:27:20 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/04 19:19:07 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/14 19:13:34 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
 /* DEL
-/* t = - ((lo -a) *n)/(l *n)
+// t = - ((lo -a) *n)/(l *n)
 a = plane point,
 n = nomalized vektor plane
 lo = startpoint ray,
@@ -108,7 +108,8 @@ float	plane_ray_calc_t(t_plane pl, t_ray ray)
     printf("DEBUG: Ray-plane intersection found at t = %f\n", t);
     return (t);
 }
- */
+*/
+
 t_point	plane_ray_intersec(t_plane pl, t_ray ray)
 {
 	t_point	point;
