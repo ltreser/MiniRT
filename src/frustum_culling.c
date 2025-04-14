@@ -52,7 +52,7 @@ void	frustum_culling(t_rt *rt)
 	int i;
 	float distance;
 	float radius;
-	t_vector v;
+	t_vector cam2obj;
 
 	i = 0;
 	malloc_fc(rt);
@@ -63,26 +63,26 @@ void	frustum_culling(t_rt *rt)
 		distance = -1;
 		if (rt->obj[i]->type == SPHERE)
 		{
-			v = v_between_two_points_nm(*rt->camera->p, *rt->obj[i]->sphere->p);
+			cam2obj = v_between_two_points_nm(*rt->camera->p, *rt->obj[i]->sphere->p);
 			radius = rt->obj[i]->sphere->rot_r;
 		}
 		else if (rt->obj[i]->type == CYLINDER)
 		{
-			v = v_between_two_points_nm(*rt->camera->p, *rt->obj[i]->cylinder->p);	
+			cam2obj = v_between_two_points_nm(*rt->camera->p, *rt->obj[i]->cylinder->p);	
 			radius = rt->obj[i]->sphere->rot_r;
 		}
 		if (rt->obj[i]->type != PLANE)
 		{
-			distance = v_dot_product(&v, rt->fc->rplane_n) - radius;
+			distance = v_dot_product(&cam2obj, rt->fc->rplane_n) - radius;
 			if (distance > 0)
 					rt->obj[i]->visible = 0;
-			distance = v_dot_product(&v, rt->fc->lplane_n) - radius ;
+			distance = v_dot_product(&cam2obj, rt->fc->lplane_n) - radius ;
 			if (distance > 0)
 					rt->obj[i]->visible = 0;
-			distance = v_dot_product(&v, rt->fc->dplane_n) - radius;		
+			distance = v_dot_product(&cam2obj, rt->fc->dplane_n) - radius;		
 			if (distance > 0)
 					rt->obj[i]->visible = 0;
-			distance = v_dot_product(&v, rt->fc->uplane_n) - radius;
+			distance = v_dot_product(&cam2obj, rt->fc->uplane_n) - radius;
 			if (distance > 0)
 					rt->obj[i]->visible = 0;
 			break ;	

@@ -6,7 +6,11 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/04/14 17:24:46 by afoth            ###   ########.fr       */
+=======
+/*   Updated: 2025/04/14 19:19:43 by ltreser          ###   ########.fr       */
+>>>>>>> 41210267eedd26688015110634f171647d9b9158
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,7 +302,6 @@ int							keypress(int keycode, t_rt *rt);
 int							ft_close_window(t_rt *rt);
 
 // maths
-float						abc_formula(float a, float b, float c);
 float						v_len(t_vector vector);
 t_vector					*v_cross_product(t_rt *rt, t_vector *a,
 								t_vector *b);
@@ -343,8 +346,6 @@ void						frustum_check_lplane(t_rt *rt, int i);
 
 t_point						plane_ray_intersec(t_plane pl, t_ray ray);
 float						sphere_intersection(t_sphere *s, t_ray *r);
-t_point						sphere_intersection_p(t_sphere *s, t_ray *r);
-float						cylinder_intersection(t_cylinder cyl, t_ray ray);
 
 // render optimisation
 
@@ -360,6 +361,14 @@ t_point						plane_ray_intersec(t_plane pl, t_ray ray);
 void						render(t_rt *rt);
 void						calc_aspect_ratio(t_rt *rt);
 void						setup_viewport(t_rt *rt);
+float	cylinder_intersection(t_rt *rt, t_cylinder cyl, t_ray ray);
+t_point						sphere_intersection_p(t_sphere *s, t_ray *r);
+float   infinite_planes(t_cylinder cyl, t_ray ray, int  flag);
+int point_within_circles(t_cylinder cyl, float intersection, t_ray ray);
+int point_within_planes(t_rt *rt, t_cylinder cyl, float intersection, t_ray ray);
+float infinite_cylinder(t_cylinder cyl, t_ray ray, int flag);
+float   abc_formula(float a, float b, float c, int  flag);
+
 // init_obj.c
 void						init_obj(t_rt *rt);
 t_point						*init_point(t_gc *gc);
