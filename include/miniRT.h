@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/04/11 22:58:07 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/14 17:24:46 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 // 1920x1080? DEL
 # define PI 3.14159265f
-# define SCREEN_WIDTH 800
-# define SCREEN_HEIGHT 600
+# define SCREEN_WIDTH 1200
+# define SCREEN_HEIGHT 800
 # define MAX_RENDER FLT_MAX
 // Comparing floats, if the difference is smaller than EPSILON,
 // they are considered equal
@@ -367,6 +367,11 @@ t_ray						*init_ray(t_gc *gc);
 //color
 unsigned int				float_to_grayscale_color(float value);
 unsigned int				scale_color_by_value(struct s_color color, float value);
+
+//lighting
+float							lighting(t_rt *rt, float t);
+float							lighting_loop(t_rt *rt, t_ray *ray);
+
 //debug
 void						print_point(t_point p, char *prompt);
 void						print_vector(t_vector v, char *prompt);

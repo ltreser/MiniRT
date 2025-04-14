@@ -43,25 +43,25 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 		// printf("I %i count %i\n", i, rt->obj_count);
 		if(rt->obj[i]->visible == 1)
 		{
-			rt->n_obj = i;
+			i = i;
 			tmp_t = -1;
 			if(rt->obj[i]->type == PLANE)
 			{
 				// printf("I:%i ", i);
-				tmp_t = plane_ray_calc_t(*rt->obj[rt->n_obj]->plane, *ray);
-				if(tmp_t > 0 && !isnan(tmp_t))
-				{
+				tmp_t = plane_ray_calc_t(*rt->obj[i]->plane, *ray);
+				// if(tmp_t > 0 && !isnan(tmp_t))
+				// {
 					// printf("tmp_t = %f\n", tmp_t);
 
 					// printf("t = %f y= %i x= %i\n", t, rt->vp->pixel_y, rt->vp->pixel_x);
-					mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , 0xFF00FF);
+					// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , 0xFF00FF);
 					// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , float_to_grayscale_color(tmp_t));
-				}
+				// }
 			}
 			 if(rt->obj[i]->type == SPHERE)
 			 {
 
-		 	 	tmp_t = sphere_intersection(rt->obj[rt->n_obj]->sphere, ray);
+		 	 	tmp_t = sphere_intersection(rt->obj[i]->sphere, ray);
 				// printf("tmp_t = %f\n", tmp_t);
 			//	if(tmp_t > 0)
 			//	{
@@ -71,7 +71,7 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 			if (rt->obj[i]->type == CYLINDER)
 			{
 				// printf("HERE");
-				tmp_t = cylinder_intersection(*rt->obj[rt->n_obj]->cylinder, *ray);
+				tmp_t = cylinder_intersection(*rt->obj[i]->cylinder, *ray);
 				// printf("tmp_t = %f\n", tmp_t);
 
 			}
@@ -86,14 +86,26 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 	if(min_t_obj < 0) //no t found
 		return;
 	// printf("t = %f\n", t);
-	printf("t = %f y= %i x= %i\n", t, rt->vp->pixel_y, rt->vp->pixel_x);
+	// printf("t = %f y= %i x= %i\n", t, rt->vp->pixel_y, rt->vp->pixel_x);
+	tmp_t = lighting(rt, t);
 
-	mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , scale_color_by_value(*rt->obj[min_t_obj]->plane->c,t));
+	if (tmp_t > 0)
+	{
+
+		printf("tmp_t = %f\n", tmp_t);
+		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , 0x0000FF);
+	}
+	else
+		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , 0xFF0000);
+
+	// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , scale_color_by_value(*rt->obj[min_t_obj]->plane->c, t));
 	// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , 0xFFFFFF);
 
 	//CALC LIGHTING ETC
 	//unsigned int scale_color_by_value(struct s_color color, float value)
 }
+
+
 /* Main loop that sends out a ray for every pixel
 Starts in the upper left corner. (xmin ymax)
 Warning! in the mlx lib (rendering) y is inverted so y = 0 is the the highest up.
@@ -106,8 +118,6 @@ void render_loop(t_rt *rt)
 
 	create_render_ray(rt);
 	start_vec = *rt->vp->render_ray->v;
-
-
 	// int i = 0;//DEL DEBUG
 	// rt->vp->pixel_x = 0;
 	rt->vp->pixel_y = SCREEN_HEIGHT - 1;
@@ -124,6 +134,8 @@ void render_loop(t_rt *rt)
 		while(rt->vp->pixel_x < SCREEN_WIDTH)
 		{
 			obj_render_loop(rt, rt->vp->render_ray, rt->vp->pixel_x, rt->vp->pixel_y);
+
+
 			if(rt->vp->pixel_x == 400 && rt->vp->pixel_y == 300)
 				print_vector(*rt->vp->render_ray->v, "renderray");
 
