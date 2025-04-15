@@ -16,6 +16,12 @@ float	lighting_loop(t_rt *rt, t_ray *ray, float len)
 	while(i < rt->obj_count)
 	{
 		// printf("I %i count %i\n", i, rt->obj_count);
+			tmp_t = -1;
+			// if (i == rt->n_obj)
+			// {
+			// 	i++;
+			// 	continue;
+			// }
 			if(rt->obj[i]->type == PLANE)
 			{
 				tmp_t = plane_ray_calc_t(*rt->obj[i]->plane, *ray);
@@ -26,7 +32,7 @@ float	lighting_loop(t_rt *rt, t_ray *ray, float len)
 			}
 			if (rt->obj[i]->type == CYLINDER)
 			{
-				tmp_t = cylinder_intersection(rt, *rt->obj[i]->cylinder, *ray);
+				//tmp_t = cylinder_intersection(rt, *rt->obj[i]->cylinder, *ray);
 			}
 			if(tmp_t > t && tmp_t < len)
 			{
@@ -62,7 +68,7 @@ float	lighting(t_rt *rt, t_obj obj, float t)
 	// t_point	calc_endpoint_vector_nm(t_vector v, t, float scalar)
 	*(ray.p) = calc_endpoint_vector_nm(*(rt->vp->render_ray->v), *(rt->vp->render_ray->p), t);
 	normal = cal_normal(rt, obj, *(ray.p));
-	// renderpoint(rt, *(ray.p), "BLUB");
+	*(ray.p) = calc_endpoint_vector_nm(normal, *(ray.p), EPSILON);
 	*(ray.v) = v_between_two_points_nm(*(ray.p), *(rt->light->p));
 	len_v = v_len(*(ray.v)) - EPSILON;
 	return(lighting_loop(rt, &ray, len_v));

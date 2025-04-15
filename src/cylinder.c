@@ -22,7 +22,7 @@ with
 */
 
 //TODO what if t hasnt been set yet
-float	cylinder_intersection(t_rt *rt, t_cylinder cyl, t_ray ray)
+/* float	cylinder_intersection(t_rt *rt, t_cylinder cyl, t_ray ray)
 {
 	float	cylinder_intersection1;
 	float	cylinder_intersection2;
@@ -51,9 +51,9 @@ float	cylinder_intersection(t_rt *rt, t_cylinder cyl, t_ray ray)
 		&& t > plane_intersection2 && plane_intersection2 > 0)
 		t = plane_intersection2;
 	return (t);
-}
+} */
 
-float	infinite_planes(t_cylinder cyl, t_ray ray, int flag)
+/* float	infinite_planes(t_cylinder cyl, t_ray ray, int flag)
 {
 	t_plane	plane1;
 	t_plane	plane2;
@@ -66,9 +66,9 @@ float	infinite_planes(t_cylinder cyl, t_ray ray, int flag)
 		return (plane_ray_calc_t(plane1, ray));
 	else
 		return (plane_ray_calc_t(plane2, ray));
-}
+} */
 
-int	point_within_circles(t_cylinder cyl, float intersection, t_ray ray)
+/* int	point_within_circles(t_cylinder cyl, float intersection, t_ray ray)
 {
 	t_point		point;
 	t_plane		plane1;
@@ -88,17 +88,20 @@ int	point_within_circles(t_cylinder cyl, float intersection, t_ray ray)
 	if (v_len(center2point) > cyl.d / 2)
 		return (0);
 	return (1);
-}
+} */
 
-int	point_within_planes(t_rt *rt, t_cylinder cyl, float intersection, t_ray ray)
+/* int	point_within_planes(t_rt *rt, t_cylinder cyl, float intersection, t_ray ray)
 {
 	t_point		point;
 	t_plane		plane1;
 	t_plane		plane2;
 	t_vector	camera2point;
+	t_vector	camera2point;
+
 
 	point = calc_endpoint_vector(ray.v, ray.p, intersection);
 	plane1.v = cyl.v;
+
 	*plane2.v = v_mult_scalar_nm(*cyl.v, -1); //here segfault
 	camera2point = v_between_two_points_nm(*rt->camera->p, point);
 	if (v_dot_product(&camera2point, plane1.v) > 0)
@@ -106,7 +109,7 @@ int	point_within_planes(t_rt *rt, t_cylinder cyl, float intersection, t_ray ray)
 	if (v_dot_product(&camera2point, plane2.v) > 0)
 		return (0);
 	return (1);
-}
+} */
 
 float	infinite_cylinder(t_cylinder cyl, t_ray ray, int flag)
 {
@@ -138,15 +141,15 @@ float	infinite_cylinder(t_cylinder cyl, t_ray ray, int flag)
 
 float	abc_formula(float a, float b, float c, int flag)
 {
-	float	tmp;
+	// float	tmp;
 	float	discriminant;
-	float	intersections[2];
+	// float	intersections[2];
 
 	discriminant = b * b - 4.f * a * c;
 	if (discriminant < 0.f)
 		return (-1.f);
 	discriminant = sqrtf(discriminant);
-	if (flag = 0)
+	if (flag == 0)
 		return ((-b + discriminant) / (2 * a));
 	else
 		return ((-b - discriminant) / (2 * a));
