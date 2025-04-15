@@ -24,62 +24,66 @@ with
 //TODO what if t hasnt been set yet
 float	cylinder_intersection(t_rt *rt, t_cylinder cyl, t_ray ray)
 {
-	float	cylinder_intersections[2];
-	float	plane_intersections[2];
+	float	cylinder_intersection1;
+	float	cylinder_intersection2;
+	float	plane_intersection1;
+	float	plane_intersection2;
 	float	t;
 
 	// get infinite cylinder intersections first
-	cylinder_intersections[0] = infinite_cylinder(cyl, ray, 0);
-	cylinder_intersections[1] = infinite_cylinder(cyl, ray, 1);
+	cylinder_intersection1 = infinite_cylinder(cyl, ray, 0);
+	cylinder_intersection2 = infinite_cylinder(cyl, ray, 1);
 	//exit(0);
-	if (point_within_planes(rt, cyl, cylinder_intersections[0], ray))
-		t = cylinder_intersections[0];// deault t that is valid bc its within the cylinder planes
-	if (point_within_planes(rt, cyl, cylinder_intersections[1], ray) // check if valid t
-		&& cylinder_intersections[0] > cylinder_intersections[1] // and also smaller than previous
-		&& cylinder_intersections[1] > 0) // and also not negative
-		t = cylinder_intersections[1]; // if so, change to superior t
+	if (point_within_planes(rt, cyl, cylinder_intersection1, ray))
+		t = cylinder_intersection1;// deault t that is valid bc its within the cylinder planes
+	if (point_within_planes(rt, cyl, cylinder_intersection2, ray) // check if valid t
+		&& cylinder_intersection1 > cylinder_intersection2 // and also smaller than previous
+		&& cylinder_intersection2 > 0) // and also not negative
+		t = cylinder_intersection2; // if so, change to superior t
 	// get the infinite cylinder plane intersections
-	plane_intersections[0] = infinite_planes(cyl, ray, 0);
-	plane_intersections[1] = infinite_planes(cyl, ray, 1);
-	if (point_within_circles(cyl, plane_intersections[0], ray) // check if valid bc within circles
-		&& t > plane_intersections[0] // check if smaller than previous
-		&& plane_intersections[0] > 0) // check if not negative
-	t = plane_intersections[0]; // if so, change to superior t
-	if (point_within_circles(cyl, plane_intersections[1], ray) // repeat process
-		&& t > plane_intersections[1] && plane_intersections > 0)
-		t = plane_intersections[1];
+	plane_intersection1 = infinite_planes(cyl, ray, 0);
+	plane_intersection2 = infinite_planes(cyl, ray, 1);
+	if (point_within_circles(cyl, plane_intersection1, ray) // check if valid bc within circles
+		&& t > plane_intersection1 // check if smaller than previous
+		&& plane_intersection1 > 0) // check if not negative
+		t = plane_intersection1; // if so, change to superior t
+	if (point_within_circles(cyl, plane_intersection2, ray) // repeat process
+		&& t > plane_intersection2 && plane_intersection2 > 0)
+		t = plane_intersection2;
 	return (t);
 }
 
 float	infinite_planes(t_cylinder cyl, t_ray ray, int flag)
 {
-	t_plane	planes[2];
+	t_plane	plane1;
+	t_plane	plane2;
 
-	*planes[0].p = calc_endpoint_vector(cyl.v, cyl.p, cyl.h / 2);
-	planes[0].v = cyl.v;
-	*planes[1].p = calc_endpoint_vector(cyl.v, cyl.p, -(cyl.h / 2));
-	*planes[1].v = v_mult_scalar_nm(*cyl.v, -1);
+	*plane1.p = calc_endpoint_vector(cyl.v, cyl.p, cyl.h / 2);
+	plane1.v = cyl.v;
+	*plane2.p = calc_endpoint_vector(cyl.v, cyl.p, -(cyl.h / 2));
+	*plane2.v = v_mult_scalar_nm(*cyl.v, -1);
 	if (flag == 0)
-		return (plane_ray_calc_t(planes[0], ray));
+		return (plane_ray_calc_t(plane1, ray));
 	else
-		return (plane_ray_calc_t(planes[1], ray));
+		return (plane_ray_calc_t(plane2, ray));
 }
 
 int	point_within_circles(t_cylinder cyl, float intersection, t_ray ray)
 {
 	t_point		point;
-	t_plane		planes[2];
+	t_plane		plane1;
+	t_plane		plane2;
 	t_vector	center2point;
 
 	point = calc_endpoint_vector(ray.v, ray.p, intersection);
-	*planes[0].p = calc_endpoint_vector(cyl.v, cyl.p, cyl.h / 2);
-	planes[0].v = cyl.v;
-	*planes[1].p = calc_endpoint_vector(cyl.v, cyl.p, -(cyl.h / 2));
-	*planes[1].v = v_mult_scalar_nm(*cyl.v, -1);
+	*plane1.p = calc_endpoint_vector(cyl.v, cyl.p, cyl.h / 2);
+	plane1.v = cyl.v;
+	*plane2.p = calc_endpoint_vector(cyl.v, cyl.p, -(cyl.h / 2));
+	*plane2.v = v_mult_scalar_nm(*cyl.v, -1);
 	center2point = v_between_two_points_nm(*cyl.p, point);
-	if (v_dot_product(&center2point, planes[0].v) != 0)
+	if (v_dot_product(&center2point, plane1.v) != 0)
 		return (0);
-	if (v_dot_product(&center2point, planes[1].v) != 0)
+	if (v_dot_product(&center2point, plane2.v) != 0)
 		return (0);
 	if (v_len(center2point) > cyl.d / 2)
 		return (0);
@@ -89,18 +93,17 @@ int	point_within_circles(t_cylinder cyl, float intersection, t_ray ray)
 int	point_within_planes(t_rt *rt, t_cylinder cyl, float intersection, t_ray ray)
 {
 	t_point		point;
-	t_plane		planes[2];
+	t_plane		plane1;
+	t_plane		plane2;
 	t_vector	camera2point;
 
 	point = calc_endpoint_vector(ray.v, ray.p, intersection);
-	planes[0].v = cyl.v;
-	//exit(0);
-	*planes[1].v = v_mult_scalar_nm(*cyl.v, -1);
-	exit(0);
+	plane1.v = cyl.v;
+	*plane2.v = v_mult_scalar_nm(*cyl.v, -1); //here segfault
 	camera2point = v_between_two_points_nm(*rt->camera->p, point);
-	if (v_dot_product(&camera2point, planes[0].v) > 0)
+	if (v_dot_product(&camera2point, plane1.v) > 0)
 		return (0);
-	if (v_dot_product(&camera2point, planes[1].v) > 0)
+	if (v_dot_product(&camera2point, plane2.v) > 0)
 		return (0);
 	return (1);
 }
@@ -108,7 +111,8 @@ int	point_within_planes(t_rt *rt, t_cylinder cyl, float intersection, t_ray ray)
 float	infinite_cylinder(t_cylinder cyl, t_ray ray, int flag)
 {
 	t_vector	delta_p;
-	t_vector	vector[2];
+	t_vector	vector1;
+	t_vector	vector2;
 	float		a;
 	float		b;
 	float		c;
@@ -116,14 +120,14 @@ float	infinite_cylinder(t_cylinder cyl, t_ray ray, int flag)
 
 	r = cyl.d / 2;
 	delta_p = pp_sub_v_nm(*ray.p, *cyl.p);
-	vector[0] = v_subtract_nm(*ray.v, v_mult_scalar_nm(*cyl.v,
+	vector1 = v_subtract_nm(*ray.v, v_mult_scalar_nm(*cyl.v,
 				v_dot_product(ray.v, cyl.v)));
-	vector[1] = v_subtract_nm(delta_p, v_mult_scalar_nm(*cyl.v,
+	vector2 = v_subtract_nm(delta_p, v_mult_scalar_nm(*cyl.v,
 				v_dot_product(&delta_p, cyl.v)));
-	a = scalar_product_nm(vector[0], vector[0]);
-	b = 2 * (v_dot_product(&vector[0], &vector[1]));
-	c = scalar_product_nm(vector[1], vector[1]) - (r * r);
-	if (flag = 0)
+	a = scalar_product_nm(vector1, vector1);
+	b = 2 * (v_dot_product(&vector1, &vector2));
+	c = scalar_product_nm(vector2, vector2) - (r * r);
+	if (flag == 0)
 		return (abc_formula(a, b, c, 0));
 	return (abc_formula(a, b, c, 1));
 }
