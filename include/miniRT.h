@@ -6,11 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/04/14 17:24:46 by afoth            ###   ########.fr       */
-=======
-/*   Updated: 2025/04/14 19:19:43 by ltreser          ###   ########.fr       */
->>>>>>> 41210267eedd26688015110634f171647d9b9158
+/*   Updated: 2025/04/15 13:45:37 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -378,8 +374,10 @@ unsigned int				float_to_grayscale_color(float value);
 unsigned int				scale_color_by_value(struct s_color color, float value);
 
 //lighting
-float							lighting(t_rt *rt, float t);
-float							lighting_loop(t_rt *rt, t_ray *ray);
+float							lighting(t_rt *rt, t_obj obj, float t);
+float							lighting_loop(t_rt *rt, t_ray *ray, float len);
+t_vector						cal_normal(t_rt *rt, t_obj obj, t_point p);
+
 
 //debug
 void						print_point(t_point p, char *prompt);
