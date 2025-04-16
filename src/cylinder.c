@@ -80,34 +80,25 @@ float	infinite_planes(t_cylinder cyl, t_ray ray, int flag)
 int	point_within_circles(t_cylinder cyl, float intersection, t_ray ray)
 {
 	t_point		point;
-	t_plane		plane1;
-	t_vector	v1;
-	t_point		p1;
-	t_plane		plane2;
-	t_vector	v2;
-	t_point		p2;
-	t_vector	center2point;
+	t_vector	top_normal;
+	t_point		top_center;
+	t_vector	bottom_normal;
+	t_point		bottom_center;
+	t_vector	center2point_top;
+	t_vector	center2point_bottom;
 
-	//if (intersection > 0)
-	//	printf("test for intersection validity\n");
-	plane1.v = &v1;
-	plane1.p = &p1;
-	plane2.v = &v2;
-	plane2.p = &p2;
 	point = calc_endpoint_vector(ray.v, ray.p, intersection);
-	*plane1.p = calc_endpoint_vector(cyl.v, cyl.p, cyl.h / 2);
-	plane1.v = cyl.v;
-	*plane2.p = calc_endpoint_vector(cyl.v, cyl.p, -(cyl.h / 2));
-	*plane2.v = v_mult_scalar_nm(*cyl.v, -1);
-	center2point = v_between_two_points_nm(*cyl.p, point);
-	if (v_dot_product(&center2point, plane1.v) != 0)
-		return (0);
-	if (v_dot_product(&center2point, plane2.v) != 0)
-		return (0);
-	if (v_len(center2point) > cyl.d / 2)
-		return (0);
-	//printf("POINT WITHIN CIRCLES!!!!!!\n");
-	return (1);
+	top_center = calc_endpoint_vector(cyl.v, cyl.p, cyl.h / 2);
+	top_normal = *cyl.v;
+	bottom_center = calc_endpoint_vector(cyl.v, cyl.p, -(cyl.h / 2));
+	bottom_normal = v_mult_scalar_nm(*cyl.v, -1);
+	center2point_top = v_between_two_points_nm(top_center, point);
+	center2point_bottom = v_between_two_points_nm(bottom_center, point);
+	if (!v_dot_product(&center2point_top, &top_normal) && v_len(center2point_top) <= cyl.d/2)
+		return (1);
+	if (!v_dot_product(&center2point_bottom, &bottom_normal) && v_len(center2point_bottom) <= cyl.d/2)
+		return (1);
+	return (0);
 } 
 
 int	point_within_planes(t_cylinder cyl, float intersection, t_ray ray)
@@ -132,7 +123,6 @@ int	point_within_planes(t_cylinder cyl, float intersection, t_ray ray)
 		return (0);
 	if (v_dot_product(&bottom2point, &bottom_normal) > 0)
 		return (0);
-	printf("POINT WITHIN PLANES!!!!!!\n");
 	return (1);
 }
 
