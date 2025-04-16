@@ -21,8 +21,7 @@ with
 	(va, (p+v*t2)-p1) > 0 and (va, (p+v*t2)- p2) < 0
 */
 
-//TODO what if t hasnt been set yet
-/* float	cylinder_intersection(t_rt *rt, t_cylinder cyl, t_ray ray)
+float	cylinder_intersection(t_cylinder cyl, t_ray ray)
 {
 	float	cylinder_intersection1;
 	float	cylinder_intersection2;
@@ -30,34 +29,44 @@ with
 	float	plane_intersection2;
 	float	t;
 
-	// get infinite cylinder intersections first
+	t = -1;
 	cylinder_intersection1 = infinite_cylinder(cyl, ray, 0);
 	cylinder_intersection2 = infinite_cylinder(cyl, ray, 1);
-	//exit(0);
-	if (point_within_planes(rt, cyl, cylinder_intersection1, ray))
-		t = cylinder_intersection1;// deault t that is valid bc its within the cylinder planes
-	if (point_within_planes(rt, cyl, cylinder_intersection2, ray) // check if valid t
-		&& cylinder_intersection1 > cylinder_intersection2 // and also smaller than previous
-		&& cylinder_intersection2 > 0) // and also not negative
-		t = cylinder_intersection2; // if so, change to superior t
-	// get the infinite cylinder plane intersections
+
+	if (cylinder_intersection1 > 0 && point_within_planes(cyl, cylinder_intersection1, ray))
+		t = cylinder_intersection1;
+
+	if (cylinder_intersection2 > 0 && point_within_planes(cyl, cylinder_intersection2, ray)
+		&& (t < 0 || t > cylinder_intersection2))
+		t = cylinder_intersection2; 
+
 	plane_intersection1 = infinite_planes(cyl, ray, 0);
 	plane_intersection2 = infinite_planes(cyl, ray, 1);
-	if (point_within_circles(cyl, plane_intersection1, ray) // check if valid bc within circles
-		&& t > plane_intersection1 // check if smaller than previous
-		&& plane_intersection1 > 0) // check if not negative
-		t = plane_intersection1; // if so, change to superior t
-	if (point_within_circles(cyl, plane_intersection2, ray) // repeat process
-		&& t > plane_intersection2 && plane_intersection2 > 0)
+
+	if (plane_intersection1 > 0 && point_within_circles(cyl, plane_intersection1, ray)
+		&& (t < 0 || t > plane_intersection1))
+		t = plane_intersection1;
+
+	if (plane_intersection2 > 0 && point_within_circles(cyl, plane_intersection2, ray)
+		&& (t < 0 || t > plane_intersection2))
 		t = plane_intersection2;
+
 	return (t);
-} */
+}
 
-/* float	infinite_planes(t_cylinder cyl, t_ray ray, int flag)
+float	infinite_planes(t_cylinder cyl, t_ray ray, int flag)
 {
-	t_plane	plane1;
-	t_plane	plane2;
+	t_plane		plane1;
+	t_vector	v1;
+	t_point		p1;
+	t_plane		plane2;
+	t_vector	v2;
+	t_point		p2;
 
+	plane1.v = &v1;
+	plane1.p = &p1;
+	plane2.v = &v2;
+	plane2.p = &p2;
 	*plane1.p = calc_endpoint_vector(cyl.v, cyl.p, cyl.h / 2);
 	plane1.v = cyl.v;
 	*plane2.p = calc_endpoint_vector(cyl.v, cyl.p, -(cyl.h / 2));
@@ -66,15 +75,25 @@ with
 		return (plane_ray_calc_t(plane1, ray));
 	else
 		return (plane_ray_calc_t(plane2, ray));
-} */
+} 
 
-/* int	point_within_circles(t_cylinder cyl, float intersection, t_ray ray)
+int	point_within_circles(t_cylinder cyl, float intersection, t_ray ray)
 {
 	t_point		point;
 	t_plane		plane1;
+	t_vector	v1;
+	t_point		p1;
 	t_plane		plane2;
+	t_vector	v2;
+	t_point		p2;
 	t_vector	center2point;
 
+	//if (intersection > 0)
+	//	printf("test for intersection validity\n");
+	plane1.v = &v1;
+	plane1.p = &p1;
+	plane2.v = &v2;
+	plane2.p = &p2;
 	point = calc_endpoint_vector(ray.v, ray.p, intersection);
 	*plane1.p = calc_endpoint_vector(cyl.v, cyl.p, cyl.h / 2);
 	plane1.v = cyl.v;
@@ -87,29 +106,35 @@ with
 		return (0);
 	if (v_len(center2point) > cyl.d / 2)
 		return (0);
+	//printf("POINT WITHIN CIRCLES!!!!!!\n");
 	return (1);
-} */
+} 
 
-/* int	point_within_planes(t_rt *rt, t_cylinder cyl, float intersection, t_ray ray)
+int	point_within_planes(t_cylinder cyl, float intersection, t_ray ray)
 {
 	t_point		point;
-	t_plane		plane1;
-	t_plane		plane2;
-	t_vector	camera2point;
-	t_vector	camera2point;
+	t_vector	top_normal;
+	t_point		top_point;
+	t_vector	bottom_normal;
+	t_point		bottom_point;
+	t_vector	top2point;
+	t_vector	bottom2point;
 
 
 	point = calc_endpoint_vector(ray.v, ray.p, intersection);
-	plane1.v = cyl.v;
-
-	*plane2.v = v_mult_scalar_nm(*cyl.v, -1); //here segfault
-	camera2point = v_between_two_points_nm(*rt->camera->p, point);
-	if (v_dot_product(&camera2point, plane1.v) > 0)
+	top_normal = *cyl.v;
+	bottom_normal = v_mult_scalar_nm(*cyl.v, -1);
+    top_point = calc_endpoint_vector(cyl.v, cyl.p, cyl.h / 2);
+	bottom_point = calc_endpoint_vector(cyl.v, cyl.p, (-(cyl.h / 2)));
+	top2point = v_between_two_points_nm(top_point, point);
+	bottom2point = v_between_two_points_nm(bottom_point, point);
+	if (v_dot_product(&top2point, &top_normal) > 0)
 		return (0);
-	if (v_dot_product(&camera2point, plane2.v) > 0)
+	if (v_dot_product(&bottom2point, &bottom_normal) > 0)
 		return (0);
+	printf("POINT WITHIN PLANES!!!!!!\n");
 	return (1);
-} */
+}
 
 float	infinite_cylinder(t_cylinder cyl, t_ray ray, int flag)
 {
@@ -141,9 +166,7 @@ float	infinite_cylinder(t_cylinder cyl, t_ray ray, int flag)
 
 float	abc_formula(float a, float b, float c, int flag)
 {
-	// float	tmp;
 	float	discriminant;
-	// float	intersections[2];
 
 	discriminant = b * b - 4.f * a * c;
 	if (discriminant < 0.f)
@@ -152,5 +175,5 @@ float	abc_formula(float a, float b, float c, int flag)
 	if (flag == 0)
 		return ((-b + discriminant) / (2 * a));
 	else
-		return ((-b - discriminant) / (2 * a));
+			return ((-b - discriminant) / (2 * a));
 }
