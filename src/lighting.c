@@ -7,11 +7,13 @@ t_float	shadow_loop(t_rt *rt, t_ray *ray, t_float len)
 {
 	int		i;
 	// int		min_t_obj; might need to deturm color
-	t_float	t;
+	// t_float	t;
 	t_float	tmp_t;
 
 	i = 0;
-	t = EPSILON;
+	// t = EPSILON;
+	// t = -1;
+
 	// min_t_obj = -1;
 	while(i < rt->obj_count)
 	{
@@ -46,7 +48,7 @@ t_float	shadow_loop(t_rt *rt, t_ray *ray, t_float len)
 		// return;
 	// printf("t = %f\n", t);
 
-	return(t);
+	return(tmp_t);
 }
 
 t_color	col_mult_scalar(t_color color, t_float scalar)
@@ -98,9 +100,9 @@ t_color	calculate_light(t_rt *rt, t_color color, t_color diffuse)
 	t_color	ambient;
 
 	ambient = col_mult_scalar(*rt->ambient->c, rt->ambient->ratio);
-	result.r = ((ambient.r + diffuse.r) / 255.0) * color.r;
-	result.g = ((ambient.g + diffuse.g) / 255.0) * color.g;
-	result.b = ((ambient.b + diffuse.b) / 255.0) * color.b;
+	result.r = ((t_float)(ambient.r + diffuse.r) / 255.0) * color.r;
+	result.g = ((t_float)(ambient.g + diffuse.g) / 255.0) * color.g;
+	result.b = ((t_float)(ambient.b + diffuse.b) / 255.0) * color.b;
 	if (result.r > 255.0)
 		result.r = 255.0;
 	if (result.g > 255.0)
@@ -115,6 +117,7 @@ t_color	lighting(t_rt *rt, t_obj obj, t_color color, t_float *t)
 	// create a ray between obj and light
 	t_ray		ray;
 	t_point		p;
+	t_point		hitpoint;
 	t_vector	v;
 	t_vector	normal;
 	t_color		diffuse;
@@ -125,25 +128,28 @@ t_color	lighting(t_rt *rt, t_obj obj, t_color color, t_float *t)
 	// assign internal pointers to stack memory
 	ray.p = &p;
 	ray.v = &v;
+	diffuse = (t_color){0,0,0};
+	hitpoint = calc_endpoint_vector_nm(*(rt->vp->render_ray->v), *(rt->vp->render_ray->p), *t);
 
-	//calc normal
-
-	//cal point
-	// t_point	calc_endpoint_vector_nm(t_vector v, t, t_float scalar)
-	//ray.p hit point obj
-	*(ray.p) = calc_endpoint_vector_nm(*(rt->vp->render_ray->v), *(rt->vp->render_ray->p), *t);
-	normal = cal_normal(rt, obj, *(ray.p));
-	*(ray.p) = calc_endpoint_vector_nm(normal, *(ray.p), EPSILON);
-	*(ray.v) = v_between_two_points_nm(*(ray.p), *(rt->light->p));
-	len_v = v_len(*(ray.v)) - EPSILON;
+	// *(ray.p) = calc_endpoint_vector_nm(*(rt->vp->render_ray->v), *(rt->vp->render_ray->p), *t);
+	*(ray.v) = v_normalize_nm(v_between_two_points_nm(hitpoint, *(rt->light->p)));
+	normal = cal_normal(rt, obj, hitpoint);
+	*(ray.p) = calc_endpoint_vector_nm(normal, hitpoint, EPSILON);
+	len_v = v_len(v_between_two_points_nm(*(ray.p), *(rt->light->p))) - EPSILON;
+	//shadow t is negative, not intersection found
 	shadow_t = shadow_loop(rt, &ray, len_v);
-	if(shadow_t < EPSILON)
-		diffuse = calc_diffuse_light(rt, normal, *(ray.v));
-
-
-	result = calculate_light(rt, color, diffuse);
 	*t = shadow_t;
-	return(result);
+	if(shadow_t < EPSILON)
+	{
+		diffuse = calc_diffuse_light(rt, normal, *(ray.v));
+		result = calculate_light(rt, color, diffuse);
+		return(result);
+	}
+	//shadow t is positive aka shade
+	else
+	{
+		result = calculate_light(rt, color, diffuse);
+		return(result);
+	}
 
-	// calculate if obj between the start obj and the light, if so make it dark
 }

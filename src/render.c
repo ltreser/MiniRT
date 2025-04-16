@@ -71,20 +71,24 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 		}
 		i++;
 	}
-	if(min_t_obj < 0) //no t found
+	//no t found
+	if(min_t_obj < 0)
+	{
+		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - 1 - y , 0x0000FF);
 		return;
+	}
 	// printf("t = %f\n", t);
 	// printf("t = %f y= %i x= %i\n", t, rt->vp->pixel_y, rt->vp->pixel_x);
 	rt->n_obj = min_t_obj;
 	color = lighting(rt, *(rt->obj[min_t_obj]), color, &t);
 
-	if (t > EPSILON)
-	{
+	// if (t > EPSILON)
+	// {
 
-	// 	// printf("tmp_t = %f\n", tmp_t);
-		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - 1 - y , 0x0000FF);
-	}
-	else
+	// // 	// printf("tmp_t = %f\n", tmp_t);
+	// 	mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - 1 - y , color_to_hex(color));
+	// }
+	// else
 		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - 1 - y , color_to_hex(color));
 		// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - 1 - y , 0xFFFFFF);
 

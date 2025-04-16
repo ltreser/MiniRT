@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/04/16 18:16:07 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/16 23:18:12 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 // 1920x1080? DEL
 # define PI 3.14159265f
-# define SCREEN_WIDTH 1200
+# define SCREEN_WIDTH 1600
 # define SCREEN_HEIGHT 800
 # define MAX_RENDER FLT_MAX
 // Comparing t_floats, if the difference is smaller than EPSILON,
