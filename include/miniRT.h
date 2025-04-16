@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/04/15 17:51:50 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/16 15:31:16 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define MAX_RENDER FLT_MAX
 // Comparing floats, if the difference is smaller than EPSILON,
 // they are considered equal
-# define EPSILON 0.00001f
+# define EPSILON 0.000001f
 
 /*Error Codes*/
 # define EXIT_MALLOC 2
@@ -375,7 +375,7 @@ unsigned int				scale_color_by_value(struct s_color color, float value);
 
 //lighting
 float							lighting(t_rt *rt, t_obj obj, float t);
-float							lighting_loop(t_rt *rt, t_ray *ray, float len);
+float							shadow_loop(t_rt *rt, t_ray *ray, float len);
 t_vector						cal_normal(t_rt *rt, t_obj obj, t_point p);
 
 

@@ -79,13 +79,13 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 	if (tmp_t > EPSILON)
 	{
 
-		printf("tmp_t = %f\n", tmp_t);
+		// printf("tmp_t = %f\n", tmp_t);
 		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - 1 - y , 0x0000FF);
 	}
 	else
-		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - 1 - y , 0xFFFFFF);
+		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - 1 - y , scale_color_by_value(*rt->obj[min_t_obj]->plane->c, t));
+		// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - 1 - y , 0xFFFFFF);
 
-	// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , scale_color_by_value(*rt->obj[min_t_obj]->plane->c, t));
 	// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , 0xFFFFFF);
 
 	//CALC LIGHTING ETC

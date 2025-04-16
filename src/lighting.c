@@ -3,7 +3,7 @@
 
 //simple check if there is an obj between the light and the obj that is rendert
 //find biggest t and compare to len obj light - EPSILON
-float	lighting_loop(t_rt *rt, t_ray *ray, float len)
+float	shadow_loop(t_rt *rt, t_ray *ray, float len)
 {
 	int		i;
 	// int		min_t_obj; might need to deturm color
@@ -11,7 +11,7 @@ float	lighting_loop(t_rt *rt, t_ray *ray, float len)
 	float	tmp_t;
 
 	i = 0;
-	t = -1;
+	t = EPSILON;
 	// min_t_obj = -1;
 	while(i < rt->obj_count)
 	{
@@ -34,9 +34,10 @@ float	lighting_loop(t_rt *rt, t_ray *ray, float len)
 			{
 				//tmp_t = cylinder_intersection(rt, *rt->obj[i]->cylinder, *ray);
 			}
-			if(tmp_t > t && tmp_t < len)
+			// shadow_hit->t > EPSILON && shadow_hit->t < max_len - EPSILON)
+			if(tmp_t > EPSILON && tmp_t < len)
 			{
-				t = tmp_t;
+				return(tmp_t);
 				// min_t_obj = i;
 			}
 		i++;
@@ -47,7 +48,58 @@ float	lighting_loop(t_rt *rt, t_ray *ray, float len)
 
 	return(t);
 }
+t_color	col_mult_scalar(t_color color, float scalar)
+{
+	t_color	result;
 
+	result.r = color.r * scalar;
+	result.g = color.g * scalar;
+	result.b = color.b * scalar;
+	return(result);
+}
+
+t_color	calc_diffuse_light(t_rt *rt, t_vector normal)
+{
+	t_ray	light;
+	float	dot_product;
+	t_color	diffuse;
+	t_color	temp_diffuse;
+
+	diffuse = (t_color){0, 0, 0,};
+	while (l != NULL && hit_rec)
+	{
+		light.direction = vec_unit(vec_sub(l->point, hit_rec->point));
+		light.origin = l->point;
+		dot_product = fmax(vec_dot(hit_rec->normal, light.direction), EPSILON);
+		shadow = check_shadow(light, hit_rec->point, data, hit_rec->normal);
+		if (dot_product > EPSILON && shadow == false)
+		{
+			temp_diffuse = \
+				col_mult(col_mult(l->color, dot_product), l->brightness);
+			diffuse = col_add(diffuse, temp_diffuse);
+		}
+		l = l->next;
+	}
+	return (diffuse);
+}
+
+t_color	calculate_light(t_rt *rt, t_point p, t_color color, t_color diffuse)
+{
+	t_color	result;
+	t_color	ambient;
+
+	ambient = col_mult_scalar(*rt->ambient->c, rt->ambient->ratio);
+	result.r = ((ambient.r + diffuse.r) / 255.0) * color.r;
+	result.g = ((ambient.g + diffuse.g) / 255.0) * color.g;
+	result.b = ((ambient.b + diffuse.b) / 255.0) * color.b;
+	if (result.r > 255.0)
+		result.r = 255.0;
+	if (result.g > 255.0)
+		result.g = 255.0;
+	if (result.b > 255.0)
+		result.b = 255.0;
+	return (result);
+}
 
 float	lighting(t_rt *rt, t_obj obj, float t)
 {
@@ -57,6 +109,7 @@ float	lighting(t_rt *rt, t_obj obj, float t)
 	t_vector	v;
 	t_vector	normal;
 	float		len_v;
+	float		shadow_t;
 
 	// assign internal pointers to stack memory
 	ray.p = &p;
@@ -66,13 +119,18 @@ float	lighting(t_rt *rt, t_obj obj, float t)
 
 	//cal point
 	// t_point	calc_endpoint_vector_nm(t_vector v, t, float scalar)
+	//ray.p hit point obj
 	*(ray.p) = calc_endpoint_vector_nm(*(rt->vp->render_ray->v), *(rt->vp->render_ray->p), t);
 	normal = cal_normal(rt, obj, *(ray.p));
 	*(ray.p) = calc_endpoint_vector_nm(normal, *(ray.p), EPSILON);
 	*(ray.v) = v_between_two_points_nm(*(ray.p), *(rt->light->p));
 	len_v = v_len(*(ray.v)) - EPSILON;
-	return(lighting_loop(rt, &ray, len_v));
+	shadow_t = shadow_loop(rt, &ray, len_v);
+	t_color	calc_diffuse_light(t_rt *rt, t_vector normal)
 
+	t_color	calculate_light(t_rt *rt, t_point p, t_color color, t_color diffuse)
+
+	return(shadow_t);
 
 	// calculate if obj between the start obj and the light, if so make it dark
 }
