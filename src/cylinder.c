@@ -30,34 +30,51 @@ with
 	float	plane_intersection2;
 	float	t;
 
+	t = -1;
 	// get infinite cylinder intersections first
 	cylinder_intersection1 = infinite_cylinder(cyl, ray, 0);
 	cylinder_intersection2 = infinite_cylinder(cyl, ray, 1);
+	//printf("cylinder intersection 1 is: %f\n", cylinder_intersection1);
+	//printf("cylinder intersection 2 is: %f\n", cylinder_intersection2);
 	//exit(0);
 	if (point_within_planes(rt, cyl, cylinder_intersection1, ray))
 		t = cylinder_intersection1;// deault t that is valid bc its within the cylinder planes
+	printf("t is: %f\n", t);
 	if (point_within_planes(rt, cyl, cylinder_intersection2, ray) // check if valid t
-		&& cylinder_intersection1 > cylinder_intersection2 // and also smaller than previous
+		&& (t < 0 || t > cylinder_intersection2) // and also smaller than previous
 		&& cylinder_intersection2 > 0) // and also not negative
 		t = cylinder_intersection2; // if so, change to superior t
+	//printf("t is: %f\n", t);
 	// get the infinite cylinder plane intersections
 	plane_intersection1 = infinite_planes(cyl, ray, 0);
 	plane_intersection2 = infinite_planes(cyl, ray, 1);
+	//printf("plane intersection 1 is: %f\n", plane_intersection1);
+	//printf("plane intersection 2 is: %f\n", plane_intersection2);
 	if (point_within_circles(cyl, plane_intersection1, ray) // check if valid bc within circles
-		&& t > plane_intersection1 // check if smaller than previous
+		&& (t < 0 || t > plane_intersection1) // check if smaller than previous
 		&& plane_intersection1 > 0) // check if not negative
 		t = plane_intersection1; // if so, change to superior t
+	//printf("t is: %f\n", t);
 	if (point_within_circles(cyl, plane_intersection2, ray) // repeat process
-		&& t > plane_intersection2 && plane_intersection2 > 0)
+		&& (t < 0 || t > plane_intersection2) && plane_intersection2 > 0)
 		t = plane_intersection2;
+	printf("t is: %f\n", t);
 	return (t);
 } */
 
 /* float	infinite_planes(t_cylinder cyl, t_ray ray, int flag)
 {
-	t_plane	plane1;
-	t_plane	plane2;
+	t_plane		plane1;
+	t_vector	v1;
+	t_point		p1;
+	t_plane		plane2;
+	t_vector	v2;
+	t_point		p2;
 
+	plane1.v = &v1;
+	plane1.p = &p1;
+	plane2.v = &v2;
+	plane2.p = &p2;
 	*plane1.p = calc_endpoint_vector(cyl.v, cyl.p, cyl.h / 2);
 	plane1.v = cyl.v;
 	*plane2.p = calc_endpoint_vector(cyl.v, cyl.p, -(cyl.h / 2));
@@ -72,9 +89,17 @@ with
 {
 	t_point		point;
 	t_plane		plane1;
+	t_vector	v1;
+	t_point		p1;
 	t_plane		plane2;
+	t_vector	v2;
+	t_point		p2;
 	t_vector	center2point;
 
+	plane1.v = &v1;
+	plane1.p = &p1;
+	plane2.v = &v2;
+	plane2.p = &p2;
 	point = calc_endpoint_vector(ray.v, ray.p, intersection);
 	*plane1.p = calc_endpoint_vector(cyl.v, cyl.p, cyl.h / 2);
 	plane1.v = cyl.v;
@@ -94,11 +119,15 @@ with
 {
 	t_point		point;
 	t_plane		plane1;
+	t_vector	v1;
 	t_plane		plane2;
+	t_vector	v2;
 	t_vector	camera2point;
 	t_vector	camera2point;
 
 
+	plane1.v = &v1;
+	plane2.v = &v2;
 	point = calc_endpoint_vector(ray.v, ray.p, intersection);
 	plane1.v = cyl.v;
 
