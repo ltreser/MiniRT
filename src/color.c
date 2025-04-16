@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 16:32:16 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/11 12:06:19 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/16 17:56:07 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,16 @@ unsigned int scale_color_by_value(struct s_color color, float value)
 
     // Pack into 0xRRGGBB
     return (r << 16) | (g << 8) | b;
+}
+
+unsigned int color_to_hex(t_color c)
+{
+	unsigned int	r;
+	unsigned int	g;
+	unsigned int	b;
+
+	r = c.r;
+	g = c.g;
+	b = c.b;
+	return (r << 16) | (g << 8) | b;
 }

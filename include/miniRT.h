@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/04/16 16:35:07 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/16 18:01:27 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -375,9 +375,16 @@ unsigned int				float_to_grayscale_color(float value);
 unsigned int				scale_color_by_value(struct s_color color, float value);
 
 //lighting
-float							lighting(t_rt *rt, t_obj obj, float t);
+t_color							lighting(t_rt *rt, t_obj obj, t_color color, float *t);
 float							shadow_loop(t_rt *rt, t_ray *ray, float len);
 t_vector						cal_normal(t_rt *rt, t_obj obj, t_point p);
+unsigned int					color_to_hex(t_color c);
+t_color							col_mult_scalar(t_color color, float scalar);
+t_color							col_add(t_color color_a, t_color color_b);
+t_color							calc_diffuse_light(t_rt *rt, t_vector normal, t_vector v_light);
+t_color							calculate_light(t_rt *rt, t_color color, t_color diffuse);
+
+
 
 
 //debug

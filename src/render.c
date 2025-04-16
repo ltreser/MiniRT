@@ -34,6 +34,7 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 	int		min_t_obj;
 	float	t;
 	float	tmp_t;
+	t_color	color;
 
 	i = 0;
 	t = MAX_RENDER;
@@ -48,18 +49,19 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 			if(rt->obj[i]->type == PLANE)
 			{
 				tmp_t = plane_ray_calc_t(*rt->obj[i]->plane, *ray);
+				color = *rt->obj[i]->plane->c;
+
 			}
 			if(rt->obj[i]->type == SPHERE)
 			{
 		 	 	tmp_t = sphere_intersection(rt->obj[i]->sphere, ray);
+				color = *rt->obj[i]->sphere->c;
 
 			}
 			if (rt->obj[i]->type == CYLINDER)
 			{
-				// printf("HERE");
 				tmp_t = cylinder_intersection(*rt->obj[i]->cylinder, *ray);
-				// printf("tmp_t = %f\n", tmp_t);
-
+				color = *rt->obj[i]->cylinder->c;
 			}
 			if(tmp_t > EPSILON && tmp_t < t)
 			{
@@ -74,16 +76,16 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 	// printf("t = %f\n", t);
 	// printf("t = %f y= %i x= %i\n", t, rt->vp->pixel_y, rt->vp->pixel_x);
 	rt->n_obj = min_t_obj;
-	tmp_t = lighting(rt, *(rt->obj[min_t_obj]), t);
+	color = lighting(rt, *(rt->obj[min_t_obj]), color, &t);
 
-	if (tmp_t > EPSILON)
+	if (t > EPSILON)
 	{
 
-		// printf("tmp_t = %f\n", tmp_t);
+	// 	// printf("tmp_t = %f\n", tmp_t);
 		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - 1 - y , 0x0000FF);
 	}
 	else
-		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - 1 - y , scale_color_by_value(*rt->obj[min_t_obj]->plane->c, t));
+		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - 1 - y , color_to_hex(color));
 		// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - 1 - y , 0xFFFFFF);
 
 	// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , 0xFFFFFF);
