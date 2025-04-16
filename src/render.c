@@ -57,7 +57,7 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 			if (rt->obj[i]->type == CYLINDER)
 			{
 				// printf("HERE");
-			//	tmp_t = cylinder_intersection(rt, *rt->obj[i]->cylinder, *ray);
+				tmp_t = cylinder_intersection(*rt->obj[i]->cylinder, *ray);
 				// printf("tmp_t = %f\n", tmp_t);
 
 			}

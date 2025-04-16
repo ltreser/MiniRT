@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/04/15 17:51:50 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/16 15:27:14 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -357,11 +357,11 @@ t_point						plane_ray_intersec(t_plane pl, t_ray ray);
 void						render(t_rt *rt);
 void						calc_aspect_ratio(t_rt *rt);
 void						setup_viewport(t_rt *rt);
-float	cylinder_intersection(t_rt *rt, t_cylinder cyl, t_ray ray);
+float	cylinder_intersection(t_cylinder cyl, t_ray ray);
 t_point						sphere_intersection_p(t_sphere *s, t_ray *r);
 float   infinite_planes(t_cylinder cyl, t_ray ray, int  flag);
 int point_within_circles(t_cylinder cyl, float intersection, t_ray ray);
-int point_within_planes(t_rt *rt, t_cylinder cyl, float intersection, t_ray ray);
+int point_within_planes(t_cylinder cyl, float intersection, t_ray ray);
 float infinite_cylinder(t_cylinder cyl, t_ray ray, int flag);
 float   abc_formula(float a, float b, float c, int  flag);
 
