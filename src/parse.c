@@ -46,7 +46,7 @@ void	ft_parse(char *str, t_rt *rt, int count_only)
 
 void	parse_ambient(t_rt *rt, char *str)
 {
-	float ratio;
+	t_float ratio;
 	rt->ambient = gc_malloc(rt->gc, sizeof(t_ambient));
 	str += skip_spaces(str);
 	ratio = ft_atof(gc_chop(rt->gc, str, ' '));
@@ -71,7 +71,7 @@ void	parse_camera(t_rt *rt, char *str)
 	rt->camera->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
 	str += skip_spaces(str);
 	fov = (int)ft_atof(gc_chop(rt->gc, str, '\n'));
-	is_nan(rt, (float)fov);
+	is_nan(rt, (t_float)fov);
 	if (fov < 0 || fov > 180)
 		ft_exit(rt, 2, gc_strdup(rt->gc,FILE_FAIL));
 	rt->camera->fov = fov;
@@ -79,7 +79,7 @@ void	parse_camera(t_rt *rt, char *str)
 
 void	parse_light(t_rt *rt, char *str)
 {
-	float bright;
+	t_float bright;
 	rt->light = gc_malloc(rt->gc, sizeof(t_light));
 	str += skip_spaces(str);
 	rt->light->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
@@ -130,17 +130,17 @@ t_color *parse_color(t_rt *rt, char *str)
 		ft_exit(rt, 2, gc_strdup(rt->gc,FILE_FAIL));
 	str += skip_spaces(str);
 	color->r = (int)ft_atof(gc_chop(rt->gc, str, ','));
-	is_nan(rt, (float)color->r);
+	is_nan(rt, (t_float)color->r);
 	if (color->r < 0 || color->r > 255)
 		ft_exit(rt, 2, gc_strdup(rt->gc,FILE_FAIL));
 	str += skip_spaces(str);
 	color->g = (int)ft_atof(gc_chop(rt->gc, str, ','));
-	is_nan(rt, (float)color->g);
+	is_nan(rt, (t_float)color->g);
 	if (color->g < 0 || color->g > 255)
 		ft_exit(rt, 2, gc_strdup(rt->gc,FILE_FAIL));
 	str += skip_spaces(str);
 	color->b = (int)ft_atof(gc_strtrim(rt->gc, str, "'\n' "));
-	is_nan(rt, (float)color->b);
+	is_nan(rt, (t_float)color->b);
 	if (color->b < 0 || color->b > 255)
 		ft_exit(rt, 2, gc_strdup(rt->gc,FILE_FAIL));
 	return (color);
@@ -171,7 +171,7 @@ t_point	*parse_point(t_rt *rt, char *str)
 t_vector	*parse_vector(t_rt *rt, char *str)
 {
 	t_vector	*vector;
-	float		len;
+	t_float		len;
 
 	vector = gc_malloc(rt->gc, sizeof(t_vector));
 	vector->x= ft_atof(gc_chop(rt->gc, str, ','));

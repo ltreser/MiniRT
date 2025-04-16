@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 16:34:13 by ltreser           #+#    #+#             */
-/*   Updated: 2025/04/16 18:01:27 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/16 18:16:07 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 # define SCREEN_WIDTH 1200
 # define SCREEN_HEIGHT 800
 # define MAX_RENDER FLT_MAX
-// Comparing floats, if the difference is smaller than EPSILON,
+// Comparing t_floats, if the difference is smaller than EPSILON,
 // they are considered equal
 # define EPSILON 0.000001f
-
+typedef double	t_float;
 /*Error Codes*/
 # define EXIT_MALLOC 2
 # define EXIT_READ 3
@@ -86,9 +86,9 @@ enum						e_type
 
 struct						s_rt
 {
-	float					aspect_r;
-	float					screen_h_rad;
-	float					screen_w_rad;
+	t_float					aspect_r;
+	t_float					screen_h_rad;
+	t_float					screen_w_rad;
 	t_mlx					*mlx;
 	t_gc					*gc;
 	t_camera				*camera;
@@ -108,15 +108,15 @@ struct						s_vp
 {
 	t_ray					*render_ray;
 	t_plane					*vp_plane;
-	float					width;
-	float					height;
-	float					distance;
-	float					pixel_size;
+	t_float					width;
+	t_float					height;
+	t_float					distance;
+	t_float					pixel_size;
 	t_vector				*pixel_v_x;
 	t_vector				*pixel_v_y;
 	t_vector				*pixel_v_y_negative;
-	float					pixel_w;
-	float					pixel_h;
+	t_float					pixel_w;
+	t_float					pixel_h;
 
 	int						pixel_x;
 	int						pixel_y;
@@ -141,10 +141,10 @@ struct						s_fc
 	t_point					*dplane_p;
 	t_point					*rplane_p;
 	t_point					*lplane_p;
-	float					uplane_d;
-	float					dplane_d;
-	float					rplane_d;
-	float					lplane_d;
+	t_float					uplane_d;
+	t_float					dplane_d;
+	t_float					rplane_d;
+	t_float					lplane_d;
 };
 
 /*minilibx graphical library struct*/
@@ -162,7 +162,7 @@ struct						s_mlx
 	int						bpp;
 	int						endian;
 	int						line_len;
-	// float	zoom;
+	// t_float	zoom;
 };
 
 /*objects*/
@@ -200,7 +200,7 @@ struct						s_sphere
 	t_vector				*v;//DEL HAE??
 	t_point					*p;
 	int						d;
-	float					rot_r;
+	t_float					rot_r;
 };
 
 struct						s_cylinder
@@ -210,9 +210,9 @@ struct						s_cylinder
 	t_color					*c;
 	t_vector				*v;
 	t_point					*p;
-	float					rot_r;
-	float					d;
-	float					h;
+	t_float					rot_r;
+	t_float					d;
+	t_float					h;
 };
 
 /*parameters*/
@@ -220,20 +220,20 @@ struct						s_cylinder
 struct						s_ambient
 {
 	t_color					*c;
-	float					ratio;
+	t_float					ratio;
 };
 
 struct						s_camera
 {
 	t_vector				*v;
 	t_point					*p;
-	int						fov;//DEL float???
+	int						fov;//DEL t_float???
 };
 
 struct						s_light
 {
 	t_point					*p;
-	float					bright;
+	t_float					bright;
 	t_color					*c;
 };
 
@@ -241,16 +241,16 @@ struct						s_light
 
 struct						s_vector
 {
-	float					x;
-	float					y;
-	float					z;
+	t_float					x;
+	t_float					y;
+	t_float					z;
 };
 
 struct						s_point
 {
-	float					x;
-	float					y;
-	float					z;
+	t_float					x;
+	t_float					y;
+	t_float					z;
 };
 
 struct						s_color
@@ -289,7 +289,7 @@ void						read_file(int fd, t_rt *rt);
 void						parse_dimensions(t_rt *rt, char *str);
 int							skip_spaces(char *str);
 int							only_valid_chars(char *str);
-void						is_nan(t_rt *rt, float f);
+void						is_nan(t_rt *rt, t_float f);
 void						init(t_rt *rt);
 void						init_fc(t_fc *fc);
 
@@ -299,36 +299,36 @@ int							keypress(int keycode, t_rt *rt);
 int							ft_close_window(t_rt *rt);
 
 // maths
-float						v_len(t_vector vector);
+t_float						v_len(t_vector vector);
 t_vector					*v_cross_product(t_rt *rt, t_vector *a,
 								t_vector *b);
 t_point						calc_endpoint_vector_nm(t_vector v, t_point start,
-								float scalar);
+								t_float scalar);
 t_vector					*v_normalize(t_vector *v);
 t_vector					v_normalize_nm(t_vector v);
 t_vector					*v_add(t_rt *rt, t_vector *a, t_vector *b);
-float						calc_p_distance(t_point a, t_point b);
+t_float						calc_p_distance(t_point a, t_point b);
 t_vector					vector_projection(t_vector a, t_vector b);
-t_vector					v_mult_scalar_nm(t_vector v, float scalar);
+t_vector					v_mult_scalar_nm(t_vector v, t_float scalar);
 t_vector					v_add_nm(t_vector a, t_vector b);
 t_vector					v_subtract_nm(t_vector a, t_vector b);
 t_vector					v_mult_nm(t_vector a, t_vector b);
-float						scalar_product_nm(t_vector a, t_vector b);
-float						cylinder_rot_radius(t_rt *rt, t_cylinder *c);
+t_float						scalar_product_nm(t_vector a, t_vector b);
+t_float						cylinder_rot_radius(t_rt *rt, t_cylinder *c);
 t_point						*pv_add(t_rt *rt, t_vector *a, t_point *b);
 t_point						vp_add_nm(t_vector a, t_point b);
 t_point						pv_subtract_nm(t_point a, t_vector b);
 t_point						vp_subtract_nm(t_vector a, t_point b);
 t_vector					v_product_nm(t_vector a, t_vector b);
 t_point						calc_endpoint_vector(t_vector *v, t_point *start,
-								float scalar);
+								t_float scalar);
 t_vector					v_cross_product_nm(t_vector a, t_vector b);
 t_vector					*v_between_two_points(t_rt *rt, t_point a,
 								t_point b);
 t_vector					v_between_two_points_nm(t_point a, t_point b);
 t_vector					pp_sub_v_nm(t_point a, t_point b);
-float						distance_p_to_ray(t_point point, t_ray ray);
-float						v_dot_product(t_vector *a, t_vector *b);
+t_float						distance_p_to_ray(t_point point, t_ray ray);
+t_float						v_dot_product(t_vector *a, t_vector *b);
 t_point						p_add(t_vector a, t_point b);
 
 // frustum culling
@@ -342,7 +342,7 @@ void						frustum_check_rplane(t_rt *rt, int i);
 void						frustum_check_lplane(t_rt *rt, int i);
 
 t_point						plane_ray_intersec(t_plane pl, t_ray ray);
-float						sphere_intersection(t_sphere *s, t_ray *r);
+t_float						sphere_intersection(t_sphere *s, t_ray *r);
 
 // render optimisation
 
@@ -352,34 +352,34 @@ void						create_sphere_mask(t_rt *rt);
 void						calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner, int *error);
 void						optimise_pixel_rendering(t_rt *rt);
 // plan equations
-float						plane_ray_calc_t(t_plane pl, t_ray ray);
+t_float						plane_ray_calc_t(t_plane pl, t_ray ray);
 t_point						plane_ray_intersec(t_plane pl, t_ray ray);
 // render
 void						render(t_rt *rt);
 void						calc_aspect_ratio(t_rt *rt);
 void						setup_viewport(t_rt *rt);
-float	cylinder_intersection(t_cylinder cyl, t_ray ray);
+t_float	cylinder_intersection(t_cylinder cyl, t_ray ray);
 t_point						sphere_intersection_p(t_sphere *s, t_ray *r);
-float   infinite_planes(t_cylinder cyl, t_ray ray, int  flag);
-int point_within_circles(t_cylinder cyl, float intersection, t_ray ray);
-int point_within_planes(t_cylinder cyl, float intersection, t_ray ray);
-float infinite_cylinder(t_cylinder cyl, t_ray ray, int flag);
-float   abc_formula(float a, float b, float c, int  flag);
+t_float   infinite_planes(t_cylinder cyl, t_ray ray, int  flag);
+int point_within_circles(t_cylinder cyl, t_float intersection, t_ray ray);
+int point_within_planes(t_cylinder cyl, t_float intersection, t_ray ray);
+t_float infinite_cylinder(t_cylinder cyl, t_ray ray, int flag);
+t_float   abc_formula(t_float a, t_float b, t_float c, int  flag);
 
 // init_obj.c
 void						init_obj(t_rt *rt);
 t_point						*init_point(t_gc *gc);
 t_ray						*init_ray(t_gc *gc);
 //color
-unsigned int				float_to_grayscale_color(float value);
-unsigned int				scale_color_by_value(struct s_color color, float value);
+unsigned int				t_float_to_grayscale_color(t_float value);
+unsigned int				scale_color_by_value(struct s_color color, t_float value);
 
 //lighting
-t_color							lighting(t_rt *rt, t_obj obj, t_color color, float *t);
-float							shadow_loop(t_rt *rt, t_ray *ray, float len);
+t_color							lighting(t_rt *rt, t_obj obj, t_color color, t_float *t);
+t_float							shadow_loop(t_rt *rt, t_ray *ray, t_float len);
 t_vector						cal_normal(t_rt *rt, t_obj obj, t_point p);
 unsigned int					color_to_hex(t_color c);
-t_color							col_mult_scalar(t_color color, float scalar);
+t_color							col_mult_scalar(t_color color, t_float scalar);
 t_color							col_add(t_color color_a, t_color color_b);
 t_color							calc_diffuse_light(t_rt *rt, t_vector normal, t_vector v_light);
 t_color							calculate_light(t_rt *rt, t_color color, t_color diffuse);

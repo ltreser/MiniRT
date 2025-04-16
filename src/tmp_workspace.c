@@ -78,9 +78,9 @@ int	ft_close_window(t_game *game)
 #include <math.h>
 
 typedef struct s_vector {
-	float	x;
-	float	y;
-	float	z;
+	t_float	x;
+	t_float	y;
+	t_float	z;
 }	t_vector, t_point;
 
 typedef struct s_plane {
@@ -93,7 +93,7 @@ typedef struct s_ray {
 	t_vector	*v;
 }	t_ray;
 
-float	scalar_product_nm(t_vector a, t_vector b)
+t_float	scalar_product_nm(t_vector a, t_vector b)
 {
 	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
@@ -108,7 +108,7 @@ t_vector	pp_sub_v_nm(t_point a, t_point b)
 	return (res);
 }
 
-t_point	calc_endpoint_vector_nm(t_vector dir, t_point origin, float t)
+t_point	calc_endpoint_vector_nm(t_vector dir, t_point origin, t_float t)
 {
 	t_point	result;
 
@@ -119,12 +119,12 @@ t_point	calc_endpoint_vector_nm(t_vector dir, t_point origin, float t)
 }
 
 // Add your intersection functions here (from earlier)
-float	plane_ray_calc_t(t_plane pl, t_ray ray)
+t_float	plane_ray_calc_t(t_plane pl, t_ray ray)
 {
-	float		divident;
-	float		divisor;
+	t_float		divident;
+	t_float		divisor;
 	t_vector	vector;
-	float		t;
+	t_float		t;
 
 	printf("DEBUG: Starting plane_ray_calc_t()\n");
 
@@ -166,7 +166,7 @@ float	plane_ray_calc_t(t_plane pl, t_ray ray)
 t_point	plane_ray_intersec(t_plane pl, t_ray ray)
 {
 	t_point	point;
-	float	t;
+	t_float	t;
 
 	printf("DEBUG: Starting plane_ray_intersec()\n");
 
@@ -184,12 +184,12 @@ t_point	plane_ray_intersec(t_plane pl, t_ray ray)
 	return (point);
 }
 
-/* float	plane_ray_calc_t(t_plane pl, t_ray ray)
+/* t_float	plane_ray_calc_t(t_plane pl, t_ray ray)
 {
-	float		divident;
-	float		divisor;
+	t_float		divident;
+	t_float		divisor;
 	t_vector	vector;
-	float		t;
+	t_float		t;
 
 	divisor = scalar_product_nm(*pl.v, *ray.v);
 	if (divisor == 0)
@@ -212,7 +212,7 @@ t_point	plane_ray_intersec(t_plane pl, t_ray ray)
 t_point	plane_ray_intersec(t_plane pl, t_ray ray)
 {
 	t_point	point;
-	float	t;
+	t_float	t;
 
 	t = plane_ray_calc_t(pl, ray);
 	point = calc_endpoint_vector_nm(*ray.v, *ray.p, t);
@@ -255,7 +255,7 @@ int main()
 	t_ray ray = {&ray_origin, &ray_dir};
 	t_plane plane = {&plane_point, &plane_normal};
 
-	float t = plane_ray_calc_t(plane, ray);
+	t_float t = plane_ray_calc_t(plane, ray);
 	if (!isnan(t))
 	{
 		printf("Intersection at t = %f\n", t);

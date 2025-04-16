@@ -8,7 +8,7 @@ t_point	calc_startpoint_render(t_rt *rt)
 	t_point		point;
 
 	vector = v_add_nm(*rt->vp->pixel_v_y, *rt->vp->pixel_v_x);
-	vector = v_mult_scalar_nm(vector, (float)0.5);
+	vector = v_mult_scalar_nm(vector, (t_float)0.5);
 	point = p_add(vector, *rt->vp->bottom_left);
 	return(point);
 }
@@ -32,8 +32,8 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 {
 	int		i;
 	int		min_t_obj;
-	float	t;
-	float	tmp_t;
+	t_float	t;
+	t_float	tmp_t;
 	t_color	color;
 
 	i = 0;
@@ -91,7 +91,7 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 	// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, y , 0xFFFFFF);
 
 	//CALC LIGHTING ETC
-	//unsigned int scale_color_by_value(struct s_color color, float value)
+	//unsigned int scale_color_by_value(struct s_color color, t_float value)
 }
 
 

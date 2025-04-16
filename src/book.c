@@ -6,14 +6,14 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:24:11 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/14 20:05:08 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/16 18:12:47 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
 
-int	compare_fl(float a, float b)
+int	compare_fl(t_float a, t_float b)
 {
 	return (fabsf(a - b) < EPSILON);
 }

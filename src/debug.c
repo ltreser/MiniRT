@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:18:33 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/08 15:07:38 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/16 18:12:47 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,14 @@ int	calc_point_on_screen(t_rt *rt, t_point point, char axis)
 	ray.p = rt->vp->bottom_left;
 	if(axis == 'x')
 	{
-		float dist_up = distance_p_to_ray(point, ray);
+		t_float dist_up = distance_p_to_ray(point, ray);
 		return(ceilf(dist_up / rt->vp->pixel_w));
 	}
 	if(axis == 'y')
 	{
 		ray.v = rt->vp->right;
 
-		float dist_right = distance_p_to_ray(point, ray);
+		t_float dist_right = distance_p_to_ray(point, ray);
 		return(ceilf(dist_right / rt->vp->pixel_h));
 	}
 	else

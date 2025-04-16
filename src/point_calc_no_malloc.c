@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:38:54 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/26 16:00:29 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/16 18:12:47 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_vector	pp_sub_v_nm(t_point a, t_point b)
 	return (res);
 }
 
-t_point	calc_endpoint_vector_nm(t_vector v, t_point start, float scalar)
+t_point	calc_endpoint_vector_nm(t_vector v, t_point start, t_float scalar)
 {
 	t_point	 end;
 

@@ -6,17 +6,17 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 16:32:16 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/16 17:56:07 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/16 18:12:47 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
-unsigned int float_to_grayscale_color(float value)
+unsigned int t_float_to_grayscale_color(t_float value)
 {
-	float	min;
-	float	max;
-	float	norm;
+	t_float	min;
+	t_float	max;
+	t_float	norm;
 	int		intensity;
 
 	min = 15;
@@ -35,11 +35,11 @@ unsigned int float_to_grayscale_color(float value)
 	return (intensity << 16) | (intensity << 8) | intensity;
 }
 
-unsigned int scale_color_by_value(struct s_color color, float value)
+unsigned int scale_color_by_value(struct s_color color, t_float value)
 {
     // Choose your min/max or pass them as parameters if needed
-    float min = 0.0f;
-    float max = 100.0f;
+    t_float min = 0.0f;
+    t_float max = 100.0f;
 
     // Clamp value to [min, max]
     if (value < min)
@@ -48,7 +48,7 @@ unsigned int scale_color_by_value(struct s_color color, float value)
         value = max;
 
     // Convert [min, max] to a normalized [0, 1]
-    float norm = (value - min) / (max - min);
+    t_float norm = (value - min) / (max - min);
 
     // Scale each component
     int r = (int)(color.r * norm);

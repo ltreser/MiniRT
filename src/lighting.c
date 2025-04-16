@@ -3,12 +3,12 @@
 
 //simple check if there is an obj between the light and the obj that is rendert
 //find biggest t and compare to len obj light - EPSILON
-float	shadow_loop(t_rt *rt, t_ray *ray, float len)
+t_float	shadow_loop(t_rt *rt, t_ray *ray, t_float len)
 {
 	int		i;
 	// int		min_t_obj; might need to deturm color
-	float	t;
-	float	tmp_t;
+	t_float	t;
+	t_float	tmp_t;
 
 	i = 0;
 	t = EPSILON;
@@ -49,7 +49,7 @@ float	shadow_loop(t_rt *rt, t_ray *ray, float len)
 	return(t);
 }
 
-t_color	col_mult_scalar(t_color color, float scalar)
+t_color	col_mult_scalar(t_color color, t_float scalar)
 {
 	t_color	result;
 
@@ -72,7 +72,7 @@ t_color	col_add(t_color color_a, t_color color_b)
 t_color	calc_diffuse_light(t_rt *rt, t_vector normal, t_vector v_light)
 {
 	// t_ray	light;
-	float	dot_product;
+	t_float	dot_product;
 	t_color	diffuse;
 	t_color	temp_diffuse;
 //
@@ -110,7 +110,7 @@ t_color	calculate_light(t_rt *rt, t_color color, t_color diffuse)
 	return (result);
 }
 
-t_color	lighting(t_rt *rt, t_obj obj, t_color color, float *t)
+t_color	lighting(t_rt *rt, t_obj obj, t_color color, t_float *t)
 {
 	// create a ray between obj and light
 	t_ray		ray;
@@ -119,8 +119,8 @@ t_color	lighting(t_rt *rt, t_obj obj, t_color color, float *t)
 	t_vector	normal;
 	t_color		diffuse;
 	t_color		result;
-	float		len_v;
-	float		shadow_t;
+	t_float		len_v;
+	t_float		shadow_t;
 
 	// assign internal pointers to stack memory
 	ray.p = &p;
@@ -129,7 +129,7 @@ t_color	lighting(t_rt *rt, t_obj obj, t_color color, float *t)
 	//calc normal
 
 	//cal point
-	// t_point	calc_endpoint_vector_nm(t_vector v, t, float scalar)
+	// t_point	calc_endpoint_vector_nm(t_vector v, t, t_float scalar)
 	//ray.p hit point obj
 	*(ray.p) = calc_endpoint_vector_nm(*(rt->vp->render_ray->v), *(rt->vp->render_ray->p), *t);
 	normal = cal_normal(rt, obj, *(ray.p));

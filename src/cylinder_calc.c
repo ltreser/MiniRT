@@ -6,19 +6,19 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 19:02:13 by afoth             #+#    #+#             */
-/*   Updated: 2025/02/24 17:20:26 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/16 18:12:47 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
- float	cylinder_rot_radius(t_rt *rt, t_cylinder *c)
+ t_float	cylinder_rot_radius(t_rt *rt, t_cylinder *c)
 {
 	t_point		up_center;
 	t_point		up_side;
 	t_vector	arbitrary;
 	t_vector	sideways;
-	float		radius;
+	t_float		radius;
 
 	up_center = calc_endpoint_vector(c->v, c->p, c->h / 2);
 	arbitrary.x = 0.0;

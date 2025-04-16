@@ -21,13 +21,13 @@ with
 	(va, (p+v*t2)-p1) > 0 and (va, (p+v*t2)- p2) < 0
 */
 
-float	cylinder_intersection(t_cylinder cyl, t_ray ray)
+t_float	cylinder_intersection(t_cylinder cyl, t_ray ray)
 {
-	float	cylinder_intersection1;
-	float	cylinder_intersection2;
-	float	plane_intersection1;
-	float	plane_intersection2;
-	float	t;
+	t_float	cylinder_intersection1;
+	t_float	cylinder_intersection2;
+	t_float	plane_intersection1;
+	t_float	plane_intersection2;
+	t_float	t;
 
 	t = -1;
 	cylinder_intersection1 = infinite_cylinder(cyl, ray, 0);
@@ -38,7 +38,7 @@ float	cylinder_intersection(t_cylinder cyl, t_ray ray)
 
 	if (cylinder_intersection2 > 0 && point_within_planes(cyl, cylinder_intersection2, ray)
 		&& (t < 0 || t > cylinder_intersection2))
-		t = cylinder_intersection2; 
+		t = cylinder_intersection2;
 
 	plane_intersection1 = infinite_planes(cyl, ray, 0);
 	plane_intersection2 = infinite_planes(cyl, ray, 1);
@@ -54,7 +54,7 @@ float	cylinder_intersection(t_cylinder cyl, t_ray ray)
 	return (t);
 }
 
-float	infinite_planes(t_cylinder cyl, t_ray ray, int flag)
+t_float	infinite_planes(t_cylinder cyl, t_ray ray, int flag)
 {
 	t_plane		plane1;
 	t_vector	v1;
@@ -75,9 +75,9 @@ float	infinite_planes(t_cylinder cyl, t_ray ray, int flag)
 		return (plane_ray_calc_t(plane1, ray));
 	else
 		return (plane_ray_calc_t(plane2, ray));
-} 
+}
 
-int	point_within_circles(t_cylinder cyl, float intersection, t_ray ray)
+int	point_within_circles(t_cylinder cyl, t_float intersection, t_ray ray)
 {
 	t_point		point;
 	t_vector	top_normal;
@@ -99,9 +99,9 @@ int	point_within_circles(t_cylinder cyl, float intersection, t_ray ray)
 	if (!v_dot_product(&center2point_bottom, &bottom_normal) && v_len(center2point_bottom) <= cyl.d/2)
 		return (1);
 	return (0);
-} 
+}
 
-int	point_within_planes(t_cylinder cyl, float intersection, t_ray ray)
+int	point_within_planes(t_cylinder cyl, t_float intersection, t_ray ray)
 {
 	t_point		point;
 	t_vector	top_normal;
@@ -126,15 +126,15 @@ int	point_within_planes(t_cylinder cyl, float intersection, t_ray ray)
 	return (1);
 }
 
-float	infinite_cylinder(t_cylinder cyl, t_ray ray, int flag)
+t_float	infinite_cylinder(t_cylinder cyl, t_ray ray, int flag)
 {
 	t_vector	delta_p;
 	t_vector	vector1;
 	t_vector	vector2;
-	float		a;
-	float		b;
-	float		c;
-	float		r;
+	t_float		a;
+	t_float		b;
+	t_float		c;
+	t_float		r;
 
 	r = cyl.d / 2;
 	delta_p = pp_sub_v_nm(*ray.p, *cyl.p);
@@ -152,11 +152,11 @@ float	infinite_cylinder(t_cylinder cyl, t_ray ray, int flag)
 
 //(−b±√(b^2−4ac))/2a
 // (va, (p+v*t1)-p1) > 0 and (va,
-//(p+v*t1)- p2) < 0 when nicht der fall return max float
+//(p+v*t1)- p2) < 0 when nicht der fall return max t_float
 
-float	abc_formula(float a, float b, float c, int flag)
+t_float	abc_formula(t_float a, t_float b, t_float c, int flag)
 {
-	float	discriminant;
+	t_float	discriminant;
 
 	discriminant = b * b - 4.f * a * c;
 	if (discriminant < 0.f)

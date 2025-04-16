@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:36:36 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/11 11:42:50 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/16 18:12:47 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,14 @@ void	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner, int *erro
 		ray.v = rt->vp->up;
 		ray.p = rt->vp->bottom_left;
 
-		float dist_up = distance_p_to_ray(point, ray);
+		t_float dist_up = distance_p_to_ray(point, ray);
 
 		rt->obj[rt->n_obj]->uvp_x1 = ceilf(dist_up / rt->vp->pixel_w);
 		printf("uvp_x1 %i, ", rt->obj[rt->n_obj]->uvp_x1);
 
 		ray.v = rt->vp->right;
 
-		float dist_right = distance_p_to_ray(point, ray);
+		t_float dist_right = distance_p_to_ray(point, ray);
 		rt->obj[rt->n_obj]->uvp_y1 = ceilf(dist_right / rt->vp->pixel_h);
 		printf("uvp_y1 %i, ", rt->obj[rt->n_obj]->uvp_y1);
 
@@ -110,13 +110,13 @@ void	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner, int *erro
 		ray.v = rt->vp->up;
 		ray.p = rt->vp->bottom_left;
 
-		float dist_up = distance_p_to_ray(point, ray);
+		t_float dist_up = distance_p_to_ray(point, ray);
 		rt->obj[rt->n_obj]->dvp_x2 = ceilf(dist_up / rt->vp->pixel_w);
 		printf("dvp_x2 %i, ", rt->obj[rt->n_obj]->dvp_x2);
 
 		ray.v = rt->vp->right;
 
-		float dist_right = distance_p_to_ray(point, ray);
+		t_float dist_right = distance_p_to_ray(point, ray);
 		rt->obj[rt->n_obj]->dvp_y2 = ceilf(dist_right / rt->vp->pixel_h);
 		printf("dvp_y2 %i, ", rt->obj[rt->n_obj]->dvp_y2);
 
@@ -130,7 +130,7 @@ void	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner, int *erro
 		//x = rt->vp->up * (point -  rt->vp->bottom_right)/ rt->vp->up
 
 		//abstand x achse zu punkt = y
-		//ergebnis float cast zu int, wird immer abgerundet ceilf() immer auf
+		//ergebnis t_float cast zu int, wird immer abgerundet ceilf() immer auf
 		ray.v = rt->vp->up;
 		ray.p = rt->vp->bottom_right;
 		rt->obj[rt->n_obj]->uvp_x1 = ceilf(distance_p_to_ray(point, ray)/rt->vp->pixel_w);
@@ -161,9 +161,9 @@ the viewport
 */
 void	create_sphere_mask(t_rt *rt)
 {
-	float		r;
-	// float		x;
-	// float		y;
+	t_float		r;
+	// t_float		x;
+	// t_float		y;
 	t_vector	tmp_u;
 	t_vector	tmp_d;
 	t_point		p;
@@ -185,9 +185,9 @@ void	create_sphere_mask(t_rt *rt)
 
 void	create_cylinder_mask(t_rt *rt)
 {
-	float		r;
-	// float		x;
-	// float		y;
+	t_float		r;
+	// t_float		x;
+	// t_float		y;
 	t_vector	tmp_u;
 	t_vector	tmp_d;
 	t_point		p;

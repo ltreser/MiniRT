@@ -6,20 +6,20 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:48:50 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/04 15:01:54 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/16 18:12:47 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
 //function has possibility to over and underflow
-float v_len(t_vector vector)
+t_float v_len(t_vector vector)
 {
 	return(sqrtf(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z));
 }
 
 //results in a scalar that descrubes the angle between the two vectors, e.g. if a * b = 0 -> they are perpendicular
-//float	v_dot_product(t_rt *rt, t_vector *a, t_vector *b)
+//t_float	v_dot_product(t_rt *rt, t_vector *a, t_vector *b)
 
 
 //results in a vector thats perpendicular (senkrecht) to both a and b
@@ -47,7 +47,7 @@ t_vector	v_cross_product_nm(t_vector a, t_vector b)
 
 t_vector	*v_normalize(t_vector *v)
 {
-	float	length;
+	t_float	length;
 
 	length = 0;
 	length = v_len(*v);
@@ -86,9 +86,9 @@ t_vector	*v_between_two_points(t_rt *rt, t_point a, t_point b)
 
 t_vector vector_projection(t_vector a, t_vector b)
 {
-    float dot_ab = scalar_product_nm(a, b);
-    float dot_bb = scalar_product_nm(b, b);
-    
+    t_float dot_ab = scalar_product_nm(a, b);
+    t_float dot_bb = scalar_product_nm(b, b);
+
     if (dot_bb == 0) // Prevent division by zero
         return (t_vector){0, 0, 0};
 

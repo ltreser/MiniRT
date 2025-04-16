@@ -50,8 +50,8 @@ void calculate_fplanes(t_rt *rt)
 void	frustum_culling(t_rt *rt)
 {
 	int i;
-	float distance;
-	float radius;
+	t_float distance;
+	t_float radius;
 	t_vector cam2obj;
 
 	i = 0;
@@ -68,7 +68,7 @@ void	frustum_culling(t_rt *rt)
 		}
 		else if (rt->obj[i]->type == CYLINDER)
 		{
-			cam2obj = v_between_two_points_nm(*rt->camera->p, *rt->obj[i]->cylinder->p);	
+			cam2obj = v_between_two_points_nm(*rt->camera->p, *rt->obj[i]->cylinder->p);
 			radius = rt->obj[i]->sphere->rot_r;
 		}
 		if (rt->obj[i]->type != PLANE)
@@ -79,13 +79,13 @@ void	frustum_culling(t_rt *rt)
 			distance = v_dot_product(&cam2obj, rt->fc->lplane_n) - radius ;
 			if (distance > 0)
 					rt->obj[i]->visible = 0;
-			distance = v_dot_product(&cam2obj, rt->fc->dplane_n) - radius;		
+			distance = v_dot_product(&cam2obj, rt->fc->dplane_n) - radius;
 			if (distance > 0)
 					rt->obj[i]->visible = 0;
 			distance = v_dot_product(&cam2obj, rt->fc->uplane_n) - radius;
 			if (distance > 0)
 					rt->obj[i]->visible = 0;
-			break ;	
+			break ;
 		}
 		i++;
 	}

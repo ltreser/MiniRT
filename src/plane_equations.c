@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:27:20 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/14 19:13:34 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/16 18:12:47 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ result = ray->p + (-1*((ray->p - pl->p)* pl->v)/ (ray->v * pl->v)) * ray->v;
 
 
  */
-float	plane_ray_calc_t(t_plane pl, t_ray ray)
+t_float	plane_ray_calc_t(t_plane pl, t_ray ray)
 {
-	float		divident;
-	float		divisor;
+	t_float		divident;
+	t_float		divisor;
 	t_vector	vector;
-	float		t;
+	t_float		t;
 
 	divisor = scalar_product_nm(*pl.v, *ray.v);
 	if(divisor == 0)
@@ -59,12 +59,12 @@ float	plane_ray_calc_t(t_plane pl, t_ray ray)
 /* #include <stdio.h>
 #include <math.h>
 
-float	plane_ray_calc_t(t_plane pl, t_ray ray)
+t_float	plane_ray_calc_t(t_plane pl, t_ray ray)
 {
-    float		divident;
-    float		divisor;
+    t_float		divident;
+    t_float		divisor;
     t_vector	vector;
-    float		t;
+    t_float		t;
 
     printf("DEBUG: Starting plane_ray_calc_t function\n");
 
@@ -113,7 +113,7 @@ float	plane_ray_calc_t(t_plane pl, t_ray ray)
 t_point	plane_ray_intersec(t_plane pl, t_ray ray)
 {
 	t_point	point;
-	float	t;
+	t_float	t;
 
 	t = plane_ray_calc_t(pl, ray);
 	if(isnan(t))
@@ -144,7 +144,7 @@ t_point	plane_ray_intersec(t_plane pl, t_ray ray)
 	return (1);
 } */
 
-// float	vector2component_form(t_point *p, t_vektor *v)
+// t_float	vector2component_form(t_point *p, t_vektor *v)
 // {
 
 // }
@@ -154,7 +154,7 @@ given parameters:
 -
 
 
-t_point	ray_plane_intersect(float scalar, t_ray *ray, t_plane *plane)
+t_point	ray_plane_intersect(t_float scalar, t_ray *ray, t_plane *plane)
 {
 
 

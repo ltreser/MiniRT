@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:53:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/10 14:06:27 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/16 18:12:47 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ void	calc_vp_corners(t_rt *rt)
 void	setup_viewport(t_rt *rt) //TODO init struct variables
 {
 	printf("fov %i\n", rt->camera->fov);
-	// float tang = tanf(((float)rt->camera->fov / 2))
+	// t_float tang = tanf(((t_float)rt->camera->fov / 2))
 	// t_vector	plane_normal = {-0.0f, 0.0f, -1.0f};//DEBUG
 	rt->vp->render_ray = init_ray(rt->gc);//init to NULL? right now to 0
 
-	rt->vp->width = 2 * tanf(((float)rt->camera->fov / 2) * (PI / 180.0f));
+	rt->vp->width = 2 * tanf(((t_float)rt->camera->fov / 2) * (PI / 180.0f));
 	calc_aspect_ratio(rt);
 	rt->vp->height = rt->vp->width / rt->aspect_r;
 

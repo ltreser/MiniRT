@@ -30,7 +30,7 @@ int	only_valid_chars(char *str)
 	return (1);
 }
 
-void	is_nan(t_rt *rt, float f)
+void	is_nan(t_rt *rt, t_float f)
 {
 	if (isnan(f))
 	{
