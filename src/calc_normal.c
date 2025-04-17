@@ -30,18 +30,26 @@ t_vector	cal_normal_sphere(t_rt *rt, t_obj obj, t_point p)
 
 t_vector	cal_normal_cyl(t_rt *rt, t_obj obj, t_point p)
 {
-	t_vector center2point;
+	t_vector point2center;
+	t_vector neg_cyl_normal;
 
-	center2point = v_between_two_points_nm(*obj.cylinder->p, p);
+	neg_cyl_normal = v_mult_scalar_nm(*obj.cylinder->v, -1);
+
+	point2center = v_between_two_points_nm(p, *obj.cylinder->p);
 	if (located_in_endcaps(*obj.cylinder, p))
 	{	
-		if (v_dot_product(obj.cylinder->v, &center2point) > 0)
+		if (v_dot_product(&point2center, obj.cylinder->v) < 0)
 			return (*obj.cylinder->v);
 		else
-			return (v_mult_scalar_nm(*obj.cylinder->v, -1));
+			return (neg_cyl_normal);
 	}	 
 	else
-		return (v_normalize_nm(vector_projection(*obj.cylinder->v, center2point)));
+	{
+		if (v_dot_product(&point2center, obj.cylinder->v) < 0)
+			return (v_normalize_nm(vector_projection(*obj.cylinder->v, point2center)));
+		else
+			return (v_normalize_nm(vector_projection(neg_cyl_normal, point2center)));
+	}		
 }
 
 t_vector	cal_normal(t_rt *rt, t_obj obj, t_point p)
