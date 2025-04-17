@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:26:34 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/16 18:12:47 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/17 23:10:02 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ t_vector	v_mult_scalar_nm(t_vector v, t_float scalar)
 {
 	t_vector	result;
 
-	result.x = v.x *scalar;
-	result.y = v.y *scalar;
-	result.z = v.z *scalar;
-	return(result);
+	result.x = v.x * scalar;
+	result.y = v.y * scalar;
+	result.z = v.z * scalar;
+	return (result);
 }
 
 t_vector	v_add_nm(t_vector a, t_vector b)
@@ -65,7 +65,8 @@ t_vector	v_product_nm(t_vector a, t_vector b)
 t_float	scalar_product_nm(t_vector a, t_vector b)
 {
 	t_float	result;
-	return(result = a.x * b.x + a.y * b.y + a.z * b.z);
+
+	return (result = a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
 /*returns vector that points from a to b*/
@@ -93,10 +94,9 @@ t_vector	v_normalize_nm(t_vector v)
 	return (v);
 }
 
-//tested with example from book
 t_float	distance_p_to_ray(t_point point, t_ray ray)
 {
-	return (v_len(v_product_nm(*ray.v, pp_sub_v_nm(point, *ray.p)))/ v_len(*ray.v));
+	return (v_len(v_product_nm(*ray.v, pp_sub_v_nm(point, *ray.p))) / v_len(*ray.v));
 }
 
 t_float	v_dot_product(t_vector *a, t_vector *b)

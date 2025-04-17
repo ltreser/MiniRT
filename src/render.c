@@ -11,7 +11,7 @@ t_point	calc_startpoint_render(t_rt *rt)
 	vector = v_add_nm(*rt->vp->pixel_v_y, *rt->vp->pixel_v_x);
 	vector = v_mult_scalar_nm(vector, (t_float)0.5);
 	point = p_add(vector, *rt->vp->bottom_left);
-	return(point);
+	return (point);
 }
 
 void	create_render_ray(t_rt *rt)
@@ -42,16 +42,16 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 	min_t_obj = -1;
 	while(i < rt->obj_count)
 	{
-		if(rt->obj[i]->visible == 1)
+		if (rt->obj[i]->visible == 1)
 		{
 			i = i;
 			tmp_t = -1;
-			if(rt->obj[i]->type == PLANE)
+			if (rt->obj[i]->type == PLANE)
 			{
 				tmp_t = plane_ray_calc_t(*rt->obj[i]->plane, *ray);
 				color = *rt->obj[i]->plane->c;
 			}
-			if(rt->obj[i]->type == SPHERE)
+			if (rt->obj[i]->type == SPHERE)
 			{
 		 	 	tmp_t = sphere_intersection(rt->obj[i]->sphere, ray);
 				color = *rt->obj[i]->sphere->c;
@@ -62,7 +62,7 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 				color = *rt->obj[i]->cylinder->c;
 			}
 			//IS 0 POSSILBE
-			if(tmp_t > EPSILON && tmp_t < t)
+			if (tmp_t > EPSILON && tmp_t < t)
 			{
 				t = tmp_t;
 				min_t_obj = i;
@@ -70,13 +70,13 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 		}
 		i++;
 	}
-	if(min_t_obj < 0)
+	if (min_t_obj < 0)
 	{
 		// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - 1 - y , 0x0000FF);//BACKGROUND
 		return;
 	}
 	rt->n_obj = min_t_obj;
-	color = lighting(rt, *(rt->obj[min_t_obj]), color, &t);
+	color = lighting(rt, *(rt->obj[min_t_obj]), color, t);
 		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - y , color_to_hex(color));
 }
 
@@ -106,7 +106,7 @@ void render_loop(t_rt *rt)
 			obj_render_loop(rt, rt->vp->render_ray, rt->vp->pixel_x, rt->vp->pixel_y);
 
 			// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->vp->pixel_x, rt->vp->pixel_y , 0x0000FF);
-			// if(i < 6)
+			// if (i < 6)
 			// i++;
 			*rt->vp->render_ray->v = v_add_nm(*rt->vp->render_ray->v, *rt->vp->pixel_v_x);
 			rt->vp->pixel_x++;

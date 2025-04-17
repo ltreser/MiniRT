@@ -12,7 +12,7 @@ typedef struct s_vector		t_vector;
 
 float v_len(t_vector vector)
 {
-	return(sqrtf(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z));
+	return (sqrtf(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z));
 }
 t_vector	v_normalize_nm(t_vector v)
 {

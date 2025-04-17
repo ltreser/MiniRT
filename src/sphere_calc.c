@@ -1,10 +1,8 @@
 #include "../include/miniRT.h"
 
-
 //TODO build in protection from vectors w length 0
 t_float	sphere_intersection(t_sphere *s, t_ray *r)
 {
-
 	t_float t;
 	t_float a;
 	t_float b;
@@ -30,7 +28,7 @@ t_float	sphere_intersection(t_sphere *s, t_ray *r)
 	return (t);
 }
 
-t_point sphere_intersection_p(t_sphere *s, t_ray *r)
+t_point	sphere_intersection_p(t_sphere *s, t_ray *r)
 {
 	t_point	point;
 	t_float	t;

@@ -346,14 +346,14 @@ t_point						plane_ray_intersec(t_plane pl, t_ray ray);
 void						render(t_rt *rt);
 void						calc_aspect_ratio(t_rt *rt);
 void						setup_viewport(t_rt *rt);
-t_float	cylinder_intersection(t_cylinder cyl, t_ray ray);
+t_float						cylinder_intersection(t_cylinder cyl, t_ray ray);
 t_point						sphere_intersection_p(t_sphere *s, t_ray *r);
-t_float   infinite_planes(t_cylinder cyl, t_ray ray, int  flag);
-int point_within_circles(t_cylinder cyl, t_float intersection, t_ray ray);
-int point_within_planes(t_cylinder cyl, t_float intersection, t_ray ray);
-t_float infinite_cylinder(t_cylinder cyl, t_ray ray, int flag);
-t_float   abc_formula(t_float a, t_float b, t_float c, int  flag);
-int 	located_in_endcaps(t_cylinder cyl, t_point point);
+t_float						infinite_planes(t_cylinder cyl, t_ray ray, int  flag);
+int							point_within_circles(t_cylinder cyl, t_float intersection, t_ray ray);
+int							point_within_planes(t_cylinder cyl, t_float intersection, t_ray ray);
+t_float						infinite_cylinder(t_cylinder cyl, t_ray ray, int flag);
+t_float						abc_formula(t_float a, t_float b, t_float c, int  flag);
+int							located_in_endcaps(t_cylinder cyl, t_point point);
 
 // init_obj.c
 void						init_obj(t_rt *rt);
@@ -364,7 +364,8 @@ unsigned int				t_float_to_grayscale_color(t_float value);
 unsigned int				scale_color_by_value(struct s_color color, t_float value);
 
 //lighting
-t_color							lighting(t_rt *rt, t_obj obj, t_color color, t_float *t);
+t_color							lighting(t_rt *rt, t_obj obj, t_color color, t_float t);
+t_ray							calc_shadow_ray(t_rt *rt, t_float t);
 t_float							shadow_loop(t_rt *rt, t_ray *ray, t_float len);
 t_vector						cal_normal(t_rt *rt, t_obj obj, t_point p);
 unsigned int					color_to_hex(t_color c);
@@ -372,9 +373,6 @@ t_color							col_mult_scalar(t_color color, t_float scalar);
 t_color							col_add(t_color color_a, t_color color_b);
 t_color							calc_diffuse_light(t_rt *rt, t_vector normal, t_vector v_light);
 t_color							calculate_light(t_rt *rt, t_color color, t_color diffuse);
-
-
-
 
 //debug
 void						print_point(t_point p, char *prompt);

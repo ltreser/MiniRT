@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 15:40:56 by afoth             #+#    #+#             */
-/*   Updated: 2025/03/25 14:39:02 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/17 22:51:10 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,6 @@ void	mlx_create_window(t_rt *rt)
 		ft_exit(rt, 5, ft_strdup(MLX_FAIL));
 	}
 	rt->mlx->pixel_adress = mlx_get_data_addr(rt->mlx->img, &rt->mlx->bpp, &rt->mlx->line_len, &rt->mlx->endian);
-	//test DEL
-	// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, 0, 0, 0xFFFFFFFF);
-	// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, 1, 1, 0xFFFFFFFF);
-	// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, 2, 2, 0xFFFFFFFF);
-	// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, 3, 3, 0xFFFFFFFF);
 	mlx_hook(rt->mlx->window, 2, 1L << 0, keypress, rt);
 	mlx_hook(rt->mlx->window, 17, 1L << 17, ft_close_window, rt);
-
 }
-
-
-

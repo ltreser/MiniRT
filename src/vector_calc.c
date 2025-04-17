@@ -6,44 +6,40 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:48:50 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/16 18:12:47 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/17 23:13:26 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
 //function has possibility to over and underflow
-t_float v_len(t_vector vector)
+t_float	v_len(t_vector vector)
 {
-	return(sqrtf(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z));
+	return (sqrtf(vector.x * vector.x + \
+		vector.y * vector.y + vector.z * vector.z));
 }
-
-//results in a scalar that descrubes the angle between the two vectors, e.g. if a * b = 0 -> they are perpendicular
-//t_float	v_dot_product(t_rt *rt, t_vector *a, t_vector *b)
-
 
 //results in a vector thats perpendicular (senkrecht) to both a and b
 t_vector	*v_cross_product(t_rt *rt, t_vector *a, t_vector *b)
 {
-	t_vector *res;
+	t_vector	*res;
 
 	res = gc_malloc(rt->gc, sizeof(t_vector));
 	res->x = a->y * b->z - a->z * b->y;
 	res->y = a->z * b->x - a->x * b->z;
-	res-> z = a->x * b->y - a->y * b->x;
+	res->z = a->x * b->y - a->y * b->x;
 	return (res);
 }
 
 t_vector	v_cross_product_nm(t_vector a, t_vector b)
 {
-	t_vector res;
+	t_vector	res;
 
 	res.x = a.y * b.z - a.z * b.y;
 	res.y = a.z * b.x - a.x * b.z;
-	res. z = a.x * b.y - a.y * b.x;
+	res.z = a.x * b.y - a.y * b.x;
 	return (res);
 }
-
 
 t_vector	*v_normalize(t_vector *v)
 {
@@ -83,15 +79,14 @@ t_vector	*v_between_two_points(t_rt *rt, t_point a, t_point b)
 
 //project vector a onto b
 //the component of a that goes in the same direction as b
-
-t_vector vector_projection(t_vector a, t_vector b)
+t_vector	vector_projection(t_vector a, t_vector b)
 {
-    t_float dot_ab = scalar_product_nm(a, b);
-    t_float dot_bb = scalar_product_nm(b, b);
+	t_float	dot_ab;
+	t_float	dot_bb;
 
-    if (dot_bb == 0) // Prevent division by zero
-        return (t_vector){0, 0, 0};
-
-    return v_mult_scalar_nm(b, dot_ab / dot_bb);
+	dot_ab = scalar_product_nm(a, b);
+	dot_bb = scalar_product_nm(b, b);
+	if (dot_bb == 0)
+		return ((t_vector){0, 0, 0});
+	return (v_mult_scalar_nm(b, dot_ab / dot_bb));
 }
-

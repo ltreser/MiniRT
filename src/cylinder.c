@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cylinder.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/17 22:37:28 by afoth             #+#    #+#             */
+/*   Updated: 2025/04/17 22:41:39 by afoth            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/miniRT.h"
 
 /* The equation for a more general
@@ -23,34 +35,30 @@ with
 
 t_float	cylinder_intersection(t_cylinder cyl, t_ray ray)
 {
-	t_float	cylinder_intersection1;
-	t_float	cylinder_intersection2;
-	t_float	plane_intersection1;
-	t_float	plane_intersection2;
+	t_float	cylinder_intersec1;
+	t_float	cylinder_intersec2;
+	t_float	plane_intersec1;
+	t_float	plane_intersec2;
 	t_float	t;
 
 	t = -1;
-	cylinder_intersection1 = infinite_cylinder(cyl, ray, 0);
-	cylinder_intersection2 = infinite_cylinder(cyl, ray, 1);
-
-	if (cylinder_intersection1 > 0 && point_within_planes(cyl, cylinder_intersection1, ray))
-		t = cylinder_intersection1;
-
-	if (cylinder_intersection2 > 0 && point_within_planes(cyl, cylinder_intersection2, ray)
-		&& (t < 0 || t > cylinder_intersection2))
-		t = cylinder_intersection2;
-
-	plane_intersection1 = infinite_planes(cyl, ray, 0);
-	plane_intersection2 = infinite_planes(cyl, ray, 1);
-
-	if (plane_intersection1 > 0 && point_within_circles(cyl, plane_intersection1, ray)
-		&& (t < 0 || t > plane_intersection1))
-		t = plane_intersection1;
-
-	if (plane_intersection2 > 0 && point_within_circles(cyl, plane_intersection2, ray)
-		&& (t < 0 || t > plane_intersection2))
-		t = plane_intersection2;
-
+	cylinder_intersec1 = infinite_cylinder(cyl, ray, 0);
+	cylinder_intersec2 = infinite_cylinder(cyl, ray, 1);
+	if (cylinder_intersec1 > 0 && \
+		point_within_planes(cyl, cylinder_intersec1, ray))
+		t = cylinder_intersec1;
+	if (cylinder_intersec2 > 0 && \
+		point_within_planes(cyl, cylinder_intersec2, ray)
+		&& (t < 0 || t > cylinder_intersec2))
+		t = cylinder_intersec2;
+	plane_intersec1 = infinite_planes(cyl, ray, 0);
+	plane_intersec2 = infinite_planes(cyl, ray, 1);
+	if (plane_intersec1 > 0 && point_within_circles(cyl, plane_intersec1, ray)
+		&& (t < 0 || t > plane_intersec1))
+		t = plane_intersec1;
+	if (plane_intersec2 > 0 && point_within_circles(cyl, plane_intersec2, ray)
+		&& (t < 0 || t > plane_intersec2))
+		t = plane_intersec2;
 	return (t);
 }
 
@@ -94,9 +102,11 @@ int	point_within_circles(t_cylinder cyl, t_float intersection, t_ray ray)
 	bottom_normal = v_mult_scalar_nm(*cyl.v, -1);
 	center2point_top = v_between_two_points_nm(top_center, point);
 	center2point_bottom = v_between_two_points_nm(bottom_center, point);
-	if (!v_dot_product(&center2point_top, &top_normal) && v_len(center2point_top) <= cyl.d/2)
+	if (!v_dot_product(&center2point_top, &top_normal) && \
+	v_len(center2point_top) <= cyl.d/2)
 		return (1);
-	if (!v_dot_product(&center2point_bottom, &bottom_normal) && v_len(center2point_bottom) <= cyl.d/2)
+	if (!v_dot_product(&center2point_bottom, &bottom_normal) && \
+	v_len(center2point_bottom) <= cyl.d/2)
 		return (1);
 	return (0);
 }
@@ -111,11 +121,10 @@ int	point_within_planes(t_cylinder cyl, t_float intersection, t_ray ray)
 	t_vector	top2point;
 	t_vector	bottom2point;
 
-
 	point = calc_endpoint_vector(ray.v, ray.p, intersection);
 	top_normal = *cyl.v;
 	bottom_normal = v_mult_scalar_nm(*cyl.v, -1);
-    top_point = calc_endpoint_vector(cyl.v, cyl.p, cyl.h / 2);
+	top_point = calc_endpoint_vector(cyl.v, cyl.p, cyl.h / 2);
 	bottom_point = calc_endpoint_vector(cyl.v, cyl.p, (-(cyl.h / 2)));
 	top2point = v_between_two_points_nm(top_point, point);
 	bottom2point = v_between_two_points_nm(bottom_point, point);
@@ -148,22 +157,4 @@ t_float	infinite_cylinder(t_cylinder cyl, t_ray ray, int flag)
 	if (flag == 0)
 		return (abc_formula(a, b, c, 0));
 	return (abc_formula(a, b, c, 1));
-}
-
-//(−b±√(b^2−4ac))/2a
-// (va, (p+v*t1)-p1) > 0 and (va,
-//(p+v*t1)- p2) < 0 when nicht der fall return max t_float
-
-t_float	abc_formula(t_float a, t_float b, t_float c, int flag)
-{
-	t_float	discriminant;
-
-	discriminant = b * b - 4.f * a * c;
-	if (discriminant < 0.f)
-		return (-1.f);
-	discriminant = sqrtf(discriminant);
-	if (flag == 0)
-		return ((-b + discriminant) / (2 * a));
-	else
-			return ((-b - discriminant) / (2 * a));
 }

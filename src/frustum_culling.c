@@ -1,6 +1,18 @@
-#include "../include/miniRT.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   frustum_culling.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/17 22:43:17 by afoth             #+#    #+#             */
+/*   Updated: 2025/04/17 22:45:35 by afoth            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	malloc_fc(t_rt *rt) // have they been inited to 0/NULL?
+#include "../include/miniRT.h"
+// have they been inited to 0/NULL?
+void	malloc_fc(t_rt *rt)
 {
 	if (!rt->fc)
 		rt->fc = gc_malloc(rt->gc, sizeof(t_fc));
@@ -22,42 +34,35 @@ void	malloc_fc(t_rt *rt) // have they been inited to 0/NULL?
 		rt->fc->lplane_p = gc_malloc(rt->gc, sizeof(t_point));
 }
 
-
-void calculate_fplanes(t_rt *rt)
+void	calculate_fplanes(t_rt *rt)
 {
-    // Right Plane Normal: (Top-right - Center) x Up
-    t_vector v1 = v_between_two_points_nm(*rt->camera->p, *rt->vp->top_right);
-    t_vector v2 = v_between_two_points_nm(*rt->camera->p, *rt->vp->bottom_right);
-    *rt->fc->rplane_n = v_normalize_nm(v_cross_product_nm(v2, v1));
+	t_vector	v1;
+	t_vector	v2;
 
-    // Left Plane Normal: Up x (Bottom-left - Center)
-    v1 = v_between_two_points_nm(*rt->camera->p, *rt->vp->top_left);
-    v2 = v_between_two_points_nm(*rt->camera->p, *rt->vp->bottom_left);
-    *rt->fc->lplane_n = v_normalize_nm(v_cross_product_nm(v1, v2));
-
-    // Up Plane Normal: (Top-left - Center) x Right
-    v1 = v_between_two_points_nm(*rt->camera->p, *rt->vp->top_left);
-    v2 = v_between_two_points_nm(*rt->camera->p, *rt->vp->top_right);
-    *rt->fc->uplane_n = v_normalize_nm(v_cross_product_nm(v2, v1));
-
-    // Down Plane Normal: Right x (Bottom-left - Center)
-    v1 = v_between_two_points_nm(*rt->camera->p, *rt->vp->bottom_left);
-    v2 = v_between_two_points_nm(*rt->camera->p, *rt->vp->bottom_right);
-    *rt->fc->dplane_n = v_normalize_nm(v_cross_product_nm(v1, v2));
+	v1 = v_between_two_points_nm(*rt->camera->p, *rt->vp->top_right);
+	v2 = v_between_two_points_nm(*rt->camera->p, *rt->vp->bottom_right);
+	*rt->fc->rplane_n = v_normalize_nm(v_cross_product_nm(v2, v1));
+	v1 = v_between_two_points_nm(*rt->camera->p, *rt->vp->top_left);
+	v2 = v_between_two_points_nm(*rt->camera->p, *rt->vp->bottom_left);
+	*rt->fc->lplane_n = v_normalize_nm(v_cross_product_nm(v1, v2));
+	v1 = v_between_two_points_nm(*rt->camera->p, *rt->vp->top_left);
+	v2 = v_between_two_points_nm(*rt->camera->p, *rt->vp->top_right);
+	*rt->fc->uplane_n = v_normalize_nm(v_cross_product_nm(v2, v1));
+	v1 = v_between_two_points_nm(*rt->camera->p, *rt->vp->bottom_left);
+	v2 = v_between_two_points_nm(*rt->camera->p, *rt->vp->bottom_right);
+	*rt->fc->dplane_n = v_normalize_nm(v_cross_product_nm(v1, v2));
 }
-
 
 void	frustum_culling(t_rt *rt)
 {
-	int i;
-	t_float distance;
-	t_float radius;
-	t_vector cam2obj;
+	int			i;
+	t_float		distance;
+	t_float		radius;
+	t_vector	cam2obj;
 
 	i = 0;
 	malloc_fc(rt);
 	calculate_fplanes(rt);
-	//calculate_fplane_distances(rt);
 	while (i < rt->n_obj)
 	{
 		distance = -1;

@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 17:51:38 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/07 16:26:15 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/17 22:47:34 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	init_viewport(t_rt *rt)
 	rt->vp->bottom_left = gc_malloc(rt->gc, sizeof(t_point));
 	rt->vp->bottom_right = gc_malloc(rt->gc, sizeof(t_point));
 	rt->vp->vp_plane = gc_malloc(rt->gc, sizeof(t_plane));
-
 }
 
 void	init_fc(t_fc *fc)

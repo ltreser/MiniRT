@@ -1,95 +1,53 @@
-#include "../include/miniRT.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lighting.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/17 23:33:19 by afoth             #+#    #+#             */
+/*   Updated: 2025/04/18 00:27:14 by afoth            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../include/miniRT.h"
 
 //simple check if there is an obj between the light and the obj that is rendert
 //find biggest t and compare to len obj light - EPSILON
 t_float	shadow_loop(t_rt *rt, t_ray *ray, t_float len)
 {
 	int		i;
-	// int		min_t_obj; might need to deturm color
-	// t_float	t;
 	t_float	tmp_t;
 
 	i = 0;
-	// t = EPSILON;
-	// t = -1;
-
-	// min_t_obj = -1;
-	while(i < rt->obj_count)
+	while (i < rt->obj_count)
 	{
-		// printf("I %i count %i\n", i, rt->obj_count);
-			tmp_t = -1;
-			// if (i == rt->n_obj)
-			// {
-			// 	i++;
-			// 	continue;
-			// }
-			if(rt->obj[i]->type == PLANE)
-			{
-				tmp_t = plane_ray_calc_t(*rt->obj[i]->plane, *ray);
-			}
-			if(rt->obj[i]->type == SPHERE)
-			{
-				tmp_t = sphere_intersection(rt->obj[i]->sphere, ray);
-			}
-			if (rt->obj[i]->type == CYLINDER)
-			{
-				tmp_t = cylinder_intersection(*rt->obj[i]->cylinder, *ray);
-			}
-			// shadow_hit->t > EPSILON && shadow_hit->t < max_len - EPSILON)
-			if(tmp_t > EPSILON && tmp_t < len)
-			{
-				return(tmp_t);
-				// min_t_obj = i;
-			}
+		tmp_t = -1;
+		if (rt->obj[i]->type == PLANE)
+			tmp_t = plane_ray_calc_t(*rt->obj[i]->plane, *ray);
+		if (rt->obj[i]->type == SPHERE)
+			tmp_t = sphere_intersection(rt->obj[i]->sphere, ray);
+		if (rt->obj[i]->type == CYLINDER)
+			tmp_t = cylinder_intersection(*rt->obj[i]->cylinder, *ray);
+		if (tmp_t > EPSILON && tmp_t < len)
+			return (tmp_t);
 		i++;
 	}
-	// if(min_t_obj < 0) //no t found
-		// return;
-	// printf("t = %f\n", t);
-
-	return(tmp_t);
-}
-
-t_color	col_mult_scalar(t_color color, t_float scalar)
-{
-	t_color	result;
-
-	result.r = color.r * scalar;
-	result.g = color.g * scalar;
-	result.b = color.b * scalar;
-	return(result);
-}
-
-t_color	col_add(t_color color_a, t_color color_b)
-{
-	t_color	result;
-
-	result.r = color_a.r + color_b.r;
-	result.g = color_a.g + color_b.g;
-	result.b = color_a.b + color_b.b;
-	return(result);
+	return (tmp_t);
 }
 
 t_color	calc_diffuse_light(t_rt *rt, t_vector normal, t_vector v_light)
 {
-	// t_ray	light;
 	t_float	dot_product;
 	t_color	diffuse;
-//
+
 	diffuse = (t_color){0, 0, 0,};
-	// while (l != NULL && hit_rec)
-	// {
-		// light.direction = vec_unit(vec_sub(l->point, hit_rec->point));
-		// light.origin = l->point;
-		// dot_product = fmax(vec_dot(hit_rec->normal, light.direction), EPSILON);
 	dot_product = v_dot_product(&normal, &v_light);
-	if(dot_product > EPSILON)
+	if (dot_product > EPSILON)
 	{
-		diffuse = col_mult_scalar(col_mult_scalar(*rt->light->c, dot_product), rt->light->bright);
-		// diffuse = col_add(diffuse, diffuse);
+		diffuse = col_mult_scalar(col_mult_scalar(*rt->light->c, \
+			dot_product), rt->light->bright);
 	}
-	// diffuse = col_mult(col_mult(l->color, dot_product), l->brightness);
 	return (diffuse);
 }
 
@@ -98,7 +56,7 @@ t_color	calculate_light(t_rt *rt, t_color color, t_color diffuse)
 	t_color	result;
 	t_color	ambient;
 
-	ambient = col_mult_scalar(*rt->ambient->c, rt->ambient->ratio);//move to init FREDDY
+	ambient = *(rt->ambient->c);
 	result.r = ((t_float)(ambient.r + diffuse.r) / 255.0) * color.r;
 	result.g = ((t_float)(ambient.g + diffuse.g) / 255.0) * color.g;
 	result.b = ((t_float)(ambient.b + diffuse.b) / 255.0) * color.b;
@@ -111,9 +69,73 @@ t_color	calculate_light(t_rt *rt, t_color color, t_color diffuse)
 	return (result);
 }
 
-t_color	lighting(t_rt *rt, t_obj obj, t_color color, t_float *t)
+t_ray	calc_shadow_ray(t_rt *rt, t_float t)
 {
-	// create a ray between obj and light
+	t_ray		ray;
+	t_vector	v;
+	t_point		p;
+
+	p = calc_endpoint_vector_nm(*(rt->vp->render_ray->v), \
+	*(rt->vp->render_ray->p), t);
+	v = v_normalize_nm(v_between_two_points_nm(p, \
+		*(rt->light->p)));
+	ray.p = &p;
+	ray.v = &v;
+	return (ray);
+}
+
+t_color	lighting(t_rt *rt, t_obj obj, t_color color, t_float t)
+{
+	t_ray		ray;
+	t_vector	normal;
+	t_color		diffuse;
+	t_float		len_v;
+	t_float		shadow_t;
+
+	diffuse = (t_color){0, 0, 0};
+	ray = calc_shadow_ray(rt, t);
+	normal = cal_normal(rt, obj, *(ray.p));
+	*(ray.p) = calc_endpoint_vector_nm(normal, *(ray.p), EPSILON);
+	len_v = v_len(v_between_two_points_nm(*(ray.p), \
+	*(rt->light->p))) - EPSILON;
+	shadow_t = shadow_loop(rt, &ray, len_v);
+	if (shadow_t < EPSILON)
+	{
+		diffuse = calc_diffuse_light(rt, normal, *(ray.v));
+		return (calculate_light(rt, color, diffuse));
+	}
+	else
+		return (calculate_light(rt, color, diffuse));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* t_color	lighting(t_rt *rt, t_obj obj, t_color color, t_float *t)
+{
 	t_ray		ray;
 	t_point		p;
 	t_point		hitpoint;
@@ -124,31 +146,21 @@ t_color	lighting(t_rt *rt, t_obj obj, t_color color, t_float *t)
 	t_float		len_v;
 	t_float		shadow_t;
 
-	// assign internal pointers to stack memory
 	ray.p = &p;
 	ray.v = &v;
-	diffuse = (t_color){0,0,0};
+	diffuse = (t_color){0, 0, 0};
 	hitpoint = calc_endpoint_vector_nm(*(rt->vp->render_ray->v), *(rt->vp->render_ray->p), *t);
-
-	// *(ray.p) = calc_endpoint_vector_nm(*(rt->vp->render_ray->v), *(rt->vp->render_ray->p), *t);
 	*(ray.v) = v_normalize_nm(v_between_two_points_nm(hitpoint, *(rt->light->p)));
 	normal = cal_normal(rt, obj, hitpoint);
 	*(ray.p) = calc_endpoint_vector_nm(normal, hitpoint, EPSILON);
 	len_v = v_len(v_between_two_points_nm(*(ray.p), *(rt->light->p))) - EPSILON;
-	//shadow t is negative, not intersection found
 	shadow_t = shadow_loop(rt, &ray, len_v);
 	*t = shadow_t;
-	if(shadow_t < EPSILON)
+	if (shadow_t < EPSILON)
 	{
 		diffuse = calc_diffuse_light(rt, normal, *(ray.v));
-		result = calculate_light(rt, color, diffuse);
-		return(result);
+		return (calculate_light(rt, color, diffuse));
 	}
-	//shadow t is positive aka shade
 	else
-	{
-		result = calculate_light(rt, color, diffuse);
-		return(result);
-	}
-
-}
+		return (calculate_light(rt, color, diffuse));
+} */
