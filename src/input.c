@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:10:44 by ltreser           #+#    #+#             */
-/*   Updated: 2025/04/17 17:06:42 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/17 23:49:28 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void parse_input(t_rt *rt, char **argv)
 
 	line = NULL;
 	line = get_next_line(rt->fd);
+	int counter = 0;
 	while (line)
 	{
 		ft_parse(line, rt, 1);
@@ -55,6 +56,8 @@ void parse_input(t_rt *rt, char **argv)
 	line = get_next_line(rt->fd);
 	while (line)
 	{
+		counter++;
+		printf("line %i: '%s'\n", counter, line);
 		ft_parse(line, rt, 0);
 		free(line);
 		line = get_next_line(rt->fd);

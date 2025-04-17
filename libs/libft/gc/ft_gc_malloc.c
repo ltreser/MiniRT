@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:04:07 by afoth             #+#    #+#             */
-/*   Updated: 2024/12/09 21:22:12 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/18 00:59:22 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ char	*gc_strdup(t_gc *gc, const char *s)
 	return (ptr);
 }
 
+
+
 char	*gc_chop(t_gc *gc, char *str, char c)
 {
 	int		i;
@@ -114,6 +116,7 @@ char	*gc_chop(t_gc *gc, char *str, char c)
 	i = 0;
 	len = 0;
 	chop = NULL;
+	printf("gc chop gets: %s\n", str);
 	if (!contains_c(str, c))
 		return (str);
 	while (str[len] && str[len] != c)
@@ -126,9 +129,12 @@ char	*gc_chop(t_gc *gc, char *str, char c)
 	}
 	chop[i++] = '\0';
 	len = i;
-	i = 0;
+	//while (str[len] && str[len] == c)
+	//	len++;
 	ft_memmove(str, str + len, (ft_strlen(str) - len));
 	ft_bzero(str + (ft_strlen(str) - len), len);
+	printf("str is now %s\n", str);
+	printf("gc chop returns: %s\n", chop);
 	return (chop);
 }
 

@@ -187,7 +187,7 @@ struct						s_sphere
 	t_color					*c;
 	t_vector				*v;//DEL HAE??
 	t_point					*p;
-	int						d;
+	t_float						d;
 	t_float					rot_r;
 };
 

@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:32:07 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/10 18:20:32 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/17 23:35:27 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,13 +144,21 @@ double	ft_atof(const char *str)
 		sign = -1;
 		str++;
 	}
-	if (!is_valid_float(str))
+	if (!is_valid_float(str)) {
+		printf("not a vaid float: '%s'\n", str);
 		return (NAN);
+	}
 	result = parse_integer_part(&str, &overflow);
-	if (overflow)
+	if (overflow) {
+		printf("overflow: %s\n", str);
 		return (NAN);
+}
 	result += parse_fractional_part(&str, &power, &overflow) / power;
-	if (overflow)
+	if (overflow) {
+		printf("frac overflow: %s\n", str);
 		return (NAN);
+}
+	if (sign * result == NAN)
+		printf("Uncaught NaN\n");
 	return (sign * result);
 }

@@ -105,8 +105,11 @@ void	parse_obj(char *str, t_rt *rt)
 	if (rt->obj[rt->n_obj]->type == PLANE)
 	{
 		rt->obj[rt->n_obj]->plane = gc_malloc(rt->gc, sizeof(t_plane));
+		printf("string is: %s\n", str);
 		rt->obj[rt->n_obj]->plane->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
+		printf("string is: %s\n", str);
 		rt->obj[rt->n_obj]->plane->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
+		printf("string is: %s\n", str);
 		rt->obj[rt->n_obj]->plane->c = parse_color(rt, str);
 	}
 	if (rt->obj[rt->n_obj]->type == CYLINDER)
