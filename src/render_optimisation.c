@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:36:36 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/16 18:12:47 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/17 17:40:51 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,9 +217,9 @@ void	symplify(t_rt *rt, int	*error)
 		create_sphere_mask(rt);
 		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->sphere->u_corner, 'u', error);
 		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->sphere->d_corner, 'd', error);
-
-		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->obj[rt->n_obj]->dvp_x2, rt->obj[rt->n_obj]->dvp_y2, 0xFFFFFFFF);
-		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->obj[rt->n_obj]->uvp_x1, rt->obj[rt->n_obj]->uvp_y1, 0xFFFFFFFF);
+			//uncoment for mask render points visualing
+		// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->obj[rt->n_obj]->dvp_x2, rt->obj[rt->n_obj]->dvp_y2, 0xFFFFFFFF);
+		//mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->obj[rt->n_obj]->uvp_x1, rt->obj[rt->n_obj]->uvp_y1, 0xFFFFFFFF);
 	}
 	else
 	{

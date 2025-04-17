@@ -9,7 +9,7 @@
 # define MAX_RENDER FLT_MAX
 // Comparing t_floats, if the difference is smaller than EPSILON,
 // they are considered equal
-# define EPSILON 0.1f
+# define EPSILON 0.00000000001f
 typedef double	t_float;
 /*Error Codes*/
 # define EXIT_MALLOC 2

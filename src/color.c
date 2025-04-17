@@ -6,13 +6,14 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 16:32:16 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/16 18:12:47 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/17 18:10:15 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
-unsigned int t_float_to_grayscale_color(t_float value)
+//not in use, for differnt coloration
+/* unsigned int t_float_to_grayscale_color(t_float value)
 {
 	t_float	min;
 	t_float	max;
@@ -33,9 +34,9 @@ unsigned int t_float_to_grayscale_color(t_float value)
 	// printf("Color: 0x%06X\n", color);
 
 	return (intensity << 16) | (intensity << 8) | intensity;
-}
-
-unsigned int scale_color_by_value(struct s_color color, t_float value)
+} */
+//not in use, for differnt coloration
+/* unsigned int scale_color_by_value(struct s_color color, t_float value)
 {
     // Choose your min/max or pass them as parameters if needed
     t_float min = 0.0f;
@@ -57,7 +58,7 @@ unsigned int scale_color_by_value(struct s_color color, t_float value)
 
     // Pack into 0xRRGGBB
     return (r << 16) | (g << 8) | b;
-}
+} */
 
 unsigned int color_to_hex(t_color c)
 {
@@ -68,5 +69,5 @@ unsigned int color_to_hex(t_color c)
 	r = c.r;
 	g = c.g;
 	b = c.b;
-	return (r << 16) | (g << 8) | b;
+	return ((r << 16) | (g << 8) | b);
 }

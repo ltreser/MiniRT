@@ -34,7 +34,7 @@ t_float	shadow_loop(t_rt *rt, t_ray *ray, t_float len)
 			}
 			if (rt->obj[i]->type == CYLINDER)
 			{
-				//tmp_t = cylinder_intersection(rt, *rt->obj[i]->cylinder, *ray);
+				tmp_t = cylinder_intersection(*rt->obj[i]->cylinder, *ray);
 			}
 			// shadow_hit->t > EPSILON && shadow_hit->t < max_len - EPSILON)
 			if(tmp_t > EPSILON && tmp_t < len)
@@ -76,7 +76,6 @@ t_color	calc_diffuse_light(t_rt *rt, t_vector normal, t_vector v_light)
 	// t_ray	light;
 	t_float	dot_product;
 	t_color	diffuse;
-	t_color	temp_diffuse;
 //
 	diffuse = (t_color){0, 0, 0,};
 	// while (l != NULL && hit_rec)
@@ -87,10 +86,10 @@ t_color	calc_diffuse_light(t_rt *rt, t_vector normal, t_vector v_light)
 	dot_product = v_dot_product(&normal, &v_light);
 	if(dot_product > EPSILON)
 	{
-		temp_diffuse = col_mult_scalar(col_mult_scalar(*rt->light->c, dot_product), rt->light->bright);
-		diffuse = col_add(diffuse, temp_diffuse);
+		diffuse = col_mult_scalar(col_mult_scalar(*rt->light->c, dot_product), rt->light->bright);
+		// diffuse = col_add(diffuse, diffuse);
 	}
-	// temp_diffuse = col_mult(col_mult(l->color, dot_product), l->brightness);
+	// diffuse = col_mult(col_mult(l->color, dot_product), l->brightness);
 	return (diffuse);
 }
 
@@ -99,7 +98,7 @@ t_color	calculate_light(t_rt *rt, t_color color, t_color diffuse)
 	t_color	result;
 	t_color	ambient;
 
-	ambient = col_mult_scalar(*rt->ambient->c, rt->ambient->ratio);
+	ambient = col_mult_scalar(*rt->ambient->c, rt->ambient->ratio);//move to init FREDDY
 	result.r = ((t_float)(ambient.r + diffuse.r) / 255.0) * color.r;
 	result.g = ((t_float)(ambient.g + diffuse.g) / 255.0) * color.g;
 	result.b = ((t_float)(ambient.b + diffuse.b) / 255.0) * color.b;
