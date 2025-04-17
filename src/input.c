@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:10:44 by ltreser           #+#    #+#             */
-/*   Updated: 2025/02/25 14:25:15 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/17 17:06:42 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void parse_input(t_rt *rt, char **argv)
 	rt->obj = NULL;
 	rt->obj = gc_malloc(rt->gc, sizeof(t_obj) * rt->obj_count);
 	rt->fd = open(argv[1], O_RDONLY);
+	if(!(rt->fd > 0))
+		ft_exit(rt, 2, gc_strdup(rt->gc, OPEN_FAIL));
 	line = NULL;
 	line = get_next_line(rt->fd);
 	while (line)
