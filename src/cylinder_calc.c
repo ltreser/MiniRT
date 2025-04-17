@@ -25,7 +25,7 @@
 	return (radius);
 }
 
-int 3d_point_within_circles(t_cylinder cyl, t_point point)
+int located_in_endcaps(t_cylinder cyl, t_point point)
 {
     t_vector    top_normal;
     t_point     top_center;

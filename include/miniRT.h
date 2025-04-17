@@ -348,20 +348,12 @@ void						calc_aspect_ratio(t_rt *rt);
 void						setup_viewport(t_rt *rt);
 t_float	cylinder_intersection(t_cylinder cyl, t_ray ray);
 t_point						sphere_intersection_p(t_sphere *s, t_ray *r);
-<<<<<<< HEAD
-t_float   infinite_planes(t_cylinder cyl, t_ray ray, int  flag);
-int point_within_circles(t_cylinder cyl, t_float intersection, t_ray ray);
-int point_within_planes(t_cylinder cyl, t_float intersection, t_ray ray);
-t_float infinite_cylinder(t_cylinder cyl, t_ray ray, int flag);
-t_float   abc_formula(t_float a, t_float b, t_float c, int  flag);
-=======
 float   infinite_planes(t_cylinder cyl, t_ray ray, int  flag);
 int point_within_circles(t_cylinder cyl, float intersection, t_ray ray);
 int point_within_planes(t_cylinder cyl, float intersection, t_ray ray);
 float infinite_cylinder(t_cylinder cyl, t_ray ray, int flag);
 float   abc_formula(float a, float b, float c, int  flag);
-int 3d_point_within_circles(t_cylinder cyl, t_point point);
->>>>>>> 0625aae (feat: calculate cylinder normal)
+int 	located_in_endcaps(t_cylinder cyl, t_point point);
 
 // init_obj.c
 void						init_obj(t_rt *rt);
