@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cylinder_calc.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/17 19:02:13 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/16 18:12:47 by afoth            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
@@ -35,3 +24,26 @@
 	radius = v_len(v_between_two_points_nm(*(c->p), up_side));
 	return (radius);
 }
+
+int 3d_point_within_circles(t_cylinder cyl, t_point point)
+{
+    t_vector    top_normal;
+    t_point     top_center;
+    t_vector    bottom_normal;
+    t_point     bottom_center;
+    t_vector    center2point_top;
+    t_vector    center2point_bottom;
+
+    top_center = calc_endpoint_vector(cyl.v, cyl.p, cyl.h / 2);
+    top_normal = *cyl.v;
+    bottom_center = calc_endpoint_vector(cyl.v, cyl.p, -(cyl.h / 2));
+    bottom_normal = v_mult_scalar_nm(*cyl.v, -1);
+    center2point_top = v_between_two_points_nm(top_center, point);
+    center2point_bottom = v_between_two_points_nm(bottom_center, point);
+    if (!v_dot_product(&center2point_top, &top_normal) && v_len(center2point_top) <= cyl.d/2)
+        return (1);
+    if (!v_dot_product(&center2point_bottom, &bottom_normal) && v_len(center2point_bottom) <= cyl.d/2)
+        return (1);
+    return (0);
+}
+
