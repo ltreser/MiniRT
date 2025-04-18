@@ -106,37 +106,37 @@ char	*gc_strdup(t_gc *gc, const char *s)
 }
 
 
-
-char	*gc_chop(t_gc *gc, char *str, char c)
+char    *gc_chop(t_gc *gc, char *str, char c)
 {
-	int		i;
-	int		len;
-	char	*chop;
+        int             i;
+        int             len;
+        char    *chop;
 
-	i = 0;
-	len = 0;
-	chop = NULL;
-	printf("gc chop gets: %s\n", str);
-	if (!contains_c(str, c))
-		return (str);
-	while (str[len] && str[len] != c)
-		len++;
-	chop = gc_malloc(gc, (len + 1) * sizeof(char));
-	while (str[i] && i < len)
-	{
-		chop[i] = str[i];
-		i++;
-	}
-	chop[i++] = '\0';
-	len = i;
-	//while (str[len] && str[len] == c)
-	//	len++;
-	ft_memmove(str, str + len, (ft_strlen(str) - len));
-	ft_bzero(str + (ft_strlen(str) - len), len);
-	printf("str is now %s\n", str);
-	printf("gc chop returns: %s\n", chop);
-	return (chop);
+        i = 0;
+        len = 0;
+        chop = NULL;
+        if (!contains_c(str, c))
+                return (str);
+        while (str[len] && str[len] != c )
+                len++;
+        chop = gc_malloc(gc, (len + 1) * sizeof(char));
+        while (str[i] && i < len)
+        {
+                chop[i] = str[i];
+                i++;
+        }
+        chop[i++] = '\0';
+        len = i;
+        ft_memmove(str, str + len, (ft_strlen(str) - len));
+        ft_bzero(str + (ft_strlen(str) - len), len);
+        i = 0;
+        while (str[i] == ' ')
+                i++;
+        ft_memmove(str, str + i, (ft_strlen(str) - i));
+        ft_bzero(str + (ft_strlen(str) - i), i);
+        return (chop);
 }
+
 
 char	*gc_strtrim(t_gc *gc, char const *s1, char const *set)
 {
