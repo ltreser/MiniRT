@@ -38,7 +38,6 @@ void parse_input(t_rt *rt, char **argv)
 
 	line = NULL;
 	line = get_next_line(rt->fd);
-	int counter = 0;
 	while (line)
 	{
 		ft_parse(line, rt, 1);
@@ -56,8 +55,6 @@ void parse_input(t_rt *rt, char **argv)
 	line = get_next_line(rt->fd);
 	while (line)
 	{
-		counter++;
-		printf("line %i: '%s'\n", counter, line);
 		ft_parse(line, rt, 0);
 		free(line);
 		line = get_next_line(rt->fd);

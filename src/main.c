@@ -7,7 +7,7 @@
 
 int	main(int argc, char **argv)
 {
-	printf("\n\n\nTESTING: %s\n\n", argv[1]);
+	//printf("\n\n\nTESTING: %s\n\n", argv[1]);
 	t_rt *rt;
 	struct timeval	start, end;
 	gettimeofday(&start, NULL);

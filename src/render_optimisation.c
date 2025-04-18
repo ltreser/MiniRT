@@ -94,13 +94,13 @@ void	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner, int *erro
 		t_float dist_up = distance_p_to_ray(point, ray);
 
 		rt->obj[rt->n_obj]->uvp_x1 = ceilf(dist_up / rt->vp->pixel_w);
-		printf("uvp_x1 %i, ", rt->obj[rt->n_obj]->uvp_x1);
+		//printf("uvp_x1 %i, ", rt->obj[rt->n_obj]->uvp_x1);
 
 		ray.v = rt->vp->right;
 
 		t_float dist_right = distance_p_to_ray(point, ray);
 		rt->obj[rt->n_obj]->uvp_y1 = ceilf(dist_right / rt->vp->pixel_h);
-		printf("uvp_y1 %i, ", rt->obj[rt->n_obj]->uvp_y1);
+		//printf("uvp_y1 %i, ", rt->obj[rt->n_obj]->uvp_y1);
 
 	}
 
@@ -112,13 +112,13 @@ void	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner, int *erro
 
 		t_float dist_up = distance_p_to_ray(point, ray);
 		rt->obj[rt->n_obj]->dvp_x2 = ceilf(dist_up / rt->vp->pixel_w);
-		printf("dvp_x2 %i, ", rt->obj[rt->n_obj]->dvp_x2);
+		//printf("dvp_x2 %i, ", rt->obj[rt->n_obj]->dvp_x2);
 
 		ray.v = rt->vp->right;
 
 		t_float dist_right = distance_p_to_ray(point, ray);
 		rt->obj[rt->n_obj]->dvp_y2 = ceilf(dist_right / rt->vp->pixel_h);
-		printf("dvp_y2 %i, ", rt->obj[rt->n_obj]->dvp_y2);
+		//printf("dvp_y2 %i, ", rt->obj[rt->n_obj]->dvp_y2);
 
 	}
 }

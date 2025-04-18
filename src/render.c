@@ -29,6 +29,16 @@ void	create_render_ray(t_rt *rt)
 This Point is rendert
 tmp_t init
 */
+t_color	get_color(t_rt *rt, int i)
+{
+	if(rt->obj[i]->type == PLANE)
+			return (*rt->obj[i]->plane->c);
+	if(rt->obj[i]->type == SPHERE)
+			return (*rt->obj[i]->sphere->c);
+	if (rt->obj[i]->type == CYLINDER)
+			return (*rt->obj[i]->cylinder->c);
+}
+
 void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 {
 	int		i;
@@ -47,20 +57,11 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 			i = i;
 			tmp_t = -1;
 			if(rt->obj[i]->type == PLANE)
-			{
 				tmp_t = plane_ray_calc_t(*rt->obj[i]->plane, *ray);
-				color = *rt->obj[i]->plane->c;
-			}
 			if(rt->obj[i]->type == SPHERE)
-			{
 		 	 	tmp_t = sphere_intersection(rt->obj[i]->sphere, ray);
-				color = *rt->obj[i]->sphere->c;
-			}
 			if (rt->obj[i]->type == CYLINDER)
-			{
 				tmp_t = cylinder_intersection(*rt->obj[i]->cylinder, *ray);
-				color = *rt->obj[i]->cylinder->c;
-			}
 			//IS 0 POSSILBE
 			if(tmp_t > EPSILON && tmp_t < t)
 			{
@@ -76,6 +77,7 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 		return;
 	}
 	rt->n_obj = min_t_obj;
+	color = get_color(rt, min_t_obj);
 	color = lighting(rt, *(rt->obj[min_t_obj]), color, &t);
 		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - y , color_to_hex(color));
 }
