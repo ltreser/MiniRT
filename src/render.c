@@ -79,7 +79,8 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 	rt->n_obj = min_t_obj;
 	color = get_color(rt, min_t_obj);
 	color = lighting(rt, *(rt->obj[min_t_obj]), color, &t);
-		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - y , color_to_hex(color));
+	*(unsigned int *)(rt->mlx->pixel_adress + (rt->vp->pixel_y * rt->mlx->line_len + rt->vp->pixel_x * rt->mlx->bpp / 8)) = color_to_hex(color);
+	//mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - y , color_to_hex(color));
 }
 
 
@@ -135,6 +136,7 @@ void render_loop(t_rt *rt)
 	y pixel++ until y max verschiebung vektor?
 
 */
+	mlx_put_image_to_window(rt->mlx->connection, rt->mlx->window, rt->mlx->img, 0, 0);
 }
 
 
