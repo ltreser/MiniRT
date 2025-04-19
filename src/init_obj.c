@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:23:23 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 21:22:55 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/20 00:27:30 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,19 @@ t_point	*init_point(t_gc *gc)
 	point->y = 0;
 	point->z = 0;
 	return (point);
+}
+
+t_vector	*init_vector(t_gc *gc)
+{
+	t_vector	*vector;
+
+	vector = gc_malloc(gc, sizeof(t_vector));
+	if (!vector)
+		return (NULL);
+	vector->x = 0;
+	vector->y = 0;
+	vector->z = 0;
+	return (vector);
 }
 
 void	init_obj(t_rt *rt)

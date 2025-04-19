@@ -291,7 +291,7 @@ int							only_valid_chars(char *str);
 void						is_nan(t_rt *rt, t_float f);
 void						init(t_rt *rt);
 void						init_fc(t_fc *fc);
-
+t_vector					*init_vector(t_gc *gc);
 // mlx
 void						mlx_create_window(t_rt *rt);
 int							keypress(int keycode, t_rt *rt);

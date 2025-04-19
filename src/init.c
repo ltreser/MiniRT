@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 17:51:38 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 21:34:29 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/20 00:26:30 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	init(t_rt *rt)
 void	init_intersec(t_rt *rt)
 {
 	rt->intersec = gc_malloc(rt->gc, sizeof(t_intersect));
-	rt->intersec->ray = gc_malloc(rt->gc, sizeof(t_ray));
-	rt->intersec->hit_p = gc_malloc(rt->gc, sizeof(t_point));
+	rt->intersec->ray = init_ray(rt->gc);
+	rt->intersec->hit_p = init_point(rt->gc);
 	rt->intersec->normal = gc_malloc(rt->gc, sizeof(t_vector));
 }
 
