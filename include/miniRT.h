@@ -56,6 +56,7 @@ typedef struct s_sphere		t_sphere;
 typedef struct s_cylinder	t_cylinder;
 typedef struct s_color		t_color;
 typedef struct s_obj		t_obj;
+typedef struct s_intersect	t_intersect;
 typedef struct s_gc			t_gc;
 typedef struct s_mlx		t_mlx;
 typedef struct s_vp			t_vp;
@@ -85,6 +86,7 @@ struct						s_rt
 	t_obj					**obj;
 	t_vp					*vp;
 	t_fc					*fc;
+	t_intersect				*intersec;
 	int						n_obj;
 	int						obj_count;
 	int						fd;
@@ -172,6 +174,15 @@ struct						s_obj
 		t_cylinder			*cyl;
 	};
 };
+
+struct						s_intersect
+{
+	t_ray					*ray;
+	t_point					*hit_p;
+	t_vector				*normal;
+	t_float					shadow_t;
+};
+
 
 struct						s_plane
 {

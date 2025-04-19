@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 23:33:19 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 19:13:05 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 21:26:55 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,28 +71,24 @@ t_color	calculate_light(t_rt *rt, t_color color, t_color diffuse)
 
 t_color	lighting(t_rt *rt, t_obj obj, t_color color, t_float t)
 {
-	t_ray		ray;
-	t_point		p;
-	t_point		hitpoint;
-	t_vector	v;
-	t_vector	normal;
 	t_color		diffuse;
 	t_float		len_v;
-	t_float		shadow_t;
 
-	ray.p = &p;
-	ray.v = &v;
 	diffuse = (t_color){0, 0, 0};
-	hitpoint = calc_endpoint_vector_nm(*(rt->vp->render_ray->v), *(rt->vp->render_ray->p), t);
-	*(ray.v) = v_normalize_nm(v_between_two_points_nm(hitpoint, *(rt->light->p)));
-	normal = cal_normal(rt, obj, hitpoint);
-	*(ray.p) = calc_endpoint_vector_nm(normal, hitpoint, EPSILON);
-	len_v = v_len(v_between_two_points_nm(*(ray.p), *(rt->light->p))) - EPSILON;
-	shadow_t = shadow_loop(rt, &ray, len_v);
-	t = shadow_t;
-	if (shadow_t < EPSILON)
+	*(rt->intersec->hit_p) = calc_endpoint_vector_nm(*(rt->vp->render_ray->v), \
+		*(rt->vp->render_ray->p), t);
+	*(rt->intersec->ray->v) = v_normalize_nm(\
+		v_between_two_points_nm(*(rt->intersec->hit_p), *(rt->light->p)));
+	*(rt->intersec->normal) = cal_normal(rt, obj, *(rt->intersec->hit_p));
+	*(rt->intersec->ray->p) = calc_endpoint_vector_nm(*(rt->intersec->normal), \
+		*(rt->intersec->hit_p), EPSILON);
+	len_v = v_len(v_between_two_points_nm(*(rt->intersec->ray->p), \
+		*(rt->light->p))) - EPSILON;
+	rt->intersec->shadow_t = shadow_loop(rt, rt->intersec->ray, len_v);
+	if (rt->intersec->shadow_t < EPSILON)
 	{
-		diffuse = calc_diffuse_light(rt, normal, *(ray.v));
+		diffuse = calc_diffuse_light(rt, *(rt->intersec->normal), \
+			*(rt->intersec->ray->v));
 		return (calculate_light(rt, color, diffuse));
 	}
 	else
