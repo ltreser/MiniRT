@@ -94,7 +94,7 @@ void	frustum_culling(t_rt *rt)
 		}
 		i++;
 	}
-	i = 0;
+	/*i = 0;
 	while (i < rt->n_obj)
 	{
 		if (rt->obj[i]->visible)
@@ -102,5 +102,5 @@ void	frustum_culling(t_rt *rt)
 		else
 			printf("obj nr %d is NOT visible\n", i);
 		i++;
-	}
+	}*/
 }

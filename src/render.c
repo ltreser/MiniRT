@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 19:04:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 19:10:55 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 19:22:33 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@ void	create_render_ray(t_rt *rt)
 This Point is rendert
 tmp_t init
 */
+t_color	get_color(t_rt *rt, int i)
+{
+	if(rt->obj[i]->type == PLANE)
+			return (*rt->obj[i]->pl->c);
+	if(rt->obj[i]->type == SPHERE)
+			return (*rt->obj[i]->s->c);
+	if (rt->obj[i]->type == CYLINDER)
+			return (*rt->obj[i]->cyl->c);
+}
+
 void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 {
 	int		i;
@@ -57,22 +67,12 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 		{
 			i = i;
 			tmp_t = -1;
-			if (rt->obj[i]->type == PLANE)
-			{
+			if(rt->obj[i]->type == PLANE)
 				tmp_t = plane_ray_calc_t(*rt->obj[i]->pl, *ray);
-				color = *rt->obj[i]->pl->c;
-			}
-			if (rt->obj[i]->type == SPHERE)
-			{
+			if(rt->obj[i]->type == SPHERE)
 		 	 	tmp_t = sphere_intersection(rt->obj[i]->s, ray);
-				color = *rt->obj[i]->s->c;
-			}
 			if (rt->obj[i]->type == CYLINDER)
-			{
 				tmp_t = cylinder_intersection(*rt->obj[i]->cyl, *ray);
-				color = *rt->obj[i]->cyl->c;
-			}
-			//IS 0 POSSILBE
 			if (tmp_t > EPSILON && tmp_t < t)
 			{
 				t = tmp_t;
@@ -87,8 +87,10 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 		return;
 	}
 	rt->n_obj = min_t_obj;
+	color = get_color(rt, min_t_obj);
 	color = lighting(rt, *(rt->obj[min_t_obj]), color, t);
-		mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - y , color_to_hex(color));
+	*(unsigned int *)(rt->mlx->pixel_adress + (rt->vp->pixel_y * rt->mlx->line_len + rt->vp->pixel_x * rt->mlx->bpp / 8)) = color_to_hex(color);
+	//mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - y , color_to_hex(color));
 }
 
 
@@ -144,6 +146,7 @@ void render_loop(t_rt *rt)
 	y pixel++ until y max verschiebung vektor?
 
 */
+	mlx_put_image_to_window(rt->mlx->connection, rt->mlx->window, rt->mlx->img, 0, 0);
 }
 
 

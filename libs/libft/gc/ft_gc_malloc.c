@@ -6,7 +6,11 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:04:07 by afoth             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/04/17 23:40:37 by afoth            ###   ########.fr       */
+=======
+/*   Updated: 2025/04/18 00:59:22 by ltreser          ###   ########.fr       */
+>>>>>>> 9a0736aa7c7f3390bd2a6596b2b20071b2f253cb
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,32 +108,38 @@ char	*gc_strdup(t_gc *gc, const char *s)
 	return (ptr);
 }
 
-char	*gc_chop(t_gc *gc, char *str, char c)
-{
-	int		i;
-	int		len;
-	char	*chop;
 
-	i = 0;
-	len = 0;
-	chop = NULL;
-	if (!contains_c(str, c))
-		return (str);
-	while (str[len] && str[len] != c)
-		len++;
-	chop = gc_malloc(gc, (len + 1) * sizeof(char));
-	while (str[i] && i < len)
-	{
-		chop[i] = str[i];
-		i++;
-	}
-	chop[i++] = '\0';
-	len = i;
-	i = 0;
-	ft_memmove(str, str + len, (ft_strlen(str) - len));
-	ft_bzero(str + (ft_strlen(str) - len), len);
-	return (chop);
+char    *gc_chop(t_gc *gc, char *str, char c)
+{
+        int             i;
+        int             len;
+        char    *chop;
+
+        i = 0;
+        len = 0;
+        chop = NULL;
+        if (!contains_c(str, c))
+                return (str);
+        while (str[len] && str[len] != c )
+                len++;
+        chop = gc_malloc(gc, (len + 1) * sizeof(char));
+        while (str[i] && i < len)
+        {
+                chop[i] = str[i];
+                i++;
+        }
+        chop[i++] = '\0';
+        len = i;
+        ft_memmove(str, str + len, (ft_strlen(str) - len));
+        ft_bzero(str + (ft_strlen(str) - len), len);
+        i = 0;
+        while (str[i] == ' ')
+                i++;
+        ft_memmove(str, str + i, (ft_strlen(str) - i));
+        ft_bzero(str + (ft_strlen(str) - i), i);
+        return (chop);
 }
+
 
 char	*gc_strtrim(t_gc *gc, char const *s1, char const *set)
 {

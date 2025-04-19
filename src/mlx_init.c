@@ -26,7 +26,7 @@ int	keypress(int keycode, t_rt *rt)
 {
 	if (keycode == 65307)
 		ft_close_window(rt);
-	printf("keycode is: %d\n", keycode);
+	//printf("keycode is: %d\n", keycode);
 	return (0);
 }
 void	mlx_create_window(t_rt *rt)
