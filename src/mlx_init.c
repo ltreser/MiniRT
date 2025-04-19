@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 15:40:56 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 22:11:14 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/20 00:35:37 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	keypress(int keycode, t_rt *rt)
 		ft_close_window(rt);
 	return (0);
 }
-void	mlx_create_window(t_rt *rt)
+
+void	mlx_setup(t_rt *rt)
 {
 	rt->mlx->x = 0;
 	rt->mlx->y = 0;
@@ -37,6 +38,11 @@ void	mlx_create_window(t_rt *rt)
 	rt->mlx->bpp = 24;
 	rt->mlx->endian = 0;
 	rt->mlx->line_len = rt->mlx->width * 3;
+}
+
+void	mlx_create_window(t_rt *rt)
+{
+	mlx_setup(rt);
 	rt->mlx->connection = mlx_init();
 	if (!rt->mlx->connection)
 		ft_exit(rt, 5, ft_strdup(MLX_FAIL));

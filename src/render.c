@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 19:04:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 21:53:56 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/20 00:51:02 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ t_point	calc_startpoint_render(t_rt *rt)
 	return (point);
 }
 
+//DEL error handling?
+//TODO problem: ray start point should be the camera
 void	create_render_ray(t_rt *rt)
 {
-	*rt->vp->render_ray->p  =  *rt->camera->p;  //TODO problem: ray start point should be the camera
-	*rt->vp->render_ray->v = v_between_two_points_nm(*rt->camera->p, calc_startpoint_render(rt));
-	//error handling?
+	*rt->vp->render_ray->p  =  *rt->camera->p;
+	*rt->vp->render_ray->v = v_between_two_points_nm(*rt->camera->p, \
+		calc_startpoint_render(rt));
 }
 
 t_color	get_color(t_rt *rt, int i)
@@ -42,13 +44,44 @@ t_color	get_color(t_rt *rt, int i)
 		return (*rt->obj[i]->cyl->c);
 }
 
+float	obj_type_to_render(t_rt *rt, t_ray *ray, int i)
+{
+	float	tmp_t;
+
+	tmp_t = -1;
+	if (rt->obj[i]->type == PLANE)
+		tmp_t = plane_ray_calc_t(*rt->obj[i]->pl, *ray);
+	if (rt->obj[i]->type == SPHERE)
+		tmp_t = sphere_intersection(rt->obj[i]->s, ray);
+	if (rt->obj[i]->type == CYLINDER)
+		tmp_t = cylinder_intersection(*rt->obj[i]->cyl, *ray);
+	return (tmp_t);
+}
+
+// mlx_pixel_put(rt->mlx->connection, rt->mlx->window,
+// x, SCREEN_HEIGHT - 1 - y , 0x0000FF);//BACKGROUND
+void	put_pixel_vp(t_rt *rt, float t, int min_t_obj)
+{
+	t_color	color;
+
+	if (min_t_obj < 0)
+	{
+		return ;
+	}
+	rt->n_obj = min_t_obj;
+	color = get_color(rt, min_t_obj);
+	color = lighting(rt, *(rt->obj[min_t_obj]), color, t);
+	*(unsigned int *)(rt->mlx->pixel_adress + (rt->vp->pixel_y * \
+		rt->mlx->line_len + rt->vp->pixel_x * rt->mlx->bpp / 8)) = \
+		color_to_hex(color);
+}
+
 void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 {
 	int		i;
 	int		min_t_obj;
 	t_float	t;
 	t_float	tmp_t;
-	t_color	color;
 
 	i = 0;
 	t = MAX_RENDER;
@@ -57,13 +90,7 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 	{
 		if (rt->obj[i]->visible == 1)
 		{
-			tmp_t = -1;
-			if (rt->obj[i]->type == PLANE)
-				tmp_t = plane_ray_calc_t(*rt->obj[i]->pl, *ray);
-			if (rt->obj[i]->type == SPHERE)
-				tmp_t = sphere_intersection(rt->obj[i]->s, ray);
-			if (rt->obj[i]->type == CYLINDER)
-				tmp_t = cylinder_intersection(*rt->obj[i]->cyl, *ray);
+			tmp_t = obj_type_to_render(rt, ray, i);
 			if (tmp_t > EPSILON && tmp_t < t)
 			{
 				t = tmp_t;
@@ -72,15 +99,7 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 		}
 		i++;
 	}
-	if (min_t_obj < 0)
-	{
-		// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - 1 - y , 0x0000FF);//BACKGROUND
-		return;
-	}
-	rt->n_obj = min_t_obj;
-	color = get_color(rt, min_t_obj);
-	color = lighting(rt, *(rt->obj[min_t_obj]), color, t);
-	*(unsigned int *)(rt->mlx->pixel_adress + (rt->vp->pixel_y * rt->mlx->line_len + rt->vp->pixel_x * rt->mlx->bpp / 8)) = color_to_hex(color);
+	put_pixel_vp(rt, t, min_t_obj);
 }
 
 

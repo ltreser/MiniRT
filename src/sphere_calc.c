@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere_calc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltreser <ltreser@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 21:24:04 by ltreser           #+#    #+#             */
-/*   Updated: 2025/04/19 21:51:04 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/20 00:46:08 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_float	a_b_c_formula(t_float a, t_float b, t_float c, t_float discriminant)
 		t = intersections[1];
 	return (t);
 }
+
 // TODO build in protection from vectors w length 0
 t_float	sphere_intersection(t_sphere *s, t_ray *r)
 {
