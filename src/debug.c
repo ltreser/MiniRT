@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:18:33 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/17 22:42:36 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 19:36:13 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	print_sphere(t_sphere *s)
 	printf("====== SPHERE DEBUG ======\n");
 	print_point(*s->p, "Position");
 	print_vector(*s->v, "Direction");
-	printf("Diameter: %d\n", s->d);
+	printf("Diameter: %f\n", s->d);
 	print_point(*s->u_corner, "Upper Corner");
 	print_point(*s->d_corner, "Lower Corner");
 	printf("==========================\n");

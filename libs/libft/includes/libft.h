@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 19:09:08 by ltreser           #+#    #+#             */
-/*   Updated: 2024/12/09 21:17:17 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 19:26:09 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <unistd.h>
 # include <stdint.h>
 # include <stdio.h>
+# include <stddef.h>
 
 # define MALLOC_FAIL "\033[0;31m Error\nMalloc failed!\n \033[0m"
 
