@@ -6,11 +6,21 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:50:43 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 21:26:24 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/19 21:53:02 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
+
+void	render(t_rt *rt)
+{
+	setup_viewport(rt);
+	frustum_culling(rt);
+	optimise_pixel_rendering(rt);
+	render_loop(rt);
+	mlx_loop(rt->mlx->connection);
+	ft_close_window(rt);
+}
 
 int	main(int argc, char **argv)
 {

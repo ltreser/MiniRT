@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:45:50 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 21:25:12 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/19 22:03:01 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,27 +49,7 @@ t_float	calc_p_distance(t_point a, t_point b)
 	return (distance);
 }
 
-t_point	vp_add_nm(t_vector a, t_point b)
-{
-	t_point	res;
-
-	res.x = a.x + b.x;
-	res.y = a.y + b.y;
-	res.z = a.z + b.z;
-	return (res);
-}
-
 t_point	pv_subtract_nm(t_point a, t_vector b)
-{
-	t_point	res;
-
-	res.x = a.x - b.x;
-	res.y = a.y - b.y;
-	res.z = a.z - b.z;
-	return (res);
-}
-
-t_point	vp_subtract_nm(t_vector a, t_point b)
 {
 	t_point	res;
 

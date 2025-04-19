@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 19:04:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 21:27:17 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/19 21:53:56 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	create_render_ray(t_rt *rt)
 
 t_color	get_color(t_rt *rt, int i)
 {
-	if(rt->obj[i]->type == PLANE)
-			return (*rt->obj[i]->pl->c);
-	if(rt->obj[i]->type == SPHERE)
-			return (*rt->obj[i]->s->c);
+	if (rt->obj[i]->type == PLANE)
+		return (*rt->obj[i]->pl->c);
+	if (rt->obj[i]->type == SPHERE)
+		return (*rt->obj[i]->s->c);
 	if (rt->obj[i]->type == CYLINDER)
-			return (*rt->obj[i]->cyl->c);
+		return (*rt->obj[i]->cyl->c);
 }
 
 void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
@@ -53,16 +53,15 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 	i = 0;
 	t = MAX_RENDER;
 	min_t_obj = -1;
-	while(i < rt->obj_count)
+	while (i < rt->obj_count)
 	{
 		if (rt->obj[i]->visible == 1)
 		{
-			i = i;
 			tmp_t = -1;
-			if(rt->obj[i]->type == PLANE)
+			if (rt->obj[i]->type == PLANE)
 				tmp_t = plane_ray_calc_t(*rt->obj[i]->pl, *ray);
-			if(rt->obj[i]->type == SPHERE)
-		 	 	tmp_t = sphere_intersection(rt->obj[i]->s, ray);
+			if (rt->obj[i]->type == SPHERE)
+				tmp_t = sphere_intersection(rt->obj[i]->s, ray);
 			if (rt->obj[i]->type == CYLINDER)
 				tmp_t = cylinder_intersection(*rt->obj[i]->cyl, *ray);
 			if (tmp_t > EPSILON && tmp_t < t)
@@ -82,7 +81,6 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 	color = get_color(rt, min_t_obj);
 	color = lighting(rt, *(rt->obj[min_t_obj]), color, t);
 	*(unsigned int *)(rt->mlx->pixel_adress + (rt->vp->pixel_y * rt->mlx->line_len + rt->vp->pixel_x * rt->mlx->bpp / 8)) = color_to_hex(color);
-	//mlx_pixel_put(rt->mlx->connection, rt->mlx->window, x, SCREEN_HEIGHT - y , color_to_hex(color));
 }
 
 
@@ -92,66 +90,29 @@ Warning! in the mlx lib (rendering) y is inverted so y = 0 is the the highest up
 Our coordinate system 0.0 for the viewport is still at the bottom left corner for ease of thinking.
 Rendering starts at the bootm left
 */
-void render_loop(t_rt *rt)
+void	render_loop(t_rt *rt)
 {
 	t_vector	start_vec;
 
 	create_render_ray(rt);
 	start_vec = *rt->vp->render_ray->v;
-	// int i = 0;//DEL DEBUG
-	// rt->vp->pixel_x = 0;
 	rt->vp->pixel_y = 0;
-	//mlx_pixel_put(rt->mlx->connection, rt->mlx->window, 0, rt->vp->pixel_y, 0xFF00FF);
-	//DEL DO we not -1?
-	while(rt->vp->pixel_y < SCREEN_HEIGHT - 1)
+	while (rt->vp->pixel_y < SCREEN_HEIGHT - 1)
 	{
 		rt->vp->pixel_x = 0;
-		while(rt->vp->pixel_x < SCREEN_WIDTH)
+		while (rt->vp->pixel_x < SCREEN_WIDTH)
 		{
-			obj_render_loop(rt, rt->vp->render_ray, rt->vp->pixel_x, rt->vp->pixel_y);
-
-			// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->vp->pixel_x, rt->vp->pixel_y , 0x0000FF);
-			// if (i < 6)
-			// i++;
-			*rt->vp->render_ray->v = v_add_nm(*rt->vp->render_ray->v, *rt->vp->pixel_v_x);
+			obj_render_loop(rt, rt->vp->render_ray, \
+				rt->vp->pixel_x, rt->vp->pixel_y);
+			*rt->vp->render_ray->v = v_add_nm(*rt->vp->render_ray->v, \
+				*rt->vp->pixel_v_x);
 			rt->vp->pixel_x++;
 		}
-		//RESET RAY
 		*rt->vp->render_ray->v = start_vec;
-
 		rt->vp->pixel_y++;
-		*rt->vp->render_ray->v = v_add_nm(*rt->vp->render_ray->v, v_mult_scalar_nm(*rt->vp->pixel_v_y, rt->vp->pixel_y));
-		// print_vector(*rt->vp->render_ray->v, "y");
-		// printf("pixel y %i\n", rt->vp->pixel_y);
+		*rt->vp->render_ray->v = v_add_nm(*rt->vp->render_ray->v, \
+			v_mult_scalar_nm(*rt->vp->pixel_v_y, rt->vp->pixel_y));
 	}
-	/*
-	start: create ray pixel coord + camera
-	start a the top most left pixel? y max x min
-	Go throught obj array and see if obj is visble
-	(y obj max <= y pixel >= y obj min;  if x obj max <= x pixel >= x obj min -> render)
-	move ray
-	call function related to obj type
-
-	if point found-> retun t compare render smallest positve t
-	if point not found/ behind camera-> return t negative
-
-	y pixel++ until y max verschiebung vektor?
-
-*/
-	mlx_put_image_to_window(rt->mlx->connection, rt->mlx->window, rt->mlx->img, 0, 0);
-}
-
-
-
-void	render(t_rt *rt)
-{
-	setup_viewport(rt);
-	frustum_culling(rt);
-	optimise_pixel_rendering(rt);
-	render_loop(rt);
-
-
-	//last FT in render!!!
-	mlx_loop(rt->mlx->connection);
-	ft_close_window(rt);
+	mlx_put_image_to_window(rt->mlx->connection, \
+		rt->mlx->window, rt->mlx->img, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:36:36 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 19:10:34 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 21:56:56 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner, int *erro
 	t_vector	vector;
 	t_ray		ray;
 	t_point		point;
+	t_float		dist_up;
+	t_float		dist_right;
 
 	vector = v_between_two_points_nm(*rt->camera->p, *mask_corner);
 	ray.v = &vector;
@@ -59,44 +61,27 @@ void	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner, int *erro
 	if (isnan(point.x))
 	{
 		*error = 1;
-		return;
+		return ;
 	}
-
 	if (corner == 'u')
 	{
-
 		ray.v = rt->vp->up;
 		ray.p = rt->vp->bottom_left;
-
-		t_float dist_up = distance_p_to_ray(point, ray);
-
+		dist_up = distance_p_to_ray(point, ray);
 		rt->obj[rt->n_obj]->uvp_x1 = ceilf(dist_up / rt->vp->pixel_w);
-		//printf("uvp_x1 %i, ", rt->obj[rt->n_obj]->uvp_x1);
-
 		ray.v = rt->vp->right;
-
-		t_float dist_right = distance_p_to_ray(point, ray);
+		dist_right = distance_p_to_ray(point, ray);
 		rt->obj[rt->n_obj]->uvp_y1 = ceilf(dist_right / rt->vp->pixel_h);
-		//printf("uvp_y1 %i, ", rt->obj[rt->n_obj]->uvp_y1);
-
 	}
-
 	if (corner == 'd')
 	{
-
 		ray.v = rt->vp->up;
 		ray.p = rt->vp->bottom_left;
-
-		t_float dist_up = distance_p_to_ray(point, ray);
+		dist_up = distance_p_to_ray(point, ray);
 		rt->obj[rt->n_obj]->dvp_x2 = ceilf(dist_up / rt->vp->pixel_w);
-		//printf("dvp_x2 %i, ", rt->obj[rt->n_obj]->dvp_x2);
-
 		ray.v = rt->vp->right;
-
-		t_float dist_right = distance_p_to_ray(point, ray);
+		dist_right = distance_p_to_ray(point, ray);
 		rt->obj[rt->n_obj]->dvp_y2 = ceilf(dist_right / rt->vp->pixel_h);
-		//printf("dvp_y2 %i, ", rt->obj[rt->n_obj]->dvp_y2);
-
 	}
 }
 

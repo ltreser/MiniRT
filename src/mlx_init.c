@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 15:40:56 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 21:27:50 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/19 22:11:14 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	mlx_create_window(t_rt *rt)
 {
 	rt->mlx->x = 0;
 	rt->mlx->y = 0;
-	rt->mlx->width = SCREEN_WIDTH;   // TODO change later
-	rt->mlx->height = SCREEN_HEIGHT; // TODO same
+	rt->mlx->width = SCREEN_WIDTH;
+	rt->mlx->height = SCREEN_HEIGHT;
 	rt->mlx->bpp = 24;
 	rt->mlx->endian = 0;
 	rt->mlx->line_len = rt->mlx->width * 3;

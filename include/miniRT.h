@@ -279,7 +279,7 @@ void						ft_parse(char *str, t_rt *rt, int count_only);
 void						parse_obj(char *str, t_rt *rt);
 t_color						*parse_color(t_rt *rt, char *str);
 t_point						*parse_point(t_rt *rt, char *str);
-t_vector					*parse_vector(t_rt *rt, char *str);
+t_vector					*parse_vec(t_rt *rt, char *str);
 void						parse_ambient(t_rt *rt, char *str);
 void						parse_camera(t_rt *rt, char *str);
 void						parse_light(t_rt *rt, char *str);

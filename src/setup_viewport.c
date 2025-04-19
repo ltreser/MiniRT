@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:53:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 21:21:12 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/19 22:01:45 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,19 @@ void	setup_viewport(t_rt *rt)
 	rt->vp->right = v_normalize(v_cross_product(rt, rt->camera->v,
 				&(t_vector){0, 1, 0}));
 	rt->vp->up = v_normalize(v_cross_product(rt, rt->vp->right, rt->camera->v));
-	*(rt->vp->center) = vp_add_nm(*rt->camera->v, *rt->camera->p);
-	*(rt->vp->top_left) = vp_add_nm(v_subtract_nm(v_mult_scalar_nm(*rt->vp->up,
+	*(rt->vp->center) = p_add(*rt->camera->v, *rt->camera->p);
+	*(rt->vp->top_left) = p_add(v_subtract_nm(v_mult_scalar_nm(*rt->vp->up,
 					rt->vp->height / 2), v_mult_scalar_nm(*rt->vp->right,
 					rt->vp->width / 2)), *rt->vp->center);
-	*(rt->vp->top_right) = vp_add_nm(v_add_nm(v_mult_scalar_nm(*rt->vp->up,
+	*(rt->vp->top_right) = p_add(v_add_nm(v_mult_scalar_nm(*rt->vp->up,
 					rt->vp->height / 2), v_mult_scalar_nm(*rt->vp->right,
 					rt->vp->width / 2)), *rt->vp->center);
-	*(rt->vp->bottom_right) = vp_add_nm(v_add_nm(v_mult_scalar_nm(*rt->vp->right,
-					rt->vp->width / 2), v_mult_scalar_nm(*rt->vp->up,
+	*(rt->vp->bottom_right) = p_add(v_add_nm(\
+		v_mult_scalar_nm(*rt->vp->right, rt->vp->width / 2), \
+		v_mult_scalar_nm(*rt->vp->up,
 					-rt->vp->height / 2)), *rt->vp->center);
-	*(rt->vp->bottom_left) = vp_add_nm(v_subtract_nm(v_mult_scalar_nm(*rt->vp->up,
+	*(rt->vp->bottom_left) = p_add(v_subtract_nm(\
+		v_mult_scalar_nm(*rt->vp->up,
 					-rt->vp->height / 2), v_mult_scalar_nm(*rt->vp->right,
 					rt->vp->width / 2)), *rt->vp->center);
 	rt->vp->vp_plane->p = rt->vp->bottom_left;
