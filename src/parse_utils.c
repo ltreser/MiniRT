@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:51:49 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/17 22:52:42 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 21:16:09 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ int	only_valid_chars(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (i == 0 && (str[i] == 'A' || str[i] == 'C' || \
-			str[i] == 'L' || str[i] == 'c' || str[i] == 's' || str[i] == 'p'))
+		if (i == 0 && (str[i] == 'A' || str[i] == 'C' || str[i] == 'L'
+				|| str[i] == 'c' || str[i] == 's' || str[i] == 'p'))
 			i++;
-		else if (i == 1 && (str[i] == 'l' || str[i] == 'y' || \
-			str[i] == 'p' || str[i] == ' '))
+		else if (i == 1 && (str[i] == 'l' || str[i] == 'y' || str[i] == 'p'
+				|| str[i] == ' '))
 			i++;
-		else if (str[i] == ',' || str[i] == '-' || str[i] == '.' || \
-			ft_isdigit(str[i]) || str[i] == ' ' || str[i] == '\n')
+		else if (str[i] == ',' || str[i] == '-' || str[i] == '.'
+			|| ft_isdigit(str[i]) || str[i] == ' ' || str[i] == '\n')
 			i++;
 		else
 			return (0);

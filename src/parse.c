@@ -6,10 +6,9 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:55:31 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 20:48:47 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/19 21:15:27 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/miniRT.h"
 
@@ -28,7 +27,7 @@ void	ft_parse(char *str, t_rt *rt, int count_only)
 					3) || !ft_strncmp("cy ", str, 3));
 	else if (only_valid_chars(str))
 	{
- 		if (str[0] == 'A' && !rt->ambient && str[1] && str[1] == ' ')
+		if (str[0] == 'A' && !rt->ambient && str[1] && str[1] == ' ')
 			parse_ambient(rt, str + 2);
 		else if (str[0] == 'A' && rt->ambient)
 			ft_exit(rt, 4, AC_FAIL);
@@ -118,7 +117,8 @@ void	parse_obj(char *str, t_rt *rt)
 	{
 		rt->obj[rt->n_obj]->cyl = gc_malloc(rt->gc, sizeof(t_cylinder));
 		rt->obj[rt->n_obj]->cyl->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
-		rt->obj[rt->n_obj]->cyl->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
+		rt->obj[rt->n_obj]->cyl->v = parse_vector(rt, gc_chop(rt->gc, str,
+					' '));
 		parse_dimensions(rt, str);
 		rt->obj[rt->n_obj]->cyl->c = parse_color(rt, str);
 		init_obj(rt);

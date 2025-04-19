@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:33:53 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 19:14:49 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 21:15:46 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_vector	cal_normal_plane(t_rt *rt, t_obj obj, t_point p)
 	return (n);
 }
 
-//substract hitpoint from sphere center and making it len 1
+// substract hitpoint from sphere center and making it len 1
 t_vector	cal_normal_sphere(t_rt *rt, t_obj obj, t_point p)
 {
 	t_vector	n;
@@ -48,11 +48,11 @@ t_vector	cal_normal_cyl(t_rt *rt, t_obj obj, t_point p)
 	else
 	{
 		if (v_dot_product(&point2center, obj.cyl->v) < 0)
-			return (v_normalize_nm
-				(vector_projection(*obj.cyl->v, point2center)));
+			return (v_normalize_nm(vector_projection(*obj.cyl->v,
+						point2center)));
 		else
-			return (v_normalize_nm
-				(vector_projection(neg_cyl_normal, point2center)));
+			return (v_normalize_nm(vector_projection(neg_cyl_normal,
+						point2center)));
 	}
 }
 

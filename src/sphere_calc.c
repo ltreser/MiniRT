@@ -1,18 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sphere_calc.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ltreser <ltreser@student.42berlin.de>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/19 21:24:04 by ltreser           #+#    #+#             */
+/*   Updated: 2025/04/19 21:24:07 by ltreser          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/miniRT.h"
 
-//TODO build in protection from vectors w length 0
+// TODO build in protection from vectors w length 0
 t_float	sphere_intersection(t_sphere *s, t_ray *r)
 {
-	t_float t;
-	t_float a;
-	t_float b;
-	t_float c;
-	t_float discriminant;
-	t_float intersections[2];
-	t_vector vector;
+	t_float		t;
+	t_float		a;
+	t_float		b;
+	t_float		c;
+	t_float		discriminant;
+	t_float		intersections[2];
+	t_vector	vector;
 
 	t = 0;
-	vector = v_subtract_nm((t_vector){r->p->x,r->p->y,r->p->z}, (t_vector){s->p->x,s->p->y,s->p->z});
+	vector = v_subtract_nm((t_vector){r->p->x, r->p->y, r->p->z},
+			(t_vector){s->p->x, s->p->y, s->p->z});
 	a = (v_len(*r->v)) * (v_len(*r->v));
 	b = 2 * v_dot_product(r->v, &vector);
 	c = (v_len(vector)) * (v_len(vector)) - s->rot_r * s->rot_r;

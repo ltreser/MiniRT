@@ -6,20 +6,20 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:48:50 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/17 23:13:26 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 21:25:25 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
-//function has possibility to over and underflow
+// function has possibility to over and underflow
 t_float	v_len(t_vector vector)
 {
-	return (sqrtf(vector.x * vector.x + \
-		vector.y * vector.y + vector.z * vector.z));
+	return (sqrtf(vector.x * vector.x + vector.y * vector.y + vector.z
+			* vector.z));
 }
 
-//results in a vector thats perpendicular (senkrecht) to both a and b
+// results in a vector thats perpendicular (senkrecht) to both a and b
 t_vector	*v_cross_product(t_rt *rt, t_vector *a, t_vector *b)
 {
 	t_vector	*res;
@@ -77,8 +77,8 @@ t_vector	*v_between_two_points(t_rt *rt, t_point a, t_point b)
 	return (res);
 }
 
-//project vector a onto b
-//the component of a that goes in the same direction as b
+// project vector a onto b
+// the component of a that goes in the same direction as b
 t_vector	vector_projection(t_vector a, t_vector b)
 {
 	t_float	dot_ab;

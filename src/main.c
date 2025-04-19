@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:50:43 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 19:17:31 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 21:26:24 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ int	main(int argc, char **argv)
 		render(rt);
 	}
 	gettimeofday(&end, NULL);
-	runtime = (end.tv_sec - start.tv_sec) + \
-	(end.tv_usec - start.tv_usec) / 1e6;
+	runtime = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1e6;
 	ft_gc_free(rt->gc);
 	free(rt);
 	printf("Runtime: %.6f seconds\n", runtime);

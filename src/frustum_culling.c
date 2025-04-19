@@ -6,11 +6,12 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:43:17 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 19:10:34 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 21:14:18 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
+
 // have they been inited to 0/NULL?
 void	malloc_fc(t_rt *rt)
 {
@@ -53,10 +54,18 @@ void	calculate_fplanes(t_rt *rt)
 	*rt->fc->dplane_n = v_normalize_nm(v_cross_product_nm(v1, v2));
 }
 
+void	visibility_test(t_rt *rt, int i, t_vector cam2obj, t_float radius)
+{
+	if (((v_dot_product(&cam2obj, rt->fc->rplane_n) - radius) > 0)
+		|| ((v_dot_product(&cam2obj, rt->fc->lplane_n) - radius) > 0)
+		|| ((v_dot_product(&cam2obj, rt->fc->dplane_n) - radius) > 0)
+		|| ((v_dot_product(&cam2obj, rt->fc->uplane_n) - radius) > 0))
+		rt->obj[i]->visible = 0;
+}
+
 void	frustum_culling(t_rt *rt)
 {
 	int			i;
-	t_float		distance;
 	t_float		radius;
 	t_vector	cam2obj;
 
@@ -65,42 +74,20 @@ void	frustum_culling(t_rt *rt)
 	calculate_fplanes(rt);
 	while (i < rt->n_obj)
 	{
-		distance = -1;
 		if (rt->obj[i]->type == SPHERE)
 		{
-			cam2obj = v_between_two_points_nm(*rt->camera->p, *rt->obj[i]->s->p);
+			cam2obj = v_between_two_points_nm(*rt->camera->p,
+					*rt->obj[i]->s->p);
 			radius = rt->obj[i]->s->rot_r;
 		}
 		else if (rt->obj[i]->type == CYLINDER)
 		{
-			cam2obj = v_between_two_points_nm(*rt->camera->p, *rt->obj[i]->cyl->p);
+			cam2obj = v_between_two_points_nm(*rt->camera->p,
+					*rt->obj[i]->cyl->p);
 			radius = rt->obj[i]->s->rot_r;
 		}
 		if (rt->obj[i]->type != PLANE)
-		{
-			distance = v_dot_product(&cam2obj, rt->fc->rplane_n) - radius;
-			if (distance > 0)
-					rt->obj[i]->visible = 0;
-			distance = v_dot_product(&cam2obj, rt->fc->lplane_n) - radius ;
-			if (distance > 0)
-					rt->obj[i]->visible = 0;
-			distance = v_dot_product(&cam2obj, rt->fc->dplane_n) - radius;
-			if (distance > 0)
-					rt->obj[i]->visible = 0;
-			distance = v_dot_product(&cam2obj, rt->fc->uplane_n) - radius;
-			if (distance > 0)
-					rt->obj[i]->visible = 0;
-			break ;
-		}
+			visibility_test(rt, i, cam2obj, radius);
 		i++;
 	}
-	/*i = 0;
-	while (i < rt->n_obj)
-	{
-		if (rt->obj[i]->visible)
-			printf("obj nr %d is visible\n", i);
-		else
-			printf("obj nr %d is NOT visible\n", i);
-		i++;
-	}*/
 }

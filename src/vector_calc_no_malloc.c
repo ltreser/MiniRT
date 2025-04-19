@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:26:34 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/17 23:10:02 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 21:26:01 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ t_vector	v_normalize_nm(t_vector v)
 
 t_float	distance_p_to_ray(t_point point, t_ray ray)
 {
-	return (v_len(v_product_nm(*ray.v, pp_sub_v_nm(point, *ray.p))) / v_len(*ray.v));
+	return (v_len(v_product_nm(*ray.v, pp_sub_v_nm(point, *ray.p)))
+		/ v_len(*ray.v));
 }
 
 t_float	v_dot_product(t_vector *a, t_vector *b)

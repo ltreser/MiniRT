@@ -6,13 +6,13 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:45:50 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/17 23:00:05 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 21:25:12 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
-//adds a given vector to a point, so the point
+// adds a given vector to a point, so the point
 // is moved in the direction and length of the vector
 t_point	*pv_add(t_rt *rt, t_vector *a, t_point *b)
 {
@@ -35,15 +35,15 @@ t_point	calc_endpoint_vector(t_vector *v, t_point *start, t_float scalar)
 	return (end);
 }
 
-//powf calculates the value of one
+// powf calculates the value of one
 // t_float raised to the power of another t_float.
-//XXX distance between 2 points is returned as a negative t_float
+// XXX distance between 2 points is returned as a negative t_float
 t_float	calc_p_distance(t_point a, t_point b)
 {
 	t_float	distance;
 
-	distance = sqrtf(powf(a.x - b.x, 2) + \
-	powf(a.y - b.y, 2) + powf(a.z - b.z, 2));
+	distance = sqrtf(powf(a.x - b.x, 2) + powf(a.y - b.y, 2) + powf(a.z - b.z,
+				2));
 	if (distance < 0)
 		distance *= -1;
 	return (distance);
