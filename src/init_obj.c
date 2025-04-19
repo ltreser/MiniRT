@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:23:23 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 19:10:34 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 21:22:55 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ void	parse_dimensions(t_rt *rt, char *str)
 	i = skip_spaces(str);
 	if (rt->obj[rt->n_obj]->type == CYLINDER)
 	{
-		rt->obj[rt->n_obj]->cyl->d = \
-		ft_atof(gc_chop(rt->gc, str + i, ' '));
+		rt->obj[rt->n_obj]->cyl->d = ft_atof(gc_chop(rt->gc, str + i, ' '));
 		i = skip_spaces(str);
-		rt->obj[rt->n_obj]->cyl->h = \
-		ft_atof(gc_chop(rt->gc, str + i, ' '));
+		rt->obj[rt->n_obj]->cyl->h = ft_atof(gc_chop(rt->gc, str + i, ' '));
 	}
 	else if (rt->obj[rt->n_obj]->type == SPHERE)
 		rt->obj[rt->n_obj]->s->d = ft_atof(gc_chop(rt->gc, str + i, ' '));
@@ -66,8 +64,8 @@ void	init_obj(t_rt *rt)
 	{
 		rt->obj[rt->n_obj]->cyl->u_corner = init_point(rt->gc);
 		rt->obj[rt->n_obj]->cyl->d_corner = init_point(rt->gc);
-		rt->obj[rt->n_obj]->cyl->rot_r = \
-		cylinder_rot_radius(rt, rt->obj[rt->n_obj]->cyl);
+		rt->obj[rt->n_obj]->cyl->rot_r = cylinder_rot_radius(rt,
+				rt->obj[rt->n_obj]->cyl);
 	}
 	if (rt->obj[rt->n_obj]->type == SPHERE)
 	{

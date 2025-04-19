@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:34:16 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/17 22:39:22 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 21:25:41 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_float	cylinder_rot_radius(t_rt *rt, t_cylinder *c)
 		arbitrary.z = 0.0;
 	}
 	sideways = v_cross_product_nm(arbitrary, *(c->v));
-	up_side	= calc_endpoint_vector(&sideways, &up_center, c->d/2);
+	up_side = calc_endpoint_vector(&sideways, &up_center, c->d / 2);
 	radius = v_len(v_between_two_points_nm(*(c->p), up_side));
 	return (radius);
 }
@@ -51,11 +51,11 @@ int	located_in_endcaps(t_cylinder cyl, t_point point)
 	bottom_normal = v_mult_scalar_nm(*cyl.v, -1);
 	center2point_top = v_between_two_points_nm(top_center, point);
 	center2point_bottom = v_between_two_points_nm(bottom_center, point);
-	if (!v_dot_product(&center2point_top, &top_normal) && \
-	v_len(center2point_top) <= cyl.d / 2)
+	if (!v_dot_product(&center2point_top, &top_normal)
+		&& v_len(center2point_top) <= cyl.d / 2)
 		return (1);
-	if (!v_dot_product(&center2point_bottom, &bottom_normal) && \
-	v_len(center2point_bottom) <= cyl.d/2)
+	if (!v_dot_product(&center2point_bottom, &bottom_normal)
+		&& v_len(center2point_bottom) <= cyl.d / 2)
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:37:28 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/17 22:41:39 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 21:24:43 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,11 @@ t_float	cylinder_intersection(t_cylinder cyl, t_ray ray)
 	t = -1;
 	cylinder_intersec1 = infinite_cylinder(cyl, ray, 0);
 	cylinder_intersec2 = infinite_cylinder(cyl, ray, 1);
-	if (cylinder_intersec1 > 0 && \
-		point_within_planes(cyl, cylinder_intersec1, ray))
+	if (cylinder_intersec1 > 0 && point_within_planes(cyl, cylinder_intersec1,
+			ray))
 		t = cylinder_intersec1;
-	if (cylinder_intersec2 > 0 && \
-		point_within_planes(cyl, cylinder_intersec2, ray)
-		&& (t < 0 || t > cylinder_intersec2))
+	if (cylinder_intersec2 > 0 && point_within_planes(cyl, cylinder_intersec2,
+			ray) && (t < 0 || t > cylinder_intersec2))
 		t = cylinder_intersec2;
 	plane_intersec1 = infinite_planes(cyl, ray, 0);
 	plane_intersec2 = infinite_planes(cyl, ray, 1);
@@ -102,11 +101,11 @@ int	point_within_circles(t_cylinder cyl, t_float intersection, t_ray ray)
 	bottom_normal = v_mult_scalar_nm(*cyl.v, -1);
 	center2point_top = v_between_two_points_nm(top_center, point);
 	center2point_bottom = v_between_two_points_nm(bottom_center, point);
-	if (!v_dot_product(&center2point_top, &top_normal) && \
-	v_len(center2point_top) <= cyl.d/2)
+	if (!v_dot_product(&center2point_top, &top_normal)
+		&& v_len(center2point_top) <= cyl.d / 2)
 		return (1);
-	if (!v_dot_product(&center2point_bottom, &bottom_normal) && \
-	v_len(center2point_bottom) <= cyl.d/2)
+	if (!v_dot_product(&center2point_bottom, &bottom_normal)
+		&& v_len(center2point_bottom) <= cyl.d / 2)
 		return (1);
 	return (0);
 }

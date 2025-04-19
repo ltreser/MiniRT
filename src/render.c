@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 19:04:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 19:22:33 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 21:27:17 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,7 @@ void	create_render_ray(t_rt *rt)
 	*rt->vp->render_ray->v = v_between_two_points_nm(*rt->camera->p, calc_startpoint_render(rt));
 	//error handling?
 }
-// void	render_sphere()
-// {
 
-// }
-
-/* Check for closes distance (t)
-This Point is rendert
-tmp_t init
-*/
 t_color	get_color(t_rt *rt, int i)
 {
 	if(rt->obj[i]->type == PLANE)
