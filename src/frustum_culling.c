@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:43:17 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/17 22:45:35 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 19:10:34 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ void	frustum_culling(t_rt *rt)
 		distance = -1;
 		if (rt->obj[i]->type == SPHERE)
 		{
-			cam2obj = v_between_two_points_nm(*rt->camera->p, *rt->obj[i]->sphere->p);
-			radius = rt->obj[i]->sphere->rot_r;
+			cam2obj = v_between_two_points_nm(*rt->camera->p, *rt->obj[i]->s->p);
+			radius = rt->obj[i]->s->rot_r;
 		}
 		else if (rt->obj[i]->type == CYLINDER)
 		{
-			cam2obj = v_between_two_points_nm(*rt->camera->p, *rt->obj[i]->cylinder->p);
-			radius = rt->obj[i]->sphere->rot_r;
+			cam2obj = v_between_two_points_nm(*rt->camera->p, *rt->obj[i]->cyl->p);
+			radius = rt->obj[i]->s->rot_r;
 		}
 		if (rt->obj[i]->type != PLANE)
 		{

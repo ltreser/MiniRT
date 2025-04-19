@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:55:31 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/17 23:31:48 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 19:10:55 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,26 +96,26 @@ void	parse_obj(char *str, t_rt *rt)
 {
 	if (rt->obj[rt->n_obj]->type == SPHERE)
 	{
-		rt->obj[rt->n_obj]->sphere = gc_malloc(rt->gc, sizeof(t_sphere));
-		rt->obj[rt->n_obj]->sphere->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
+		rt->obj[rt->n_obj]->s = gc_malloc(rt->gc, sizeof(t_sphere));
+		rt->obj[rt->n_obj]->s->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
 		parse_dimensions(rt, str);
-		rt->obj[rt->n_obj]->sphere->c = parse_color(rt, str);
+		rt->obj[rt->n_obj]->s->c = parse_color(rt, str);
 		init_obj(rt);
 	}
 	if (rt->obj[rt->n_obj]->type == PLANE)
 	{
-		rt->obj[rt->n_obj]->plane = gc_malloc(rt->gc, sizeof(t_plane));
-		rt->obj[rt->n_obj]->plane->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
-		rt->obj[rt->n_obj]->plane->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
-		rt->obj[rt->n_obj]->plane->c = parse_color(rt, str);
+		rt->obj[rt->n_obj]->pl = gc_malloc(rt->gc, sizeof(t_plane));
+		rt->obj[rt->n_obj]->pl->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
+		rt->obj[rt->n_obj]->pl->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
+		rt->obj[rt->n_obj]->pl->c = parse_color(rt, str);
 	}
 	if (rt->obj[rt->n_obj]->type == CYLINDER)
 	{
-		rt->obj[rt->n_obj]->cylinder = gc_malloc(rt->gc, sizeof(t_cylinder));
-		rt->obj[rt->n_obj]->cylinder->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
-		rt->obj[rt->n_obj]->cylinder->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
+		rt->obj[rt->n_obj]->cyl = gc_malloc(rt->gc, sizeof(t_cylinder));
+		rt->obj[rt->n_obj]->cyl->p = parse_point(rt, gc_chop(rt->gc, str, ' '));
+		rt->obj[rt->n_obj]->cyl->v = parse_vector(rt, gc_chop(rt->gc, str, ' '));
 		parse_dimensions(rt, str);
-		rt->obj[rt->n_obj]->cylinder->c = parse_color(rt, str);
+		rt->obj[rt->n_obj]->cyl->c = parse_color(rt, str);
 		init_obj(rt);
 	}
 	rt->n_obj++;

@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:36:36 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/17 23:06:53 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 19:10:34 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,14 +109,14 @@ void	create_sphere_mask(t_rt *rt)
 	t_vector	up;
 	t_vector	right;
 
-	r = rt->obj[rt->n_obj]->sphere->d / 2;
-	p = *rt->obj[rt->n_obj]->sphere->p;
+	r = rt->obj[rt->n_obj]->s->d / 2;
+	p = *rt->obj[rt->n_obj]->s->p;
 	up = *rt->vp->up;
 	right = *rt->vp->right;
 	tmp_u = v_add_nm(v_mult_scalar_nm(up, r), v_mult_scalar_nm(right, r * -1));
 	tmp_d = v_add_nm(v_mult_scalar_nm(up, r * -1), v_mult_scalar_nm(right, r));
-	*rt->obj[rt->n_obj]->sphere->u_corner = calc_endpoint_vector(&tmp_u, &p, 1);
-	*rt->obj[rt->n_obj]->sphere->d_corner = calc_endpoint_vector(&tmp_d, &p, 1);
+	*rt->obj[rt->n_obj]->s->u_corner = calc_endpoint_vector(&tmp_u, &p, 1);
+	*rt->obj[rt->n_obj]->s->d_corner = calc_endpoint_vector(&tmp_d, &p, 1);
 }
 
 void	create_cylinder_mask(t_rt *rt)
@@ -128,14 +128,14 @@ void	create_cylinder_mask(t_rt *rt)
 	t_vector	up;
 	t_vector	right;
 
-	r = rt->obj[rt->n_obj]->cylinder->d / 2;
-	p = *rt->obj[rt->n_obj]->cylinder->p;
+	r = rt->obj[rt->n_obj]->cyl->d / 2;
+	p = *rt->obj[rt->n_obj]->cyl->p;
 	up = *rt->vp->up;
 	right = *rt->vp->right;
 	tmp_u = v_add_nm(v_mult_scalar_nm(up, r), v_mult_scalar_nm(right, r * -1));
 	tmp_d = v_add_nm(v_mult_scalar_nm(up, r * -1), v_mult_scalar_nm(right, r));
-	*rt->obj[rt->n_obj]->sphere->u_corner = calc_endpoint_vector(&tmp_u, &p, 1);
-	*rt->obj[rt->n_obj]->sphere->d_corner = calc_endpoint_vector(&tmp_d, &p, 1);
+	*rt->obj[rt->n_obj]->s->u_corner = calc_endpoint_vector(&tmp_u, &p, 1);
+	*rt->obj[rt->n_obj]->s->d_corner = calc_endpoint_vector(&tmp_d, &p, 1);
 }
 
 /* uncoment for mask render points visualing
@@ -150,17 +150,17 @@ void	symplify(t_rt *rt, int	*error)
 	if (rt->obj[rt->n_obj]->type == SPHERE)
 	{
 		create_sphere_mask(rt);
-		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->sphere->u_corner, \
+		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->s->u_corner, \
 			'u', error);
-		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->sphere->d_corner, \
+		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->s->d_corner, \
 			'd', error);
 	}
 	else
 	{
 		create_cylinder_mask(rt);
-		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->cylinder->u_corner, \
+		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->cyl->u_corner, \
 			'u', error);
-		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->cylinder->d_corner, \
+		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->cyl->d_corner, \
 			'd', error);
 	}
 }

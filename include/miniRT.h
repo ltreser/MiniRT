@@ -167,9 +167,9 @@ struct						s_obj
 	int						dvp_y2;
 	union
 	{
-		t_plane				*plane;
-		t_sphere			*sphere;
-		t_cylinder			*cylinder;
+		t_plane				*pl;
+		t_sphere			*s;
+		t_cylinder			*cyl;
 	};
 };
 

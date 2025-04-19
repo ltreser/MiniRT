@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 23:33:19 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/18 00:27:14 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/19 19:13:05 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ t_float	shadow_loop(t_rt *rt, t_ray *ray, t_float len)
 	{
 		tmp_t = -1;
 		if (rt->obj[i]->type == PLANE)
-			tmp_t = plane_ray_calc_t(*rt->obj[i]->plane, *ray);
+			tmp_t = plane_ray_calc_t(*rt->obj[i]->pl, *ray);
 		if (rt->obj[i]->type == SPHERE)
-			tmp_t = sphere_intersection(rt->obj[i]->sphere, ray);
+			tmp_t = sphere_intersection(rt->obj[i]->s, ray);
 		if (rt->obj[i]->type == CYLINDER)
-			tmp_t = cylinder_intersection(*rt->obj[i]->cylinder, *ray);
+			tmp_t = cylinder_intersection(*rt->obj[i]->cyl, *ray);
 		if (tmp_t > EPSILON && tmp_t < len)
 			return (tmp_t);
 		i++;
@@ -69,72 +69,7 @@ t_color	calculate_light(t_rt *rt, t_color color, t_color diffuse)
 	return (result);
 }
 
-t_ray	calc_shadow_ray(t_rt *rt, t_float t)
-{
-	t_ray		ray;
-	t_vector	v;
-	t_point		p;
-
-	p = calc_endpoint_vector_nm(*(rt->vp->render_ray->v), \
-	*(rt->vp->render_ray->p), t);
-	v = v_normalize_nm(v_between_two_points_nm(p, \
-		*(rt->light->p)));
-	ray.p = &p;
-	ray.v = &v;
-	return (ray);
-}
-
 t_color	lighting(t_rt *rt, t_obj obj, t_color color, t_float t)
-{
-	t_ray		ray;
-	t_vector	normal;
-	t_color		diffuse;
-	t_float		len_v;
-	t_float		shadow_t;
-
-	diffuse = (t_color){0, 0, 0};
-	ray = calc_shadow_ray(rt, t);
-	normal = cal_normal(rt, obj, *(ray.p));
-	*(ray.p) = calc_endpoint_vector_nm(normal, *(ray.p), EPSILON);
-	len_v = v_len(v_between_two_points_nm(*(ray.p), \
-	*(rt->light->p))) - EPSILON;
-	shadow_t = shadow_loop(rt, &ray, len_v);
-	if (shadow_t < EPSILON)
-	{
-		diffuse = calc_diffuse_light(rt, normal, *(ray.v));
-		return (calculate_light(rt, color, diffuse));
-	}
-	else
-		return (calculate_light(rt, color, diffuse));
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* t_color	lighting(t_rt *rt, t_obj obj, t_color color, t_float *t)
 {
 	t_ray		ray;
 	t_point		p;
@@ -142,20 +77,19 @@ t_color	lighting(t_rt *rt, t_obj obj, t_color color, t_float t)
 	t_vector	v;
 	t_vector	normal;
 	t_color		diffuse;
-	t_color		result;
 	t_float		len_v;
 	t_float		shadow_t;
 
 	ray.p = &p;
 	ray.v = &v;
 	diffuse = (t_color){0, 0, 0};
-	hitpoint = calc_endpoint_vector_nm(*(rt->vp->render_ray->v), *(rt->vp->render_ray->p), *t);
+	hitpoint = calc_endpoint_vector_nm(*(rt->vp->render_ray->v), *(rt->vp->render_ray->p), t);
 	*(ray.v) = v_normalize_nm(v_between_two_points_nm(hitpoint, *(rt->light->p)));
 	normal = cal_normal(rt, obj, hitpoint);
 	*(ray.p) = calc_endpoint_vector_nm(normal, hitpoint, EPSILON);
 	len_v = v_len(v_between_two_points_nm(*(ray.p), *(rt->light->p))) - EPSILON;
 	shadow_t = shadow_loop(rt, &ray, len_v);
-	*t = shadow_t;
+	t = shadow_t;
 	if (shadow_t < EPSILON)
 	{
 		diffuse = calc_diffuse_light(rt, normal, *(ray.v));
@@ -163,4 +97,4 @@ t_color	lighting(t_rt *rt, t_obj obj, t_color color, t_float t)
 	}
 	else
 		return (calculate_light(rt, color, diffuse));
-} */
+}

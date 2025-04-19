@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/19 19:04:32 by afoth             #+#    #+#             */
+/*   Updated: 2025/04/19 19:10:55 by afoth            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../include/miniRT.h"
 //calc the middle of the pixel
@@ -48,18 +59,18 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 			tmp_t = -1;
 			if (rt->obj[i]->type == PLANE)
 			{
-				tmp_t = plane_ray_calc_t(*rt->obj[i]->plane, *ray);
-				color = *rt->obj[i]->plane->c;
+				tmp_t = plane_ray_calc_t(*rt->obj[i]->pl, *ray);
+				color = *rt->obj[i]->pl->c;
 			}
 			if (rt->obj[i]->type == SPHERE)
 			{
-		 	 	tmp_t = sphere_intersection(rt->obj[i]->sphere, ray);
-				color = *rt->obj[i]->sphere->c;
+		 	 	tmp_t = sphere_intersection(rt->obj[i]->s, ray);
+				color = *rt->obj[i]->s->c;
 			}
 			if (rt->obj[i]->type == CYLINDER)
 			{
-				tmp_t = cylinder_intersection(*rt->obj[i]->cylinder, *ray);
-				color = *rt->obj[i]->cylinder->c;
+				tmp_t = cylinder_intersection(*rt->obj[i]->cyl, *ray);
+				color = *rt->obj[i]->cyl->c;
 			}
 			//IS 0 POSSILBE
 			if (tmp_t > EPSILON && tmp_t < t)
