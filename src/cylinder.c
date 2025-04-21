@@ -42,46 +42,53 @@ t_float	cylinder_intersection(t_cylinder cyl, t_ray ray)
 	t_float	t;
 
 	t = -1;
-	cylinder_intersec1 = infinite_cylinder(cyl, ray, 0);
-	cylinder_intersec2 = infinite_cylinder(cyl, ray, 1);
-	if (cylinder_intersec1 > 0 && point_within_planes(cyl, cylinder_intersec1,
-			ray))
-		t = cylinder_intersec1;
-	if (cylinder_intersec2 > 0 && point_within_planes(cyl, cylinder_intersec2,
-			ray) && (t < 0 || t > cylinder_intersec2))
-		t = cylinder_intersec2;
-	plane_intersec1 = infinite_planes(cyl, ray, 0);
-	plane_intersec2 = infinite_planes(cyl, ray, 1);
-	if (plane_intersec1 > 0 && point_within_circles(cyl, plane_intersec1, ray)
-		&& (t < 0 || t > plane_intersec1))
-		t = plane_intersec1;
-	if (plane_intersec2 > 0 && point_within_circles(cyl, plane_intersec2, ray)
-		&& (t < 0 || t > plane_intersec2))
-		t = plane_intersec2;
+	cylinder_intersection1 = infinite_cylinder(cyl, ray, 0);
+	cylinder_intersection2 = infinite_cylinder(cyl, ray, 1);
+
+	if (cylinder_intersection1 > 0 && point_within_planes(cyl, cylinder_intersection1, ray))
+		t = cylinder_intersection1;
+
+	if (cylinder_intersection2 > 0 && point_within_planes(cyl, cylinder_intersection2, ray)
+		&& (t < 0 || t > cylinder_intersection2))
+		t = cylinder_intersection2;
+
+	plane_intersection1 = infinite_plane_a(cyl, ray);
+	plane_intersection2 = infinite_plane_b(cyl, ray);
+
+	if (plane_intersection1 > 0 && point_within_circles(cyl, plane_intersection1, ray)
+		&& (t < 0 || t > plane_intersection1))
+		t = plane_intersection1;
+
+	if (plane_intersection2 > 0 && point_within_circles(cyl, plane_intersection2, ray)
+		&& (t < 0 || t > plane_intersection2))
+		t = plane_intersection2;
 	return (t);
 }
 
-t_float	infinite_planes(t_cylinder cyl, t_ray ray, int flag)
+t_float	infinite_plane_a(t_cylinder cyl, t_ray ray)
 {
-	t_plane		plane1;
-	t_vector	v1;
-	t_point		p1;
-	t_plane		plane2;
-	t_vector	v2;
-	t_point		p2;
+	t_plane		plane;
+	t_vector	v;
+	t_point		p;
 
-	plane1.v = &v1;
-	plane1.p = &p1;
-	plane2.v = &v2;
-	plane2.p = &p2;
-	*plane1.p = calc_endpoint_vector(cyl.v, cyl.p, cyl.h / 2);
-	plane1.v = cyl.v;
-	*plane2.p = calc_endpoint_vector(cyl.v, cyl.p, -(cyl.h / 2));
-	*plane2.v = v_mult_scalar_nm(*cyl.v, -1);
-	if (flag == 0)
-		return (plane_ray_calc_t(plane1, ray));
-	else
-		return (plane_ray_calc_t(plane2, ray));
+	plane.v = &v;
+	plane.p = &p;
+	*plane.p = calc_endpoint_vector(cyl.v, cyl.p, cyl.h / 2);
+	plane.v = cyl.v;
+	return (plane_ray_calc_t(plane1, ray));
+}
+
+t_float	infinite_plane_b(t_cylinder cyl, t_ray ray)
+{
+	t_plane		plane;
+	t_vector	v;
+	t_point		p;
+
+	plane.v = &v;
+	plane.p = &p;
+	*plane.p = calc_endpoint_vector(cyl.v, cyl.p, -(cyl.h / 2));
+	*plane.v = v_mult_scalar_nm(*cyl.v, -1);
+	return (plane_ray_calc_t(plane2, ray));
 }
 
 int	point_within_circles(t_cylinder cyl, t_float intersection, t_ray ray)

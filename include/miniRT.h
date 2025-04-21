@@ -63,6 +63,7 @@ typedef struct s_vp			t_vp;
 typedef struct s_fc			t_fc;
 typedef struct s_ray		t_ray;
 typedef enum e_type			t_type;
+typedef struct s_bvh 		t_bvh;
 
 enum						e_type
 {
@@ -87,6 +88,7 @@ struct						s_rt
 	t_vp					*vp;
 	t_fc					*fc;
 	t_intersect				*intersec;
+	t_bvh					*bvh;
 	int						n_obj;
 	int						obj_count;
 	int						fd;
@@ -137,6 +139,13 @@ struct						s_fc
 	t_float					lplane_d;
 };
 
+struct						s_bvh
+{
+	char					axis;
+	int					*sort;
+	int					count;
+}
+
 /*minilibx graphical library struct*/
 
 struct						s_mlx
@@ -167,6 +176,9 @@ struct						s_obj
 	int						uvp_y1;
 	int						dvp_x2;
 	int						dvp_y2;
+	t_point						*center;
+	t_vector					*bbox_min;
+	t_vector					*bbox_max;
 	union
 	{
 		t_plane				*pl;
@@ -195,7 +207,6 @@ struct						s_sphere
 {
 	t_point					*u_corner;
 	t_point					*d_corner;
-	t_color					*c;
 	t_vector				*v;//DEL HAE??
 	t_point					*p;
 	t_float						d;
@@ -335,10 +346,6 @@ void						malloc_fc(t_rt *rt);
 void						calculate_fplanes(t_rt *rt);
 void						calculate_fplane_distances(t_rt *rt);
 void						frustum_culling(t_rt *rt);
-void						frustum_check_uplane(t_rt *rt, int i);
-void						frustum_check_dplane(t_rt *rt, int i);
-void						frustum_check_rplane(t_rt *rt, int i);
-void						frustum_check_lplane(t_rt *rt, int i);
 
 t_point						plane_ray_intersec(t_plane pl, t_ray ray);
 t_float						sphere_intersection(t_sphere *s, t_ray *r);
@@ -359,12 +366,20 @@ void						calc_aspect_ratio(t_rt *rt);
 void						setup_viewport(t_rt *rt);
 t_float						cylinder_intersection(t_cylinder cyl, t_ray ray);
 t_point						sphere_intersection_p(t_sphere *s, t_ray *r);
+<<<<<<< HEAD
 t_float						infinite_planes(t_cylinder cyl, t_ray ray, int  flag);
 int							point_within_circles(t_cylinder cyl, t_float intersection, t_ray ray);
 int							point_within_planes(t_cylinder cyl, t_float intersection, t_ray ray);
 t_float						infinite_cylinder(t_cylinder cyl, t_ray ray, int flag);
 t_float						abc_formula(t_float a, t_float b, t_float c, int  flag);
 int							located_in_endcaps(t_cylinder cyl, t_point point);
+t_float   infinite_plane_a(t_cylinder cyl, t_ray ray);
+t_float   infinite_plane_b(t_cylinder cyl, t_ray ray);
+int point_within_circles(t_cylinder cyl, t_float intersection, t_ray ray);
+int point_within_planes(t_cylinder cyl, t_float intersection, t_ray ray);
+t_float infinite_cylinder(t_cylinder cyl, t_ray ray, int flag);
+t_float   abc_formula(t_float a, t_float b, t_float c, int  flag);
+int 	located_in_endcaps(t_cylinder cyl, t_point point);
 
 // init_obj.c
 void						init_obj(t_rt *rt);
@@ -384,6 +399,17 @@ t_color							col_mult_scalar(t_color color, t_float scalar);
 t_color							col_add(t_color color_a, t_color color_b);
 t_color							calc_diffuse_light(t_rt *rt, t_vector normal, t_vector v_light);
 t_color							calculate_light(t_rt *rt, t_color color, t_color diffuse);
+
+//bvh
+void    setup_bvh(t_rt *rt);
+void    create_obj_bboxes(t_rt *rt);
+void    create_cylinder_bbox(t_rt *rt, int i);
+void    create_sphere_bbox(t_rt *rt, int i);
+void    init_bvh(t_rt *rt);
+void find_division_axis(t_rt *rt);
+static int      find_biggest(t_rt *rt, int axis);
+static int      find_smallest(t_rt *rt, int axis);
+
 
 //debug
 void						print_point(t_point p, char *prompt);

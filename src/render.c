@@ -135,3 +135,19 @@ void	render_loop(t_rt *rt)
 	mlx_put_image_to_window(rt->mlx->connection, \
 		rt->mlx->window, rt->mlx->img, 0, 0);
 }
+
+
+
+void	render(t_rt *rt)
+{
+	setup_viewport(rt);
+	frustum_culling(rt);
+	//setup_bvh(rt);
+	optimise_pixel_rendering(rt);
+	render_loop(rt);
+
+
+	//last FT in render!!!
+	mlx_loop(rt->mlx->connection);
+i	ft_close_window(rt);
+}
