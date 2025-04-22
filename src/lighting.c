@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 23:33:19 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/22 15:51:38 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/22 17:13:52 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ t_color	lighting(t_rt *rt, t_obj obj, t_color color, t_float t)
 	t_float		len_v;
 
 	diffuse = (t_color){0, 0, 0};
+	if (!rt->light)
+		return (calculate_light(rt, color, diffuse));
 	*(rt->intersec->hit_p) = calc_endpoint_vector_nm(*(rt->vp->render_ray->v), \
 		*(rt->vp->render_ray->p), t);
 	*(rt->intersec->ray->v) = v_normalize_nm(\
