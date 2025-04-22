@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:37:28 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/22 14:58:58 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/22 15:06:14 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ with
 	(va, (p+v*t2)-p1) > 0 and (va, (p+v*t2)- p2) < 0
 */
 
-t_float	cylinder_intersection(t_cylinder cyl, t_ray ray)
+/* t_float	cylinder_intersection(t_cylinder cyl, t_ray ray)
 {
 	t_float	cylinder_intersection1;
 	t_float	cylinder_intersection2;
@@ -93,7 +93,7 @@ int	point_within_circles_check(t_cylinder cyl, t_point point,
 {
 	t_point		bottom_center;
 	t_point		top_center;
-	tt_vector	center2point_top;
+	t_vector	center2point_top;
 	t_vector	center2point_bottom;
 
 	top_center = calc_endpoint_vector(cyl.v, cyl.p, cyl.h / 2);
@@ -172,4 +172,4 @@ t_float	infinite_cylinder(t_cylinder cyl, t_ray ray, int flag)
 	return (abc_formula(scalar_product_nm(vector1, vector1), 2
 			* (v_dot_product(&vector1, &vector2), scalar_product_nm(vector2,
 					vector2) - (r * r), 1));
-}
+} */

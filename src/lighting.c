@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 23:33:19 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 21:26:55 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/22 15:06:39 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_float	shadow_loop(t_rt *rt, t_ray *ray, t_float len)
 		if (rt->obj[i]->type == SPHERE)
 			tmp_t = sphere_intersection(rt->obj[i]->s, ray);
 		if (rt->obj[i]->type == CYLINDER)
-			tmp_t = cylinder_intersection(*rt->obj[i]->cyl, *ray);
+			// tmp_t = cylinder_intersection(*rt->obj[i]->cyl, *ray);
 		if (tmp_t > EPSILON && tmp_t < len)
 			return (tmp_t);
 		i++;
