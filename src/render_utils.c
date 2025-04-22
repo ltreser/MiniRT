@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltreser <ltreser@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:18:55 by ltreser           #+#    #+#             */
-/*   Updated: 2025/04/22 15:41:20 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/22 16:25:36 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ t_point	calc_startpoint_render(t_rt *rt)
 	point = p_add(vector, *rt->vp->bottom_left);
 	return (point);
 }
-
-// DEL error handling?
-// TODO problem: ray start point should be the camera
 
 void	create_render_ray(t_rt *rt)
 {

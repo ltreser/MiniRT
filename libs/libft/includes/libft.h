@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 19:09:08 by ltreser           #+#    #+#             */
-/*   Updated: 2025/04/19 19:26:09 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/22 16:50:11 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "ft_printf.h"
 # include "get_next_line.h"
-# include <float.h>
 # include <limits.h>
 # include <math.h>
 # include <stdlib.h>
@@ -24,6 +23,7 @@
 # include <stdio.h>
 # include <stddef.h>
 
+# define FLT_MAX 3.402823466e+38F
 # define MALLOC_FAIL "\033[0;31m Error\nMalloc failed!\n \033[0m"
 
 typedef struct s_gc	t_gc;
@@ -119,7 +119,6 @@ void				ft_gc_free(t_gc *gc);
 char				*gc_substr(t_gc *gc, const char *s, unsigned int start,
 						size_t len);
 char				*gc_strtrim(t_gc *gc, char const *s1, char const *set);
-
 
 char				*gc_strdup(t_gc *gc, const char *s);
 char				*gc_chop(t_gc *gc, char *str, char c);

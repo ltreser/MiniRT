@@ -6,13 +6,12 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:27:20 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/20 00:36:13 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/22 16:25:24 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
-//DEL ERROR handeling this should be poosible !segfault prevent
 t_float	plane_ray_calc_t(t_plane pl, t_ray ray)
 {
 	t_float		divident;

@@ -1,5 +1,0 @@
-exicodes, just 0 and 1?
-
-radians=degrees×(π/180).
-
-gc_chop gc_malloc

@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:50:43 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 21:53:02 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/22 16:57:19 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	render(t_rt *rt)
 {
 	setup_viewport(rt);
 	frustum_culling(rt);
-	optimise_pixel_rendering(rt);
 	render_loop(rt);
 	mlx_loop(rt->mlx->connection);
 	ft_close_window(rt);

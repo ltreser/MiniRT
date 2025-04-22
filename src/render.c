@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 19:04:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/22 15:57:03 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/22 16:25:42 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,6 @@ void	render_loop(t_rt *rt)
 			*rt->vp->render_ray->v = v_add_nm(*rt->vp->render_ray->v,
 					*rt->vp->pixel_v_x);
 			rt->vp->pixel_x++;
-			if (rt->vp->pixel_y == 750 && rt->vp->pixel_x == 800)
-				printf("DEL\n");
 		}
 		*rt->vp->render_ray->v = start_vec;
 		rt->vp->pixel_y++;

@@ -1,34 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   miniRT.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/22 16:54:13 by afoth             #+#    #+#             */
+/*   Updated: 2025/04/22 16:54:29 by afoth            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-// 1920x1080? DEL
-# define PI 3.14159265f
-# define SCREEN_WIDTH 1600
-# define SCREEN_HEIGHT 800
-# define MAX_RENDER FLT_MAX
-// Comparing t_floats, if the difference is smaller than EPSILON,
-// they are considered equal
-# define EPSILON 0.000001f
-typedef double				t_float;
-/*Error Codes*/
-# define EXIT_MALLOC 2
-# define EXIT_READ 3
-# define EXIT_INPUT 4
-# define EXIT_MLX 5
-
-/*Error Messages*/
-
-# define MALLOC_FAIL "\033[0;31m Error\nMalloc failed!\n \033[0m"
-# define AC_FAIL "\033[0;31m Error\n Wrong number of arguments!\n \033[0m"
-# define OPEN_FAIL "\033[0;31m Error\n Failed to open file!\n \033[0m"
-# define FORMAT_FAIL "\033[0;31m Error\n Wrong Format!\n \033[0m"
-# define FILE_FAIL "\033[0;31m Error\n Scene to render is not correctly provided!\n \033[0m"
-# define MLX_FAIL "\033[0;31m Error\n MLX failed to initialize!\n \033[0m"
-
 /* Standard Libraries */
 # include <fcntl.h>
-# include <float.h>
 # include <limits.h>
 # include <math.h>
 # include <stdint.h>
@@ -44,6 +30,30 @@ typedef double				t_float;
 
 /* MiniLibX */
 # include <mlx.h>
+# define PI 3.14159265f
+# define SCREEN_WIDTH 1600
+# define SCREEN_HEIGHT 800
+# define MAX_RENDER 3.402823466e+38F
+// Comparing t_floats, if the difference is smaller than EPSILON,
+// they are considered equal
+# define EPSILON 0.000001f
+
+typedef double				t_float;
+
+/*Error Codes*/
+# define EXIT_MALLOC 2
+# define EXIT_READ 3
+# define EXIT_INPUT 4
+# define EXIT_MLX 5
+
+/*Error Messages*/
+# define MALLOC_FAIL "\033[0;31m Error\nMalloc failed!\n \033[0m"
+# define AC_FAIL "\033[0;31m Error\n Wrong number of arguments!\n \033[0m"
+# define OPEN_FAIL "\033[0;31m Error\n Failed to open file!\n \033[0m"
+# define FORMAT_FAIL "\033[0;31m Error\n Wrong Format!\n \033[0m"
+# define FILE_FAIL "\033[0;31m Error\n Scene to render\
+is not correctly provided!\n \033[0m"
+# define MLX_FAIL "\033[0;31m Error\n MLX failed to initialize!\n \033[0m"
 
 typedef struct s_rt			t_rt;
 typedef struct s_ambient	t_ambient;
@@ -161,7 +171,6 @@ struct						s_mlx
 	int						bpp;
 	int						endian;
 	int						line_len;
-	// t_float	zoom;
 };
 
 /*objects*/
@@ -206,7 +215,7 @@ struct						s_sphere
 {
 	t_point					*u_corner;
 	t_point					*d_corner;
-	t_vector *v; // DEL HAE??
+	t_vector				*v;
 	t_point					*p;
 	t_float					d;
 	t_color					*c;
@@ -237,7 +246,7 @@ struct						s_camera
 {
 	t_vector				*v;
 	t_point					*p;
-	int fov; // DEL t_float???
+	t_float					fov;
 };
 
 struct						s_light
