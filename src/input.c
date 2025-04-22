@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:10:44 by ltreser           #+#    #+#             */
-/*   Updated: 2025/04/19 21:24:53 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/22 18:50:10 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,10 @@ void	parse_input(t_rt *rt, char **argv)
 	}
 	free(line);
 	close(rt->fd);
+}
+
+void	check_completion(t_rt *rt)
+{
+	if (!rt->camera)
+		ft_exit(rt, 2, gc_strdup(rt->gc, FILE_FAIL));
 }

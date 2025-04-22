@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 16:54:13 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/22 17:18:42 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/22 18:47:26 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ typedef double				t_float;
 # define AC_FAIL "\033[0;31m Error\n Wrong number of arguments!\n \033[0m"
 # define OPEN_FAIL "\033[0;31m Error\n Failed to open file!\n \033[0m"
 # define FORMAT_FAIL "\033[0;31m Error\n Wrong Format!\n \033[0m"
-# define FILE_FAIL "\033[0;31m Error\n Scene to render \
+# define FILE_FAIL \
+	"\033[0;31m Error\n Scene to render \
 is not correctly provided!\n \033[0m"
 # define MLX_FAIL "\033[0;31m Error\n MLX failed to initialize!\n \033[0m"
 
@@ -314,6 +315,7 @@ void						init_fc(t_fc *fc);
 t_vector					*init_vector(t_gc *gc);
 void						init_intersec(t_rt *rt);
 void						assign_obj(t_rt *rt, char *str);
+void						check_completion(t_rt *rt);
 
 // mlx
 void						mlx_create_window(t_rt *rt);
