@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 23:33:19 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/22 17:13:52 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/22 18:46:28 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_float	shadow_loop(t_rt *rt, t_ray *ray, t_float len)
 			return (tmp_t);
 		i++;
 	}
-	return (tmp_t);
+	return (-1);
 }
 
 t_color	calc_diffuse_light(t_rt *rt, t_vector normal, t_vector v_light)

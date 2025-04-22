@@ -6,7 +6,7 @@
             "type": "cppdbg", // Keep this as is for C/C++ debugging
             "request": "launch", // Keep this for launching your program
             "program": "${workspaceFolder}/miniRT", // Change 'a.out' to your executable name if different
-            "args": ["tests/eval/basicshapes.rt"], // Add any command line arguments for your program here
+            "args": ["bugs/cylinder.rt"], // Add any command line arguments for your program here
             "stopAtEntry": true, // Set to true if you want the debugger to stop at the entry point of your program
             "cwd": "${workspaceFolder}", // Keeps the current working directory as your workspace folder
             "environment": [], // Add any environment variables if needed
