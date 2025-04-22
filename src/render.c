@@ -6,45 +6,11 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 19:04:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/22 15:40:51 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/22 15:54:46 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
-
-// calc the middle of the pixel
-// Vector is multiplied by -0.5 for the middle point of the pixel
-// DEL LIMA is startpoint correct? y 0 rendering?!
-t_point	calc_startpoint_render(t_rt *rt)
-{
-	t_vector	vector;
-	t_point		point;
-
-	vector = v_add_nm(*rt->vp->pixel_v_y, *rt->vp->pixel_v_x);
-	vector = v_mult_scalar_nm(vector, (t_float)0.5);
-	point = p_add(vector, *rt->vp->bottom_left);
-	return (point);
-}
-
-// DEL error handling?
-// TODO problem: ray start point should be the camera
-void	create_render_ray(t_rt *rt)
-{
-	*rt->vp->render_ray->p = *rt->camera->p;
-	*rt->vp->render_ray->v = v_between_two_points_nm(*rt->camera->p,
-			calc_startpoint_render(rt));
-}
-
-t_color	get_color(t_rt *rt, int i)
-{
-	if (rt->obj[i]->type == PLANE)
-		return (*rt->obj[i]->pl->c);
-	if (rt->obj[i]->type == SPHERE)
-		return (*rt->obj[i]->s->c);
-	if (rt->obj[i]->type == CYLINDER)
-		return (*rt->obj[i]->cyl->c);
-	return ((t_color){0, 0, 0});
-}
 
 float	obj_type_to_render(t_rt *rt, t_ray *ray, int i)
 {
@@ -76,7 +42,6 @@ void	put_pixel_vp(t_rt *rt, float t, int min_t_obj)
 	*(unsigned int *)(rt->mlx->pixel_adress + ((SCREEN_HEIGHT - 1 - rt->vp->pixel_y)
 				* rt->mlx->line_len + rt->vp->pixel_x * rt->mlx->bpp
 				/ 8)) = color_to_hex(color);
-	// mlx_pixel_put(rt->mlx->connection, rt->mlx->window, rt->vp->pixel_x, SCREEN_HEIGHT - 1 - rt->vp->pixel_y , color_to_hex(color));
 }
 
 void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
@@ -108,8 +73,10 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 
 /* Main loop that sends out a ray for every pixel
 Starts in the upper left corner. (xmin ymax)
-Warning! in the mlx lib (rendering) y is inverted so y = 0 is the the highest up.
-Our coordinate system 0.0 for the viewport is still at the bottom left corner for ease of thinking.
+Warning! in the mlx lib (rendering) y is inverted
+so y = 0 is the the highest up.
+Our coordinate system 0.0 for the viewport is still
+at the bottom left corner for ease of thinking.
 Rendering starts at the bootm left
 */
 void	render_loop(t_rt *rt)
