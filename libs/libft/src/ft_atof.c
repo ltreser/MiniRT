@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:32:07 by ltreser           #+#    #+#             */
-/*   Updated: 2025/04/17 23:35:27 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/22 16:07:07 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* int valid_float(const char *str, int *error_code)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!(ft_isdigit(str[i]) && str[i] != '-'))
@@ -40,6 +40,7 @@ double	ft_atof(const char *str, int *error_code)
 	char	*dec_point;
 	int		sign;
 	int		i;
+	int		i;
 
 	sign = 1;
 	power = 1.0;
@@ -60,11 +61,8 @@ double	ft_atof(const char *str, int *error_code)
 	}
 	return (result * sign / power);
 } */
-
 static int	is_valid_float(const char *str)
 {
-	int	i;
-
 	i = 0;
 	if (!str || !*str)
 		return (0);
@@ -102,10 +100,11 @@ static double	parse_integer_part(const char **str, int *overflow)
 			return (NAN);
 		}
 	}
-	return result;
+	return (result);
 }
 
-static double	parse_fractional_part(const char **str, double *power, int *overflow)
+static double	parse_fractional_part(const char **str, double *power,
+		int *overflow)
 {
 	double	result;
 
@@ -125,7 +124,7 @@ static double	parse_fractional_part(const char **str, double *power, int *overfl
 			}
 		}
 	}
-	return result;
+	return (result);
 }
 
 double	ft_atof(const char *str)
@@ -134,7 +133,7 @@ double	ft_atof(const char *str)
 	double	power;
 	int		sign;
 	int		overflow;
-	//printf("atof receives this as str:'%s'\n", str);
+
 	result = 0.0;
 	power = 1.0;
 	sign = 1;
@@ -144,20 +143,14 @@ double	ft_atof(const char *str)
 		sign = -1;
 		str++;
 	}
-	if (!is_valid_float(str)) {
-		printf("not a vaid float: '%s'\n", str);
+	if (!is_valid_float(str))
 		return (NAN);
-	}
 	result = parse_integer_part(&str, &overflow);
-	if (overflow) {
-		printf("overflow: %s\n", str);
+	if (overflow)
 		return (NAN);
-}
 	result += parse_fractional_part(&str, &power, &overflow) / power;
-	if (overflow) {
-		printf("frac overflow: %s\n", str);
+	if (overflow)
 		return (NAN);
-}
 	if (sign * result == NAN)
 		printf("Uncaught NaN\n");
 	return (sign * result);

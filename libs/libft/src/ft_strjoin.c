@@ -6,7 +6,7 @@
 /*   By: ltreser <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 22:53:21 by ltreser           #+#    #+#             */
-/*   Updated: 2023/06/22 18:47:46 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/22 16:05:34 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*jointstring;
-	
+
 	jointstring = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!jointstring)
 		return (0);
