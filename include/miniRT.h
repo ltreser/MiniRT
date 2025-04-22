@@ -10,7 +10,7 @@
 // Comparing t_floats, if the difference is smaller than EPSILON,
 // they are considered equal
 # define EPSILON 0.00000000001f
-typedef double	t_float;
+typedef double				t_float;
 /*Error Codes*/
 # define EXIT_MALLOC 2
 # define EXIT_READ 3
@@ -63,7 +63,7 @@ typedef struct s_vp			t_vp;
 typedef struct s_fc			t_fc;
 typedef struct s_ray		t_ray;
 typedef enum e_type			t_type;
-typedef struct s_bvh 		t_bvh;
+typedef struct s_bvh		t_bvh;
 
 enum						e_type
 {
@@ -142,9 +142,9 @@ struct						s_fc
 struct						s_bvh
 {
 	char					axis;
-	int					*sort;
-	int					count;
-}
+	int						*sort;
+	int						count;
+};
 
 /*minilibx graphical library struct*/
 
@@ -176,9 +176,9 @@ struct						s_obj
 	int						uvp_y1;
 	int						dvp_x2;
 	int						dvp_y2;
-	t_point						*center;
-	t_vector					*bbox_min;
-	t_vector					*bbox_max;
+	t_point					*center;
+	t_vector				*bbox_min;
+	t_vector				*bbox_max;
 	union
 	{
 		t_plane				*pl;
@@ -195,7 +195,6 @@ struct						s_intersect
 	t_float					shadow_t;
 };
 
-
 struct						s_plane
 {
 	t_color					*c;
@@ -207,9 +206,10 @@ struct						s_sphere
 {
 	t_point					*u_corner;
 	t_point					*d_corner;
-	t_vector				*v;//DEL HAE??
+	t_vector *v; // DEL HAE??
 	t_point					*p;
-	t_float						d;
+	t_float					d;
+	t_color					*c;
 	t_float					rot_r;
 };
 
@@ -237,7 +237,7 @@ struct						s_camera
 {
 	t_vector				*v;
 	t_point					*p;
-	int						fov;//DEL t_float???
+	int fov; // DEL t_float???
 };
 
 struct						s_light
@@ -303,6 +303,8 @@ void						is_nan(t_rt *rt, t_float f);
 void						init(t_rt *rt);
 void						init_fc(t_fc *fc);
 t_vector					*init_vector(t_gc *gc);
+void						init_intersec(t_rt *rt);
+
 // mlx
 void						mlx_create_window(t_rt *rt);
 int							keypress(int keycode, t_rt *rt);
@@ -355,7 +357,8 @@ t_float						sphere_intersection(t_sphere *s, t_ray *r);
 void						create_cylinder_mask(t_rt *rt);
 void						symplify(t_rt *rt, int *error);
 void						create_sphere_mask(t_rt *rt);
-void						calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner, int *error);
+void						calc_maskpoint_on_vp(t_rt *rt, t_point *mask_corner,
+								char corner, int *error);
 void						optimise_pixel_rendering(t_rt *rt);
 // plan equations
 t_float						plane_ray_calc_t(t_plane pl, t_ray ray);
@@ -366,58 +369,57 @@ void						calc_aspect_ratio(t_rt *rt);
 void						setup_viewport(t_rt *rt);
 t_float						cylinder_intersection(t_cylinder cyl, t_ray ray);
 t_point						sphere_intersection_p(t_sphere *s, t_ray *r);
-<<<<<<< HEAD
-t_float						infinite_planes(t_cylinder cyl, t_ray ray, int  flag);
-int							point_within_circles(t_cylinder cyl, t_float intersection, t_ray ray);
-int							point_within_planes(t_cylinder cyl, t_float intersection, t_ray ray);
-t_float						infinite_cylinder(t_cylinder cyl, t_ray ray, int flag);
-t_float						abc_formula(t_float a, t_float b, t_float c, int  flag);
+t_float						infinite_plane_a(t_cylinder cyl, t_ray ray);
+t_float						infinite_plane_b(t_cylinder cyl, t_ray ray);
+int							point_within_circles(t_cylinder cyl,
+								t_float intersection, t_ray ray);
+int							point_within_planes(t_cylinder cyl,
+								t_float intersection, t_ray ray);
+t_float						infinite_cylinder(t_cylinder cyl, t_ray ray,
+								int flag);
+t_float						abc_formula(t_float a, t_float b, t_float c,
+								int flag);
 int							located_in_endcaps(t_cylinder cyl, t_point point);
-t_float   infinite_plane_a(t_cylinder cyl, t_ray ray);
-t_float   infinite_plane_b(t_cylinder cyl, t_ray ray);
-int point_within_circles(t_cylinder cyl, t_float intersection, t_ray ray);
-int point_within_planes(t_cylinder cyl, t_float intersection, t_ray ray);
-t_float infinite_cylinder(t_cylinder cyl, t_ray ray, int flag);
-t_float   abc_formula(t_float a, t_float b, t_float c, int  flag);
-int 	located_in_endcaps(t_cylinder cyl, t_point point);
+void						obj_render_loop(t_rt *rt, t_ray *ray, int x, int y);
+void						render_loop(t_rt *rt);
 
 // init_obj.c
 void						init_obj(t_rt *rt);
 t_point						*init_point(t_gc *gc);
 t_ray						*init_ray(t_gc *gc);
-//color
+// color
 unsigned int				t_float_to_grayscale_color(t_float value);
-unsigned int				scale_color_by_value(struct s_color color, t_float value);
+unsigned int				scale_color_by_value(struct s_color color,
+								t_float value);
 
-//lighting
-t_color							lighting(t_rt *rt, t_obj obj, t_color color, t_float t);
-t_ray							calc_shadow_ray(t_rt *rt, t_float t);
-t_float							shadow_loop(t_rt *rt, t_ray *ray, t_float len);
-t_vector						cal_normal(t_rt *rt, t_obj obj, t_point p);
-unsigned int					color_to_hex(t_color c);
-t_color							col_mult_scalar(t_color color, t_float scalar);
-t_color							col_add(t_color color_a, t_color color_b);
-t_color							calc_diffuse_light(t_rt *rt, t_vector normal, t_vector v_light);
-t_color							calculate_light(t_rt *rt, t_color color, t_color diffuse);
+// lighting
+t_color						lighting(t_rt *rt, t_obj obj, t_color color,
+								t_float t);
+t_ray						calc_shadow_ray(t_rt *rt, t_float t);
+t_float						shadow_loop(t_rt *rt, t_ray *ray, t_float len);
+t_vector					cal_normal(t_rt *rt, t_obj obj, t_point p);
+unsigned int				color_to_hex(t_color c);
+t_color						col_mult_scalar(t_color color, t_float scalar);
+t_color						col_add(t_color color_a, t_color color_b);
+t_color						calc_diffuse_light(t_rt *rt, t_vector normal,
+								t_vector v_light);
+t_color						calculate_light(t_rt *rt, t_color color,
+								t_color diffuse);
 
-//bvh
-void    setup_bvh(t_rt *rt);
-void    create_obj_bboxes(t_rt *rt);
-void    create_cylinder_bbox(t_rt *rt, int i);
-void    create_sphere_bbox(t_rt *rt, int i);
-void    init_bvh(t_rt *rt);
-void find_division_axis(t_rt *rt);
-static int      find_biggest(t_rt *rt, int axis);
-static int      find_smallest(t_rt *rt, int axis);
+// bvh
+void						setup_bvh(t_rt *rt);
+void						create_obj_bboxes(t_rt *rt);
+void						create_cylinder_bbox(t_rt *rt, int i);
+void						create_sphere_bbox(t_rt *rt, int i);
+void						init_bvh(t_rt *rt);
+void						find_division_axis(t_rt *rt);
 
-
-//debug
+// debug
 void						print_point(t_point p, char *prompt);
 void						print_vector(t_vector v, char *prompt);
 void						print_sphere(t_sphere *s);
-int							calc_point_on_screen(t_rt *rt, t_point point, char axis);
+int							calc_point_on_screen(t_rt *rt, t_point point,
+								char axis);
 void						renderpoint(t_rt *rt, t_point point, char *prompt);
-
-
 
 #endif

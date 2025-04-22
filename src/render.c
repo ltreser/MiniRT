@@ -6,14 +6,15 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 19:04:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/20 00:51:02 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/22 14:09:27 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
-//calc the middle of the pixel
-//Vector is multiplied by -0.5 for the middle point of the pixel
-//DEL LIMA is startpoint correct? y 0 rendering?!
+
+// calc the middle of the pixel
+// Vector is multiplied by -0.5 for the middle point of the pixel
+// DEL LIMA is startpoint correct? y 0 rendering?!
 t_point	calc_startpoint_render(t_rt *rt)
 {
 	t_vector	vector;
@@ -25,13 +26,13 @@ t_point	calc_startpoint_render(t_rt *rt)
 	return (point);
 }
 
-//DEL error handling?
-//TODO problem: ray start point should be the camera
+// DEL error handling?
+// TODO problem: ray start point should be the camera
 void	create_render_ray(t_rt *rt)
 {
-	*rt->vp->render_ray->p  =  *rt->camera->p;
-	*rt->vp->render_ray->v = v_between_two_points_nm(*rt->camera->p, \
-		calc_startpoint_render(rt));
+	*rt->vp->render_ray->p = *rt->camera->p;
+	*rt->vp->render_ray->v = v_between_two_points_nm(*rt->camera->p,
+			calc_startpoint_render(rt));
 }
 
 t_color	get_color(t_rt *rt, int i)
@@ -71,9 +72,9 @@ void	put_pixel_vp(t_rt *rt, float t, int min_t_obj)
 	rt->n_obj = min_t_obj;
 	color = get_color(rt, min_t_obj);
 	color = lighting(rt, *(rt->obj[min_t_obj]), color, t);
-	*(unsigned int *)(rt->mlx->pixel_adress + (rt->vp->pixel_y * \
-		rt->mlx->line_len + rt->vp->pixel_x * rt->mlx->bpp / 8)) = \
-		color_to_hex(color);
+	*(unsigned int *)(rt->mlx->pixel_adress + (rt->vp->pixel_y
+				* rt->mlx->line_len + rt->vp->pixel_x * rt->mlx->bpp
+				/ 8)) = color_to_hex(color);
 }
 
 void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
@@ -102,7 +103,6 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 	put_pixel_vp(rt, t, min_t_obj);
 }
 
-
 /* Main loop that sends out a ray for every pixel
 Starts in the upper left corner. (xmin ymax)
 Warning! in the mlx lib (rendering) y is inverted so y = 0 is the the highest up.
@@ -121,33 +121,17 @@ void	render_loop(t_rt *rt)
 		rt->vp->pixel_x = 0;
 		while (rt->vp->pixel_x < SCREEN_WIDTH)
 		{
-			obj_render_loop(rt, rt->vp->render_ray, \
-				rt->vp->pixel_x, rt->vp->pixel_y);
-			*rt->vp->render_ray->v = v_add_nm(*rt->vp->render_ray->v, \
-				*rt->vp->pixel_v_x);
+			obj_render_loop(rt, rt->vp->render_ray, rt->vp->pixel_x,
+				rt->vp->pixel_y);
+			*rt->vp->render_ray->v = v_add_nm(*rt->vp->render_ray->v,
+					*rt->vp->pixel_v_x);
 			rt->vp->pixel_x++;
 		}
 		*rt->vp->render_ray->v = start_vec;
 		rt->vp->pixel_y++;
-		*rt->vp->render_ray->v = v_add_nm(*rt->vp->render_ray->v, \
-			v_mult_scalar_nm(*rt->vp->pixel_v_y, rt->vp->pixel_y));
+		*rt->vp->render_ray->v = v_add_nm(*rt->vp->render_ray->v,
+				v_mult_scalar_nm(*rt->vp->pixel_v_y, rt->vp->pixel_y));
 	}
-	mlx_put_image_to_window(rt->mlx->connection, \
-		rt->mlx->window, rt->mlx->img, 0, 0);
-}
-
-
-
-void	render(t_rt *rt)
-{
-	setup_viewport(rt);
-	frustum_culling(rt);
-	//setup_bvh(rt);
-	optimise_pixel_rendering(rt);
-	render_loop(rt);
-
-
-	//last FT in render!!!
-	mlx_loop(rt->mlx->connection);
-i	ft_close_window(rt);
+	mlx_put_image_to_window(rt->mlx->connection, rt->mlx->window, rt->mlx->img,
+		0, 0);
 }

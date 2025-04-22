@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:36:36 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 21:56:56 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/22 14:12:19 by ltreser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,18 @@ void	optimise_pixel_rendering(t_rt *rt)
 		i++;
 	}
 }
-//DEL DEbuging plane_ray_intersec scheint zu gehen vl falsche eingabe?
+// DEL DEbuging plane_ray_intersec scheint zu gehen vl falsche eingabe?
 /* Calculating the 2D point on the viewport of a 3d point.
 The point has to lay on the screen
 The tranformation is done by calculating the distance of the point to
 the x and y axis of the viewport
 1. Ray is created for the axis
-2. Distance to axis is calculated and translated into pixels(dist_up / rt->vp->pixel_w)
-ceilf is used to round up(no half pixels)
+2. Distance to axis is calculated and translated into pixels(dist_up
+	/ rt->vp->pixel_w)
+ceilf is used to round	up(no half pixels)
 */
-void	calc_maskpoint_on_vp(t_rt *rt, t_point	*mask_corner, char corner, int *error)
+void	calc_maskpoint_on_vp(t_rt *rt, t_point *mask_corner, char corner,
+		int *error)
 {
 	t_vector	vector;
 	t_ray		ray;
@@ -130,22 +132,18 @@ rt->mlx->window, rt->obj[rt->n_obj]->dvp_x2, rt->obj[rt->n_obj]->dvp_y2,
 mlx_pixel_put(rt->mlx->connection,
 rt->mlx->window, rt->obj[rt->n_obj]->uvp_x1, rt->obj[rt->n_obj]->uvp_y1,
  0xFFFFFFFF); */
-void	symplify(t_rt *rt, int	*error)
+void	symplify(t_rt *rt, int *error)
 {
 	if (rt->obj[rt->n_obj]->type == SPHERE)
 	{
 		create_sphere_mask(rt);
-		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->s->u_corner, \
-			'u', error);
-		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->s->d_corner, \
-			'd', error);
+		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->s->u_corner, 'u', error);
+		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->s->d_corner, 'd', error);
 	}
 	else
 	{
 		create_cylinder_mask(rt);
-		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->cyl->u_corner, \
-			'u', error);
-		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->cyl->d_corner, \
-			'd', error);
+		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->cyl->u_corner, 'u', error);
+		calc_maskpoint_on_vp(rt, rt->obj[rt->n_obj]->cyl->d_corner, 'd', error);
 	}
 }
