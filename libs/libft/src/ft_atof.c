@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:32:07 by ltreser           #+#    #+#             */
-/*   Updated: 2025/04/22 16:07:07 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/22 16:18:43 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ double	ft_atof(const char *str, int *error_code)
 } */
 static int	is_valid_float(const char *str)
 {
+	int	i;
+
 	i = 0;
 	if (!str || !*str)
 		return (0);
