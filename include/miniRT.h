@@ -304,6 +304,7 @@ void						init(t_rt *rt);
 void						init_fc(t_fc *fc);
 t_vector					*init_vector(t_gc *gc);
 void						init_intersec(t_rt *rt);
+void						assign_obj(t_rt *rt, char *str);
 
 // mlx
 void						mlx_create_window(t_rt *rt);
@@ -382,6 +383,9 @@ t_float						abc_formula(t_float a, t_float b, t_float c,
 int							located_in_endcaps(t_cylinder cyl, t_point point);
 void						obj_render_loop(t_rt *rt, t_ray *ray, int x, int y);
 void						render_loop(t_rt *rt);
+t_point						calc_startpoint_render(t_rt *rt);
+void						create_render_ray(t_rt *rt);
+t_color						get_color(t_rt *rt, int i);
 
 // init_obj.c
 void						init_obj(t_rt *rt);
