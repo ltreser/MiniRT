@@ -6,7 +6,7 @@
 #    By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/04 02:24:33 by ltreser           #+#    #+#              #
-#    Updated: 2024/12/06 20:37:55 by afoth            ###   ########.fr        #
+#    Updated: 2025/04/22 16:02:19 by ltreser          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ GNL_SRCS	= get_next_line.c get_next_line_utils.c
 
 GNL_OBJS	= $(GNL_SRCS:.c=.o)
 
-GC_SRCS	= ft_gc_malloc.c
+GC_SRCS	= ft_gc_malloc.c ft_gc_malloc2.c
 
 GC_OBJS	= $(GC_SRCS:.c=.o)
 
