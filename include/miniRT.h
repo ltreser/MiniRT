@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 16:54:13 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/22 18:52:52 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/22 19:05:07 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define MAX_RENDER 3.402823466e+38F
 // Comparing t_floats, if the difference is smaller than EPSILON,
 // they are considered equal
-# define EPSILON 0.00001f
+# define EPSILON 0.0001f
 
 typedef double				t_float;
 

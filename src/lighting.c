@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 23:33:19 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/22 18:46:28 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/22 18:59:43 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ t_color	calculate_light(t_rt *rt, t_color color, t_color diffuse)
 	t_color	result;
 	t_color	ambient;
 
-	ambient = *(rt->ambient->c);
+	if (!rt->ambient)
+		ambient = (t_color){0, 0, 0};
+	else
+		ambient = *(rt->ambient->c);
 	result.r = ((t_float)(ambient.r + diffuse.r) / 255.0) * color.r;
 	result.g = ((t_float)(ambient.g + diffuse.g) / 255.0) * color.g;
 	result.b = ((t_float)(ambient.b + diffuse.b) / 255.0) * color.b;
