@@ -6,13 +6,13 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 21:24:04 by ltreser           #+#    #+#             */
-/*   Updated: 2025/04/20 00:46:08 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/22 19:26:22 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
-t_float	a_b_c_formula(t_float a, t_float b, t_float c, t_float discriminant)
+t_float	a_b_c_formula(t_float a, t_float b, t_float discriminant)
 {
 	t_float	intersections[2];
 	t_float	t;
@@ -44,7 +44,7 @@ t_float	sphere_intersection(t_sphere *s, t_ray *r)
 	b = 2 * v_dot_product(r->v, &vector);
 	c = (v_len(vector)) * (v_len(vector)) - s->rot_r * s->rot_r;
 	discriminant = b * b - 4 * a * c;
-	return (a_b_c_formula(a, b, c, discriminant));
+	return (a_b_c_formula(a, b, discriminant));
 }
 
 t_point	sphere_intersection_p(t_sphere *s, t_ray *r)

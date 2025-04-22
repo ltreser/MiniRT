@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 19:04:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/22 18:59:05 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/22 19:19:17 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	put_pixel_vp(t_rt *rt, float t, int min_t_obj)
 				/ 8)) = color_to_hex(color);
 }
 
-void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
+void	obj_render_loop(t_rt *rt, t_ray *ray)
 {
 	int		i;
 	int		min_t_obj;
@@ -91,8 +91,7 @@ void	render_loop(t_rt *rt)
 		rt->vp->pixel_x = 0;
 		while (rt->vp->pixel_x < SCREEN_WIDTH)
 		{
-			obj_render_loop(rt, rt->vp->render_ray, rt->vp->pixel_x,
-				rt->vp->pixel_y);
+			obj_render_loop(rt, rt->vp->render_ray);
 			*rt->vp->render_ray->v = v_add_nm(*rt->vp->render_ray->v,
 					*rt->vp->pixel_v_x);
 			rt->vp->pixel_x++;

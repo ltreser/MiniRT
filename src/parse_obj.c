@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 22:06:26 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/22 19:03:03 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/22 19:23:44 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_vector	*parse_vec(t_rt *rt, char *str)
 	vector->z = ft_atof(gc_chop(rt->gc, str, ' '));
 	is_nan(rt, vector->z);
 	len = v_len(*vector);
-	if (fabsf(len - 1.0f) < 0.01)
+	if (fabs(len - 1.0f) < 0.01)
 		return (vector);
 	else
 	{

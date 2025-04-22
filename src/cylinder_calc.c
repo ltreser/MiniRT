@@ -6,13 +6,13 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 22:34:16 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/22 15:50:49 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/22 19:19:39 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
-t_float	cylinder_rot_radius(t_rt *rt, t_cylinder *c)
+t_float	cylinder_rot_radius(t_cylinder *c)
 {
 	t_point		up_center;
 	t_point		up_side;

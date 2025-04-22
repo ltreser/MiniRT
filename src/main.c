@@ -23,10 +23,7 @@ void	render(t_rt *rt)
 
 int	main(int argc, char **argv)
 {
-	double			runtime;
 	t_rt			*rt;
-	struct timeval	start;
-	struct timeval	end;
 
 	rt = malloc(sizeof(t_rt));
 	init(rt);

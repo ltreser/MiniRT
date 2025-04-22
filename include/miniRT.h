@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 16:54:13 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/22 19:05:07 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/22 19:19:51 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,7 +338,7 @@ t_vector					v_add_nm(t_vector a, t_vector b);
 t_vector					v_subtract_nm(t_vector a, t_vector b);
 t_vector					v_mult_nm(t_vector a, t_vector b);
 t_float						scalar_product_nm(t_vector a, t_vector b);
-t_float						cylinder_rot_radius(t_rt *rt, t_cylinder *c);
+t_float						cylinder_rot_radius(t_cylinder *c);
 t_point						*pv_add(t_rt *rt, t_vector *a, t_point *b);
 t_point						vp_add_nm(t_vector a, t_point b);
 t_point						pv_subtract_nm(t_point a, t_vector b);
@@ -392,7 +392,7 @@ t_float						infinite_cylinder(t_cylinder cyl, t_ray ray,
 t_float						abc_formula(t_float a, t_float b, t_float c,
 								int flag);
 int							located_in_endcaps(t_cylinder cyl, t_point point);
-void						obj_render_loop(t_rt *rt, t_ray *ray, int x, int y);
+void						obj_render_loop(t_rt *rt, t_ray *ray);
 void						render_loop(t_rt *rt);
 t_point						calc_startpoint_render(t_rt *rt);
 void						create_render_ray(t_rt *rt);

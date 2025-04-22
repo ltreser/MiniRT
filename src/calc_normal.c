@@ -6,13 +6,13 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:33:53 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/19 21:15:46 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/22 19:22:06 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
-t_vector	cal_normal_plane(t_rt *rt, t_obj obj, t_point p)
+t_vector	cal_normal_plane(t_rt *rt, t_obj obj)
 {
 	t_vector	n;
 
@@ -23,7 +23,7 @@ t_vector	cal_normal_plane(t_rt *rt, t_obj obj, t_point p)
 }
 
 // substract hitpoint from sphere center and making it len 1
-t_vector	cal_normal_sphere(t_rt *rt, t_obj obj, t_point p)
+t_vector	cal_normal_sphere(t_obj obj, t_point p)
 {
 	t_vector	n;
 
@@ -31,7 +31,7 @@ t_vector	cal_normal_sphere(t_rt *rt, t_obj obj, t_point p)
 	return (v_normalize_nm(n));
 }
 
-t_vector	cal_normal_cyl(t_rt *rt, t_obj obj, t_point p)
+t_vector	cal_normal_cyl(t_obj obj, t_point p)
 {
 	t_vector	point2center;
 	t_vector	neg_cyl_normal;
@@ -59,9 +59,9 @@ t_vector	cal_normal_cyl(t_rt *rt, t_obj obj, t_point p)
 t_vector	cal_normal(t_rt *rt, t_obj obj, t_point p)
 {
 	if (obj.type == PLANE)
-		return (cal_normal_plane(rt, obj, p));
+		return (cal_normal_plane(rt, obj));
 	if (obj.type == SPHERE)
-		return (cal_normal_sphere(rt, obj, p));
+		return (cal_normal_sphere(obj, p));
 	else
-		return (cal_normal_cyl(rt, obj, p));
+		return (cal_normal_cyl(obj, p));
 }

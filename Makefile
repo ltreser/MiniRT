@@ -17,7 +17,7 @@ INC_DIR = include/
 HEADERS = $(addprefix $(INC_DIR), miniRT.h)
 
 CC = gcc
-CFLAGS = -Wall -g3 -I$(INC_DIR) -I/usr/include -Ilibs/minilibx-linux
+CFLAGS = -Wall -Werror -Wextra -I$(INC_DIR) -I/usr/include -Ilibs/minilibx-linux
 LDFLAGS = -L libs/libft -L libs/minilibx-linux
 LDLIBS = -lft -lmlx
 LFLAGS = -lbsd -lXext -lX11 -lm
