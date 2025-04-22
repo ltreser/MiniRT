@@ -6,7 +6,7 @@
 /*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 19:04:32 by afoth             #+#    #+#             */
-/*   Updated: 2025/04/22 15:54:46 by afoth            ###   ########.fr       */
+/*   Updated: 2025/04/22 15:57:03 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ float	obj_type_to_render(t_rt *rt, t_ray *ray, int i)
 		tmp_t = plane_ray_calc_t(*rt->obj[i]->pl, *ray);
 	if (rt->obj[i]->type == SPHERE)
 		tmp_t = sphere_intersection(rt->obj[i]->s, ray);
-	// if (rt->obj[i]->type == CYLINDER)
-		// tmp_t = cylinder_intersection(*rt->obj[i]->cyl, *ray);
+	if (rt->obj[i]->type == CYLINDER)
+		tmp_t = cylinder_intersection(*rt->obj[i]->cyl, *ray);
 	return (tmp_t);
 }
 
@@ -39,7 +39,8 @@ void	put_pixel_vp(t_rt *rt, float t, int min_t_obj)
 	rt->n_obj = min_t_obj;
 	color = get_color(rt, min_t_obj);
 	color = lighting(rt, *(rt->obj[min_t_obj]), color, t);
-	*(unsigned int *)(rt->mlx->pixel_adress + ((SCREEN_HEIGHT - 1 - rt->vp->pixel_y)
+	*(unsigned int *)(rt->mlx->pixel_adress + \
+				((SCREEN_HEIGHT - 1 - rt->vp->pixel_y)
 				* rt->mlx->line_len + rt->vp->pixel_x * rt->mlx->bpp
 				/ 8)) = color_to_hex(color);
 }
@@ -67,7 +68,6 @@ void	obj_render_loop(t_rt *rt, t_ray *ray, int x, int y)
 		}
 		i++;
 	}
-	//ERROR
 	put_pixel_vp(rt, t, min_t_obj);
 }
 

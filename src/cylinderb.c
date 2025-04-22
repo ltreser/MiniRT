@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinderb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltreser <ltreser@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: afoth <afoth@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:15:56 by ltreser           #+#    #+#             */
-/*   Updated: 2025/04/22 15:16:28 by ltreser          ###   ########.fr       */
+/*   Updated: 2025/04/22 16:14:13 by afoth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,20 @@ int	point_within_planes(t_cylinder cyl, t_float intersection, t_ray ray)
 
 t_float	infinite_cylinder(t_cylinder cyl, t_ray ray, int flag)
 {
-	t_vector	delta_p;
 	t_vector	vector1;
 	t_vector	vector2;
 	t_float		a;
 	t_float		b;
 	t_float		c;
-	t_float		r;
 
-	r = cyl.d / 2;
-	delta_p = pp_sub_v_nm(*ray.p, *cyl.p);
 	vector1 = v_subtract_nm(*ray.v, v_mult_scalar_nm(*cyl.v,
 				v_dot_product(ray.v, cyl.v)));
-	vector2 = v_subtract_nm(delta_p, v_mult_scalar_nm(*cyl.v,
-				v_dot_product(&delta_p, cyl.v)));
+	vector2 = v_subtract_nm(pp_sub_v_nm(*ray.p, *cyl.p),
+			v_mult_scalar_nm(*cyl.v, scalar_product_nm(\
+				pp_sub_v_nm(*ray.p, *cyl.p), *cyl.v)));
 	a = scalar_product_nm(vector1, vector1);
 	b = 2 * (v_dot_product(&vector1, &vector2));
-	c = scalar_product_nm(vector2, vector2) - (r * r);
+	c = scalar_product_nm(vector2, vector2) - (cyl.d / 2 * cyl.d / 2);
 	if (flag == 0)
 		return (abc_formula(a, b, c, 0));
 	return (abc_formula(a, b, c, 1));
