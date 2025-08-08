@@ -76,22 +76,22 @@ enum						e_type
 
 struct						s_rt
 {
-	t_float					aspect_r;
-	t_float					screen_h_rad;
-	t_float					screen_w_rad;
-	t_mlx					*mlx;
-	t_gc					*gc;
-	t_camera				*camera;
-	t_ambient				*ambient;
-	t_light					*light;
-	t_obj					**obj;
-	t_vp					*vp;
-	t_fc					*fc;
-	t_intersect				*intersec;
-	t_bvh					*bvh;
-	int						n_obj;
-	int						obj_count;
-	int						fd;
+	t_float					aspect_r; //aspect ratio
+	t_float					screen_h_rad; //screen height radius
+	t_float					screen_w_rad; //screen width radius
+	t_mlx					*mlx; //MLX graphics api
+	t_gc					*gc; //garbage collector
+	t_camera				*camera; //camera data
+	t_ambient				*ambient; //ambient light data
+	t_light					*light; //light data
+	t_obj					**obj; //object array
+	t_vp					*vp; //viewport
+	t_fc					*fc; //frustum culling
+	t_intersect				*intersec; //intersection data
+	t_bvh					*bvh; //head of bvh
+	int						n_obj; //iterator for objects
+	int						obj_count; //total objects
+	int						fd; //scene file
 };
 
 /*viewport* note: forward vector == camera vector*/
@@ -141,9 +141,13 @@ struct						s_fc
 
 struct						s_bvh
 {
+	t_vector				*bbox_min;
+	t_vector				*bbox_max;
 	char					axis;
 	int						*sort;
 	int						count;
+	t_bvh					*left;
+	t_bvh					right;
 };
 
 /*minilibx graphical library struct*/
