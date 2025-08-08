@@ -12,17 +12,17 @@
 
 #include "../include/miniRT.h"
 
-/*
+
 void	create_sphere_bbox(t_rt *rt, int i)
 {
 	rt->obj[i]->bbox_min = (t_vector){rt->obj[i]->sphere->c->x
 		- rt->obj[i]->sphere->rot_r, rt->obj[i]->sphere->c->y
 		- rt->obj[i]->sphere->rot_r, rt->obj[i]->sphere->c->z
-		- rt->obj[i]->sphere->rot_r;
+		- rt->obj[i]->sphere->rot_r};
 	rt->obj[i]->bbox_max = (t_vector){rt->obj[i]->sphere->c->x
 		+ rt->obj[i]->sphere->ror_r, rt->obj[i]->sphere->c->y
 		+ rt->obj[i]->sphere->ror_r, rt->obj[i]->sphere->c->z
-		+ rt->obj[i]->sphere->rot_r;
+		+ rt->obj[i]->sphere->rot_r};
 }
 
 void	create_cylinder_bbox(t_rt *rt, int i)
@@ -52,28 +52,29 @@ void	create_obj_bboxes(t_rt *rt)
 	}
 }
 
-static int	find_smallest(t_rt *rt, int axis)
+static int	find_smallest(t_rt *rt, char axis)
 {
 	int		i;
 	t_float	smallest;
 
 	i = 0;
-	if (axis == 0)
+	if (axis == 'x')
 		smallest = rt->obj[0]->center->x;
-	if (axis == 1)
+	if (axis == 'y')
 		smallest = rt->obj[0]->center->y;
-	if (axis == 2)
+	if (axis == 'z')
 		smallest = rt->obj[0]->center->z;
 	while (i < rt->obj_count)
 	{
-		if (axis == 0 && smallest > rt->obj[i]->center->x)
+		if (axis == 'x' && smallest > rt->obj[i]->center->x)
 			smallest = rt->obj[i]->center->x;
-		if (axis == 1 && smallest > rt->obj[i]->center->y)
+		if (axis == 'y' && smallest > rt->obj[i]->center->y)
 			smallest = rt->obj[i]->center->y;
-		if (axis == 2 && smallest > rt->obj[i]->center->z)
+		if (axis == 'z' && smallest > rt->obj[i]->center->z)
 			smallest = rt->obj[i]->center->z;
 		i++;
 	}
+	return (smallest);
 }
 
 static int	find_biggest(t_rt *rt, int axis)
@@ -98,13 +99,14 @@ static int	find_biggest(t_rt *rt, int axis)
 						biggest = rt->obj[i]->center->z;
 				i++;
 		}
+		return (biggest);
 }
 
 void	find_division_axis(t_rt *rt)
 {
 	t_float	max_difference;
 
-	char axis
+	char axis;
 	max_difference = 0;
 	max_difference = find_biggest(rt, x) - find_smallest(rt, x);
 	axis = 'x';
@@ -145,13 +147,19 @@ void	sort_objects(t_rt *rt)
 }
 
 
-//TODO only visible ones
-//
+//TODO only visible ones - through frustum culling?
+//TODO bvh struct should be linked list for creating binary tree
+//TODO fix minor bugs in code so far
+//TODO sort objects ft for sorting along the corresponding axis
+//TODO setup recursive loop for building binary tree with helper fts already written
+//TODO implement in render loop
+
 void	setup_bvh(t_rt *rt)
 {
 	init_bvh(rt);
 	create_obj_bboxes(rt);
 	find_division_axis(rt);
 	sort_objects(rt);
+	//TODO build recursive loop here	
 
-}*/
+}
